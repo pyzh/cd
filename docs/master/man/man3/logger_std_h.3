@@ -1,0 +1,76 @@
+.TH logger_std_h 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.SH NAME
+logger_std_h \- Default handler for Logger.
+.SH DESCRIPTION
+.LP
+This is the default handler for Logger\&. Multiple instances of this handler can be added to Logger, and each instance will print logs to \fIstandard_io\fR\&, \fIstandard_error\fR\& or to file\&. The default instance that starts with Kernel is named \fIdefault\fR\& - which is the name to be used for reconfiguration\&.
+.LP
+The handler has an overload protection mechanism that will keep the handler process and the Kernel application alive during a high load of log requests\&. How this feature works, and how to modify the configuration, is described in the \fB\fIUser\&'s Guide\fR\&\fR\&\&.
+.LP
+To add a new instance of the standard handler, use \fB\fIlogger:add_handler/3\fR\&\fR\&\&. The handler configuration argument is a map which may contain general configuration parameters, as documented in the \fB\fIUser\&'s Guide\fR\&\fR\&, as well as handler specific parameters\&. The specific parameters are stored in a sub map with the key \fIconfig\fR\&\&. The following keys and values may be specified:
+.RS 2
+.TP 2
+.B
+\fItype\fR\&:
+This will have the value \fIstandard_io\fR\&, \fIstandard_error\fR\&, \fI{file,LogFileName}\fR\&, or \fI{file,LogFileName,LogFileOpts}\fR\&, where \fIstandard_io\fR\& is the default value for type\&. It\&'s recommended to not specify \fILogFileOpts\fR\& if not absolutely necessary\&. The default options used by the handler to open a file for logging are: \fIraw\fR\&, \fIappend\fR\& and \fIdelayed_write\fR\&\&. The standard handler does not have support for circular logging\&. Use the \fB\fIlogger_disk_log_h\fR\&\fR\& handler for this\&.
+.TP 2
+.B
+\fIfilesync_repeat_interval\fR\&:
+This value (in milliseconds) specifies how often the handler will do a file sync operation in order to make sure that buffered data gets written to disk\&. The handler will repeatedly attempt this operation, but only perform it if something has actually been logged since the last sync\&. The default value is \fI5000\fR\& milliseconds\&. If \fIno_repeat\fR\& is set as value, the repeated file sync operation is disabled, and it will be the operating system settings that determine how quickly or slowly data gets written to disk\&. The user can also call the \fB\fIsync/1\fR\&\fR\& function to perform a file sync\&.
+.RE
+.LP
+There are a number of other configuration parameters available, that are to be used for customizing the overload protection behaviour\&. The same parameters are used both in the standard handler and the disk_log handler, and are documented in the \fB\fIUser\&'s Guide\fR\&\fR\&\&.
+.LP
+Note that when changing the configuration of the handler in runtime, by calling \fB\fIlogger:set_handler_config/2\fR\&\fR\&, or \fB\fIlogger:set_handler_config/3\fR\&\fR\&, the \fItype\fR\& parameter may not be modified\&.
+.LP
+Example of adding a standard handler:
+.LP
+.nf
+
+logger:add_handler(my_standard_h, logger_std_h,
+                   #{level => info,
+                     filter_default => log,
+                     config =>
+		         #{type => {file,"./system_info.log"},
+                           filesync_repeat_interval => 1000}}).
+    
+.fi
+.LP
+In order to configure the default handler (that starts initially with the Kernel application) to log to file instead of \fIstandard_io\fR\&, change the Kernel default logger to use a file\&. Example:
+.LP
+.nf
+
+erl -kernel logger '[{handler,default,logger_std_h,
+                      #{config => #{type => {file,"./log.log"}}}}]'
+    
+.fi
+.LP
+An example of how to replace the standard handler with a disk_log handler at start up can be found in the manual of \fB\fIlogger_disk_log_h\fR\&\fR\&\&.
+.SH EXPORTS
+.LP
+.nf
+
+.B
+sync(Name) -> ok | {error, Reason}
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Name = atom()
+.br
+Reason = handler_busy | {badarg, term()}
+.br
+.RE
+.RE
+.RS
+.LP
+Write buffered data to disk\&.
+.RE
+.SH "SEE ALSO"
+
+.LP
+\fB\fIlogger(3)\fR\&\fR\&, \fB\fIlogger_disk_log_h(3)\fR\&\fR\&
