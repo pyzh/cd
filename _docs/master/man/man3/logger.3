@@ -1,4 +1,4 @@
-.TH logger 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.TH logger 3 "kernel 6.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 logger \- API module for Logger, the standard logging facility
     in Erlang/OTP.
@@ -51,6 +51,14 @@ the built-in formatter, see \fBlogger_formatter\fR\&\&.
 built-in filters, see \fBlogger_filters\fR\&\&.
 .LP
 .RE
+
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+Since Logger is new in Erlang/OTP 21\&.0, we do reserve the right to introduce changes to the Logger API and functionality in patches following this release\&. These changes might or might not be backwards compatible with the initial version\&.
 
 .SH DATA TYPES
 .nf
@@ -1508,7 +1516,7 @@ Reason = term()
 .LP
 This callback function is optional\&.
 .LP
-The function is called when an new handler is about to be added, and the purpose is to verify the configuration and initiate all resources needed by the handler\&.
+The function is called on a temporary process when an new handler is about to be added\&. The purpose is to verify the configuration and initiate all resources needed by the handler\&.
 .LP
 The handler identity is associated with the \fIid\fR\& key in \fIConfig1\fR\&\&.
 .LP
@@ -1535,7 +1543,7 @@ Reason = term()
 .LP
 This callback function is optional\&.
 .LP
-The function is called when the configuration for a handler is about to change, and the purpose is to verify and act on the new configuration\&.
+The function is called on a temporary process when the configuration for a handler is about to change\&. The purpose is to verify and act on the new configuration\&.
 .LP
 \fIConfig1\fR\& is the existing configuration and \fIConfig2\fR\& is the new configuration\&.
 .LP
@@ -1564,7 +1572,7 @@ Config = \fBhandler_config()\fR\&
 .LP
 This callback function is mandatory\&.
 .LP
-The function is called when all primary filters and all handler filters for the handler in question have passed for the given log event\&.
+The function is called when all primary filters and all handler filters for the handler in question have passed for the given log event\&. It is called on the client process, that is, the process that issued the log event\&.
 .LP
 The handler identity is associated with the \fIid\fR\& key in \fIConfig\fR\&\&.
 .LP
@@ -1589,7 +1597,7 @@ Config = \fBhandler_config()\fR\&
 .LP
 This callback function is optional\&.
 .LP
-The function is called when a handler is about to be removed, and the purpose is to release all resources used by the handler\&.
+The function is called on a temporary process when a handler is about to be removed\&. The purpose is to release all resources used by the handler\&.
 .LP
 The handler identity is associated with the \fIid\fR\& key in \fIConfig\fR\&\&.
 .LP

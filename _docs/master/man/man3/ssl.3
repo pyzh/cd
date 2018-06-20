@@ -1,4 +1,4 @@
-.TH ssl 3 "ssl 8.2.6" "Ericsson AB" "Erlang Module Definition"
+.TH ssl 3 "ssl 9.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 ssl \- Interface Functions for Secure Socket Layer
 .SH DESCRIPTION
@@ -805,7 +805,7 @@ Type = erlang | openssl | all
 .RE
 .RS
 .LP
-Returns a list of supported cipher suites\&. This function will become deprecated in OTP 21, and replaced by \fBssl:cipher-suites/2\fR\& \fIcipher_suites()\fR\& is equivalent to \fIcipher_suites(erlang)\&.\fR\& Type \fIopenssl\fR\& is provided for backwards compatibility with the old SSL, which used OpenSSL\&. \fIcipher_suites(all)\fR\& returns all available cipher suites\&. The cipher suites not present in \fIcipher_suites(erlang)\fR\& but included in \fIcipher_suites(all)\fR\& are not used unless explicitly configured by the user\&.
+Deprecated in OTP 21, use \fBcipher_suites/2\fR\& instead\&.
 .RE
 .LP
 .B
@@ -850,7 +850,7 @@ PEM files, used by ssl API-functions, are cached\&. The cache is regularly check
 connect(Socket, SslOptions) -> 
 .br
 .B
-connect(Socket, SslOptions, Timeout) -> {ok, TLSSocket} | {ok, TLSSocket, Ext} | {error, Reason}
+connect(Socket, SslOptions, Timeout) -> {ok, SslSocket} | {ok, SslSocket, Ext} | {error, Reason}
 .br
 .RS
 .LP
@@ -863,7 +863,7 @@ SslOptions = [{handshake, hello| full} | ssl_option()]
 .br
 Timeout = integer() | infinity
 .br
-TLSSocket = sslsocket()
+SslSocket = sslsocket()
 .br
 Ext = hello_extensions()
 .br
@@ -883,14 +883,14 @@ Note:
 If the option \fIverify\fR\& is set to \fIverify_peer\fR\& the option \fIserver_name_indication\fR\& shall also be specified, if it is not no Server Name Indication extension will be sent, and \fBpublic_key:pkix_verify_hostname/2\fR\& will be called with the IP-address of the connection as \fIReferenceID\fR\&, which is proably not what you want\&.
 
 .LP
-If the option \fI{handshake, hello}\fR\& is used the handshake is paused after receiving the server hello message and the success response is \fI{ok, TLSSocket, Ext}\fR\& instead of \fI{ok, TLSSocket}\fR\&\&. Thereafter the handshake is continued or canceled by calling \fB\fIhandshake_continue/3\fR\&\fR\& or \fB\fIhandshake_cancel/1\fR\&\fR\&\&.
+If the option \fI{handshake, hello}\fR\& is used the handshake is paused after receiving the server hello message and the success response is \fI{ok, SslSocket, Ext}\fR\& instead of \fI{ok, SslSocket}\fR\&\&. Thereafter the handshake is continued or canceled by calling \fB\fIhandshake_continue/3\fR\&\fR\& or \fB\fIhandshake_cancel/1\fR\&\fR\&\&.
 .RE
 .LP
 .B
 connect(Host, Port, Options) ->
 .br
 .B
-connect(Host, Port, Options, Timeout) -> {ok, SslSocket}| {ok, TLSSocket, Ext} | {error, Reason}
+connect(Host, Port, Options, Timeout) -> {ok, SslSocket}| {ok, SslSocket, Ext} | {error, Reason}
 .br
 .RS
 .LP
@@ -925,7 +925,7 @@ Note:
 According to good practices certificates should not use IP-addresses as "server names"\&. It would be very surprising if this happen outside a closed network\&.
 
 .LP
-If the option \fI{handshake, hello}\fR\& is used the handshake is paused after receiving the server hello message and the success response is \fI{ok, TLSSocket, Ext}\fR\& instead of \fI{ok, TLSSocket}\fR\&\&. Thereafter the handshake is continued or canceled by calling \fB\fIhandshake_continue/3\fR\&\fR\& or \fB\fIhandshake_cancel/1\fR\&\fR\&\&.
+If the option \fI{handshake, hello}\fR\& is used the handshake is paused after receiving the server hello message and the success response is \fI{ok, SslSocket, Ext}\fR\& instead of \fI{ok, SslSocket}\fR\&\&. Thereafter the handshake is continued or canceled by calling \fB\fIhandshake_continue/3\fR\&\fR\& or \fB\fIhandshake_cancel/1\fR\&\fR\&\&.
 .RE
 .LP
 .B
@@ -997,6 +997,8 @@ connection_information(SslSocket) -> {ok, Result} | {error, Reason}
 Types:
 
 .RS 3
+SslSocket = sslsocket()
+.br
 Item = protocol | cipher_suite | sni_hostname | ecc | session_id | atom()
 .br
 .RS 2
@@ -1021,6 +1023,8 @@ connection_information(SslSocket, Items) -> {ok, Result} | {error, Reason}
 Types:
 
 .RS 3
+SslSocket = sslsocket()
+.br
 Items = [Item]
 .br
 Item = protocol | cipher_suite | sni_hostname | ecc | session_id | client_random | server_random | master_secret | atom()
@@ -1084,7 +1088,7 @@ Presents the error returned by an SSL function as a printable string\&.
 .RE
 .LP
 .B
-getopts(Socket, OptionNames) -> {ok, [socketoption()]} | {error, Reason}
+getopts(SslSocket, OptionNames) -> {ok, [socketoption()]} | {error, Reason}
 .br
 .RS
 .LP
@@ -1103,17 +1107,17 @@ Gets the values of the specified socket options\&.
 .RE
 .LP
 .B
-getstat(Socket) -> {ok, OptionValues} | {error, inet:posix()}
+getstat(SslSocket) -> {ok, OptionValues} | {error, inet:posix()}
 .br
 .B
-getstat(Socket, OptionNames) -> {ok, OptionValues} | {error, inet:posix()}
+getstat(SslSocket, OptionNames) -> {ok, OptionValues} | {error, inet:posix()}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+SslSocket = sslsocket()
 .br
 OptionNames = [atom()]
 .br
@@ -1129,17 +1133,17 @@ See inet:getstat/2 for statistic options description\&.
 .RE
 .LP
 .B
-handshake(Socket) -> 
+handshake(HsSocket) -> 
 .br
 .B
-handshake(Socket, Timeout) -> {ok, Socket} | {error, Reason}
+handshake(HsSocket, Timeout) -> {ok, SslSocket} | {error, Reason}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+HsSocket = SslSocket = sslsocket()
 .br
 Timeout = integer()
 .br
@@ -1151,14 +1155,14 @@ Reason = term()
 .LP
 Performs the SSL/TLS/DTLS server-side handshake\&.
 .LP
-\fISocket\fR\& is a socket as returned by \fBssl:transport_accept/[1,2]\fR\&\&.
+Returns a new TLS/DTLS socket if the handshake is successful\&.
 .RE
 .LP
 .B
 handshake(Socket, SslOptions) -> 
 .br
 .B
-handshake(Socket, SslOptions, Timeout) -> {ok, Socket} | {ok, Socket, Ext} | {error, Reason}
+handshake(Socket, SslOptions, Timeout) -> {ok, SslSocket} | {ok, SslSocket, Ext} | {error, Reason}
 .br
 .RS
 .LP
@@ -1166,6 +1170,8 @@ Types:
 
 .RS 3
 Socket = socket() | sslsocket() 
+.br
+SslSocket = sslsocket() 
 .br
 Ext = hello_extensions()
 .br
@@ -1179,30 +1185,30 @@ Reason = term()
 .RE
 .RS
 .LP
-If \fISocket\fR\& is a ordinary \fIsocket()\fR\&: upgrades a \fIgen_tcp\fR\&, or equivalent, socket to an SSL socket, that is, performs the SSL/TLS server-side handshake and returns the SSL socket\&.
+If \fISocket\fR\& is a ordinary \fIsocket()\fR\&: upgrades a \fIgen_tcp\fR\&, or equivalent, socket to an SSL socket, that is, performs the SSL/TLS server-side handshake and returns a TLS socket\&.
 .LP
 
 .RS -4
 .B
 Warning:
 .RE
-The Socket shall be in passive mode ({active, false}) before calling this function or the handshake can fail due to a race condition\&.
+The \fISocket\fR\& shall be in passive mode ({active, false}) before calling this function or else the behavior of this function is undefined\&.
 
 .LP
-If \fISocket\fR\& is an \fIsslsocket()\fR\&: provides extra SSL/TLS/DTLS options to those specified in \fBssl:listen/2 \fR\& and then performs the SSL/TLS/DTLS handshake\&.
+If \fISocket\fR\& is an \fIsslsocket()\fR\&: provides extra SSL/TLS/DTLS options to those specified in \fBlisten/2 \fR\& and then performs the SSL/TLS/DTLS handshake\&. Returns a new TLS/DTLS socket if the handshake is successful\&.
 .LP
-If option \fI{handshake, hello}\fR\& is specified the handshake is paused after receiving the client hello message and the sucess response is \fI{ok, TLSSocket, Ext}\fR\& instead of \fI{ok, TLSSocket}\fR\&\&. Thereafter the handshake is continued or canceled by calling \fB\fIhandshake_continue/3\fR\&\fR\& or \fB\fIhandshake_cancel/1\fR\&\fR\&\&.
+If option \fI{handshake, hello}\fR\& is specified the handshake is paused after receiving the client hello message and the success response is \fI{ok, SslSocket, Ext}\fR\& instead of \fI{ok, SslSocket}\fR\&\&. Thereafter the handshake is continued or canceled by calling \fB\fIhandshake_continue/3\fR\&\fR\& or \fB\fIhandshake_cancel/1\fR\&\fR\&\&.
 .RE
 .LP
 .B
-handshake_cancel(Socket) -> ok 
+handshake_cancel(SslSocket) -> ok 
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+SslSocket = sslsocket()
 .br
 .RE
 .RE
@@ -1212,14 +1218,17 @@ Cancel the handshake with a fatal \fIUSER_CANCELED\fR\& alert\&.
 .RE
 .LP
 .B
-handshake_continue(Socket, SSLOptions, Timeout) -> {ok, Socket} | {error, Reason}
+handshake_continue(HsSocket, SSLOptions) -> {ok, SslSocket} | {error, Reason}
+.br
+.B
+handshake_continue(HsSocket, SSLOptions, Timeout) -> {ok, SslSocket} | {error, Reason}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+HsSocket = SslSocket = sslsocket()
 .br
 SslOptions = [ssl_option()]
 .br
@@ -1256,14 +1265,14 @@ Creates an SSL listen socket\&.
 .RE
 .LP
 .B
-negotiated_protocol(Socket) -> {ok, Protocol} | {error, protocol_not_negotiated}
+negotiated_protocol(SslSocket) -> {ok, Protocol} | {error, protocol_not_negotiated}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+SslSocket = sslsocket()
 .br
 Protocol = binary()
 .br
@@ -1275,14 +1284,14 @@ Returns the protocol negotiated through ALPN or NPN extensions\&.
 .RE
 .LP
 .B
-peercert(Socket) -> {ok, Cert} | {error, Reason}
+peercert(SslSocket) -> {ok, Cert} | {error, Reason}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+SslSocket = sslsocket()
 .br
 Cert = binary()
 .br
@@ -1290,18 +1299,18 @@ Cert = binary()
 .RE
 .RS
 .LP
-The peer certificate is returned as a DER-encoded binary\&. The certificate can be decoded with \fIpublic_key:pkix_decode_cert/2\fR\&\&.
+The peer certificate is returned as a DER-encoded binary\&. The certificate can be decoded with \fBpublic_key:pkix_decode_cert/2\fR\& 
 .RE
 .LP
 .B
-peername(Socket) -> {ok, {Address, Port}} | {error, Reason}
+peername(SslSocket) -> {ok, {Address, Port}} | {error, Reason}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+SslSocket = sslsocket()
 .br
 Address = ipaddress()
 .br
@@ -1361,17 +1370,17 @@ Can only be used with TLS/DTLS connections; \fI{error, undefined}\fR\& is return
 .RE
 .LP
 .B
-recv(Socket, Length) -> 
+recv(SslSocket, Length) -> 
 .br
 .B
-recv(Socket, Length, Timeout) -> {ok, Data} | {error, Reason}
+recv(SslSocket, Length, Timeout) -> {ok, Data} | {error, Reason}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+SslSocket = sslsocket()
 .br
 Length = integer()
 .br
@@ -1391,14 +1400,14 @@ Optional argument \fITimeout\fR\& specifies a time-out in milliseconds\&. The de
 .RE
 .LP
 .B
-renegotiate(Socket) -> ok | {error, Reason}
+renegotiate(SslSocket) -> ok | {error, Reason}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+SslSocket = sslsocket()
 .br
 .RE
 .RE
@@ -1408,14 +1417,14 @@ Initiates a new handshake\&. A notable return value is \fI{error, renegotiation_
 .RE
 .LP
 .B
-send(Socket, Data) -> ok | {error, Reason}
+send(SslSocket, Data) -> ok | {error, Reason}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+SslSocket = sslsocket()
 .br
 Data = iodata()
 .br
@@ -1429,14 +1438,14 @@ A notable return value is \fI{error, closed}\fR\& indicating that the socket is 
 .RE
 .LP
 .B
-setopts(Socket, Options) -> ok | {error, Reason}
+setopts(SslSocket, Options) -> ok | {error, Reason}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+SslSocket = sslsocket()
 .br
 Options = [socketoption]()
 .br
@@ -1448,14 +1457,14 @@ Sets options according to \fIOptions\fR\& for socket \fISocket\fR\&\&.
 .RE
 .LP
 .B
-shutdown(Socket, How) -> ok | {error, Reason}
+shutdown(SslSocket, How) -> ok | {error, Reason}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+SslSocket = sslsocket()
 .br
 How = read | write | read_write
 .br
@@ -1473,17 +1482,17 @@ To be able to handle that the peer has done a shutdown on the write side, option
 .RE
 .LP
 .B
-ssl_accept(Socket) -> 
+ssl_accept(SslSocket) -> 
 .br
 .B
-ssl_accept(Socket, Timeout) -> ok | {error, Reason}
+ssl_accept(SslSocket, Timeout) -> ok | {error, Reason}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+SslSocket = sslsocket()
 .br
 Timeout = integer()
 .br
@@ -1493,9 +1502,15 @@ Reason = term()
 .RE
 .RS
 .LP
-Performs the SSL/TLS/DTLS server-side handshake\&.
+Deprecated in OTP 21, use \fBhandshake/[1,2]\fR\& instead\&.
 .LP
-\fISocket\fR\& is a socket as returned by \fBssl:transport_accept/[1,2]\fR\& 
+
+.RS -4
+.B
+Note:
+.RE
+handshake/[1,2] always returns a new socket\&.
+
 .RE
 .LP
 .B
@@ -1521,28 +1536,26 @@ Reason = term()
 .RE
 .RS
 .LP
-If \fISocket\fR\& is a \fIsocket()\fR\&: upgrades a \fIgen_tcp\fR\&, or equivalent, socket to an SSL socket, that is, performs the SSL/TLS server-side handshake and returns the SSL socket\&.
+Deprecated in OTP 21, use \fBhandshake/[2,3]\fR\& instead\&.
 .LP
 
 .RS -4
 .B
-Warning:
+Note:
 .RE
-The listen socket is to be in mode \fI{active, false}\fR\& before telling the client that the server is ready to upgrade by calling this function, else the upgrade succeeds or does not succeed depending on timing\&.
+handshake/[2,3] always returns a new socket\&.
 
-.LP
-If \fISocket\fR\& is an \fIsslsocket()\fR\&: provides extra SSL/TLS/DTLS options to those specified in \fBssl:listen/2 \fR\& and then performs the SSL/TLS/DTLS handshake\&.
 .RE
 .LP
 .B
-sockname(Socket) -> {ok, {Address, Port}} | {error, Reason}
+sockname(SslSocket) -> {ok, {Address, Port}} | {error, Reason}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Socket = sslsocket()
+SslSocket = sslsocket()
 .br
 Address = ipaddress()
 .br
@@ -1606,14 +1619,14 @@ Returns the string representation of a cipher suite\&.
 transport_accept(ListenSocket) ->
 .br
 .B
-transport_accept(ListenSocket, Timeout) -> {ok, NewSocket} | {error, Reason}
+transport_accept(ListenSocket, Timeout) -> {ok, SslSocket} | {error, Reason}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-ListenSocket = NewSocket = sslsocket()
+ListenSocket = SslSocket = sslsocket()
 .br
 Timeout = integer()
 .br
@@ -1623,17 +1636,17 @@ Reason = reason()
 .RE
 .RS
 .LP
-Accepts an incoming connection request on a listen socket\&. \fIListenSocket\fR\& must be a socket returned from \fB ssl:listen/2\fR\&\&. The socket returned is to be passed to \fB ssl:ssl_accept[2,3]\fR\& to complete handshaking, that is, establishing the SSL/TLS/DTLS connection\&.
+Accepts an incoming connection request on a listen socket\&. \fIListenSocket\fR\& must be a socket returned from \fB listen/2\fR\&\&. The socket returned is to be passed to \fB handshake/[2,3]\fR\& to complete handshaking, that is, establishing the SSL/TLS/DTLS connection\&.
 .LP
 
 .RS -4
 .B
 Warning:
 .RE
-The socket returned can only be used with \fB ssl:ssl_accept[2,3]\fR\&\&. No traffic can be sent or received before that call\&.
+The socket returned can only be used with \fB handshake/[2,3]\fR\&\&. No traffic can be sent or received before that call\&.
 
 .LP
-The accepted socket inherits the options set for \fIListenSocket\fR\& in \fB ssl:listen/2\fR\&\&.
+The accepted socket inherits the options set for \fIListenSocket\fR\& in \fB listen/2\fR\&\&.
 .LP
 The default value for \fITimeout\fR\& is \fIinfinity\fR\&\&. If \fITimeout\fR\& is specified and no connection is accepted within the given time, \fI{error, timeout}\fR\& is returned\&.
 .RE
@@ -1661,11 +1674,11 @@ The application version of the SSL application\&.
 .TP 2
 .B
 \fIsupported\fR\&:
-SSL/TLS versions supported by default\&. Overridden by a version option on \fB connect/[2,3,4]\fR\&, \fB listen/2\fR\&, and \fBssl_accept/[1,2,3]\fR\&\&. For the negotiated SSL/TLS version, see \fBssl:connection_information/1 \fR\&\&.
+SSL/TLS versions supported by default\&. Overridden by a version option on \fB connect/[2,3,4]\fR\&, \fB listen/2\fR\&, and \fBssl_accept/[1,2,3]\fR\&\&. For the negotiated SSL/TLS version, see \fBconnection_information/1 \fR\&\&.
 .TP 2
 .B
 \fIsupported_dtls\fR\&:
-DTLS versions supported by default\&. Overridden by a version option on \fB connect/[2,3,4]\fR\&, \fB listen/2\fR\&, and \fBssl_accept/[1,2,3]\fR\&\&. For the negotiated DTLS version, see \fBssl:connection_information/1 \fR\&\&.
+DTLS versions supported by default\&. Overridden by a version option on \fB connect/[2,3,4]\fR\&, \fB listen/2\fR\&, and \fBssl_accept/[1,2,3]\fR\&\&. For the negotiated DTLS version, see \fBconnection_information/1 \fR\&\&.
 .TP 2
 .B
 \fIavailable\fR\&:
