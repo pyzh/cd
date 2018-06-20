@@ -1,4 +1,4 @@
-.TH ordsets 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH ordsets 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 ordsets \- Functions for manipulating sets as ordered lists.
   
@@ -226,6 +226,27 @@ Ordset = \fBordset\fR\&(term())
 .RS
 .LP
 Returns \fItrue\fR\& if \fIElement\fR\& is an element of \fIOrdset\fR\&, otherwise \fIfalse\fR\&\&.
+.RE
+.LP
+.nf
+
+.B
+is_empty(Ordset) -> boolean()
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Ordset = \fBordset\fR\&(term())
+.br
+.RE
+.RE
+.RS
+.LP
+Returns \fItrue\fR\& if \fIOrdset\fR\& is an empty set, otherwise \fIfalse\fR\&\&.
 .RE
 .LP
 .nf

@@ -1,4 +1,4 @@
-.TH appup 5 "sasl 3.1.2" "Ericsson AB" "Files"
+.TH appup 5 "sasl 3.2" "Ericsson AB" "Files"
 .SH NAME
 appup \- Application upgrade file
 .SH DESCRIPTION
@@ -171,7 +171,7 @@ Removing an application means that the application is stopped, the modules are u
   Application = atom()
 .fi
 .LP
-Restarting an application means that the application is stopped and then started again, similar to using the instructions \fIremove_application\fR\& and \fIadd_application\fR\& in sequence\&.
+Restarting an application means that the application is stopped and then started again, similar to using the instructions \fIremove_application\fR\& and \fIadd_application\fR\& in sequence\&. Note that, even if the application has been started before the release upgrade is performed, \fIrestart_application\fR\& may only \fIload\fR\& it rather than \fIstart\fR\& it, depending on the application\&'s \fIstart type\fR\&: If \fIType = load\fR\&, the application is only loaded\&. If \fIType = none\fR\&, the application is not loaded and not started, although the code for its modules is loaded\&.
 .SS "Low-Level Instructions"
 
 .LP

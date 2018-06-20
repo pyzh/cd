@@ -1,15 +1,15 @@
-.TH ftp 3 "inets 6.5.2" "Ericsson AB" "Erlang Module Definition"
+.TH ftp 3 "ftp 1.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 ftp \- A File Transfer Protocol client.
 .SH DESCRIPTION
 .LP
 This module implements a client for file transfer according to a subset of the File Transfer Protocol (FTP), see RFC 959\&.
 .LP
-As from \fIInets\fR\& 4\&.4\&.1, the FTP client always tries to use passive FTP mode and only resort to active FTP mode if this fails\&. This default behavior can be changed by start option \fBmode\fR\&\&.
+The FTP client always tries to use passive FTP mode and only resort to active FTP mode if this fails\&. This default behavior can be changed by start option \fBmode\fR\&\&.
 .LP
-An FTP client can be started in two ways\&. One is using the \fBInets service framework\fR\&, the other is to start it directly as a standalone process using function \fBopen\fR\&\&.
+An FTP client can be started in two ways\&. One is using the \fBservice_start\fR\& function, the other is to start it directly as a standalone process using function \fBopen\fR\&\&.
 .LP
-For a simple example of an FTP session, see \fBInets User\&'s Guide\fR\&\&.
+For a simple example of an FTP session, see \fBFTP User\&'s Guide\fR\&\&.
 .LP
 In addition to the ordinary functions for receiving and sending files (see \fIrecv/2\fR\&, \fIrecv/3\fR\&, \fIsend/2\fR\&, and \fIsend/3\fR\&) there are functions for receiving remote files as binaries (see \fIrecv_bin/2\fR\&) and for sending binaries to be stored as remote files (see \fIsend_bin/3\fR\&)\&.
 .LP
@@ -19,7 +19,7 @@ The return values of the following functions depend much on the implementation o
 .SH "FTP CLIENT SERVICE START/STOP"
 
 .LP
-The FTP client can be started and stopped dynamically in runtime by calling the \fIInets\fR\& application API \fIinets:start(ftpc, ServiceConfig)\fR\&, or \fIinets:start(ftpc, ServiceConfig, How)\fR\&, and \fIinets:stop(ftpc, Pid)\fR\&\&. For details, see \fBinets(3)\fR\&\&.
+The FTP client can be started and stopped dynamically in runtime by calling the \fIftp\fR\& application API \fIftp:start_service(ServiceConfig)\fR\& and \fIftp:stop_service(Pid)\fR\&\&.
 .LP
 The available configuration options are as follows:
 .RS 2
@@ -612,7 +612,7 @@ Reason = ehost | term()
 .RE
 .RS
 .LP
-Starts a standalone FTP client process (without the \fIInets\fR\& service framework) and opens a session with the FTP server at \fIHost\fR\&\&.
+Starts a standalone FTP client process (without the \fIftp\fR\& service framework) and opens a session with the FTP server at \fIHost\fR\&\&.
 .LP
 If option \fI{tls, tls_options()}\fR\& is present, the FTP session is transported over \fItls\fR\& (\fIftps\fR\&, see RFC 4217)\&. The list \fItls_options()\fR\& can be empty\&. The function \fB\fIssl:connect/3\fR\&\fR\& is used for securing both the control connection and the data sessions\&.
 .LP
@@ -896,6 +896,54 @@ Reason = restriction_reason() | common_reason() | shortage_reason()
 .RS
 .LP
 Stops transfer of chunks to the remote server\&. The file at the remote server, specified in the call to \fIsend_chunk_start/2\fR\& is closed by the server\&.
+.RE
+.LP
+.B
+start_service(ServiceConfig) -> {ok, Pid} | {error, Reason}
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+ServiceConfig = [{Option, Value}]
+.br
+Option = property()
+.br
+Value = term()
+.br
+.RE
+.RE
+.RS
+.LP
+Dynamically starts an \fIFTP\fR\& session after the \fIftp\fR\& application has been started\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+As long as the \fIftp\fR\& application is operational, the FTP sessions are supervised and can be soft code upgraded\&.
+
+.RE
+.LP
+.B
+stop_service(Reference) -> ok | {error, Reason} 
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Reference = pid() | term() - service-specified reference
+.br
+Reason = term()
+.br
+.RE
+.RE
+.RS
+.LP
+Stops a started FTP session\&.
 .RE
 .LP
 .B

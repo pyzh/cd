@@ -1,4 +1,4 @@
-.TH zlib 3 "erts 9.3.3" "Ericsson AB" "Erlang Module Definition"
+.TH zlib 3 "erts 10.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 zlib \- zlib compression interface.
 .SH DESCRIPTION
@@ -55,7 +55,7 @@ See \fB\fIinflate/2\fR\&\fR\&\&.
 .SH DATA TYPES
 .nf
 
-\fBzstream()\fR\& = term()
+\fBzstream()\fR\& = reference()
 .br
 .fi
 .RS
@@ -116,7 +116,7 @@ Z = \fBzstream()\fR\&
 .br
 Data = iodata()
 .br
-CheckSum = integer()
+CheckSum = integer() >= 0
 .br
 .RE
 .RE
@@ -147,11 +147,11 @@ Types:
 .RS 3
 Z = \fBzstream()\fR\&
 .br
-PrevAdler = integer()
+PrevAdler = integer() >= 0
 .br
 Data = iodata()
 .br
-CheckSum = integer()
+CheckSum = integer() >= 0
 .br
 .RE
 .RE
@@ -191,7 +191,7 @@ Types:
 .RS 3
 Z = \fBzstream()\fR\&
 .br
-Adler = Adler1 = Adler2 = Size2 = integer()
+Adler = Adler1 = Adler2 = Size2 = integer() >= 0
 .br
 .RE
 .RE
@@ -268,7 +268,7 @@ Types:
 .RS 3
 Z = \fBzstream()\fR\&
 .br
-CRC = integer()
+CRC = integer() >= 0
 .br
 .RE
 .RE
@@ -301,7 +301,7 @@ Z = \fBzstream()\fR\&
 .br
 Data = iodata()
 .br
-CRC = integer()
+CRC = integer() >= 0
 .br
 .RE
 .RE
@@ -332,11 +332,11 @@ Types:
 .RS 3
 Z = \fBzstream()\fR\&
 .br
-PrevCRC = integer()
+PrevCRC = integer() >= 0
 .br
 Data = iodata()
 .br
-CRC = integer()
+CRC = integer() >= 0
 .br
 .RE
 .RE
@@ -376,7 +376,7 @@ Types:
 .RS 3
 Z = \fBzstream()\fR\&
 .br
-CRC = CRC1 = CRC2 = Size2 = integer()
+CRC = CRC1 = CRC2 = Size2 = integer() >= 0
 .br
 .RE
 .RE
@@ -719,7 +719,7 @@ Z = \fBzstream()\fR\&
 .br
 Dictionary = iodata()
 .br
-Adler32 = integer()
+Adler32 = integer() >= 0
 .br
 .RE
 .RE
@@ -856,7 +856,11 @@ Decompressed =
 .br
     iolist() |
 .br
-    {need_dictionary, Adler32 :: integer(), Output :: iolist()}
+    {need_dictionary,
+.br
+     Adler32 :: integer() >= 0,
+.br
+     Output :: iolist()}
 .br
 .RE
 .RE
@@ -1168,7 +1172,11 @@ Result =
 .br
     {finished, Output :: iolist()} |
 .br
-    {need_dictionary, Adler32 :: integer(), Output :: iolist()}
+    {need_dictionary,
+.br
+     Adler32 :: integer() >= 0,
+.br
+     Output :: iolist()}
 .br
 .RE
 .RE

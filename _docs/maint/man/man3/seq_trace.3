@@ -1,4 +1,4 @@
-.TH seq_trace 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.TH seq_trace 3 "kernel 6.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 seq_trace \- Sequential tracing of messages.
 .SH DESCRIPTION
@@ -90,7 +90,7 @@ Val = OldVal = \fBvalue()\fR\&
 .nf
 \fBvalue()\fR\& = 
 .br
-    (Integer :: integer() >= 0) |
+    (Label :: term()) |
 .br
     {Previous :: integer() >= 0, Current :: integer() >= 0} |
 .br
@@ -105,8 +105,16 @@ Sets the individual \fIComponent\fR\& of the trace token to \fIVal\fR\&\&. Retur
 .RS 2
 .TP 2
 .B
-\fIset_token(label, Integer)\fR\&:
-The \fIlabel\fR\& component is an integer which identifies all events belonging to the same sequential trace\&. If several sequential traces can be active simultaneously, \fIlabel\fR\& is used to identify the separate traces\&. Default is 0\&.
+\fIset_token(label, Label)\fR\&:
+The \fIlabel\fR\& component is a term which identifies all events belonging to the same sequential trace\&. If several sequential traces can be active simultaneously, \fIlabel\fR\& is used to identify the separate traces\&. Default is 0\&.
+.LP
+
+.RS -4
+.B
+Warning:
+.RE
+Labels were restricted to small signed integers (28 bits) prior to OTP 21\&. The trace token will be silenty dropped if it crosses over to a node that does not support the label\&.
+
 .TP 2
 .B
 \fIset_token(serial, SerialValue)\fR\&:
@@ -191,7 +199,7 @@ Val = \fBvalue()\fR\&
 .nf
 \fBvalue()\fR\& = 
 .br
-    (Integer :: integer() >= 0) |
+    (Label :: term()) |
 .br
     {Previous :: integer() >= 0, Current :: integer() >= 0} |
 .br

@@ -1,4 +1,4 @@
-.TH sets 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH sets 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 sets \- Functions for set manipulation.
 .SH DESCRIPTION
@@ -220,6 +220,27 @@ Set = \fBset\fR\&(Element)
 .RS
 .LP
 Returns \fItrue\fR\& if \fIElement\fR\& is an element of \fISet\fR\&, otherwise \fIfalse\fR\&\&.
+.RE
+.LP
+.nf
+
+.B
+is_empty(Set) -> boolean()
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Set = \fBset()\fR\&
+.br
+.RE
+.RE
+.RS
+.LP
+Returns \fItrue\fR\& if \fISet\fR\& is an empty set, otherwise \fIfalse\fR\&\&.
 .RE
 .LP
 .nf

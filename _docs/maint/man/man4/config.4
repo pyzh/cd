@@ -1,11 +1,11 @@
-.TH config 5 "kernel 5.4.3" "Ericsson AB" "Files"
+.TH config 5 "kernel 6.0" "Ericsson AB" "Files"
 .SH NAME
 config \- Configuration file.
 .SH DESCRIPTION
 .LP
 A \fIconfiguration file\fR\& contains values for configuration parameters for the applications in the system\&. The \fIerl\fR\& command-line argument \fI-config Name\fR\& tells the system to use data in the system configuration file \fIName\&.config\fR\&\&.
 .LP
-Configuration parameter values in the configuration file override the values in the application resource files (see \fB\fIapp(4)\fR\&\fR\&\&. The values in the configuration file can be overridden by command-line flags (see \fB\fIerts:erl(1)\fR\&\fR\&\&.
+Configuration parameter values in the configuration file override the values in the application resource files (see \fB\fIapp(4)\fR\&\fR\&)\&. The values in the configuration file can be overridden by command-line flags (see \fB\fIerts:erl(1)\fR\&\fR\&)\&.
 .LP
 The value of a configuration parameter is retrieved by calling \fIapplication:get_env/1,2\fR\&\&.
 .SH "FILE SYNTAX"
@@ -52,7 +52,7 @@ This means that specifying another \fI\&.config\fR\& file, or more \fI\&.config\
 .TP 2
 .B
 \fIFile = string()\fR\&:
-Name of another \fI\&.config\fR\& file\&. Extension \fI\&.config\fR\& can be omitted\&. It is recommended to use absolute paths\&. A relative path is relative the current working directory of the emulator\&.
+Name of another \fI\&.config\fR\& file\&. Extension \fI\&.config\fR\& can be omitted\&. It is recommended to use absolute paths\&. If a relative path is used, \fIFile\fR\& is searched, first, relative from \fIsys\&.config\fR\& directory, then relative to the current working directory of the emulator, for backward compatibility\&. This allow to use a \fIsys\&.config\fR\& pointing out other \fI\&.config\fR\& files in a release or in a node started manually using \fI-config \&.\&.\&.\fR\& with same result whatever the current working directory\&. 
 .RE
 .LP
 When traversing the contents of \fIsys\&.config\fR\& and a filename is encountered, its contents are read and merged with the result so far\&. When an application configuration tuple \fI{Application, Env}\fR\& is found, it is merged with the result so far\&. Merging means that new parameters are added and existing parameter values overwritten\&.

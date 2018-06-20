@@ -1,4 +1,4 @@
-.TH httpc 3 "inets 6.5.2" "Ericsson AB" "Erlang Module Definition"
+.TH httpc 3 "inets 7.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 httpc \- An HTTP/1.1 client
 .SH DESCRIPTION
@@ -310,7 +310,7 @@ HTTPOptions = http_options()
 .br
 http_options() = [http_option()]
 .br
-http_option() = {timeout, timeout()} | {connect_timeout, timeout()} | {ssl, ssloptions()} | {essl, ssloptions()} | {autoredirect, boolean()} | {proxy_auth, {userstring(), passwordstring()}} | {version, http_version()} | {relaxed, boolean()} | {url_encode, boolean()}
+http_option() = {timeout, timeout()} | {connect_timeout, timeout()} | {ssl, ssloptions()} | {essl, ssloptions()} | {autoredirect, boolean()} | {proxy_auth, {userstring(), passwordstring()}} | {version, http_version()} | {relaxed, boolean()}
 .br
 timeout() = integer() >= 0 | infinity
 .br
@@ -343,7 +343,7 @@ Profile = profile() | pid()
 .RS 2
 When started \fIstand_alone\fR\& only the pid can be used\&.
 .RE
-Reason = {connect_failed, term()} | {send_failed, term()} | term()
+Reason = term()
 .br
 .RE
 .RE
@@ -417,14 +417,6 @@ Default is the string \fI"HTTP/1\&.1"\fR\&\&.
 .B
 \fIrelaxed\fR\&:
 If set to \fItrue\fR\&, workarounds for known server deviations from the HTTP-standard are enabled\&.
-.RS 2
-.LP
-Default is \fIfalse\fR\&\&.
-.RE
-.TP 2
-.B
-\fIurl_encode\fR\&:
-Applies Percent-encoding, also known as URL encoding on the URL\&.
 .RS 2
 .LP
 Default is \fIfalse\fR\&\&.

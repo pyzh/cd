@@ -1,4 +1,4 @@
-.TH filename 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH filename 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 filename \- Filename manipulation functions.
 .SH DESCRIPTION
@@ -7,7 +7,25 @@ This module provides functions for analyzing and manipulating filenames\&. These
 .LP
 In Windows, all functions return filenames with forward slashes only, even if the arguments contain backslashes\&. To normalize a filename by removing redundant directory separators, use \fB\fIjoin/1\fR\&\fR\&\&.
 .LP
-The module supports raw filenames in the way that if a binary is present, or the filename cannot be interpreted according to the return value of \fB\fIfile:native_name_encoding/0\fR\&\fR\&, a raw filename is also returned\&. For example, \fIjoin/1\fR\& provided with a path component that is a binary (and cannot be interpreted under the current native filename encoding) results in a raw filename that is returned (the join operation is performed of course)\&. For more information about raw filenames, see the \fB\fIfile\fR\&\fR\& module\&.
+The module supports \fBraw filenames\fR\& in the way that if a binary is present, or the filename cannot be interpreted according to the return value of \fB\fIfile:native_name_encoding/0\fR\&\fR\&, a raw filename is also returned\&. For example, \fIjoin/1\fR\& provided with a path component that is a binary (and cannot be interpreted under the current native filename encoding) results in a raw filename that is returned (the join operation is performed of course)\&. For more information about raw filenames, see the \fB\fIfile\fR\&\fR\& module\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+Functionality in this module generally assumes valid input and does not necessarily fail on input that does not use a valid encoding, but may instead very likely produce invalid output\&.
+.LP
+File operations used to accept filenames containing null characters (integer value zero)\&. This caused the name to be truncated and in some cases arguments to primitive operations to be mixed up\&. Filenames containing null characters inside the filename are now \fIrejected\fR\& and will cause primitive file operations to fail\&.
+
+.LP
+
+.RS -4
+.B
+Warning:
+.RE
+Currently null characters at the end of the filename will be accepted by primitive file operations\&. Such filenames are however still documented as invalid\&. The implementation will also change in the future and reject such filenames\&.
+
 .SH DATA TYPES
 .nf
 

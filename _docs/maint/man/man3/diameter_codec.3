@@ -1,4 +1,4 @@
-.TH diameter_codec 3 "diameter 2.1.4" "Ericsson AB" "Erlang Module Definition"
+.TH diameter_codec 3 "diameter 2.1.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 diameter_codec \- Decode and encode of Diameter messages.
 .SH DESCRIPTION
@@ -149,7 +149,7 @@ Values corresponding to the R(equest), P(roxiable), E(rror) and T(Potentially re
 The representation of a Diameter message as passed to \fBdiameter:call/4\fR\& or returned from a \fBhandle_request/3\fR\& callback\&. The record representation is as outlined in \fBdiameter_dict(4)\fR\&: a message as defined in a dictionary file is encoded as a record with one field for each component AVP\&. Equivalently, a message can also be encoded as a list whose head is the atom-valued message name (as specified in the relevant dictionary file) and whose tail is either a list of AVP name/values pairs or a map with values keyed on AVP names\&. The format at decode is determined by \fBdiameter:service_opt()\fR\& \fBdecode_format\fR\&\&. Any of the formats is accepted at encode\&.
 .RS 2
 .LP
-Another list-valued representation allows a message to be specified as a list whose head is a \fBheader()\fR\& and whose tail is an \fBavp()\fR\& list\&. This representation is used by diameter itself when relaying requests as directed by the return value of a \fBhandle_request/3\fR\& callback\&. It differs from the other other two in that it bypasses the checks for messages that do not agree with their definitions in the dictionary in question: messages are sent exactly as specified\&.
+Another list-valued representation allows a message to be specified as a list whose head is a \fBheader()\fR\& and whose tail is an \fBavp()\fR\& list\&. This representation is used by diameter itself when relaying requests as directed by the return value of a \fBhandle_request/3\fR\& callback\&. It differs from the other two in that it bypasses the checks for messages that do not agree with their definitions in the dictionary in question: messages are sent exactly as specified\&.
 .RE
 .TP 2
 .B

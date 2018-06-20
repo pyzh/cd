@@ -1,4 +1,4 @@
-.TH gen_server 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH gen_server 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 gen_server \- Generic server behavior.
 .SH DESCRIPTION
@@ -24,6 +24,8 @@ gen_server:abcast     -----> Module:handle_cast/2
 
 -                     -----> Module:handle_info/2
 
+-                     -----> Module:handle_continue/2
+
 -                     -----> Module:terminate/2
 
 -                     -----> Module:code_change/3
@@ -38,6 +40,8 @@ Notice that a \fIgen_server\fR\& process does not trap exit signals automaticall
 Unless otherwise stated, all functions in this module fail if the specified \fIgen_server\fR\& process does not exist or if bad arguments are specified\&.
 .LP
 The \fIgen_server\fR\& process can go into hibernation (see \fB\fIerlang:hibernate/3\fR\&\fR\&) if a callback function specifies \fI\&'hibernate\&'\fR\& instead of a time-out value\&. This can be useful if the server is expected to be idle for a long time\&. However, use this feature with care, as hibernation implies at least two garbage collections (when hibernating and shortly after waking up) and is not something you want to do between each call to a busy server\&.
+.LP
+If the \fIgen_server\fR\& process needs to perform an action immediately after initialization or to break the execution of a callback into multiple steps, it can return \fI{continue,Continue}\fR\& in place of the time-out or hibernation value, which will immediately invoke the \fIhandle_continue/2\fR\& callback\&.
 .SH EXPORTS
 .LP
 .B
@@ -481,7 +485,7 @@ Timeout = int()>0 | infinity
 .LP
 Orders a generic server to exit with the specified \fIReason\fR\& and waits for it to terminate\&. The \fIgen_server\fR\& process calls \fB\fIModule:terminate/2\fR\&\fR\& before exiting\&.
 .LP
-The function returns \fIok\fR\& if the server terminates with the expected reason\&. Any other reason than \fInormal\fR\&, \fIshutdown\fR\&, or \fI{shutdown,Term}\fR\& causes an error report to be issued using \fB\fIerror_logger:format/2\fR\&\fR\&\&. The default \fIReason\fR\& is \fInormal\fR\&\&.
+The function returns \fIok\fR\& if the server terminates with the expected reason\&. Any other reason than \fInormal\fR\&, \fIshutdown\fR\&, or \fI{shutdown,Term}\fR\& causes an error report to be issued using \fB\fIlogger(3)\fR\&\fR\&\&. The default \fIReason\fR\& is \fInormal\fR\&\&.
 .LP
 \fITimeout\fR\& is an integer greater than zero that specifies how many milliseconds to wait for the server to terminate, or the atom \fIinfinity\fR\& to wait indefinitely\&. Defaults to \fIinfinity\fR\&\&. If the server has not terminated within the specified time, a \fItimeout\fR\& exception is raised\&.
 .LP
@@ -606,9 +610,13 @@ Result = {reply,Reply,NewState} | {reply,Reply,NewState,Timeout}
 .br
  | {reply,Reply,NewState,hibernate}
 .br
+ | {reply,Reply,NewState,{continue,Continue}}
+.br
  | {noreply,NewState} | {noreply,NewState,Timeout}
 .br
  | {noreply,NewState,hibernate}
+.br
+ | {noreply,NewState,{continue,Continue}}
 .br
  | {stop,Reason,Reply,NewState} | {stop,Reason,NewState}
 .br
@@ -617,6 +625,8 @@ Result = {reply,Reply,NewState} | {reply,Reply,NewState,Timeout}
  NewState = term()
 .br
  Timeout = int()>=0 | infinity
+.br
+ Continue = term()
 .br
  Reason = term()
 .br
@@ -672,11 +682,15 @@ Result = {noreply,NewState} | {noreply,NewState,Timeout}
 .br
  | {noreply,NewState,hibernate}
 .br
+ | {noreply,NewState,{continue,Continue}}
+.br
  | {stop,Reason,NewState}
 .br
  NewState = term()
 .br
  Timeout = int()>=0 | infinity
+.br
+ Continue = term()
 .br
  Reason = term()
 .br
@@ -687,6 +701,51 @@ Result = {noreply,NewState} | {noreply,NewState,Timeout}
 Whenever a \fIgen_server\fR\& process receives a request sent using \fB\fIcast/2\fR\&\fR\& or \fB\fIabcast/2,3\fR\&\fR\&, this function is called to handle the request\&.
 .LP
 For a description of the arguments and possible return values, see \fB\fIModule:handle_call/3\fR\&\fR\&\&.
+.RE
+.LP
+.B
+Module:handle_continue(Continue, State) -> Result
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Continue = term()
+.br
+State = term()
+.br
+Result = {noreply,NewState} | {noreply,NewState,Timeout}
+.br
+ | {noreply,NewState,hibernate}
+.br
+ | {noreply,NewState,{continue,Continue}}
+.br
+ | {stop,Reason,NewState}
+.br
+ NewState = term()
+.br
+ Timeout = int()>=0 | infinity
+.br
+ Continue = term()
+.br
+ Reason = normal | term()
+.br
+.RE
+.RE
+.RS
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+This callback is optional, so callback modules need to export it only if they return \fI{continue,Continue}\fR\& from another callback\&. If continue is used and the callback is not implemented, the process will exit with \fIundef\fR\& error\&.
+
+.LP
+This function is called by a \fIgen_server\fR\& process whenever a previous callback returns \fI{continue, Continue}\fR\&\&. \fIhandle_continue/2\fR\& is invoked immediately after the previous callback, which makes it useful for performing work after initialization or for splitting the work in a callback in multiple steps, updating the process state along the way\&.
+.LP
+For a description of the other arguments and possible return values, see \fB\fIModule:handle_call/3\fR\&\fR\&\&.
 .RE
 .LP
 .B
@@ -704,6 +763,8 @@ State = term()
 Result = {noreply,NewState} | {noreply,NewState,Timeout}
 .br
  | {noreply,NewState,hibernate}
+.br
+ | {noreply,NewState,{continue,Continue}}
 .br
  | {stop,Reason,NewState}
 .br
@@ -744,7 +805,7 @@ Args = term()
 .br
 Result = {ok,State} | {ok,State,Timeout} | {ok,State,hibernate}
 .br
- | {stop,Reason} | ignore
+ | {ok,State,{continue,Continue}} | {stop,Reason} | ignore
 .br
  State = term()
 .br
@@ -816,7 +877,7 @@ Even if the \fIgen_server\fR\& process is \fInot\fR\& part of a supervision tree
 .LP
 Otherwise, the \fIgen_server\fR\& process terminates immediately\&.
 .LP
-Notice that for any other reason than \fInormal\fR\&, \fIshutdown\fR\&, or \fI{shutdown,Term}\fR\&, the \fIgen_server\fR\& process is assumed to terminate because of an error and an error report is issued using \fB\fIerror_logger:format/2\fR\&\fR\&\&.
+Notice that for any other reason than \fInormal\fR\&, \fIshutdown\fR\&, or \fI{shutdown,Term}\fR\&, the \fIgen_server\fR\& process is assumed to terminate because of an error and an error report is issued using \fB\fIlogger(3)\fR\&\fR\&\&.
 .RE
 .SH "SEE ALSO"
 

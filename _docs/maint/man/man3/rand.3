@@ -1,4 +1,4 @@
-.TH rand 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH rand 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 rand \- Pseudo random number generation.
 .SH DESCRIPTION
@@ -61,7 +61,7 @@ Every time a random number is requested, a state is used to calculate it and a n
 .LP
 The functions with implicit state use the process dictionary variable \fIrand_seed\fR\& to remember the current state\&.
 .LP
-If a process calls \fB\fIuniform/0\fR\&\fR\& or \fB\fIuniform/1\fR\&\fR\& without setting a seed first, \fB\fIseed/1\fR\&\fR\& is called automatically with the default algorithm and creates a non-constant seed\&.
+If a process calls \fB\fIuniform/0\fR\&\fR\&, \fB\fIuniform/1\fR\&\fR\& or \fB\fIuniform_real/0\fR\&\fR\& without setting a seed first, \fB\fIseed/1\fR\&\fR\& is called automatically with the default algorithm and creates a non-constant seed\&.
 .LP
 The functions with explicit state never use the process dictionary\&.
 .LP
@@ -99,11 +99,20 @@ S0 = rand:seed_s(exrop),
 {R4, S1} = rand:uniform_s(S0),
 .fi
 .LP
+Textbook basic form Box-Muller standard normal deviate
+.LP
+.nf
+
+R5 = rand:uniform_real(),
+R6 = rand:uniform(),
+SND0 = math:sqrt(-2 * math:log(R5)) * math:cos(math:pi() * R6)
+.fi
+.LP
 Create a standard normal deviate:
 .LP
 .nf
 
-{SND0, S2} = rand:normal_s(S1),
+{SND1, S2} = rand:normal_s(S1),
 .fi
 .LP
 Create a normal deviate with mean -3 and variance 0\&.5:
@@ -445,7 +454,7 @@ The generated numbers are on the form N * 2\&.0^(-53), that is; equally spaced i
 .B
 Warning:
 .RE
-This function may return exactly \fI0\&.0\fR\& which can be fatal for certain applications\&. If that is undesired you can use \fI(1\&.0 - rand:uniform())\fR\& to get the interval \fI0\&.0 < X =< 1\&.0\fR\&\&.
+This function may return exactly \fI0\&.0\fR\& which can be fatal for certain applications\&. If that is undesired you can use \fI(1\&.0 - rand:uniform())\fR\& to get the interval \fI0\&.0 < X =< 1\&.0\fR\&, or instead use \fB\fIuniform_real/0\fR\&\fR\&\&.
 .LP
 If neither endpoint is desired you can test and re-try like this:
 .LP
@@ -459,6 +468,30 @@ my_uniform() ->
 end.
 .fi
 
+.RE
+.LP
+.nf
+
+.B
+uniform_real() -> X :: float()
+.br
+.fi
+.br
+.RS
+.LP
+Returns a random float uniformly distributed in the value range \fIDBL_MIN =< X < 1\&.0\fR\& and updates the state in the process dictionary\&.
+.LP
+Conceptually, a random real number \fIR\fR\& is generated from the interval \fI0 =< R < 1\fR\& and then the closest rounded down normalized number in the IEEE 754 Double precision format is returned\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+The generated numbers from this function has got better granularity for small numbers than the regular \fB\fIuniform/0\fR\&\fR\& because all bits in the mantissa are random\&. This property, in combination with the fact that exactly zero is never returned is useful for algoritms doing for example \fI1\&.0 / X\fR\& or \fImath:log(X)\fR\&\&.
+
+.LP
+See \fB\fIuniform_real_s/1\fR\&\fR\& for more explanation\&.
 .RE
 .LP
 .nf
@@ -491,7 +524,7 @@ The generated numbers are on the form N * 2\&.0^(-53), that is; equally spaced i
 .B
 Warning:
 .RE
-This function may return exactly \fI0\&.0\fR\& which can be fatal for certain applications\&. If that is undesired you can use \fI(1\&.0 - rand:uniform(State))\fR\& to get the interval \fI0\&.0 < X =< 1\&.0\fR\&\&.
+This function may return exactly \fI0\&.0\fR\& which can be fatal for certain applications\&. If that is undesired you can use \fI(1\&.0 - rand:uniform(State))\fR\& to get the interval \fI0\&.0 < X =< 1\&.0\fR\&, or instead use \fB\fIuniform_real_s/1\fR\&\fR\&\&.
 .LP
 If neither endpoint is desired you can test and re-try like this:
 .LP
@@ -505,6 +538,38 @@ my_uniform(State) ->
 end.
 .fi
 
+.RE
+.LP
+.nf
+
+.B
+uniform_real_s(State :: state()) ->
+.B
+                  {X :: float(), NewState :: state()}
+.br
+.fi
+.br
+.RS
+.LP
+Returns, for a specified state, a random float uniformly distributed in the value range \fIDBL_MIN =< X < 1\&.0\fR\& and updates the state in the process dictionary\&.
+.LP
+Conceptually, a random real number \fIR\fR\& is generated from the interval \fI0 =< R < 1\fR\& and then the closest rounded down normalized number in the IEEE 754 Double precision format is returned\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+The generated numbers from this function has got better granularity for small numbers than the regular \fB\fIuniform_s/1\fR\&\fR\& because all bits in the mantissa are random\&. This property, in combination with the fact that exactly zero is never returned is useful for algoritms doing for example \fI1\&.0 / X\fR\& or \fImath:log(X)\fR\&\&.
+
+.LP
+The concept implicates that the probability to get exactly zero is extremely low; so low that this function is in fact guaranteed to never return zero\&. The smallest number that it might return is \fIDBL_MIN\fR\&, which is 2\&.0^(-1022)\&.
+.LP
+The value range stated at the top of this function description is technically correct, but \fI0\&.0 =< X < 1\&.0\fR\& is a better description of the generated numbers\&' statistical distribution\&. Except that exactly 0\&.0 is never returned, which is not possible to observe statistically\&.
+.LP
+For example; for all sub ranges \fIN*2\&.0^(-53) =< X < (N+1)*2\&.0^(-53)\fR\& where \fI0 =< integer(N) < 2\&.0^53\fR\& the probability is the same\&. Compare that with the form of the numbers generated by \fB\fIuniform_s/1\fR\&\fR\&\&.
+.LP
+Having to generate extra random bits for small numbers costs a little performance\&. This function is about 20% slower than the regular \fB\fIuniform_s/1\fR\&\fR\& 
 .RE
 .LP
 .nf

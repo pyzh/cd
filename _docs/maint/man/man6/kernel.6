@@ -1,4 +1,4 @@
-.TH kernel 7 "kernel 5.4.3" "Ericsson AB" "Erlang Application Definition"
+.TH kernel 7 "kernel 6.0" "Ericsson AB" "Erlang Application Definition"
 .SH NAME
 kernel \- The Kernel application.
 .SH DESCRIPTION
@@ -21,10 +21,6 @@ Logging
 .LP
 .TP 2
 *
-Error logging
-.LP
-.TP 2
-*
 Global name service
 .LP
 .TP 2
@@ -41,10 +37,10 @@ Operating system interface
 .LP
 .RE
 
-.SH "ERROR LOGGER EVENT HANDLERS"
+.SH "LOGGER HANDLERS"
 
 .LP
-Two standard error logger event handlers are defined in the Kernel application\&. These are described in \fB\fIerror_logger(3)\fR\&\fR\&\&.
+Two standard logger handlers are defined in the Kernel application\&. These are described in the \fBKernel User\&'s Guide\fR\&, and in the \fB\fIlogger_std_h(3)\fR\&\fR\& and \fB\fIlogger_disk_log_h(3)\fR\&\fR\& manual pages\&.
 .SH "OS SIGNAL EVENT HANDLER"
 
 .LP
@@ -118,18 +114,6 @@ The following configuration parameters are defined for the Kernel application\&.
 .RS 2
 .TP 2
 .B
-\fIbrowser_cmd = string() | {M,F,A}\fR\&:
-When pressing the \fIHelp\fR\& button in a tool such as Debugger, the help text (an HTML file \fIFile\fR\&) is by default displayed in a Netscape browser, which is required to be operational\&. This parameter can be used to change the command for how to display the help text if another browser than Netscape is preferred, or if another platform than Unix or Windows is used\&.
-.RS 2
-.LP
-If set to a string \fICommand\fR\&, the command \fI"Command File"\fR\& is evaluated using \fB\fIos:cmd/1\fR\&\fR\&\&.
-.RE
-.RS 2
-.LP
-If set to a module-function-args tuple, \fI{M,F,A}\fR\&, the call \fIapply(M,F,[File|A])\fR\& is evaluated\&.
-.RE
-.TP 2
-.B
 \fIdistributed = [Distrib]\fR\&:
 Specifies which applications that are distributed and on which nodes they are allowed to execute\&. In this parameter:
 .RS 2
@@ -194,49 +178,47 @@ Permissions are described in \fB\fIapplication:permit/2\fR\&\fR\&\&.
 .RE
 .TP 2
 .B
-\fIerror_logger = Value\fR\&:
-\fIValue\fR\& is one of:
+\fIlogger = [Config]\fR\&:
+Specifies the configuration for \fBLogger\fR\&, except the primary log level, which is specified with \fB\fIlogger_level\fR\&\fR\&, and the compatibility with \fBSASL Error Logging\fR\&, which is specified with \fB\fIlogger_sasl_compatible\fR\&\fR\&\&.
 .RS 2
-.TP 2
-.B
-\fItty\fR\&:
-Installs the standard event handler, which prints error reports to \fIstdio\fR\&\&. This is the default option\&.
-.TP 2
-.B
-\fI{file, FileName}\fR\&:
-Installs the standard event handler, which prints error reports to file \fIFileName\fR\&, where \fIFileName\fR\& is a string\&. The file is opened with encoding UTF-8\&.
-.TP 2
-.B
-\fIfalse\fR\&:
-No standard event handler is installed, but the initial, primitive event handler is kept, printing raw event messages to \fItty\fR\&\&.
-.TP 2
-.B
-\fIsilent\fR\&:
-Error logging is turned off\&.
+.LP
+The \fIlogger \fR\& parameter is described in section \fB Logging\fR\& in the Kernel User\&'s Guide\&.
 .RE
 .TP 2
 .B
-\fIerror_logger_format_depth = Depth\fR\&:
-
+\fIlogger_level = Level\fR\&:
+Specifies the primary log level for Logger\&. Log events with the same, or a more severe level, pass through the primary log level check\&. See section \fBLogging\fR\& in the Kernel User\&'s Guide for more information about Logger and log levels\&.
 .RS 2
 .LP
-Can be used to limit the size of the formatted output from the error logger event handlers\&.
+\fILevel = emergency | alert | critical | error | warning | notice | info | debug | all | none\fR\&
 .RE
+.RS 2
 .LP
-
-.RS -4
+To change the primary log level at runtime, use \fB\fIlogger:set_primary_config(level, Level)\fR\&\fR\&\&.
+.RE
+.RS 2
+.LP
+Defaults to \fIinfo\fR\&\&.
+.RE
+.TP 2
 .B
-Note:
-.RE
-This configuration parameter was introduced in OTP 18\&.1 and is experimental\&. Based on user feedback, it can be changed or improved in future releases, for example, to gain better control over how to limit the size of the formatted output\&. We have no plans to remove this new feature entirely, unless it turns out to be useless\&.
-
+\fIlogger_sasl_compatible = true | false\fR\&:
+Specifies if Logger behaves backwards compatible with the SASL error logging functionality from releases prior to Erlang/OTP 21\&.0\&.
 .RS 2
 .LP
-\fIDepth\fR\& is a positive integer representing the maximum depth to which terms are printed by the error logger event handlers included in OTP\&. This configuration parameter is used by the two event handlers defined by the Kernel application and the two event handlers in the SASL application\&. (If you have implemented your own error handlers, this configuration parameter has no effect on them\&.)
+If this parameter is set to \fItrue\fR\&, the default Logger handler does not log any progress-, crash-, or supervisor reports\&. If the SASL application is then started, it adds a Logger handler named \fIsasl\fR\&, which logs these events according to values of the SASL configuration parameter \fIsasl_error_logger\fR\& and \fIsasl_errlog_type\fR\&\&.
 .RE
 .RS 2
 .LP
-\fIDepth\fR\& is used as follows: Format strings passed to the event handlers are rewritten\&. The format controls \fI~p\fR\& and \fI~w\fR\& are replaced with \fI~P\fR\& and \fI~W\fR\&, respectively, and \fIDepth\fR\& is used as the depth parameter\&. For details, see \fB\fIio:format/2\fR\&\fR\& in STDLIB\&.
+See section \fB Deprecated Error Logger Event Handlers and Configuration\fR\& in the sasl(6) manual page for information about the SASL configuration parameters\&.
+.RE
+.RS 2
+.LP
+See section \fBSASL Error Logging\fR\& in the SASL User\&'s Guide, and section \fBBackwards Compatibility with error_logger\fR\& in the Kernel User\&'s Guide for information about the SASL error logging functionality, and how Logger can be backwards compatible with this\&.
+.RE
+.RS 2
+.LP
+Defaults to \fIfalse\fR\&\&.
 .RE
 .LP
 
@@ -244,7 +226,7 @@ This configuration parameter was introduced in OTP 18\&.1 and is experimental\&.
 .B
 Note:
 .RE
-A reasonable starting value for \fIDepth\fR\& is \fI30\fR\&\&. We recommend to test crashing various processes in your application, examine the logs from the crashes, and then increase or decrease the value\&.
+If this parameter is set to \fItrue\fR\&, \fIsasl_errlog_type\fR\& indicates that progress reports shall be logged, and the configured primary log level is \fInotice\fR\& or more severe, then SASL automatically sets the primary log level to \fIinfo\fR\&\&. That is, this setting can potentially overwrite the value of the Kernel configuration parameter \fIlogger_level\fR\&\&. This is to allow progress reports, which have log level \fIinfo\fR\&, to be forwarded to the handlers\&.
 
 .TP 2
 .B
@@ -308,7 +290,7 @@ Defines a list of extra socket options to be used when connecting to other distr
 .TP 2
 .B
 \fIinet_parse_error_log = silent\fR\&:
-If set, no \fIerror_logger\fR\& messages are generated when erroneous lines are found and skipped in the various Inet configuration files\&.
+If set, no log events are issued when erroneous lines are found and skipped in the various Inet configuration files\&.
 .TP 2
 .B
 \fIinetrc = Filename\fR\&:
@@ -518,7 +500,37 @@ Specifies a list of rules for use by \fB\fIfilelib:find_file/2\fR\&\fR\& \fB\fIf
 The interpretation of \fIObjDirSuffix\fR\& and \fISrcDirSuffix\fR\& is as follows: if the end of the directory name where an object is located matches \fIObjDirSuffix\fR\&, then the name created by replacing \fIObjDirSuffix\fR\& with \fISrcDirSuffix\fR\& is expanded by calling \fB\fIfilelib:wildcard/1\fR\&\fR\&, and the first regular file found among the matches is the source file\&.
 .RE
 .RE
+.SH "DEPRECATED CONFIGURATION PARAMETERS"
+
+.LP
+In Erlang/OTP 21\&.0, a new API for logging was added\&. The old \fIerror_logger\fR\& event manager, and event handlers running on this manager, still work, but they are no longer used by default\&.
+.LP
+The following application configuration parameters can still be set, but they are only used if the corresponding configuration parameters for Logger are not set\&.
+.RS 2
+.TP 2
+.B
+\fIerror_logger\fR\&:
+Replaced by setting the type of the default \fB\fIlogger_std_h\fR\&\fR\& to the same value\&. Example: 
+.LP
+.nf
+
+erl -kernel logger '[{handler,default,logger_std_h,#{config=>#{type=>{file,"/tmp/erlang.log"}}}}]'
+      
+.fi
+.TP 2
+.B
+\fIerror_logger_format_depth\fR\&:
+Replaced by setting the \fB\fIdepth\fR\&\fR\& parameter of the default handlers formatter\&. Example: 
+.LP
+.nf
+
+erl -kernel logger '[{handler,default,logger_std_h,#{formatter=>{logger_formatter,#{legacy_header=>true,template=>[{logger_formatter,header},"\\n",msg,"\\n"],depth=>10}}}]'
+      
+.fi
+.RE
+.LP
+See \fBBackwards compatibility with error_logger\fR\& for more information\&.
 .SH "SEE ALSO"
 
 .LP
-\fB\fIapp(4)\fR\&\fR\&, \fB\fIapplication(3)\fR\&\fR\&, \fB\fIcode(3)\fR\&\fR\&, \fB\fIdisk_log(3)\fR\&\fR\&, \fB\fIerl_boot_server(3)\fR\&\fR\&, \fB\fIerl_ddll(3)\fR\&\fR\&, \fB\fIerror_logger(3)\fR\&\fR\&, \fB\fIfile(3)\fR\&\fR\&, \fB\fIglobal(3)\fR\&\fR\&, \fB\fIglobal_group(3)\fR\&\fR\&, \fB\fIheart(3)\fR\&\fR\&, \fB\fIinet(3)\fR\&\fR\&, \fB\fInet_kernel(3)\fR\&\fR\&, \fB\fIos(3)\fR\&\fR\&, \fB\fIpg2(3)\fR\&\fR\&, \fB\fIrpc(3)\fR\&\fR\&, \fB\fIseq_trace(3)\fR\&\fR\&, \fB\fIuser(3)\fR\&\fR\&, \fB\fItimer(3)\fR\&\fR\&
+\fB\fIapp(4)\fR\&\fR\&, \fB\fIapplication(3)\fR\&\fR\&, \fB\fIcode(3)\fR\&\fR\&, \fB\fIdisk_log(3)\fR\&\fR\&, \fB\fIerl_boot_server(3)\fR\&\fR\&, \fB\fIerl_ddll(3)\fR\&\fR\&, \fB\fIfile(3)\fR\&\fR\&, \fB\fIglobal(3)\fR\&\fR\&, \fB\fIglobal_group(3)\fR\&\fR\&, \fB\fIheart(3)\fR\&\fR\&, \fB\fIinet(3)\fR\&\fR\&, \fB\fIlogger(3)\fR\&\fR\&, \fB\fInet_kernel(3)\fR\&\fR\&, \fB\fIos(3)\fR\&\fR\&, \fB\fIpg2(3)\fR\&\fR\&, \fB\fIrpc(3)\fR\&\fR\&, \fB\fIseq_trace(3)\fR\&\fR\&, \fB\fIuser(3)\fR\&\fR\&, \fB\fItimer(3)\fR\&\fR\&

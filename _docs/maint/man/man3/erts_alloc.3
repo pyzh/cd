@@ -1,4 +1,4 @@
-.TH erts_alloc 3 "erts 9.3.3" "Ericsson AB" "C Library Functions"
+.TH erts_alloc 3 "erts 10.0" "Ericsson AB" "C Library Functions"
 .SH NAME
 erts_alloc \- An Erlang runtime system internal memory allocator library.
   
@@ -49,7 +49,7 @@ A fast allocator used for some frequently used fixed size data types\&.
 .TP 2
 .B
 \fIexec_alloc\fR\&:
-Allocator used by the \fB\fIHiPE\fR\&\fR\& application for native executable code on specific architectures (x86_64)\&.
+Allocator used by the \fB\fIHiPE\fR\&\fR\& application for native executable code\&.
 .TP 2
 .B
 \fIstd_alloc\fR\&:
@@ -64,7 +64,7 @@ This is normally the default \fImalloc\fR\& implementation used on the specific 
 A memory segment allocator\&. It is used by other allocators for allocating memory segments and is only available on systems that have the \fImmap\fR\& system call\&. Memory segments that are deallocated are kept for a while in a segment cache before they are destroyed\&. When segments are allocated, cached segments are used if possible instead of creating new segments\&. This to reduce the number of system calls made\&.
 .RE
 .LP
-\fIsys_alloc\fR\& and \fIliteral_alloc\fR\& are always enabled and cannot be disabled\&. \fIexec_alloc\fR\& is only available if it is needed and cannot be disabled\&. \fImseg_alloc\fR\& is always enabled if it is available and an allocator that uses it is enabled\&. All other allocators can be \fBenabled or disabled\fR\&\&. By default all allocators are enabled\&. When an allocator is disabled, \fIsys_alloc\fR\& is used instead of the disabled allocator\&.
+\fIsys_alloc\fR\&, \fIliteral_alloc\fR\& and \fItemp_alloc\fR\& are always enabled and cannot be disabled\&. \fIexec_alloc\fR\& is only available if it is needed and cannot be disabled\&. \fImseg_alloc\fR\& is always enabled if it is available and an allocator that uses it is enabled\&. All other allocators can be \fBenabled or disabled\fR\&\&. By default all allocators are enabled\&. When an allocator is disabled, \fIsys_alloc\fR\& is used instead of the disabled allocator\&.
 .LP
 The main idea with the \fIerts_alloc\fR\& library is to separate memory blocks that are used differently into different memory areas, to achieve less memory fragmentation\&. By putting less effort in finding a good fit for memory blocks that are frequently allocated than for those less frequently allocated, a performance gain can be achieved\&.
 .SH "THE ALLOC_UTIL FRAMEWORK"
@@ -460,6 +460,18 @@ See the description of allocation strategies in section \fBThe alloc_util Framew
 Absolute singleblock carrier shrink threshold (in kilobytes)\&. When a block located in an \fImseg_alloc\fR\& singleblock carrier is shrunk, the carrier is left unchanged if the amount of unused memory is less than this threshold, otherwise the carrier is shrunk\&. See also \fB\fIrsbcst\fR\&\fR\&\&.
 .TP 2
 .B
+\fI+M<S>atags true|false\fR\&:
+Adds a small tag to each allocated block that contains basic information about what it is and who allocated it\&. Use the \fB\fIinstrument\fR\&\fR\& module to inspect this information\&.
+.RS 2
+.LP
+The runtime overhead is one word per allocation when enabled\&. This may change at any time in the future\&.
+.RE
+.RS 2
+.LP
+The default is \fItrue\fR\& for \fIbinary_alloc\fR\& and \fIdriver_alloc\fR\&, and \fIfalse\fR\& for the other allocator types\&.
+.RE
+.TP 2
+.B
 \fI+M<S>e true|false\fR\&:
 Enables allocator \fI<S>\fR\&\&.
 .TP 2
@@ -545,25 +557,13 @@ Allow \fIsys_alloc\fR\& carriers\&. Defaults to \fItrue\fR\&\&. If set to \fIfal
 \fI+MIscs <size in MB>\fR\&:
 \fIliteral_alloc\fR\& super carrier size (in MB)\&. The amount of \fIvirtual\fR\& address space reserved for literal terms in Erlang code on 64-bit architectures\&. Defaults to \fI1024\fR\& (that is, 1 GB), which is usually sufficient\&. The flag is ignored on 32-bit architectures\&.
 .RE
-.SS "Special Flag for exec_alloc"
-
-.RS 2
-.TP 2
-.B
-\fI+MXscs <size in MB>\fR\&:
-\fIexec_alloc\fR\& super carrier size (in MB)\&. The amount of \fIvirtual\fR\& address space reserved for native executable code used by the \fB\fIHiPE\fR\&\fR\& application on specific architectures (x86_64)\&. Defaults to \fI512\fR\&\&.
-.RE
 .SS "Instrumentation Flags"
 
 .RS 2
 .TP 2
 .B
-\fI+Mim true|false\fR\&:
-A map over current allocations is kept by the emulator\&. The allocation map can be retrieved through module \fB\fIinstrument(3)\fR\&\fR\&\&. \fI+Mim true\fR\& implies \fI+Mis true\fR\&\&. \fI+Mim true\fR\& is the same as flag \fB\fI-instr\fR\&\fR\& in \fIerl(1)\fR\&\&.
-.TP 2
-.B
-\fI+Mis true|false\fR\&:
-Status over allocated memory is kept by the emulator\&. The allocation status can be retrieved through module \fB\fIinstrument(3)\fR\&\fR\&\&.
+\fI+M<S>atags\fR\&:
+Adds a small tag to each allocated block that contains basic information about what it is and who allocated it\&. See \fB\fI+M<S>atags\fR\&\fR\& for a more complete description\&.
 .TP 2
 .B
 \fI+Mit X\fR\&:

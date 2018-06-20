@@ -1,44 +1,9 @@
-.TH tftp 3 "inets 6.5.2" "Ericsson AB" "Erlang Module Definition"
+.TH tftp 3 "tftp 1.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 tftp \- Trivial FTP.
 .SH DESCRIPTION
 .LP
-This is a complete implementation of the following IETF standards:
-.RS 2
-.TP 2
-*
-RFC 1350, The TFTP Protocol (revision 2)
-.LP
-.TP 2
-*
-RFC 2347, TFTP Option Extension
-.LP
-.TP 2
-*
-RFC 2348, TFTP Blocksize Option
-.LP
-.TP 2
-*
-RFC 2349, TFTP Timeout Interval and Transfer Size Options
-.LP
-.RE
-
-.LP
-The only feature that not is implemented is the "netascii" transfer mode\&.
-.LP
-The \fBstart/1\fR\& function starts a daemon process listening for UDP packets on a port\&. When it receives a request for read or write, it spawns a temporary server process handling the transfer\&.
-.LP
-On the client side, function \fBread_file/3\fR\& and \fBwrite_file/3\fR\& spawn a temporary client process establishing contact with a TFTP daemon and perform the file transfer\&.
-.LP
-\fItftp\fR\& uses a callback module to handle the file transfer\&. Two such callback modules are provided, \fItftp_binary\fR\& and \fItftp_file\fR\&\&. See \fBread_file/3\fR\& and \fBwrite_file/3\fR\& for details\&. You can also implement your own callback modules, see \fBCALLBACK FUNCTIONS\fR\&\&. A callback module provided by the user is registered using option \fIcallback\fR\&, see \fBDATA TYPES\fR\&\&.
-.SH "TFTP SERVER SERVICE START/STOP"
-
-.LP
-A TFTP server can be configured to start statically when starting the \fIInets\fR\& application\&. Alternatively, it can be started dynamically (when \fIInets\fR\& is already started) by calling the \fIInets\fR\& application API \fIinets:start(tftpd, ServiceConfig)\fR\& or \fIinets:start(tftpd, ServiceConfig, How)\fR\&, see \fBinets(3)\fR\& for details\&. The \fIServiceConfig\fR\& for TFTP is described in the \fBDATA TYPES\fR\& section\&.
-.LP
-The TFTP server can be stopped using \fIinets:stop(tftpd, Pid)\fR\&, see \fBinets(3)\fR\& for details\&.
-.LP
-The TPFT client is of such a temporary nature that it is not handled as a service in the \fIInets\fR\& service framework\&.
+Interface module for the \fItftp\fR\& application\&.
 .SH "DATA TYPES"
 
 .LP

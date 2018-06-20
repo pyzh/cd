@@ -1,4 +1,4 @@
-.TH diameter 3 "diameter 2.1.4" "Ericsson AB" "Erlang Module Definition"
+.TH diameter 3 "diameter 2.1.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 diameter \- Main API of the diameter application.
 .SH DESCRIPTION
@@ -58,7 +58,7 @@ ExtraArgs = list()
 .fi
 .RS 2
 .LP
-Module implementing the callback interface defined in \fBdiameter_app(3)\fR\&, along with any extra arguments to be appended to those documented\&. Note that extra arguments specific to an outgoing request can be specified to \fBcall/4\fR\&, in which case those are are appended to any module-specific extra arguments\&.
+Module implementing the callback interface defined in \fBdiameter_app(3)\fR\&, along with any extra arguments to be appended to those documented\&. Note that extra arguments specific to an outgoing request can be specified to \fBcall/4\fR\&, in which case those are appended to any module-specific extra arguments\&.
 .RE
 .RS 2
 .LP
@@ -67,7 +67,7 @@ Specifying a \fI#diameter_callback{}\fR\& record allows individual functions to 
 .TP 2
 .B
 \fIapplication_opt()\fR\&:
-Options defining a Diameter application\&. Has one the following types\&.
+Options defining a Diameter application\&. Has one of the following types\&.
 .RS 2
 .TP 2
 .B
@@ -1539,7 +1539,7 @@ Reason = term()
 .LP
 Stop a diameter service\&.
 .LP
-Stopping a service causes all associated transport connections to be broken\&. A DPR message with be sent as in the case of \fBremove_transport/2\fR\&\&.
+Stopping a service causes all associated transport connections to be broken\&. A DPR message will be sent as in the case of \fBremove_transport/2\fR\&\&.
 .LP
 
 .RS -4

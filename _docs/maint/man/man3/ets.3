@@ -1,4 +1,4 @@
-.TH ets 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH ets 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 ets \- Built-in term storage.
 .SH DESCRIPTION
@@ -14,7 +14,7 @@ Tables are divided into four different types, \fIset\fR\&, \fIordered_set\fR\&, 
 .B
 Note:
 .RE
-The number of tables stored at one Erlang node \fIused\fR\& to be limited\&. This is no longer the case (except by memory usage)\&. The previous default limit was about 1400 tables and could be increased by setting the environment variable \fIERL_MAX_ETS_TABLES\fR\& before starting the Erlang runtime system\&. This hard limit has been removed, but it is currently useful to set the \fIERL_MAX_ETS_TABLES\fR\& anyway\&. It should be set to an approximate of the maximum amount of tables used\&. This since an internal table for named tables is sized using this value\&. If large amounts of named tables are used and \fIERL_MAX_ETS_TABLES\fR\& hasn\&'t been increased, the performance of named table lookup will degrade\&.
+The number of tables stored at one Erlang node \fIused\fR\& to be limited\&. This is no longer the case (except by memory usage)\&. The previous default limit was about 1400 tables and could be increased by setting the environment variable \fIERL_MAX_ETS_TABLES\fR\& or the command line option \fB\fI+e\fR\&\fR\& before starting the Erlang runtime system\&. This hard limit has been removed, but it is currently useful to set the \fIERL_MAX_ETS_TABLES\fR\& anyway\&. It should be set to an approximate of the maximum amount of tables used\&. This since an internal table for named tables is sized using this value\&. If large amounts of named tables are used and \fIERL_MAX_ETS_TABLES\fR\& hasn\&'t been increased, the performance of named table lookup will degrade\&.
 
 .LP
 Notice that there is no automatic garbage collection for tables\&. Even if there are no references to a table from any process, it is not automatically destroyed unless the owner process terminates\&. To destroy a table explicitly, use function \fB\fIdelete/1\fR\&\fR\&\&. The default owner is the process that created the table\&. To transfer table ownership at process termination, use option \fB\fIheir\fR\&\fR\& or call \fB\fIgive_away/3\fR\&\fR\&\&.
@@ -556,6 +556,8 @@ InfoTuple =
 .br
     {heir, pid() | none} |
 .br
+    {id, \fBtid()\fR\&} |
+.br
     {keypos, integer() >= 1} |
 .br
     {memory, integer() >= 0} |
@@ -592,6 +594,10 @@ Indicates if the table is compressed\&.
 .B
 \fI{heir, pid() | none}\fR\&:
 The pid of the heir of the table, or \fInone\fR\& if no heir is set\&.
+.TP 2
+.B
+\fI{id,\fR\&\fB\fItid()\fR\&\fR\&\fI}\fR\&:
+The table identifier\&.
 .TP 2
 .B
 \fI{keypos, integer() >= 1}\fR\&:
@@ -660,6 +666,8 @@ Item =
     fixed |
 .br
     heir |
+.br
+    id |
 .br
     keypos |
 .br
@@ -1419,7 +1427,11 @@ Only the owner process can read or write to the table\&.
 .TP 2
 .B
 \fInamed_table\fR\&:
-If this option is present, name \fIName\fR\& is associated with the table identifier\&. The name can then be used instead of the table identifier in subsequent operations\&.
+If this option is present, the table is registered under its \fIName\fR\& which can then be used instead of the table identifier in subsequent operations\&.
+.RS 2
+.LP
+The function will also return the \fIName\fR\& instead of the table identifier\&. To get the table identifier of a named table, use \fB\fIwhereis/1\fR\&\fR\&\&.
+.RE
 .TP 2
 .B
 \fI{keypos,Pos}\fR\&:
@@ -2573,7 +2585,7 @@ If a \fIThreshold\fR\& is specified, the counter is reset to value \fISetValue\f
 .RE
 
 .LP
-A list of \fIUpdateOp\fR\& can be supplied to do many update operations within the object\&. The operations are carried out in the order specified in the list\&. If the same counter position occurs more than once in the list, the corresponding counter is thus updated many times, each time based on the previous result\&. The return value is a list of the new counter values from each update operation in the same order as in the operation list\&. If an empty list is specified, nothing is updated and an empty list is returned\&. If the function fails, no updates is done\&.
+A list of \fIUpdateOp\fR\& can be supplied to do many update operations within the object\&. The operations are carried out in the order specified in the list\&. If the same counter position occurs more than once in the list, the corresponding counter is thus updated many times, each time based on the previous result\&. The return value is a list of the new counter values from each update operation in the same order as in the operation list\&. If an empty list is specified, nothing is updated and an empty list is returned\&. If the function fails, no updates are done\&.
 .LP
 The specified \fIKey\fR\& is used to identify the object by either \fImatching\fR\& the key of an object in a \fIset\fR\& table, or \fIcompare equal\fR\& to the key of an object in an \fIordered_set\fR\& table (for details on the difference, see \fB\fIlookup/2\fR\&\fR\& and \fB\fInew/2\fR\&\fR\&)\&.
 .LP
@@ -2680,4 +2692,27 @@ The element to update is also the key\&.
 .LP
 .RE
 
+.RE
+.LP
+.nf
+
+.B
+whereis(TableName) -> tid() | undefined
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+TableName = atom()
+.br
+.RE
+.RE
+.RS
+.LP
+This function returns the \fB\fItid()\fR\&\fR\& of the named table identified by \fITableName\fR\&, or \fIundefined\fR\& if no such table exists\&. The \fItid()\fR\& can be used in place of the table name in all operations, which is slightly faster since the name does not have to be resolved on each call\&.
+.LP
+If the table is deleted, the \fItid()\fR\& will be invalid even if another named table is created with the same name\&.
 .RE

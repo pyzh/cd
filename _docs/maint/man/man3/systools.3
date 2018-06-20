@@ -1,4 +1,4 @@
-.TH systools 3 "sasl 3.1.2" "Ericsson AB" "Erlang Module Definition"
+.TH systools 3 "sasl 3.2" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 systools \- A Set of Release Handling Tools
 .SH DESCRIPTION
@@ -252,7 +252,7 @@ No separate (variable) packages are generated\&. Applications that are found und
 .LP
 A directory \fIreleases\fR\& is also included in the release package, containing \fIName\&.rel\fR\& and a subdirectory \fIRelVsn\fR\&\&. \fIRelVsn\fR\& is the release version as specified in \fIName\&.rel\fR\&\&.
 .LP
-\fIreleases/RelVsn\fR\& contains the boot script \fIName\&.boot\fR\& renamed to \fIstart\&.boot\fR\& and, if found, the files \fIrelup\fR\& and \fIsys\&.config\fR\&\&. These files are searched for in the same directory as \fIName\&.rel\fR\&, in the current working directory, and in any directories specified using option \fIpath\fR\&\&.
+\fIreleases/RelVsn\fR\& contains the boot script \fIName\&.boot\fR\& renamed to \fIstart\&.boot\fR\& and, if found, the files \fIrelup\fR\& and \fIsys\&.config\fR\& or \fIsys\&.config\&.src\fR\&\&. These files are searched for in the same directory as \fIName\&.rel\fR\&, in the current working directory, and in any directories specified using option \fIpath\fR\&\&. In the case of \fIsys\&.config\fR\& it is not included if \fIsys\&.config\&.src\fR\& is found\&.
 .LP
 If the release package is to contain a new Erlang runtime system, the \fIbin\fR\& directory of the specified runtime system \fI{erts,Dir}\fR\& is copied to \fIerts-ErtsVsn/bin\fR\&\&.
 .LP

@@ -1,4 +1,4 @@
-.TH erl 1 "erts 9.3.3" "Ericsson AB" "User Commands"
+.TH erl 1 "erts 10.0" "Ericsson AB" "User Commands"
 .SH NAME
 erl \- The Erlang emulator.
 .SH DESCRIPTION
@@ -236,7 +236,7 @@ Displays the manual page for the Erlang module \fIModule\fR\&\&. Only supported 
 .TP 2
 .B
 \fI-mode interactive | embedded\fR\&:
-Indicates if the system is to load code dynamically (\fIinteractive\fR\&), or if all code is to be loaded during system initialization (\fIembedded\fR\&); see \fB\fIcode(3)\fR\&\fR\&\&. Defaults to \fIinteractive\fR\&\&.
+Modules are auto loaded when they are first referenced if the runtime system runs in \fIinteractive\fR\& mode, which is the default\&. In \fIembedded\fR\& mode modules are not auto loaded\&. The latter is recommended when the boot script preloads all modules, as conventionally happens in OTP releases\&. See \fB\fIcode(3)\fR\&\fR\&\&. 
 .TP 2
 .B
 \fI-name Name\fR\&:
@@ -370,18 +370,6 @@ Note that a distributed node will fail to start if epmd is not running\&.
 .RE
 .TP 2
 .B
-\fI-smp [enable|auto|disable]\fR\&:
-\fI-smp enable\fR\& and \fI-smp\fR\& start the Erlang runtime system with SMP support enabled\&. This can fail if no runtime system with SMP support is available\&. \fI-smp auto\fR\& starts the Erlang runtime system with SMP support enabled if it is available and more than one logical processor is detected\&. \fI-smp disable\fR\& starts a runtime system without SMP support\&. The runtime system without SMP support is deprecated and will be removed in a future major release\&.
-.LP
-
-.RS -4
-.B
-Note:
-.RE
-See also flag\fB\fI+S\fR\&\fR\&\&.
-
-.TP 2
-.B
 \fI-version\fR\& (emulator flag):
 Makes the emulator print its version number\&. The same as \fIerl +V\fR\&\&.
 .RE
@@ -397,7 +385,7 @@ Suggested stack size, in kilowords, for threads in the async thread pool\&. Vali
 .TP 2
 .B
 \fI+A size\fR\&:
-Sets the number of threads in async thread pool\&. Valid range is 0-1024\&. Defaults to 10 if thread support is available\&.
+Sets the number of threads in async thread pool\&. Valid range is 0-1024\&. Defaults to 1\&.
 .TP 2
 .B
 \fI+B [c | d | i]\fR\&:
@@ -461,7 +449,7 @@ Calling \fB\fIerlang:halt/1\fR\&\fR\& with a string argument still produces a cr
 .TP 2
 .B
 \fI+e Number\fR\&:
-Sets the maximum number of ETS tables\&.
+Sets the maximum number of ETS tables\&. This limit is \fBpartially obsolete\fR\&\&.
 .TP 2
 .B
 \fI+ec\fR\&:
@@ -547,8 +535,24 @@ Sets the initial process dictionary size of processes to the size \fISize\fR\&\&
 Sets the default value for process flag \fImessage_queue_data\fR\&\&. Defaults to \fIon_heap\fR\&\&. If \fI+hmqd\fR\& is not passed, \fIon_heap\fR\& will be the default\&. For more information, see \fB\fIprocess_flag(message_queue_data, MQD)\fR\&\fR\&\&.
 .TP 2
 .B
-\fI+K true | false\fR\&:
-Enables or disables the kernel poll functionality if supported by the emulator\&. Defaults to \fIfalse\fR\& (disabled)\&. If the emulator does not support kernel poll, and flag \fI+K\fR\& is passed to the emulator, a warning is issued at startup\&.
+\fI+IOp PollSets\fR\&:
+Sets the number of IO pollsets to use when polling for I/O\&. This option is only used on platforms that support concurrent updates of a pollset, otherwise the same number of pollsets are used as IO poll threads\&. The default is 1\&.
+.TP 2
+.B
+\fI+IOt PollThreads\fR\&:
+Sets the number of IO poll threads to use when polling for I/O\&. The maximum number of poll threads allowed is 1024\&. The default is 1\&.
+.RS 2
+.LP
+A good way to check if more IO poll threads are needed is to use \fBmicrostate accounting\fR\& and see what the load of the IO poll thread is\&. If it is high it could be a good idea to add more threads\&.
+.RE
+.TP 2
+.B
+\fI+IOPp PollSetsPercentage\fR\&:
+Similar to \fB\fI+IOp\fR\&\fR\& but uses percentages to set the number of IO pollsets to create, based on the number of poll threads configured\&. If both \fI+IOPp\fR\& and \fI+IOp\fR\& are used, \fI+IOPp\fR\& is ignored\&.
+.TP 2
+.B
+\fI+IOPt PollThreadsPercentage\fR\&:
+Similar to \fB\fI+IOt\fR\&\fR\& but uses percentages to set the number of IO poll threads to create, based on the number of schedulers configured\&. If both \fI+IOPt\fR\& and \fI+IOt\fR\& are used, \fI+IOPt\fR\& is ignored\&.
 .TP 2
 .B
 \fI+l\fR\&:
@@ -646,7 +650,7 @@ Notice that a runtime system using shared reader groups benefits from \fBbinding
 .TP 2
 .B
 \fI+S Schedulers:SchedulerOnline\fR\&:
-Sets the number of scheduler threads to create and scheduler threads to set online when SMP support has been enabled\&. The maximum for both values is 1024\&. If the Erlang runtime system is able to determine the number of logical processors configured and logical processors available, \fISchedulers\fR\& defaults to logical processors configured, and \fISchedulersOnline\fR\& defaults to logical processors available; otherwise the default values are 1\&. \fISchedulers\fR\& can be omitted if \fI:SchedulerOnline\fR\& is not and conversely\&. The number of schedulers online can be changed at runtime through \fB\fIerlang:system_flag(schedulers_online, SchedulersOnline)\fR\&\fR\&\&.
+Sets the number of scheduler threads to create and scheduler threads to set online\&. The maximum for both values is 1024\&. If the Erlang runtime system is able to determine the number of logical processors configured and logical processors available, \fISchedulers\fR\& defaults to logical processors configured, and \fISchedulersOnline\fR\& defaults to logical processors available; otherwise the default values are 1\&. \fISchedulers\fR\& can be omitted if \fI:SchedulerOnline\fR\& is not and conversely\&. The number of schedulers online can be changed at runtime through \fB\fIerlang:system_flag(schedulers_online, SchedulersOnline)\fR\&\fR\&\&.
 .RS 2
 .LP
 If \fISchedulers\fR\& or \fISchedulersOnline\fR\& is specified as a negative number, the value is subtracted from the default number of logical processors configured or logical processors available, respectively\&.
@@ -655,26 +659,18 @@ If \fISchedulers\fR\& or \fISchedulersOnline\fR\& is specified as a negative num
 .LP
 Specifying value \fI0\fR\& for \fISchedulers\fR\& or \fISchedulersOnline\fR\& resets the number of scheduler threads or scheduler threads online, respectively, to its default value\&.
 .RE
-.RS 2
-.LP
-This option is ignored if the emulator does not have SMP support enabled (see flag \fB\fI-smp\fR\&\fR\&)\&.
-.RE
 .TP 2
 .B
 \fI+SP SchedulersPercentage:SchedulersOnlinePercentage\fR\&:
-Similar to \fB\fI+S\fR\&\fR\& but uses percentages to set the number of scheduler threads to create, based on logical processors configured, and scheduler threads to set online, based on logical processors available, when SMP support has been enabled\&. Specified values must be > 0\&. For example, \fI+SP 50:25\fR\& sets the number of scheduler threads to 50% of the logical processors configured, and the number of scheduler threads online to 25% of the logical processors available\&. \fISchedulersPercentage\fR\& can be omitted if \fI:SchedulersOnlinePercentage\fR\& is not and conversely\&. The number of schedulers online can be changed at runtime through \fB\fIerlang:system_flag(schedulers_online, SchedulersOnline)\fR\&\fR\&\&.
+Similar to \fB\fI+S\fR\&\fR\& but uses percentages to set the number of scheduler threads to create, based on logical processors configured, and scheduler threads to set online, based on logical processors available\&. Specified values must be > 0\&. For example, \fI+SP 50:25\fR\& sets the number of scheduler threads to 50% of the logical processors configured, and the number of scheduler threads online to 25% of the logical processors available\&. \fISchedulersPercentage\fR\& can be omitted if \fI:SchedulersOnlinePercentage\fR\& is not and conversely\&. The number of schedulers online can be changed at runtime through \fB\fIerlang:system_flag(schedulers_online, SchedulersOnline)\fR\&\fR\&\&.
 .RS 2
 .LP
 This option interacts with \fB\fI+S\fR\&\fR\& settings\&. For example, on a system with 8 logical cores configured and 8 logical cores available, the combination of the options \fI+S 4:4 +SP 50:25\fR\& (in either order) results in 2 scheduler threads (50% of 4) and 1 scheduler thread online (25% of 4)\&.
 .RE
-.RS 2
-.LP
-This option is ignored if the emulator does not have SMP support enabled (see flag \fB\fI-smp\fR\&\fR\&)\&.
-.RE
 .TP 2
 .B
 \fI+SDcpu DirtyCPUSchedulers:DirtyCPUSchedulersOnline\fR\&:
-Sets the number of dirty CPU scheduler threads to create and dirty CPU scheduler threads to set online when threading support has been enabled\&. The maximum for both values is 1024, and each value is further limited by the settings for normal schedulers:
+Sets the number of dirty CPU scheduler threads to create and dirty CPU scheduler threads to set online\&. The maximum for both values is 1024, and each value is further limited by the settings for normal schedulers:
 .RS 2
 .TP 2
 *
@@ -694,33 +690,21 @@ For details, see the \fB\fI+S\fR\&\fR\& and \fB\fI+SP\fR\&\fR\&\&. By default, t
 .LP
 The amount of dirty CPU schedulers is limited by the amount of normal schedulers in order to limit the effect on processes executing on ordinary schedulers\&. If the amount of dirty CPU schedulers was allowed to be unlimited, dirty CPU bound jobs would potentially starve normal jobs\&.
 .RE
-.RS 2
-.LP
-This option is ignored if the emulator does not have threading support enabled\&.
-.RE
 .TP 2
 .B
 \fI+SDPcpu DirtyCPUSchedulersPercentage:DirtyCPUSchedulersOnlinePercentage\fR\&:
-Similar to \fB\fI+SDcpu\fR\&\fR\& but uses percentages to set the number of dirty CPU scheduler threads to create and the number of dirty CPU scheduler threads to set online when threading support has been enabled\&. Specified values must be > 0\&. For example, \fI+SDPcpu 50:25\fR\& sets the number of dirty CPU scheduler threads to 50% of the logical processors configured and the number of dirty CPU scheduler threads online to 25% of the logical processors available\&. \fIDirtyCPUSchedulersPercentage\fR\& can be omitted if \fI:DirtyCPUSchedulersOnlinePercentage\fR\& is not and conversely\&. The number of dirty CPU schedulers online can be changed at runtime through \fB\fIerlang:system_flag(dirty_cpu_schedulers_online, DirtyCPUSchedulersOnline)\fR\&\fR\&\&.
+Similar to \fB\fI+SDcpu\fR\&\fR\& but uses percentages to set the number of dirty CPU scheduler threads to create and the number of dirty CPU scheduler threads to set online\&. Specified values must be > 0\&. For example, \fI+SDPcpu 50:25\fR\& sets the number of dirty CPU scheduler threads to 50% of the logical processors configured and the number of dirty CPU scheduler threads online to 25% of the logical processors available\&. \fIDirtyCPUSchedulersPercentage\fR\& can be omitted if \fI:DirtyCPUSchedulersOnlinePercentage\fR\& is not and conversely\&. The number of dirty CPU schedulers online can be changed at runtime through \fB\fIerlang:system_flag(dirty_cpu_schedulers_online, DirtyCPUSchedulersOnline)\fR\&\fR\&\&.
 .RS 2
 .LP
 This option interacts with \fB\fI+SDcpu\fR\&\fR\& settings\&. For example, on a system with 8 logical cores configured and 8 logical cores available, the combination of the options \fI+SDcpu 4:4 +SDPcpu 50:25\fR\& (in either order) results in 2 dirty CPU scheduler threads (50% of 4) and 1 dirty CPU scheduler thread online (25% of 4)\&.
 .RE
-.RS 2
-.LP
-This option is ignored if the emulator does not have threading support enabled\&.
-.RE
 .TP 2
 .B
 \fI+SDio DirtyIOSchedulers\fR\&:
-Sets the number of dirty I/O scheduler threads to create when threading support has been enabled\&. Valid range is 0-1024\&. By default, the number of dirty I/O scheduler threads created is 10, same as the default number of threads in the \fBasync thread pool\fR\&\&.
+Sets the number of dirty I/O scheduler threads to create\&. Valid range is 0-1024\&. By default, the number of dirty I/O scheduler threads created is 10, same as the default number of threads in the \fBasync thread pool\fR\&\&.
 .RS 2
 .LP
 The amount of dirty IO schedulers is not limited by the amount of normal schedulers \fBlike the amount of dirty CPU schedulers\fR\&\&. This since only I/O bound work is expected to execute on dirty I/O schedulers\&. If the user should schedule CPU bound jobs on dirty I/O schedulers, these jobs might starve ordinary jobs executing on ordinary schedulers\&.
-.RE
-.RS 2
-.LP
-This option is ignored if the emulator does not have threading support enabled\&.
 .RE
 .TP 2
 .B
@@ -828,6 +812,30 @@ If a scheduler fails to bind, this is often silently ignored, as it is not alway
 .B
 \fI+sbwt none|very_short|short|medium|long|very_long\fR\&:
 Sets scheduler busy wait threshold\&. Defaults to \fImedium\fR\&\&. The threshold determines how long schedulers are to busy wait when running out of work before going to sleep\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+This flag can be removed or changed at any time without prior notice\&.
+
+.TP 2
+.B
+\fI+sbwtdcpu none|very_short|short|medium|long|very_long\fR\&:
+As \fB\fI+sbwt\fR\&\fR\& but affects dirty CPU schedulers\&. Defaults to \fIshort\fR\&\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+This flag can be removed or changed at any time without prior notice\&.
+
+.TP 2
+.B
+\fI+sbwtdio none|very_short|short|medium|long|very_long\fR\&:
+As \fB\fI+sbwt\fR\&\fR\& but affects dirty IO schedulers\&. Defaults to \fIshort\fR\&\&.
 .LP
 
 .RS -4
@@ -1005,18 +1013,6 @@ For more information, see \fB\fIerlang:system_info(cpu_topology)\fR\&\fR\&\&.
 .RE
 .TP 2
 .B
-\fI+secio true|false\fR\&:
-Enables or disables eager check I/O scheduling\&. Defaults to \fItrue\fR\&\&. The default was changed from \fIfalse\fR\& as from ERTS 7\&.0\&. The behavior before this flag was introduced corresponds to \fI+secio false\fR\&\&.
-.RS 2
-.LP
-The flag effects when schedulers will check for I/O operations possible to execute, and when such I/O operations will execute\&. As the parameter name implies, schedulers are more eager to check for I/O when \fItrue\fR\& is passed\&. This, however, also implies that execution of outstanding I/O operation is not prioritized to the same extent as when \fIfalse\fR\& is passed\&.
-.RE
-.RS 2
-.LP
-\fB\fIerlang:system_info(eager_check_io)\fR\&\fR\& returns the value of this parameter used when starting the virtual machine\&.
-.RE
-.TP 2
-.B
 \fI+sfwi Interval\fR\&:
 Sets scheduler-forced wakeup interval\&. All run queues are scanned each \fIInterval\fR\& milliseconds\&. While there are sleeping schedulers in the system, one scheduler is woken for each non-empty run queue found\&. \fIInterval\fR\& default to \fI0\fR\&, meaning this feature is disabled\&.
 .LP
@@ -1087,6 +1083,30 @@ This flag can be removed or changed at any time without prior notice\&.
 .B
 \fI+swt very_low|low|medium|high|very_high\fR\&:
 Sets scheduler wakeup threshold\&. Defaults to \fImedium\fR\&\&. The threshold determines when to wake up sleeping schedulers when more work than can be handled by currently awake schedulers exists\&. A low threshold causes earlier wakeups, and a high threshold causes later wakeups\&. Early wakeups distribute work over multiple schedulers faster, but work does more easily bounce between schedulers\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+This flag can be removed or changed at any time without prior notice\&.
+
+.TP 2
+.B
+\fI+swtdcpu very_low|low|medium|high|very_high\fR\&:
+As \fB\fI+swt\fR\&\fR\& but affects dirty CPU schedulers\&. Defaults to \fImedium\fR\&\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+This flag can be removed or changed at any time without prior notice\&.
+
+.TP 2
+.B
+\fI+swtdio very_low|low|medium|high|very_high\fR\&:
+As \fB\fI+swt\fR\&\fR\& but affects dirty IO schedulers\&. Defaults to \fImedium\fR\&\&.
 .LP
 
 .RS -4
@@ -1267,7 +1287,7 @@ The standard Erlang/OTP system can be reconfigured to change the default behavio
 .TP 2
 .B
 The \fI\&.erlang\fR\& startup file:
-When Erlang/OTP is started, the system searches for a file named \fI\&.erlang\fR\& in the directory where Erlang/OTP is started\&. If not found, the user\&'s home directory is searched for an \fI\&.erlang\fR\& file\&.
+When Erlang/OTP is started, the system searches for a file named \fI\&.erlang\fR\& in the user\&'s home directory\&.
 .RS 2
 .LP
 If an \fI\&.erlang\fR\& file is found, it is assumed to contain valid Erlang expressions\&. These expressions are evaluated as if they were input to the shell\&.

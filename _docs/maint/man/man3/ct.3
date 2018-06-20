@@ -1,4 +1,4 @@
-.TH ct 3 "common_test 1.15.4" "Ericsson AB" "Erlang Module Definition"
+.TH ct 3 "common_test 1.16" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 ct \- Main user interface for the Common Test framework.
 .SH DESCRIPTION
@@ -516,6 +516,14 @@ Gets a reference to the \fICommon Test\fR\& event manager\&. The reference can b
 
  gen_event:add_handler(ct:get_event_mgr_ref(), my_ev_h, [])
 .fi
+.RE
+.LP
+.B
+get_progname() -> string()
+.br
+.RS
+.LP
+Returns the command used to start this Erlang instance\&. If this information could not be found, the string \fI"no_prog_name"\fR\& is returned\&.
 .RE
 .LP
 .B

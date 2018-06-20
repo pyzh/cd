@@ -1,4 +1,4 @@
-.TH sys 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH sys 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 sys \- A functional interface to system messages.
 .SH DESCRIPTION
@@ -38,7 +38,7 @@ This message is used by the release handler to find which processes that execute
 .LP
 When debugging a process with the functions of this module, the process generates \fIsystem_events\fR\&, which are then treated in the debug function\&. For example, \fItrace\fR\& formats the system events to the terminal\&.
 .LP
-Three predefined system events are used when a process receives or sends a message\&. The process can also define its own system events\&. It is always up to the process itself to format these events\&.
+Four predefined system events are used when a process receives or sends a message\&. The process can also define its own system events\&. It is always up to the process itself to format these events\&.
 .SH DATA TYPES
 .nf
 
@@ -56,6 +56,8 @@ Three predefined system events are used when a process receives or sends a messa
     {in, Msg :: term(), From :: term()} |
 .br
     {out, Msg :: term(), To :: term()} |
+.br
+    {out, Msg :: term(), To :: term(), State :: term()} |
 .br
     term()
 .br
@@ -304,7 +306,9 @@ Types:
 .RS 3
 Name = \fBname()\fR\&
 .br
-FuncSpec = {Func, FuncState}
+FuncSpec = {Func, FuncState} | {FuncId, Func, FuncState}
+.br
+FuncId = term()
 .br
 Func = \fBdbg_fun()\fR\&
 .br
@@ -318,7 +322,7 @@ Timeout = timeout()
 .LP
 Enables installation of alternative debug functions\&. An example of such a function is a trigger, a function that waits for some special event and performs some action when the event is generated\&. For example, turning on low-level tracing\&.
 .LP
-\fIFunc\fR\& is called whenever a system event is generated\&. This function is to return \fIdone\fR\&, or a new \fIFunc\fR\& state\&. In the first case, the function is removed\&. It is also removed if the function fails\&.
+\fIFunc\fR\& is called whenever a system event is generated\&. This function is to return \fIdone\fR\&, or a new \fIFunc\fR\& state\&. In the first case, the function is removed\&. It is also removed if the function fails\&. If one debug function should be installed more times, a unique \fIFuncId\fR\& must be specified for each installation\&.
 .RE
 .LP
 .nf
@@ -424,14 +428,14 @@ Turns off all debugging for the process\&. This includes functions that are inst
 .nf
 
 .B
-remove(Name, Func) -> ok
+remove(Name, FuncOrFuncId :: Func | FuncId) -> ok
 .br
 .fi
 .br
 .nf
 
 .B
-remove(Name, Func, Timeout) -> ok
+remove(Name, FuncOrFuncId :: Func | FuncId, Timeout) -> ok
 .br
 .fi
 .br
@@ -444,13 +448,15 @@ Name = \fBname()\fR\&
 .br
 Func = \fBdbg_fun()\fR\&
 .br
+FuncId = term()
+.br
 Timeout = timeout()
 .br
 .RE
 .RE
 .RS
 .LP
-Removes an installed debug function from the process\&. \fIFunc\fR\& must be the same as previously installed\&.
+Removes an installed debug function from the process\&. \fIFunc\fR\& or \fIFuncId\fR\& must be the same as previously installed\&.
 .RE
 .LP
 .nf
@@ -749,7 +755,9 @@ Opt =
 .br
 FileName = \fBfile:name()\fR\&
 .br
-FuncSpec = {Func, FuncState}
+FuncSpec = {Func, FuncState} | {FuncId, Func, FuncState}
+.br
+FuncId = term()
 .br
 Func = \fBdbg_fun()\fR\&
 .br

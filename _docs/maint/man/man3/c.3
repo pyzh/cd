@@ -1,4 +1,4 @@
-.TH c 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH c 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 c \- Command interface module.
 .SH DESCRIPTION
@@ -109,6 +109,27 @@ Changes working directory to \fIDir\fR\&, which can be a relative name, and then
 2> cd("\&.\&./erlang")\&.
 /home/ron/erlang
 .fi
+.RE
+.LP
+.nf
+
+.B
+erlangrc(PathList) -> {ok, file:filename()} | {error, term()}
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+PathList = [Dir :: \fBfile:name()\fR\&]
+.br
+.RE
+.RE
+.RS
+.LP
+Search \fIPathList\fR\& and load \fI\&.erlang\fR\& resource file if found\&.
 .RE
 .LP
 .nf

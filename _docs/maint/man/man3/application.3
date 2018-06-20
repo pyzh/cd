@@ -1,4 +1,4 @@
-.TH application 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.TH application 3 "kernel 6.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 application \- Generic OTP application functions
 .SH DESCRIPTION
@@ -562,7 +562,9 @@ Starts \fIApplication\fR\&\&. If it is not loaded, the application controller fi
 .LP
 The application controller checks the value of the application specification key \fIapplications\fR\&, to ensure that all applications needed to be started before this application are running\&. Otherwise, \fI{error,{not_started,App}}\fR\& is returned, where \fIApp\fR\& is the name of the missing application\&.
 .LP
-The application controller then creates an \fIapplication master\fR\& for the application\&. The application master is the group leader of all the processes in the application\&. The application master starts the application by calling the application callback function \fIModule:start/2\fR\& as defined by the application specification key \fImod\fR\&\&.
+The application controller then creates an \fIapplication master\fR\& for the application\&. The application master becomes the group leader of all the processes in the application\&. I/O is forwarded to the previous group leader, though, this is just a way to identify processes that belong to the application\&. Used for example to find itself from any process, or, reciprocally, to kill them all when it terminates\&.
+.LP
+The application master starts the application by calling the application callback function \fIModule:start/2\fR\& as defined by the application specification key \fImod\fR\&\&.
 .LP
 Argument \fIType\fR\& specifies the type of the application\&. If omitted, it defaults to \fItemporary\fR\&\&.
 .RS 2

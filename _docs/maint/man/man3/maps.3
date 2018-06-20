@@ -1,15 +1,29 @@
-.TH maps 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH maps 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 maps \- Maps processing functions.
 .SH DESCRIPTION
 .LP
 This module contains functions for maps processing\&.
+.SH DATA TYPES
+.nf
+
+\fBiterator()\fR\&
+.br
+.fi
+.RS
+.LP
+An iterator representing the key value associations in a map\&.
+.LP
+Created using \fB\fImaps:iterator/1\fR\&\fR\&\&.
+.LP
+Consumed by \fB\fImaps:next/1\fR\&\fR\&, \fB\fImaps:filter/2\fR\&\fR\&, \fB\fImaps:fold/3\fR\&\fR\& and \fB\fImaps:map/2\fR\&\fR\&\&.
+.RE
 .SH EXPORTS
 .LP
 .nf
 
 .B
-filter(Pred, Map1) -> Map2
+filter(Pred, MapOrIter) -> Map
 .br
 .fi
 .br
@@ -22,15 +36,17 @@ Pred = fun((Key, Value) -> boolean())
 .br
 Key = Value = term()
 .br
-Map1 = Map2 = map()
+MapOrIter = map() | \fBiterator()\fR\&
+.br
+Map = map()
 .br
 .RE
 .RE
 .RS
 .LP
-Returns a map \fIMap2\fR\& for which predicate \fIPred\fR\& holds true in \fIMap1\fR\&\&.
+Returns a map \fIMap\fR\& for which predicate \fIPred\fR\& holds true in \fIMapOrIter\fR\&\&.
 .LP
-The call fails with a \fI{badmap,Map}\fR\& exception if \fIMap1\fR\& is not a map, or with \fIbadarg\fR\& if \fIPred\fR\& is not a function of arity 2\&.
+The call fails with a \fI{badmap,Map}\fR\& exception if \fIMapOrIter\fR\& is not a map or valid iterator, or with \fIbadarg\fR\& if \fIPred\fR\& is not a function of arity 2\&.
 .LP
 \fIExample:\fR\&
 .LP
@@ -83,7 +99,7 @@ The call fails with a \fI{badmap,Map}\fR\& exception if \fIMap\fR\& is not a map
 .nf
 
 .B
-fold(Fun, Init, Map) -> Acc
+fold(Fun, Init, MapOrIter) -> Acc
 .br
 .fi
 .br
@@ -96,7 +112,7 @@ Fun = fun((K, V, AccIn) -> AccOut)
 .br
 Init = Acc = AccIn = AccOut = term()
 .br
-Map = map()
+MapOrIter = map() | \fBiterator()\fR\&
 .br
 K = V = term()
 .br
@@ -104,7 +120,9 @@ K = V = term()
 .RE
 .RS
 .LP
-Calls \fIF(K, V, AccIn)\fR\& for every \fIK\fR\& to value \fIV\fR\& association in \fIMap\fR\& in any order\&. Function \fIfun F/3\fR\& must return a new accumulator, which is passed to the next successive call\&. This function returns the final value of the accumulator\&. The initial accumulator value \fIInit\fR\& is returned if the map is empty\&.
+Calls \fIF(K, V, AccIn)\fR\& for every \fIK\fR\& to value \fIV\fR\& association in \fIMapOrIter\fR\& in any order\&. Function \fIfun F/3\fR\& must return a new accumulator, which is passed to the next successive call\&. This function returns the final value of the accumulator\&. The initial accumulator value \fIInit\fR\& is returned if the map is empty\&.
+.LP
+The call fails with a \fI{badmap,Map}\fR\& exception if \fIMapOrIter\fR\& is not a map or valid iterator, or with \fIbadarg\fR\& if \fIFun\fR\& is not a function of arity 3\&.
 .LP
 \fIExample:\fR\&
 .LP
@@ -267,6 +285,47 @@ false
 .nf
 
 .B
+iterator(Map) -> Iterator
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Map = map()
+.br
+Iterator = \fBiterator()\fR\&
+.br
+.RE
+.RE
+.RS
+.LP
+Returns a map iterator \fIIterator\fR\& that can be used by \fB\fImaps:next/1\fR\&\fR\& to traverse the key-value associations in a map\&. When iterating over a map, the memory usage is guaranteed to be bounded no matter the size of the map\&.
+.LP
+The call fails with a \fI{badmap,Map}\fR\& exception if \fIMap\fR\& is not a map\&.
+.LP
+\fIExample:\fR\&
+.LP
+.nf
+
+> M = #{ a => 1, b => 2 }.
+#{a => 1,b => 2}
+> I = maps:iterator(M).
+[{a,1},{b,2}]
+> {K1, V1, I2} = maps:next(I).
+{a,1,[{b,2}]}
+> {K2, V2, I3} = maps:next(I2).
+{b,2,[]}
+> maps:next(I3).
+none
+.fi
+.RE
+.LP
+.nf
+
+.B
 keys(Map) -> Keys
 .br
 .fi
@@ -303,7 +362,7 @@ The call fails with a \fI{badmap,Map}\fR\& exception if \fIMap\fR\& is not a map
 .nf
 
 .B
-map(Fun, Map1) -> Map2
+map(Fun, MapOrIter) -> Map
 .br
 .fi
 .br
@@ -314,7 +373,9 @@ Types:
 .RS 3
 Fun = fun((K, V1) -> V2)
 .br
-Map1 = Map2 = map()
+MapOrIter = map() | \fBiterator()\fR\&
+.br
+Map = map()
 .br
 K = V1 = V2 = term()
 .br
@@ -322,7 +383,9 @@ K = V1 = V2 = term()
 .RE
 .RS
 .LP
-Produces a new map \fIMap2\fR\& by calling function \fIfun F(K, V1)\fR\& for every \fIK\fR\& to value \fIV1\fR\& association in \fIMap1\fR\& in any order\&. Function \fIfun F/2\fR\& must return value \fIV2\fR\& to be associated with key \fIK\fR\& for the new map \fIMap2\fR\&\&.
+Produces a new map \fIMap\fR\& by calling function \fIfun F(K, V1)\fR\& for every \fIK\fR\& to value \fIV1\fR\& association in \fIMapOrIter\fR\& in any order\&. Function \fIfun F/2\fR\& must return value \fIV2\fR\& to be associated with key \fIK\fR\& for the new map \fIMap\fR\&\&.
+.LP
+The call fails with a \fI{badmap,Map}\fR\& exception if \fIMapOrIter\fR\& is not a map or valid iterator, or with \fIbadarg\fR\& if \fIFun\fR\& is not a function of arity 2\&.
 .LP
 \fIExample:\fR\&
 .LP
@@ -394,6 +457,51 @@ Returns a new empty map\&.
 
 > maps:new().
 #{}
+.fi
+.RE
+.LP
+.nf
+
+.B
+next(Iterator) -> {Key, Value, NextIterator} | none
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Iterator = \fBiterator()\fR\&
+.br
+Key = Value = term()
+.br
+NextIterator = \fBiterator()\fR\&
+.br
+.RE
+.RE
+.RS
+.LP
+Returns the next key-value association in \fIIterator\fR\& and a new iterator for the remaining associations in the iterator\&.
+.LP
+If there are no more associations in the iterator, \fInone\fR\& is returned\&.
+.LP
+\fIExample:\fR\&
+.LP
+.nf
+
+> Map = #{a => 1, b => 2, c => 3}.
+#{a => 1,b => 2,c => 3}
+> Iter = maps:iterator(Map).
+[{a,1},{b,2},{c,3}]
+> {_, _, Iter1} = maps:next(Iter).
+{a,1,[{b,2},{c,3}]}
+> {_, _, Iter2} = maps:next(Iter1).
+{b,2,[{c,3}]}
+> {_, _, Iter3} = maps:next(Iter2).
+{c,3,[]}
+> maps:next(Iter3).
+none
 .fi
 .RE
 .LP

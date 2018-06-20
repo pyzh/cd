@@ -1,4 +1,4 @@
-.TH erlc 1 "erts 9.3.3" "Ericsson AB" "User Commands"
+.TH erlc 1 "erts 10.0" "Ericsson AB" "User Commands"
 .SH NAME
 erlc \- Compiler
 .SH DESCRIPTION
@@ -79,6 +79,10 @@ Compiles using the SMP emulator\&. This is mainly useful for compiling native co
 .B
 \fI-M\fR\&:
 Produces a Makefile rule to track header dependencies\&. The rule is sent to \fIstdout\fR\&\&. No object file is produced\&.
+.TP 2
+.B
+\fI-MMD\fR\&:
+Generate dependencies as a side-effect\&. The object file will be produced as normal\&. This option overrides the option \fI-M\fR\&\&.
 .TP 2
 .B
 \fI-MF <Makefile>\fR\&:

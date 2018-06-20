@@ -1,4 +1,4 @@
-.TH string 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH string 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 string \- String processing functions.
 .SH DESCRIPTION
@@ -53,7 +53,7 @@ Unless otherwise specified the return value type is the same as the input type\&
 [<<"foo">>,<<"bar">>]
 .fi
 .LP
-This module has been reworked in Erlang/OTP 20 to handle \fB\fIunicode:chardata()\fR\&\fR\& and operate on grapheme clusters\&. The \fB\fIold functions\fR\&\fR\& that only work on Latin-1 lists as input are still available but should not be used\&. They will be deprecated in Erlang/OTP 21\&.
+This module has been reworked in Erlang/OTP 20 to handle \fB\fIunicode:chardata()\fR\&\fR\& and operate on grapheme clusters\&. The \fB\fIold functions\fR\&\fR\& that only work on Latin-1 lists as input are still available but should not be used, they will be deprecated in a future release\&.
 .SH DATA TYPES
 .nf
 
@@ -855,7 +855,7 @@ Characters = [\fBgrapheme_cluster()\fR\&]
 .LP
 Returns a string, where leading or trailing, or both, \fICharacters\fR\& have been removed\&. \fIDir\fR\& which can be \fIleading\fR\&, \fItrailing\fR\&, or \fIboth\fR\&, indicates from which direction characters are to be removed\&.
 .LP
-Default \fICharacters\fR\& are the set of nonbreakable whitespace codepoints, defined as Pattern_White_Space in Unicode Standard Annex #31\&. \fIBy default, Dir\fR\& is \fIboth\fR\&\&.
+Default \fICharacters\fR\& is the set of nonbreakable whitespace codepoints, defined as Pattern_White_Space in Unicode Standard Annex #31\&. \fIBy default, Dir\fR\& is \fIboth\fR\&\&.
 .LP
 Notice that \fI[$\\r,$\\n]\fR\& is one grapheme cluster according to the Unicode Standard\&.
 .LP
@@ -903,7 +903,7 @@ Here follows the function of the old API\&. These functions only work on a list 
 .B
 Note:
 .RE
-The functions are kept for backward compatibility, but are not recommended\&. They will be deprecated in Erlang/OTP 21\&.
+The functions are kept for backward compatibility, but are not recommended\&. They will be deprecated in a future release\&.
 .LP
 Any undocumented functions in \fIstring\fR\& are not to be used\&.
 

@@ -1,9 +1,68 @@
-.TH gen_statem 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH gen_statem 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 gen_statem \- Generic state machine behavior.
 .SH DESCRIPTION
 .LP
-This behavior module provides a state machine\&. Two \fB\fIcallback modes\fR\&\fR\& are supported:
+\fIgen_statem\fR\& provides a generic state machine behaviour and replaces its predecessor \fB\fIgen_fsm\fR\&\fR\& since Erlang/OTP 20\&.0\&.
+.LP
+This reference manual describes types generated from the types in the \fIgen_statem\fR\& source code, so they are correct\&. However, the generated descriptions also reflect the type hiearchy, which makes them kind of hard to read\&.
+.LP
+To get an overview of the concepts and operation of \fIgen_statem\fR\&, do read the \fB\fIgen_statem\fR\& Behaviour \fR\& in \fB OTP Design Principles \fR\& which frequently links back to this reference manual to avoid containing detailed facts that may rot by age\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+This behavior appeared in Erlang/OTP 19\&.0\&. In OTP 19\&.1 a backwards incompatible change of the return tuple from \fB\fIModule:init/1\fR\&\fR\& was made and the mandatory callback function \fB\fIModule:callback_mode/0\fR\&\fR\& was introduced\&. In OTP 20\&.0 the \fB\fIgeneric timeouts\fR\&\fR\& were added\&.
+
+.LP
+\fIgen_statem\fR\& has got the same features that \fB\fIgen_fsm\fR\&\fR\& had and adds some really useful:
+.RS 2
+.TP 2
+*
+Co-located state code
+.LP
+.TP 2
+*
+Arbitrary term state
+.LP
+.TP 2
+*
+Event postponing
+.LP
+.TP 2
+*
+Self-generated events
+.LP
+.TP 2
+*
+State time-out
+.LP
+.TP 2
+*
+Multiple generic named time-outs
+.LP
+.TP 2
+*
+Absolute time-out time
+.LP
+.TP 2
+*
+Automatic state enter calls
+.LP
+.TP 2
+*
+ Reply from other state than the request, \fIsys\fR\& traceable 
+.LP
+.TP 2
+*
+Multiple \fIsys\fR\& traceable replies
+.LP
+.RE
+
+.LP
+Two \fB\fIcallback modes\fR\&\fR\& are supported:
 .RS 2
 .TP 2
 *
@@ -12,59 +71,6 @@ One for finite-state machines (\fB\fIgen_fsm\fR\&\fR\& like), which requires the
 .TP 2
 *
 One without restriction on the state data type that uses one callback function for all states
-.LP
-.RE
-
-.LP
-
-.RS -4
-.B
-Note:
-.RE
-This is a new behavior in Erlang/OTP 19\&.0\&. It has been thoroughly reviewed, is stable enough to be used by at least two heavy OTP applications, and is here to stay\&. Depending on user feedback, we do not expect but can find it necessary to make minor not backward compatible changes into Erlang/OTP 20\&.0\&.
-
-.LP
-The \fIgen_statem\fR\& behavior replaces \fB\fIgen_fsm\fR\&\fR\& in Erlang/OTP 20\&.0\&. It has the same features and adds some really useful:
-.RS 2
-.TP 2
-*
-Gathered state code\&.
-.LP
-.TP 2
-*
-Arbitrary term state\&.
-.LP
-.TP 2
-*
-Event postponing\&.
-.LP
-.TP 2
-*
-Self-generated events\&.
-.LP
-.TP 2
-*
-State time-out\&.
-.LP
-.TP 2
-*
-Multiple generic named time-outs\&.
-.LP
-.TP 2
-*
-Absolute time-out time\&.
-.LP
-.TP 2
-*
-Automatic state enter calls\&.
-.LP
-.TP 2
-*
-Reply from other state than the request\&.
-.LP
-.TP 2
-*
-Multiple \fIsys\fR\& traceable replies\&.
 .LP
 .RE
 
@@ -104,7 +110,7 @@ If a callback function fails or returns a bad value, the \fIgen_statem\fR\& term
 .LP
 The "\fIstate callback\fR\&" for a specific \fBstate\fR\& in a \fIgen_statem\fR\& is the callback function that is called for all events in this state\&. It is selected depending on which \fB\fIcallback mode\fR\&\fR\& that the callback module defines with the callback function \fB\fIModule:callback_mode/0\fR\&\fR\&\&.
 .LP
-When the \fB\fIcallback mode\fR\&\fR\& is \fIstate_functions\fR\&, the state must be an atom and is used as the state callback name; see \fB\fIModule:StateName/3\fR\&\fR\&\&. This gathers all code for a specific state in one function as the \fIgen_statem\fR\& engine branches depending on state name\&. Note the fact that the callback function \fB\fIModule:terminate/3\fR\&\fR\& makes the state name \fIterminate\fR\& unusable in this mode\&.
+When the \fB\fIcallback mode\fR\&\fR\& is \fIstate_functions\fR\&, the state must be an atom and is used as the state callback name; see \fB\fIModule:StateName/3\fR\&\fR\&\&. This co-locates all code for a specific state in one function as the \fIgen_statem\fR\& engine branches depending on state name\&. Note the fact that the callback function \fB\fIModule:terminate/3\fR\&\fR\& makes the state name \fIterminate\fR\& unusable in this mode\&.
 .LP
 When the \fB\fIcallback mode\fR\&\fR\& is \fIhandle_event_function\fR\&, the state can be any term and the state callback name is \fB\fIModule:handle_event/4\fR\&\fR\&\&. This makes it easy to branch depending on state or event as you desire\&. Be careful about which events you handle in which states so that you do not accidentally postpone an event forever creating an infinite busy loop\&.
 .LP
@@ -116,7 +122,7 @@ The \fBstate callback\fR\& can insert events using the \fB\fIaction()\fR\&\fR\& 
 .LP
 Inserting an event replaces the trick of calling your own state handling functions that you often would have to resort to in, for example, \fB\fIgen_fsm\fR\&\fR\& to force processing an inserted event before others\&.
 .LP
-The \fIgen_statem\fR\& engine can automatically make a specialized call to the \fBstate callback\fR\& whenever a new state is entered; see \fB\fIstate_enter()\fR\&\fR\&\&. This is for writing code common to all state entries\&. Another way to do it is to insert events at state transitions, but you have to do so everywhere it is needed\&.
+The \fIgen_statem\fR\& engine can automatically make a specialized call to the \fBstate callback\fR\& whenever a new state is entered; see \fB\fIstate_enter()\fR\&\fR\&\&. This is for writing code common to all state entries\&. Another way to do it is to insert an event at the state transition, and/or to use a dedicated state transition function, but that is something you will have to remember at every state transition to the state(s) that need it\&.
 .LP
 
 .RS -4
@@ -135,6 +141,8 @@ Notice that a \fIgen_statem\fR\& does not trap exit signals automatically, this 
 Unless otherwise stated, all functions in this module fail if the specified \fIgen_statem\fR\& does not exist or if bad arguments are specified\&.
 .LP
 The \fIgen_statem\fR\& process can go into hibernation; see \fB\fIproc_lib:hibernate/3\fR\&\fR\&\&. It is done when a \fBstate callback\fR\& or \fB\fIModule:init/1\fR\&\fR\& specifies \fIhibernate\fR\& in the returned \fB\fIActions\fR\&\fR\& list\&. This feature can be useful to reclaim process heap memory while the server is expected to be idle for a long time\&. However, use this feature with care, as hibernation can be too costly to use after every event; see \fB\fIerlang:hibernate/3\fR\&\fR\&\&.
+.LP
+There is also a server start option \fB\fI{hibernate_after, Timeout}\fR\&\fR\& for \fB\fIstart/3,4\fR\&\fR\& or \fB\fIstart_link/3,4\fR\&\fR\& that may be used to automatically hibernate the server\&.
 .SH "EXAMPLE"
 
 .LP
@@ -473,7 +481,7 @@ If \fB\fIModule:callback_mode/0\fR\&\fR\& returns a list containing \fIstate_ent
 .LP
 If \fB\fIModule:callback_mode/0\fR\&\fR\& does not return such a list, no state enter calls are done\&.
 .LP
-If \fB\fIModule:code_change/4\fR\&\fR\& should transform the state to a state with a different name it is still regarded as the same state so this does not cause a state enter call\&.
+If \fB\fIModule:code_change/4\fR\&\fR\& should transform the state, it is regarded as a state rename and not a state change, which will not cause a state enter call\&.
 .LP
 Note that a state enter call \fIwill\fR\& be done right before entering the initial state even though this formally is not a state change\&. In this case \fIOldState\fR\& will be the same as \fIState\fR\&, which can not happen for a subsequent state change, but will happen when repeating the state enter call\&.
 .RE
@@ -494,11 +502,19 @@ Note that a state enter call \fIwill\fR\& be done right before entering the init
 .fi
 .RS
 .LP
-Transition options can be set by \fBactions\fR\& and they modify how the state transition is done:
+Transition options can be set by \fBactions\fR\& and modify the state transition\&. Here are the sequence of steps for a state transition:
 .RS 2
 .TP 2
 *
-If the state changes, is the initial state, \fB\fIrepeat_state\fR\&\fR\& or \fB\fIrepeat_state_and_data\fR\&\fR\& is used, and also \fB\fIstate enter calls\fR\&\fR\& are used, the \fIgen_statem\fR\& calls the new state callback with arguments \fB(enter, OldState, Data)\fR\&\&. Any \fB\fIactions\fR\&\fR\& returned from this call are handled as if they were appended to the actions returned by the state callback that changed states\&.
+If \fB\fIstate enter calls\fR\&\fR\& are used, and either: the state changes, it is the initial state, or one of the callback results \fB\fIrepeat_state\fR\&\fR\& or \fB\fIrepeat_state_and_data\fR\&\fR\& is used; the \fIgen_statem\fR\& calls the new state callback with arguments \fB\fI(enter, OldState, Data)\fR\&\fR\&\&.
+.RS 2
+.LP
+Any \fBactions\fR\& returned from this call are handled as if they were appended to the actions returned by the state callback that caused the state entry\&.
+.RE
+.RS 2
+.LP
+Should this state enter call return any of the mentioned \fIrepeat_*\fR\& callback results it is repeated again, with the updated \fIData\fR\&\&.
+.RE
 .LP
 .TP 2
 *
@@ -514,11 +530,11 @@ If the state changes, the queue of incoming events is reset to start with the ol
 .LP
 .TP 2
 *
-All events stored with \fB\fIaction()\fR\&\fR\& \fInext_event\fR\& are inserted to be processed before the other queued events\&.
+All events stored with \fB\fIaction()\fR\&\fR\& \fInext_event\fR\& are inserted to be processed before previously queued events\&.
 .LP
 .TP 2
 *
-Time-out timers \fB\fIevent_timeout()\fR\&\fR\&, \fB\fIgeneric_timeout()\fR\&\fR\& and \fB\fIstate_timeout()\fR\&\fR\& are handled\&. Time-outs with zero time are guaranteed to be delivered to the state machine before any external not yet received event so if there is such a time-out requested, the corresponding time-out zero event is enqueued as the newest event\&.
+Time-out timers \fB\fIevent_timeout()\fR\&\fR\&, \fB\fIgeneric_timeout()\fR\&\fR\& and \fB\fIstate_timeout()\fR\&\fR\& are handled\&. Time-outs with zero time are guaranteed to be delivered to the state machine before any external not yet received event so if there is such a time-out requested, the corresponding time-out zero event is enqueued as the newest received event; that is after already queued events such as inserted and postponed events\&.
 .RS 2
 .LP
 Any event cancels an \fB\fIevent_timeout()\fR\&\fR\& so a zero time event time-out is only generated if the event queue is empty\&.
@@ -534,7 +550,7 @@ If there are enqueued events the \fBstate callback\fR\& for the possibly new sta
 .LP
 .TP 2
 *
-Otherwise the \fIgen_statem\fR\& goes into \fIreceive\fR\& or hibernation (if \fB\fIhibernate()\fR\&\fR\& is \fItrue\fR\&) to wait for the next message\&. In hibernation the next non-system event awakens the \fIgen_statem\fR\&, or rather the next incoming message awakens the \fIgen_statem\fR\&, but if it is a system event it goes right back into hibernation\&. When a new message arrives the \fBstate callback\fR\& is called with the corresponding event, and we start again from the top of this list\&.
+Otherwise the \fIgen_statem\fR\& goes into \fIreceive\fR\& or hibernation (if \fB\fIhibernate()\fR\&\fR\& is \fItrue\fR\&) to wait for the next message\&. In hibernation the next non-system event awakens the \fIgen_statem\fR\&, or rather the next incoming message awakens the \fIgen_statem\fR\&, but if it is a system event it goes right back into hibernation\&. When a new message arrives the \fBstate callback\fR\& is called with the corresponding event, and we start again from the top of this sequence\&.
 .LP
 .RE
 
@@ -555,7 +571,15 @@ If \fItrue\fR\&, postpones the current event and retries it when the state chang
 .fi
 .RS
 .LP
-If \fItrue\fR\&, hibernates the \fIgen_statem\fR\& by calling \fB\fIproc_lib:hibernate/3\fR\&\fR\& before going into \fIreceive\fR\& to wait for a new external event\&. If there are enqueued events, to prevent receiving any new event, an \fB\fIerlang:garbage_collect/0\fR\&\fR\& is done instead to simulate that the \fIgen_statem\fR\& entered hibernation and immediately got awakened by the oldest enqueued event\&.
+If \fItrue\fR\&, hibernates the \fIgen_statem\fR\& by calling \fB\fIproc_lib:hibernate/3\fR\&\fR\& before going into \fIreceive\fR\& to wait for a new external event\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+If there are enqueued events to process when hibrnation is requested, this is optimized by not hibernating but instead calling \fB\fIerlang:garbage_collect/0\fR\&\fR\& to simulate that the \fIgen_statem\fR\& entered hibernation and immediately got awakened by an enqueued event\&.
+
 .RE
 .nf
 
@@ -570,7 +594,7 @@ Any event that arrives cancels this time-out\&. Note that a retried or inserted 
 .LP
 If \fITime\fR\& is \fIinfinity\fR\&, no timer is started, as it never would expire anyway\&.
 .LP
-If \fITime\fR\& is relative and \fI0\fR\& no timer is actually started, instead the the time-out event is enqueued to ensure that it gets processed before any not yet received external event\&.
+If \fITime\fR\& is relative and \fI0\fR\& no timer is actually started, instead the the time-out event is enqueued to ensure that it gets processed before any not yet received external event, but after already queued events\&.
 .LP
 Note that it is not possible nor needed to cancel this time-out, as it is cancelled automatically by any other event\&.
 .RE
@@ -638,7 +662,7 @@ These state transition actions can be invoked by returning them from the \fBstat
 .LP
 Actions are executed in the containing list order\&.
 .LP
-Actions that set \fBtransition options\fR\& override any previous of the same type, so the last in the containing list wins\&. For example, the last \fB\fIpostpone()\fR\&\fR\& overrides any previous \fIpostpone()\fR\& in the list\&.
+Actions that set \fB transition options \fR\& override any previous of the same type, so the last in the containing list wins\&. For example, the last \fB\fIpostpone()\fR\&\fR\& overrides any previous \fIpostpone()\fR\& in the list\&.
 .RS 2
 .TP 2
 .B
@@ -647,7 +671,7 @@ Sets the \fB\fItransition_option()\fR\&\fR\& \fB\fIpostpone()\fR\&\fR\& for this
 .TP 2
 .B
 \fInext_event\fR\&:
-Stores the specified \fIEventType\fR\& and \fIEventContent\fR\& for insertion after all actions have been executed\&.
+This action does not set any \fB\fItransition_option()\fR\&\fR\& but instead stores the specified \fIEventType\fR\& and \fIEventContent\fR\& for insertion after all actions have been executed\&.
 .RS 2
 .LP
 The stored events are inserted in the queue as the next to process before any already queued events\&. The order of these stored events is preserved, so the first \fInext_event\fR\& in the containing list becomes the first to process\&.
@@ -689,7 +713,7 @@ Sets the \fB\fItransition_option()\fR\&\fR\& \fB\fIhibernate()\fR\&\fR\& for thi
 
 \fBtimeout_action()\fR\& = 
 .br
-    (Timeout :: \fBevent_timeout()\fR\&) |
+    (Time :: \fBevent_timeout()\fR\&) |
 .br
     {timeout, Time :: \fBevent_timeout()\fR\&, EventContent :: term()} |
 .br
@@ -738,8 +762,8 @@ These timeout actions sets timeout \fBtransition options\fR\&\&.
 .RS 2
 .TP 2
 .B
-\fITimeout\fR\&:
-Short for \fI{timeout,Timeout,Timeout}\fR\&, that is, the time-out message is the time-out time\&. This form exists to make the \fBstate callback\fR\& return value \fI{next_state,NextState,NewData,Timeout}\fR\& allowed like for \fIgen_fsm\fR\&\&'s
+\fITime\fR\&:
+Short for \fI{timeout,Time,Time}\fR\&, that is, the time-out message is the time-out time\&. This form exists to make the \fBstate callback\fR\& return value \fI{next_state,NextState,NewData,Time}\fR\& allowed like for \fIgen_fsm\fR\&\&.
 .TP 2
 .B
 \fItimeout\fR\&:
@@ -763,7 +787,7 @@ Sets the \fB\fItransition_option()\fR\&\fR\& \fB\fIstate_timeout()\fR\&\fR\& to 
 .LP
 This state transition action can be invoked by returning it from the \fBstate callback\fR\&, from \fB\fIModule:init/1\fR\&\fR\& or by giving it to \fB\fIenter_loop/5,6\fR\&\fR\&\&.
 .LP
-It replies to a caller waiting for a reply in \fB\fIcall/2\fR\&\fR\&\&. \fIFrom\fR\& must be the term from argument \fB\fI{call,From}\fR\&\fR\& in a call to a \fBstate callback\fR\&\&.
+It does not set any \fB\fItransition_option()\fR\&\fR\& but instead replies to a caller waiting for a reply in \fB\fIcall/2\fR\&\fR\&\&. \fIFrom\fR\& must be the term from argument \fB\fI{call,From}\fR\&\fR\& in a call to a \fBstate callback\fR\&\&.
 .LP
 Note that using this action from \fB\fIModule:init/1\fR\&\fR\& or \fB\fIenter_loop/5,6\fR\&\fR\& would be weird on the border of witchcraft since there has been no earlier call to a \fBstate callback\fR\& in this server\&.
 .RE
@@ -975,14 +999,14 @@ Note:
 For \fITimeout < infinity\fR\&, to avoid getting a late reply in the caller\&'s inbox if the caller should catch exceptions, this function spawns a proxy process that does the call\&. A late reply gets delivered to the dead proxy process, hence gets discarded\&. This is less efficient than using \fITimeout == infinity\fR\&\&.
 
 .LP
-\fITimeout\fR\& can also be a tuple \fI{clean_timeout,T}\fR\& or \fI{dirty_timeout,T}\fR\&, where \fIT\fR\& is the time-out time\&. \fI{clean_timeout,T}\fR\& works like just \fIT\fR\& described in the note above and uses a proxy process for \fIT < infinity\fR\&, while \fI{dirty_timeout,T}\fR\& bypasses the proxy process which is more lightweight\&.
+\fITimeout\fR\& can also be a tuple \fI{clean_timeout,T}\fR\& or \fI{dirty_timeout,T}\fR\&, where \fIT\fR\& is the time-out time\&. \fI{clean_timeout,T}\fR\& works like just \fIT\fR\& described in the note above and uses a proxy process while \fI{dirty_timeout,T}\fR\& bypasses the proxy process which is more lightweight\&.
 .LP
 
 .RS -4
 .B
 Note:
 .RE
-If you combine catching exceptions from this function with \fI{dirty_timeout,T}\fR\& to avoid that the calling process dies when the call times out, you will have to be prepared to handle a late reply\&. So why not just let the calling process die?
+If you combine catching exceptions from this function with \fI{dirty_timeout,T}\fR\& to avoid that the calling process dies when the call times out, you will have to be prepared to handle a late reply\&. Note that there is an odd chance to get a late reply even with \fI{dirty_timeout,infinity}\fR\& or \fIinfinity\fR\& for example in the event of network problems\&. So why not just let the calling process die by not catching the exception?
 
 .LP
 The call can also fail, for example, if the \fIgen_statem\fR\& dies before or during this function call\&.
@@ -1239,7 +1263,7 @@ stop(ServerRef :: server_ref(),
 .LP
 Orders the \fIgen_statem\fR\& \fB\fIServerRef\fR\&\fR\& to exit with the specified \fIReason\fR\& and waits for it to terminate\&. The \fIgen_statem\fR\& calls \fB\fIModule:terminate/3\fR\&\fR\& before exiting\&.
 .LP
-This function returns \fIok\fR\& if the server terminates with the expected reason\&. Any other reason than \fInormal\fR\&, \fIshutdown\fR\&, or \fI{shutdown,Term}\fR\& causes an error report to be issued through \fB\fIerror_logger:format/2\fR\&\fR\&\&. The default \fIReason\fR\& is \fInormal\fR\&\&.
+This function returns \fIok\fR\& if the server terminates with the expected reason\&. Any other reason than \fInormal\fR\&, \fIshutdown\fR\&, or \fI{shutdown,Term}\fR\& causes an error report to be issued through \fB\fIlogger(3)\fR\&\fR\&\&. The default \fIReason\fR\& is \fInormal\fR\&\&.
 .LP
 \fITimeout\fR\& is an integer > 0, which specifies how many milliseconds to wait for the server to terminate, or the atom \fIinfinity\fR\& to wait indefinitely\&. Defaults to \fIinfinity\fR\&\&. If the server does not terminate within the specified time, a \fItimeout\fR\& exception is raised\&.
 .LP
@@ -1356,7 +1380,7 @@ Whenever a \fIgen_statem\fR\& is started using \fB\fIstart_link/3,4\fR\&\fR\& or
 .B
 Note:
 .RE
-Note that if the \fIgen_statem\fR\& is started trough \fB\fIproc_lib\fR\&\fR\& and \fB\fIenter_loop/4-6\fR\&\fR\&, this callback will never be called\&. Since this callback is not optional it can in that case be implemented as:
+Note that if the \fIgen_statem\fR\& is started through \fB\fIproc_lib\fR\&\fR\& and \fB\fIenter_loop/4-6\fR\&\fR\&, this callback will never be called\&. Since this callback is not optional it can in that case be implemented as:
 .LP
 .nf
 
@@ -1474,7 +1498,7 @@ The only difference between \fIStateFunctionResult\fR\& and \fIHandleEventResult
 .LP
 For options that can be set and actions that can be done by \fIgen_statem\fR\& after returning from this function, see \fB\fIaction()\fR\&\fR\&\&.
 .LP
-When the \fIgen_statem\fR\& runs with \fBstate enter calls\fR\&, these functions are also called with arguments \fI(enter, OldState, \&.\&.\&.)\fR\& whenever the state changes\&. In this case there are some restrictions on the \fBactions\fR\& that may be returned: \fB\fIpostpone()\fR\&\fR\& is not allowed since a \fIstate enter call\fR\& is not an event so there is no event to postpone, and \fB\fI{next_event,_,_}\fR\&\fR\& is not allowed since using \fIstate enter calls\fR\& should not affect how events are consumed and produced\&. You may also not change states from this call\&. Should you return \fI{next_state,NextState, \&.\&.\&.}\fR\& with \fINextState =/= State\fR\& the \fIgen_statem\fR\& crashes\&. It is possible to use \fI{repeat_state, \&.\&.\&.}\fR\&, \fI{repeat_state_and_data,_}\fR\& or \fIrepeat_state_and_data\fR\& but all of them makes little sense since you immediately will be called again with a new \fIstate enter call\fR\& making this just a weird way of looping, and there are better ways to loop in Erlang\&. You are advised to use \fI{keep_state,\&.\&.\&.}\fR\&, \fI{keep_state_and_data,_}\fR\& or \fIkeep_state_and_data\fR\& since you can not change states from a \fIstate enter call\fR\& anyway\&.
+When the \fIgen_statem\fR\& runs with \fBstate enter calls\fR\&, these functions are also called with arguments \fI(enter, OldState, \&.\&.\&.)\fR\& whenever the state changes\&. In this case there are some restrictions on the \fBactions\fR\& that may be returned: \fB\fIpostpone()\fR\&\fR\& is not allowed since a \fIstate enter call\fR\& is not an event so there is no event to postpone, and \fB\fI{next_event,_,_}\fR\&\fR\& is not allowed since using \fIstate enter calls\fR\& should not affect how events are consumed and produced\&. You may also not change states from this call\&. Should you return \fI{next_state,NextState, \&.\&.\&.}\fR\& with \fINextState =/= State\fR\& the \fIgen_statem\fR\& crashes\&. Note that it is actually allowed to use \fI{repeat_state, NewData, \&.\&.\&.}\fR\& although it makes little sense since you immediately will be called again with a new \fIstate enter call\fR\& making this just a weird way of looping, and there are better ways to loop in Erlang\&. If you do not update \fINewData\fR\& and have some loop termination condition, or if you use \fI{repeat_state_and_data, _}\fR\& or \fIrepeat_state_and_data\fR\& you have an infinite loop! You are advised to use \fI{keep_state,\&.\&.\&.}\fR\&, \fI{keep_state_and_data,_}\fR\& or \fIkeep_state_and_data\fR\& since changing states from a \fIstate enter call\fR\& is not possible anyway\&.
 .LP
 Note the fact that you can use \fB\fIthrow\fR\&\fR\& to return the result, which can be useful\&. For example to bail out with \fIthrow(keep_state_and_data)\fR\& from deep within complex code that can not return \fI{next_state,State,Data}\fR\& because \fIState\fR\& or \fIData\fR\& is no longer in scope\&.
 .RE
@@ -1530,7 +1554,7 @@ Even if the \fIgen_statem\fR\& is \fInot\fR\& part of a supervision tree, this f
 .LP
 Otherwise, the \fIgen_statem\fR\& is immediately terminated\&.
 .LP
-Notice that for any other reason than \fInormal\fR\&, \fIshutdown\fR\&, or \fI{shutdown,Term}\fR\&, the \fIgen_statem\fR\& is assumed to terminate because of an error and an error report is issued using \fB\fIerror_logger:format/2\fR\&\fR\&\&.
+Notice that for any other reason than \fInormal\fR\&, \fIshutdown\fR\&, or \fI{shutdown,Term}\fR\&, the \fIgen_statem\fR\& is assumed to terminate because of an error and an error report is issued using \fB\fIlogger(3)\fR\&\fR\&\&.
 .RE
 .SH "SEE ALSO"
 

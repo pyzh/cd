@@ -1,4 +1,4 @@
-.TH msacc 3 "runtime_tools 1.12.5" "Ericsson AB" "Erlang Module Definition"
+.TH msacc 3 "runtime_tools 1.13" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 msacc \- Convenience functions for microstate accounting
 .SH DESCRIPTION
@@ -116,7 +116,19 @@ A map containing the different microstate accounting states\&. Each value in the
 .RE
 .nf
 
-\fBmsacc_type()\fR\& = scheduler | aux | async
+\fBmsacc_type()\fR\& = 
+.br
+    aux |
+.br
+    async |
+.br
+    dirty_cpu_scheduler |
+.br
+    dirty_io_scheduler |
+.br
+    poll |
+.br
+    scheduler
 .br
 .fi
 .nf

@@ -1,15 +1,56 @@
-.TH os 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.TH os 3 "kernel 6.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 os \- Operating system-specific functions.
 .SH DESCRIPTION
 .LP
 The functions in this module are operating system-specific\&. Careless use of these functions results in programs that will only run on a specific platform\&. On the other hand, with careful use, these functions can be of help in enabling a program to run on most platforms\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+File operations used to accept filenames containing null characters (integer value zero)\&. This caused the name to be truncated and in some cases arguments to primitive operations to be mixed up\&. Filenames containing null characters inside the filename are now \fIrejected\fR\& and will cause primitive file operations to fail\&.
+.LP
+Also environment variable operations used to accept names and values of environment variables containing null characters (integer value zero)\&. This caused operations to silently produce erroneous results\&. Environment variable names and values containing null characters inside the name or value are now \fIrejected\fR\& and will cause environment variable operations to fail\&.
+
 .SH DATA TYPES
+.nf
+
+\fBenv_var_name()\fR\& = nonempty_string()
+.br
+.fi
+.RS
+.LP
+A string containing valid characters on the specific OS for environment variable names using \fB\fIfile:native_name_encoding()\fR\&\fR\& encoding\&. Note that specifically null characters (integer value zero) and \fI$=\fR\& characters are not allowed\&. However, note that not all invalid characters necessarily will cause the primitiv operations to fail, but may instead produce invalid results\&.
+.RE
+.nf
+
+\fBenv_var_value()\fR\& = string()
+.br
+.fi
+.RS
+.LP
+A string containing valid characters on the specific OS for environment variable values using \fB\fIfile:native_name_encoding()\fR\&\fR\& encoding\&. Note that specifically null characters (integer value zero) are not allowed\&. However, note that not all invalid characters necessarily will cause the primitiv operations to fail, but may instead produce invalid results\&.
+.RE
+.nf
+
+\fBenv_var_name_value()\fR\& = nonempty_string()
+.br
+.fi
+.RS
+.LP
+Assuming that environment variables has been correctly set, a strings containing valid characters on the specific OS for environment variable names and values using \fB\fIfile:native_name_encoding()\fR\&\fR\& encoding\&. The first \fI$=\fR\& characters appearing in the string separates environment variable name (on the left) from environment variable value (on the right)\&.
+.RE
 .nf
 
 \fBos_command()\fR\& = atom() | \fBio_lib:chars()\fR\&
 .br
 .fi
+.RS
+.LP
+All characters needs to be valid characters on the specific OS using \fB\fIfile:native_name_encoding()\fR\&\fR\& encoding\&. Note that specifically null characters (integer value zero) are not allowed\&. However, note that not all invalid characters not necessarily will cause \fB\fIos:cmd/1\fR\&\fR\& to fail, but may instead produce invalid results\&.
+.RE
 .nf
 
 \fBos_command_opts()\fR\& = #{max_size => integer() >= 0 | infinity}
@@ -55,6 +96,14 @@ Options = \fBos_command_opts()\fR\&
 .RS
 .LP
 Executes \fICommand\fR\& in a command shell of the target OS, captures the standard output of the command, and returns this result as a string\&.
+.LP
+
+.RS -4
+.B
+Warning:
+.RE
+Previous implementation used to allow all characters as long as they were integer values greater than or equal to zero\&. This sometimes lead to unwanted results since null characters (integer value zero) often are interpreted as string termination\&. The current implementation rejects these\&.
+
 .LP
 \fIExamples:\fR\&
 .LP
@@ -114,7 +163,7 @@ These two functions look up an executable program, with the specified name and a
 .nf
 
 .B
-getenv() -> [string()]
+getenv() -> [env_var_name_value()]
 .br
 .fi
 .br
@@ -137,7 +186,9 @@ getenv(VarName) -> Value | false
 Types:
 
 .RS 3
-VarName = Value = string()
+VarName = \fBenv_var_name()\fR\&
+.br
+Value = \fBenv_var_value()\fR\&
 .br
 .RE
 .RE
@@ -160,7 +211,9 @@ getenv(VarName, DefaultValue) -> Value
 Types:
 
 .RS 3
-VarName = DefaultValue = Value = string()
+VarName = \fBenv_var_name()\fR\&
+.br
+DefaultValue = Value = \fBenv_var_value()\fR\&
 .br
 .RE
 .RE
@@ -204,7 +257,9 @@ putenv(VarName, Value) -> true
 Types:
 
 .RS 3
-VarName = Value = string()
+VarName = \fBenv_var_name()\fR\&
+.br
+Value = \fBenv_var_value()\fR\&
 .br
 .RE
 .RE
@@ -215,6 +270,14 @@ Sets a new \fIValue\fR\& for environment variable \fIVarName\fR\&\&.
 If Unicode filename encoding is in effect (see the \fB\fIerl\fR\& manual page\fR\&), the strings \fIVarName\fR\& and \fIValue\fR\& can contain characters with codepoints > 255\&.
 .LP
 On Unix platforms, the environment is set using UTF-8 encoding if Unicode filename translation is in effect\&. On Windows, the environment is set using wide character interfaces\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+\fIVarName\fR\& is not allowed to contain an \fI$=\fR\& character\&. Previous implementations used to just let the \fI$=\fR\& character through which silently caused erroneous results\&. Current implementation will instead throw a \fIbadarg\fR\& exception\&.
+
 .RE
 .LP
 .nf
@@ -473,7 +536,7 @@ unsetenv(VarName) -> true
 Types:
 
 .RS 3
-VarName = string()
+VarName = \fBenv_var_name()\fR\&
 .br
 .RE
 .RE

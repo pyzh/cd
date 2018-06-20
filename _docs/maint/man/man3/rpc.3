@@ -1,4 +1,4 @@
-.TH rpc 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.TH rpc 3 "kernel 6.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 rpc \- Remote Procedure Call services.
 .SH DESCRIPTION
@@ -373,7 +373,7 @@ A list of the nodes where the server does not exist
 .LP
 .TP 2
 *
-A list of the nodes where the server terminatd before sending any reply\&.
+A list of the nodes where the server terminated before sending any reply\&.
 .LP
 .RE
 
@@ -395,7 +395,9 @@ Module = module()
 .br
 Function = atom()
 .br
-Args = ResL = [term()]
+Args = [term()]
+.br
+ResL = [Res :: term() | {badrpc, Reason :: term()}]
 .br
 BadNodes = [node()]
 .br
@@ -424,7 +426,9 @@ Module = module()
 .br
 Function = atom()
 .br
-Args = ResL = [term()]
+Args = [term()]
+.br
+ResL = [Res :: term() | {badrpc, Reason :: term()}]
 .br
 BadNodes = [node()]
 .br
@@ -455,7 +459,7 @@ Args = [term()]
 .br
 Timeout = timeout()
 .br
-ResL = [term()]
+ResL = [Res :: term() | {badrpc, Reason :: term()}]
 .br
 BadNodes = [node()]
 .br
@@ -490,7 +494,7 @@ Args = [term()]
 .br
 Timeout = timeout()
 .br
-ResL = [term()]
+ResL = [Res :: term() | {badrpc, Reason :: term()}]
 .br
 BadNodes = [node()]
 .br
@@ -500,7 +504,7 @@ BadNodes = [node()]
 .LP
 In contrast to an RPC, a multicall is an RPC that is sent concurrently from one client to multiple servers\&. This is useful for collecting information from a set of nodes, or for calling a function on a set of nodes to achieve some side effects\&. It is semantically the same as iteratively making a series of RPCs on all the nodes, but the multicall is faster, as all the requests are sent at the same time and are collected one by one as they come back\&.
 .LP
-The function evaluates \fIapply(Module, Function, Args)\fR\& on the specified nodes and collects the answers\&. It returns \fI{ResL, BadNodes}\fR\&, where \fIBadNodes\fR\& is a list of the nodes that terminated or timed out during computation, and \fIResL\fR\& is a list of the return values\&. \fITimeout\fR\& is a time (integer) in milliseconds, or \fIinfinity\fR\&\&.
+The function evaluates \fIapply(Module, Function, Args)\fR\& on the specified nodes and collects the answers\&. It returns \fI{ResL, BadNodes}\fR\&, where \fIBadNodes\fR\& is a list of the nodes that do not exist, and \fIResL\fR\& is a list of the return values, or \fI{badrpc, Reason}\fR\& for failing calls\&. \fITimeout\fR\& is a time (integer) in milliseconds, or \fIinfinity\fR\&\&.
 .LP
 The following example is useful when new object code is to be loaded on all nodes in the network, and indicates some side effects that RPCs can produce:
 .LP

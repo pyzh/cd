@@ -1,9 +1,9 @@
-.TH erlang 3 "erts 9.3.3" "Ericsson AB" "Erlang Module Definition"
+.TH erlang 3 "erts 10.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 erlang \- The Erlang BIFs.
 .SH DESCRIPTION
 .LP
-By convention, most Built-In Functions (BIFs) are included in this module\&. Some of the BIFs are viewed more or less as part of the Erlang programming language and are \fIauto-imported\fR\&\&. Thus, it is not necessary to specify the module name\&. For example, the calls \fIatom_to_list(Erlang)\fR\& and \fIerlang:atom_to_list(Erlang)\fR\& are identical\&.
+By convention, most Built-In Functions (BIFs) are included in this module\&. Some of the BIFs are viewed more or less as part of the Erlang programming language and are \fIauto-imported\fR\&\&. Thus, it is not necessary to specify the module name\&. For example, the calls \fIatom_to_list(erlang)\fR\& and \fIerlang:atom_to_list(erlang)\fR\& are identical\&.
 .LP
 Auto-imported BIFs are listed without module prefix\&. BIFs listed with module prefix are not auto-imported\&.
 .LP
@@ -13,8 +13,7 @@ Some BIFs can be used in guard tests and are marked with "Allowed in guard tests
 .SH DATA TYPES
 .nf
 
-.B
-ext_binary()
+\fBext_binary()\fR\& = binary()
 .br
 .fi
 .RS
@@ -23,8 +22,7 @@ A binary data object, structured according to the Erlang external term format\&.
 .RE
 .nf
 
-.B
-iovec()
+\fBiovec()\fR\& = [binary()]
 .br
 .fi
 .RS
@@ -165,6 +163,15 @@ Same as \fB\fImicrosecond\fR\&\fR\&\&.
 Same as \fB\fInanosecond\fR\&\fR\&\&.
 .RE
 .RE
+.nf
+
+\fBdist_handle()\fR\&
+.br
+.fi
+.RS
+.LP
+An opaque handle identifing a distribution channel\&.
+.RE
 .SH EXPORTS
 .LP
 .nf
@@ -186,17 +193,6 @@ abs(Int) -> integer() >= 0
 Types:
 
 .RS 3
-Int = integer()
-.br
-.RE
-.RE
-.RS
-.LP
-Types:
-
-.RS 3
-Float = float()
-.br
 Int = integer()
 .br
 .RE
@@ -815,7 +811,7 @@ See also \fB\fIterm_to_binary/1\fR\&\fR\& and \fB\fIbinary_to_term/2\fR\&\fR\&\&
 .nf
 
 .B
-binary_to_term(Binary, Opts) -> term()
+binary_to_term(Binary, Opts) -> term() | {term(), Used}
 .br
 .fi
 .br
@@ -826,15 +822,17 @@ Types:
 .RS 3
 Binary = \fBext_binary()\fR\&
 .br
-Opts = [safe]
+Opt = safe | used
+.br
+Opts = [Opt]
+.br
+Used = integer() >= 1
 .br
 .RE
 .RE
 .RS
 .LP
-As \fIbinary_to_term/1\fR\&, but takes options that affect decoding of the binary\&.
-.LP
-Option:
+As \fIbinary_to_term/1\fR\&, but takes these options:
 .RS 2
 .TP 2
 .B
@@ -848,20 +846,35 @@ When enabled, it prevents decoding data that can be used to attack the Erlang sy
 .LP
 This prevents creation of new atoms directly, creation of new atoms indirectly (as they are embedded in certain structures, such as process identifiers, refs, and funs), and creation of new external function references\&. None of those resources are garbage collected, so unchecked creation of them can exhaust available memory\&.
 .RE
-.RE
-.LP
-Failure: \fIbadarg\fR\& if \fIsafe\fR\& is specified and unsafe data is decoded\&.
 .LP
 .nf
 
-> binary_to_term(<<131,100,0,5,104,101,108,108,111>>, [safe])\&.
+> binary_to_term(<<131,100,0,5,"hello">>, [safe])\&.
 ** exception error: bad argument
 > hello\&.
 hello
-> binary_to_term(<<131,100,0,5,104,101,108,108,111>>, [safe])\&.
+> binary_to_term(<<131,100,0,5,"hello">>, [safe])\&.
 hello
 
 .fi
+.TP 2
+.B
+\fIused\fR\&:
+Changes the return value to \fI{Term, Used}\fR\& where \fIUsed\fR\& is the number of bytes actually read from \fIBinary\fR\&\&.
+.LP
+.nf
+
+> Input = <<131,100,0,5,"hello","world">>\&.
+<<131,100,0,5,104,101,108,108,111,119,111,114,108,100>>
+> {Term, Used} = binary_to_term(Input, [used])\&.
+{hello, 9}
+> split_binary(Input, Used)\&.
+{<<131,100,0,5,104,101,108,108,111>>, <<"world">>}
+
+.fi
+.RE
+.LP
+Failure: \fIbadarg\fR\& if \fIsafe\fR\& is specified and unsafe data is decoded\&.
 .LP
 See also \fB\fIterm_to_binary/1\fR\&\fR\&, \fB\fIbinary_to_term/1\fR\&\fR\&, and \fB\fIlist_to_existing_atom/1\fR\&\fR\&\&.
 .RE
@@ -1992,6 +2005,136 @@ This BIF is intended for debugging only\&.
 .nf
 
 .B
+erlang:dist_ctrl_get_data(DHandle) -> Data | none
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+DHandle = \fBdist_handle()\fR\&
+.br
+Data = iodata()
+.br
+.RE
+.RE
+.RS
+.LP
+Get distribution channel data from the local node that is to be passed to the remote node\&. The distribution channel is identified by \fIDHandle\fR\&\&. If no data is available, the atom \fInone\fR\& is returned\&. One can request to be informed by a message when more data is available by calling \fB\fIerlang:dist_ctrl_get_data_notification(DHandle)\fR\&\fR\&\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+Only the process registered as distribution controller for the distribution channel identified by \fIDHandle\fR\& is allowed to call this function\&.
+
+.LP
+This function is used when implementing an alternative distribution carrier using processes as distribution controllers\&. \fIDHandle\fR\& is retrived via the callback \fB\fIf_handshake_complete\fR\&\fR\&\&. More information can be found in the documentation of \fBERTS User\&'s Guide ➜ How to implement an Alternative Carrier for the Erlang Distribution ➜ Distribution Module\fR\&\&.
+.RE
+.LP
+.nf
+
+.B
+erlang:dist_ctrl_get_data_notification(DHandle) -> ok
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+DHandle = \fBdist_handle()\fR\&
+.br
+.RE
+.RE
+.RS
+.LP
+Request notification when more data is available to fetch using \fB\fIerlang:dist_ctrl_get_data(DHandle)\fR\&\fR\& for the distribution channel identified by \fIDHandle\fR\&\&. When more data is present, the caller will be sent the message \fIdist_data\fR\&\&. Once a \fIdist_data\fR\& messages has been sent, no more \fIdist_data\fR\& messages will be sent until the \fIdist_ctrl_get_data_notification/1\fR\& function has been called again\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+Only the process registered as distribution controller for the distribution channel identified by \fIDHandle\fR\& is allowed to call this function\&.
+
+.LP
+This function is used when implementing an alternative distribution carrier using processes as distribution controllers\&. \fIDHandle\fR\& is retrived via the callback \fB\fIf_handshake_complete\fR\&\fR\&\&. More information can be found in the documentation of \fBERTS User\&'s Guide ➜ How to implement an Alternative Carrier for the Erlang Distribution ➜ Distribution Module\fR\&\&.
+.RE
+.LP
+.nf
+
+.B
+erlang:dist_ctrl_input_handler(DHandle, InputHandler) -> ok
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+DHandle = \fBdist_handle()\fR\&
+.br
+InputHandler = pid()
+.br
+.RE
+.RE
+.RS
+.LP
+Register an alternate input handler process for the distribution channel identified by \fIDHandle\fR\&\&. Once this function has been called, \fIInputHandler\fR\& is the only process allowed to call \fB\fIerlang:dist_ctrl_put_data(DHandle, Data)\fR\&\fR\& with the \fIDHandle\fR\& identifing this distribution channel\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+Only the process registered as distribution controller for the distribution channel identified by \fIDHandle\fR\& is allowed to call this function\&.
+
+.LP
+This function is used when implementing an alternative distribution carrier using processes as distribution controllers\&. \fIDHandle\fR\& is retrived via the callback \fB\fIf_handshake_complete\fR\&\fR\&\&. More information can be found in the documentation of \fBERTS User\&'s Guide ➜ How to implement an Alternative Carrier for the Erlang Distribution ➜ Distribution Module\fR\&\&.
+.RE
+.LP
+.nf
+
+.B
+erlang:dist_ctrl_put_data(DHandle, Data) -> ok
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+DHandle = \fBdist_handle()\fR\&
+.br
+Data = iodata()
+.br
+.RE
+.RE
+.RS
+.LP
+Deliver distribution channel data from a remote node to the local node\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+Only the process registered as distribution controller for the distribution channel identified by \fIDHandle\fR\& is allowed to call this function unless an alternate input handler process has been registered using \fB\fIerlang:dist_ctrl_input_handler(DHandle, InputHandler)\fR\&\fR\&\&. If an alternate input handler has been registered, only the registered input handler process is allowed to call this function\&.
+
+.LP
+This function is used when implementing an alternative distribution carrier using processes as distribution controllers\&. \fIDHandle\fR\& is retrived via the callback \fB\fIf_handshake_complete\fR\&\fR\&\&. More information can be found in the documentation of \fBERTS User\&'s Guide ➜ How to implement an Alternative Carrier for the Erlang Distribution ➜ Distribution Module\fR\&\&.
+.RE
+.LP
+.nf
+
+.B
 element(N, Tuple) -> term()
 .br
 .fi
@@ -2104,11 +2247,14 @@ Stops the execution of the calling process with the reason \fIReason\fR\&, where
 .nf
 
 > catch error(foobar)\&.
-{'EXIT',{foobar,[{erl_eval,do_apply,5},
-                 {erl_eval,expr,5},
-                 {shell,exprs,6},
-                 {shell,eval_exprs,6},
-                 {shell,eval_loop,3}]}}
+{'EXIT',{foobar,[{shell,apply_fun,3,
+                        [{file,"shell.erl"},{line,906}]},
+                 {erl_eval,do_apply,6,[{file,"erl_eval.erl"},{line,677}]},
+                 {erl_eval,expr,5,[{file,"erl_eval.erl"},{line,430}]},
+                 {shell,exprs,7,[{file,"shell.erl"},{line,687}]},
+                 {shell,eval_exprs,7,[{file,"shell.erl"},{line,642}]},
+                 {shell,eval_loop,3,[{file,"shell.erl"},{line,627}]}]}}
+
 .fi
 .RE
 .LP
@@ -3015,42 +3161,28 @@ Types:
 .RE
 .RS
 .LP
-Gets the call stack back-trace (\fIstacktrace\fR\&) for an exception that has just been caught in the calling process as a list of \fI{Module,Function,Arity,Location}\fR\& tuples\&. Field \fIArity\fR\& in the first tuple can be the argument list of that function call instead of an arity integer, depending on the exception\&.
-.LP
-If there has not been any exceptions in a process, the stacktrace is \fI[]\fR\&\&. After a code change for the process, the stacktrace can also be reset to \fI[]\fR\&\&.
-.LP
-\fIerlang:get_stacktrace/0\fR\& is only guaranteed to return a stacktrace if called (directly or indirectly) from within the scope of a \fItry\fR\& expression\&. That is, the following call works:
-.LP
-.nf
-
-try Expr
-catch
-  C:R ->
-   {C,R,erlang:get_stacktrace()}
-end
-.fi
-.LP
-As does this call:
-.LP
-.nf
-
-try Expr
-catch
-  C:R ->
-   {C,R,helper()}
-end
-
-helper() ->
-  erlang:get_stacktrace().
-.fi
-.LP
 
 .RS -4
 .B
 Warning:
 .RE
-In a future release, \fIerlang:get_stacktrace/0\fR\& will return \fI[]\fR\& if called from outside a \fItry\fR\& expression\&.
+\fIerlang:get_stacktrace/0\fR\& is deprecated and will stop working in a future release\&.
 
+.LP
+Instead of using \fIerlang:get_stacktrace/0\fR\& to retrieve the call stack back-trace, use the following syntax:
+.LP
+.nf
+
+try Expr
+catch
+  Class:Reason:Stacktrace ->
+   {Class,Reason,Stacktrace}
+end
+.fi
+.LP
+\fIerlang:get_stacktrace/0\fR\& retrieves the call stack back-trace (\fIstacktrace\fR\&) for an exception that has just been caught in the calling process as a list of \fI{Module,Function,Arity,Location}\fR\& tuples\&. Field \fIArity\fR\& in the first tuple can be the argument list of that function call instead of an arity integer, depending on the exception\&.
+.LP
+If there has not been any exceptions in a process, the stacktrace is \fI[]\fR\&\&. After a code change for the process, the stacktrace can also be reset to \fI[]\fR\&\&.
 .LP
 The stacktrace is the same data as operator \fIcatch\fR\& returns, for example:
 .LP
@@ -3070,6 +3202,18 @@ The second element of the tuple is a string (list of characters) representing th
 \fIline\fR\&:
 The second element of the tuple is the line number (an integer > 0) in the source file where the exception occurred or the function was called\&. 
 .RE
+.LP
+
+.RS -4
+.B
+Warning:
+.RE
+Developers should rely on stacktrace entries only for debugging purposes\&.
+.LP
+The VM performs tail call optimization, which does not add new entries to the stacktrace, and also limits stacktraces to a certain depth\&. Furthermore, compiler options, optimizations and future changes may add or remove stacktrace entries, causing any code that expects the stacktrace to be in a certain order or contain specific items to fail\&.
+.LP
+The only exception to this rule is \fIerror:undef\fR\& which guarantees to include the Module, Function and Arity of the attempted function as the first stacktrace entry\&.
+
 .LP
 See also \fB\fIerror/1\fR\&\fR\& and \fB\fIerror/2\fR\&\fR\&\&.
 .RE
@@ -3108,7 +3252,9 @@ GroupLeader = Pid = pid()
 .LP
 Sets the group leader of \fIPid\fR\& to \fIGroupLeader\fR\&\&. Typically, this is used when a process started from a certain shell is to have another group leader than \fIinit\fR\&\&.
 .LP
-See also \fB\fIgroup_leader/0\fR\&\fR\&\&.
+The group leader should be rarely changed in applications with a supervision tree, because OTP assumes the group leader of their processes is their application master\&.
+.LP
+See also \fB\fIgroup_leader/0\fR\&\fR\& and \fBOTP design principles\fR\& related to starting and stopping applications\&.
 .RE
 .LP
 .nf
@@ -3781,6 +3927,43 @@ Term = term()
 Returns \fItrue\fR\& if \fITerm\fR\& is a map, otherwise \fIfalse\fR\&\&.
 .LP
 Allowed in guard tests\&.
+.RE
+.LP
+.nf
+
+.B
+is_map_key(Key, Map) -> boolean()
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Key = term()
+.br
+Map = map()
+.br
+.RE
+.RE
+.RS
+.LP
+Returns \fItrue\fR\& if map \fIMap\fR\& contains \fIKey\fR\& and returns \fIfalse\fR\& if it does not contain the \fIKey\fR\&\&.
+.LP
+The call fails with a \fI{badmap,Map}\fR\& exception if \fIMap\fR\& is not a map\&.
+.LP
+\fIExample:\fR\&
+.LP
+.nf
+
+> Map = #{"42" => value}.
+#{"42" => value}
+> is_map_key("42",Map).
+true
+> is_map_key(value,Map).
+false
+.fi
 .RE
 .LP
 .nf
@@ -4728,6 +4911,41 @@ Creates a tuple of size \fIArity\fR\&, where each element has value \fIDefaultVa
 .nf
 
 .B
+map_get(Key, Map) -> Value
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Map = map()
+.br
+Key = Value = any()
+.br
+.RE
+.RE
+.RS
+.LP
+Returns value \fIValue\fR\& associated with \fIKey\fR\& if \fIMap\fR\& contains \fIKey\fR\&\&.
+.LP
+The call fails with a \fI{badmap,Map}\fR\& exception if \fIMap\fR\& is not a map, or with a \fI{badkey,Key}\fR\& exception if no value is associated with \fIKey\fR\&\&.
+.LP
+\fIExample:\fR\&
+.LP
+.nf
+
+> Key = 1337,
+  Map = #{42 => value_two,1337 => "value one","a" => 1},
+  map_get(Key,Map).
+"value one"
+.fi
+.RE
+.LP
+.nf
+
+.B
 map_size(Map) -> integer() >= 0
 .br
 .fi
@@ -4968,11 +5186,7 @@ Size = integer() >= 0
 .br
     code |
 .br
-    ets |
-.br
-    low |
-.br
-    maximum
+    ets
 .fi
 .br
 .RE
@@ -5126,11 +5340,7 @@ Types:
 .br
     code |
 .br
-    ets |
-.br
-    low |
-.br
-    maximum
+    ets
 .fi
 .br
 .RE
@@ -5311,21 +5521,21 @@ The monitored entity, which triggered the event\&. When monitoring a local proce
 \fIInfo\fR\&:
 Either the exit reason of the process, \fInoproc\fR\& (process or port did not exist at the time of monitor creation), or \fInoconnection\fR\& (no connection to the node where the monitored process resides)\&.
 .RE
-.LP
-If an attempt is made to monitor a process on an older node (where remote process monitoring is not implemented or where remote process monitoring by registered name is not implemented), the call fails with \fIbadarg\fR\&\&.
+.RS 2
+.TP 2
+.B
+Monitoring a \fIprocess\fR\&:
+Creates monitor between the current process and another process identified by \fIItem\fR\&, which can be a \fIpid()\fR\& (local or remote), an atom \fIRegisteredName\fR\& or a tuple \fI{RegisteredName, Node}\fR\& for a registered process, located elsewhere\&.
 .LP
 
 .RS -4
 .B
 Note:
 .RE
-The format of the \fI\&'DOWN\&'\fR\& message changed in ERTS 5\&.2 (Erlang/OTP R9B) for monitoring \fIby registered name\fR\&\&. Element \fIObject\fR\& of the \fI\&'DOWN\&'\fR\& message could in earlier versions sometimes be the process identifier of the monitored process and sometimes be the registered name\&. Now element \fIObject\fR\& is always a tuple consisting of the registered name and the node name\&. Processes on new nodes (ERTS 5\&.2 or higher versions) always get \fI\&'DOWN\&'\fR\& messages on the new format even if they are monitoring processes on old nodes\&. Processes on old nodes always get \fI\&'DOWN\&'\fR\& messages on the old format\&.
+Before ERTS 10\&.0 (OTP 21\&.0), monitoring a process could fail with \fIbadarg\fR\& if the monitored process resided on a primitive node (such as erl_interface or jinterface), where remote process monitoring is not implemented\&.
+.LP
+Now, such a call to \fImonitor\fR\& will instead succeed and a monitor is created\&. But the monitor will only supervise the connection\&. That is, a \fI{\&'DOWN\&', _, process, _, noconnection}\fR\& is the only message that may be received, as the primitive node have no way of reporting the status of the monitored process\&.
 
-.RS 2
-.TP 2
-.B
-Monitoring a \fIprocess\fR\&:
-Creates monitor between the current process and another process identified by \fIItem\fR\&, which can be a \fIpid()\fR\& (local or remote), an atom \fIRegisteredName\fR\& or a tuple \fI{RegisteredName, Node}\fR\& for a registered process, located elsewhere\&.
 .TP 2
 .B
 Monitoring a \fIport\fR\&:
@@ -5732,7 +5942,13 @@ Opt =
 .br
     {cd, Dir :: string() | binary()} |
 .br
-    {env, Env :: [{Name :: string(), Val :: string() | false}]} |
+    {env,
+.br
+     Env ::
+.br
+         [{Name :: \fBos:env_var_name()\fR\&,
+.br
+           Val :: \fBos:env_var_value()\fR\& | false}]} |
 .br
     {args, [string() | binary()]} |
 .br
@@ -5843,10 +6059,24 @@ Only valid for \fI{spawn, Command}\fR\& and \fI{spawn_executable, FileName}\fR\&
 .TP 2
 .B
 \fI{env, Env}\fR\&:
+Types:
+.br
+\fIName = \fR\&\fB\fIos:env_var_name()\fR\&\fR\&
+.br
+\fIVal = \fR\&\fB\fIos:env_var_value()\fR\&\fR\&\fI | false\fR\&
+.br
+\fIEnv = [{Name, Val}]\fR\& 
+.RS 2
+.LP
 Only valid for \fI{spawn, Command}\fR\&, and \fI{spawn_executable, FileName}\fR\&\&. The environment of the started process is extended using the environment specifications in \fIEnv\fR\&\&.
+.RE
 .RS 2
 .LP
 \fIEnv\fR\& is to be a list of tuples \fI{Name, Val}\fR\&, where \fIName\fR\& is the name of an environment variable, and \fIVal\fR\& is the value it is to have in the spawned port process\&. Both \fIName\fR\& and \fIVal\fR\& must be strings\&. The one exception is \fIVal\fR\& being the atom \fIfalse\fR\& (in analogy with \fB\fIos:getenv/1\fR\&\fR\&, which removes the environment variable\&.
+.RE
+.RS 2
+.LP
+For information about encoding requirements, see documentation of the types for \fIName\fR\& and \fIVal\fR\&\&.
 .RE
 .TP 2
 .B
@@ -6587,10 +6817,6 @@ Locking = false | port_level | driver_level
 .RS 2
 .TP 2
 *
-\fIfalse\fR\& (emulator without SMP support)
-.LP
-.TP 2
-*
 \fIport_level\fR\& (port-specific locking)
 .LP
 .TP 2
@@ -7087,14 +7313,14 @@ If \fIkill\fR\& is not defined in the map, the system default will be used\&. Th
 .TP 2
 .B
 \fIerror_logger\fR\&:
-When set to \fItrue\fR\&, the runtime system sends a message to the current \fB\fIerror_logger\fR\&\fR\& containing details about the process when the maximum heap size is reached\&. One \fIerror_logger\fR\& report is sent each time the limit is reached\&.
+When set to \fItrue\fR\&, the runtime system logs an error event via \fB\fIlogger\fR\&\fR\&, containing details about the process when the maximum heap size is reached\&. One log event is sent each time the limit is reached\&.
 .RS 2
 .LP
 If \fIerror_logger\fR\& is not defined in the map, the system default is used\&. The default system default is \fItrue\fR\&\&. It can be changed by either the option \fB+hmaxel\fR\& int \fIerl(1)\fR\&, or \fB\fIerlang:system_flag(max_heap_size, MaxHeapSize)\fR\&\fR\&\&.
 .RE
 .RE
 .LP
-The heap size of a process is quite hard to predict, especially the amount of memory that is used during the garbage collection\&. When contemplating using this option, it is recommended to first run it in production with \fIkill\fR\& set to \fIfalse\fR\& and inspect the \fIerror_logger\fR\& reports to see what the normal peak sizes of the processes in the system is and then tune the value accordingly\&.
+The heap size of a process is quite hard to predict, especially the amount of memory that is used during the garbage collection\&. When contemplating using this option, it is recommended to first run it in production with \fIkill\fR\& set to \fIfalse\fR\& and inspect the log events to see what the normal peak sizes of the processes in the system is and then tune the value accordingly\&.
 .RE
 .LP
 .nf
@@ -7176,7 +7402,7 @@ Internally in each priority level, processes are scheduled in a round robin fash
 .LP
 Execution of processes on priority \fInormal\fR\& and \fIlow\fR\& are interleaved\&. Processes on priority \fIlow\fR\& are selected for execution less frequently than processes on priority \fInormal\fR\&\&.
 .LP
-When runnable processes on priority \fIhigh\fR\& exist, no processes on priority \fIlow\fR\& or \fInormal\fR\& are selected for execution\&. Notice however that this does \fInot\fR\& mean that no processes on priority \fIlow\fR\& or \fInormal\fR\& can run when processes are running on priority \fIhigh\fR\&\&. On the runtime system with SMP support, more processes can be running in parallel than processes on priority \fIhigh\fR\&\&. That is, a \fIlow\fR\& and a \fIhigh\fR\& priority process can execute at the same time\&.
+When runnable processes on priority \fIhigh\fR\& exist, no processes on priority \fIlow\fR\& or \fInormal\fR\& are selected for execution\&. Notice however that this does \fInot\fR\& mean that no processes on priority \fIlow\fR\& or \fInormal\fR\& can run when processes are running on priority \fIhigh\fR\&\&. When using multiple schedulers, more processes can be running in parallel than processes on priority \fIhigh\fR\&\&. That is, a \fIlow\fR\& and a \fIhigh\fR\& priority process can execute at the same time\&.
 .LP
 When runnable processes on priority \fImax\fR\& exist, no processes on priority \fIlow\fR\&, \fInormal\fR\&, or \fIhigh\fR\& are selected for execution\&. As with priority \fIhigh\fR\&, processes on lower priorities can execute in parallel with processes on priority \fImax\fR\&\&.
 .LP
@@ -7187,7 +7413,7 @@ Scheduling is pre-emptive\&. Regardless of priority, a process is pre-empted whe
 .B
 Note:
 .RE
-Do not depend on the scheduling to remain exactly as it is today\&. Scheduling, at least on the runtime system with SMP support, is likely to be changed in a future release to use available processor cores better\&.
+Do not depend on the scheduling to remain exactly as it is today\&. Scheduling is likely to be changed in a future release to use available processor cores better\&.
 
 .LP
 There is \fIno\fR\& automatic mechanism for avoiding priority inversion, such as priority inheritance or priority ceilings\&. When using priorities, take this into account and handle such scenarios by yourself\&.
@@ -7517,10 +7743,6 @@ The \fIInfoTuple\fR\&s with the following items are part of the result:
 .TP 2
 *
 \fImessage_queue_len\fR\&
-.LP
-.TP 2
-*
-\fImessages\fR\&
 .LP
 .TP 2
 *
@@ -8544,9 +8766,11 @@ Msg = term()
 .RE
 .RS
 .LP
-Sends a message and returns \fIMsg\fR\&\&. This is the same as \fIDest ! Msg\fR\&\&.
+Sends a message and returns \fIMsg\fR\&\&. This is the same as using the \fB send operator\fR\&: \fIDest ! Msg\fR\&\&.
 .LP
 \fIDest\fR\& can be a remote or local process identifier, a (local) port, a locally registered name, or a tuple \fI{RegName, Node}\fR\& for a registered name at another node\&.
+.LP
+The function fails with a \fIbadarg\fR\& run-time error if \fIDest\fR\& is an atom name, but this name is not registered\&. This is the only case when \fIsend\fR\& fails for an unreachable destination \fIDest\fR\& (of correct type)\&.
 .RE
 .LP
 .nf
@@ -9689,7 +9913,7 @@ Returns the number of exact reductions\&.
 .B
 Note:
 .RE
-\fIstatistics(exact_reductions)\fR\& is a more expensive operation than \fB statistics(reductions)\fR\&, especially on an Erlang machine with SMP support\&.
+\fIstatistics(exact_reductions)\fR\& is a more expensive operation than \fB statistics(reductions)\fR\&\&.
 
 .RE
 .LP
@@ -9767,7 +9991,19 @@ MSAcc_Thread =
 .br
       counters := MSAcc_Counters}
 .br
-MSAcc_Thread_Type = scheduler | async | aux
+MSAcc_Thread_Type = 
+.br
+    async |
+.br
+    aux |
+.br
+    dirty_io_scheduler |
+.br
+    dirty_cpu_scheduler |
+.br
+    poll |
+.br
+    scheduler
 .br
 MSAcc_Thread_Id = integer() >= 0
 .br
@@ -9849,23 +10085,27 @@ Notice that these values are not guaranteed to be the exact time spent in each s
 .TP 2
 .B
 \fIscheduler\fR\&:
-The main execution threads that do most of the work\&.
+The main execution threads that do most of the work\&. See \fBerl +S\fR\& for more details\&.
 .TP 2
 .B
 \fIdirty_cpu_scheduler\fR\&:
-The threads for long running cpu intensive work\&.
+The threads for long running cpu intensive work\&. See \fBerl +SDcpu\fR\& for more details\&.
 .TP 2
 .B
 \fIdirty_io_scheduler\fR\&:
-The threads for long running I/O work\&.
+The threads for long running I/O work\&. See \fBerl +SDio\fR\& for more details\&.
 .TP 2
 .B
 \fIasync\fR\&:
-Async threads are used by various linked-in drivers (mainly the file drivers) do offload non-CPU intensive work\&.
+Async threads are used by various linked-in drivers (mainly the file drivers) do offload non-CPU intensive work\&. See \fBerl +A\fR\& for more details\&.
 .TP 2
 .B
 \fIaux\fR\&:
 Takes care of any work that is not specifically assigned to a scheduler\&.
+.TP 2
+.B
+\fIpoll\fR\&:
+Does the IO polling for the emulator\&. See \fBerl +IOt\fR\& for more details\&.
 .RE
 .LP
 The following \fIMSAcc_Thread_State\fR\&s are available\&. All states are exclusive, meaning that a thread cannot be in two states at once\&. So, if you add the numbers of all counters in a thread, you get the total runtime for that thread\&.
@@ -10207,7 +10447,7 @@ Another (probably more) useful value is to calculate total scheduler utilization
 .LP
 This weighted scheduler utilization will reach \fI1\&.0\fR\& when schedulers are active the same amount of time as maximum available CPU time\&. If more schedulers exist than available logical processors, this value may be greater than \fI1\&.0\fR\&\&.
 .LP
-As of ERTS version 9\&.0, the Erlang runtime system with SMP support will as default have more schedulers than logical processors\&. This due to the dirty schedulers\&.
+As of ERTS version 9\&.0, the Erlang runtime system will as default have more schedulers than logical processors\&. This due to the dirty schedulers\&.
 .LP
 
 .RS -4
@@ -10411,7 +10651,7 @@ Suspendee = pid()
 .br
 OptList = [Opt]
 .br
-Opt = unless_suspending | asynchronous
+Opt = unless_suspending | asynchronous | {asynchronous, term()}
 .br
 .RE
 .RE
@@ -10426,7 +10666,29 @@ Options (\fIOpt\fR\&s):
 .TP 2
 .B
 \fIasynchronous\fR\&:
-A suspend request is sent to the process identified by \fISuspendee\fR\&\&. \fISuspendee\fR\& eventually suspends unless it is resumed before it could suspend\&. The caller of \fIerlang:suspend_process/2\fR\& returns immediately, regardless of whether \fISuspendee\fR\& has suspended yet or not\&. The point in time when \fISuspendee\fR\& suspends cannot be deduced from other events in the system\&. It is only guaranteed that \fISuspendee\fR\& \fIeventually\fR\& suspends (unless it is resumed)\&. If option \fIasynchronous\fR\& has \fInot\fR\& been passed, the caller of \fIerlang:suspend_process/2\fR\& is blocked until \fISuspendee\fR\& has suspended\&.
+A suspend request is sent to the process identified by \fISuspendee\fR\&\&. \fISuspendee\fR\& eventually suspends unless it is resumed before it could suspend\&. The caller of \fIerlang:suspend_process/2\fR\& returns immediately, regardless of whether \fISuspendee\fR\& has suspended yet or not\&. The point in time when \fISuspendee\fR\& suspends cannot be deduced from other events in the system\&. It is only guaranteed that \fISuspendee\fR\& \fIeventually\fR\& suspends (unless it is resumed)\&. If no \fIasynchronous\fR\& options has been passed, the caller of \fIerlang:suspend_process/2\fR\& is blocked until \fISuspendee\fR\& has suspended\&.
+.TP 2
+.B
+\fI{asynchronous, ReplyTag}\fR\&:
+A suspend request is sent to the process identified by \fISuspendee\fR\&\&. When the suspend request has been processed, a reply message is sent to the caller of this function\&. The reply is on the form \fI{ReplyTag, State}\fR\& where \fIState\fR\& is either:
+.RS 2
+.TP 2
+.B
+\fIexited\fR\&:
+\fISuspendee\fR\& has exited\&.
+.TP 2
+.B
+\fIsuspended\fR\&:
+\fISuspendee\fR\& is now suspended\&.
+.TP 2
+.B
+\fInot_suspended\fR\&:
+\fISuspendee\fR\& is not suspended\&. This can only happen when the process that issued this request, have called \fIresume_process(Suspendee)\fR\& before getting the reply\&.
+.RE
+.RS 2
+.LP
+Appart from the reply message, the \fI{asynchronous, ReplyTag}\fR\& option behaves exactly the same as the \fIasynchronous\fR\& option without reply tag\&.
+.RE
 .TP 2
 .B
 \fIunless_suspending\fR\&:
@@ -10441,6 +10703,14 @@ If the suspend count on the process identified by \fISuspendee\fR\& is increased
 Warning:
 .RE
 This BIF is intended for debugging only\&.
+
+.LP
+
+.RS -4
+.B
+Warning:
+.RE
+You can easily create deadlocks if processes suspends each other (directly or in circles)\&. In ERTS versions prior to ERTS version 10\&.0, the runtime system prevented such deadlocks, but this prevention has now been removed due to performance reasons\&.
 
 .LP
 Failures:
@@ -10871,7 +11141,7 @@ When \fIerlang:system_flag(scheduler_bind_type, How)\fR\& is called, an asynchro
 .B
 Note:
 .RE
-If a scheduler fails to bind, this is often silently ignored, as it is not always possible to verify valid logical processor identifiers\&. If an error is reported, it is reported to \fIerror_logger\fR\&\&. To verify that the schedulers have bound as requested, call \fB\fIerlang:system_info(scheduler_bindings)\fR\&\fR\&\&.
+If a scheduler fails to bind, this is often silently ignored, as it is not always possible to verify valid logical processor identifiers\&. If an error is reported, an error event is logged\&. To verify that the schedulers have bound as requested, call \fB\fIerlang:system_info(scheduler_bindings)\fR\&\fR\&\&.
 
 .LP
 Schedulers can be bound on newer Linux, Solaris, FreeBSD, and Windows systems, but more systems will be supported in future releases\&.
@@ -11071,6 +11341,52 @@ If \fIvolatile\fR\& is returned, the time offset cannot be finalized because \fB
 .nf
 
 .B
+erlang:system_info(Item :: overview) -> boolean()
+.br
+.fi
+.br
+.RS
+.LP
+Returns information about the current system\&. The documentation of this function is broken into the following sections in order to make it easier to navigate\&.
+.RS 2
+.TP 2
+.B
+\fB\fIMemory Allocation\fR\&\fR\&:
+\fB\fIallocated_areas\fR\&\fR\&, \fB\fIallocator\fR\&\fR\&, \fB\fIalloc_util_allocators\fR\&\fR\&, \fB\fIallocator_sizes\fR\&\fR\&, \fB\fIelib_malloc\fR\&\fR\& 
+.TP 2
+.B
+\fB\fICPU Topology\fR\&\fR\&:
+\fB\fIcpu_topology\fR\&\fR\&, \fB\fIlogical_processors\fR\&\fR\&, \fB\fIupdate_cpu_info\fR\&\fR\& 
+.TP 2
+.B
+\fB\fIProcess Information\fR\&\fR\&:
+\fB\fIfullsweep_after\fR\&\fR\&, \fB\fIgarbage_collection\fR\&\fR\&, \fB\fIheap_sizes\fR\&\fR\&, \fB\fIheap_type\fR\&\fR\&, \fB\fImax_heap_size\fR\&\fR\&, \fB\fImessage_queue_data\fR\&\fR\&, \fB\fImin_heap_size\fR\&\fR\&, \fB\fImin_bin_vheap_size\fR\&\fR\&, \fB\fIprocs\fR\&\fR\& 
+.TP 2
+.B
+\fB\fISystem Limits\fR\&\fR\&:
+\fB\fIatom_count\fR\&\fR\&, \fB\fIatom_limit\fR\&\fR\&, \fB\fIets_limit\fR\&\fR\&, \fB\fIport_count\fR\&\fR\&, \fB\fIport_limit\fR\&\fR\&, \fB\fIprocess_count\fR\&\fR\&, \fB\fIprocess_limit\fR\&\fR\& 
+.TP 2
+.B
+\fB\fISystem Time\fR\&\fR\&:
+\fB\fIend_time\fR\&\fR\&, \fB\fIos_monotonic_time_source\fR\&\fR\&, \fB\fIos_system_time_source\fR\&\fR\&, \fB\fIstart_time\fR\&\fR\&, \fB\fItime_correction\fR\&\fR\&, \fB\fItime_offset\fR\&\fR\&, \fB\fItime_warp_mode\fR\&\fR\&, \fB\fItolerant_timeofday\fR\&\fR\& 
+.TP 2
+.B
+\fB\fIScheduler Information\fR\&\fR\&:
+\fB\fIdirty_cpu_schedulers\fR\&\fR\&, \fB\fIdirty_cpu_schedulers_online\fR\&\fR\&, \fB\fIdirty_io_schedulers\fR\&\fR\&, \fB\fImulti_scheduling\fR\&\fR\&, \fB\fImulti_scheduling_blockers\fR\&\fR\&, \fB\fInormal_multi_scheduling_blockers\fR\&\fR\&, \fB\fIscheduler_bind_type\fR\&\fR\&, \fB\fIscheduler_bindings\fR\&\fR\&, \fB\fIscheduler_id\fR\&\fR\&, \fB\fIschedulers\fR\&\fR\&, \fB\fIsmp_support\fR\&\fR\&, \fB\fIthreads\fR\&\fR\&, \fB\fIthread_pool_size\fR\&\fR\& 
+.TP 2
+.B
+\fB\fIDistribution Information\fR\&\fR\&:
+\fB\fIcreation\fR\&\fR\&, \fB\fIdelayed_node_table_gc\fR\&\fR\&, \fB\fIdist\fR\&\fR\&, \fB\fIdist_buf_busy_limit\fR\&\fR\&, \fB\fIdist_ctrl\fR\&\fR\& 
+.TP 2
+.B
+\fB\fISystem Information\fR\&\fR\&:
+\fB\fIbuild_type\fR\&\fR\&, \fB\fIc_compiler_used\fR\&\fR\&, \fB\fIcheck_io\fR\&\fR\&, \fB\fIcompat_rel\fR\&\fR\&, \fB\fIdebug_compiled\fR\&\fR\&, \fB\fIdriver_version\fR\&\fR\&, \fB\fIdynamic_trace\fR\&\fR\&, \fB\fIdynamic_trace_probes\fR\&\fR\&, \fB\fIinfo\fR\&\fR\&, \fB\fIkernel_poll\fR\&\fR\&, \fB\fIloaded\fR\&\fR\&, \fB\fImachine\fR\&\fR\&, \fB\fImodified_timing_level\fR\&\fR\&, \fB\fInif_version\fR\&\fR\&, \fB\fIotp_release\fR\&\fR\&, \fB\fIport_parallelism\fR\&\fR\&, \fB\fIsystem_version\fR\&\fR\&, \fB\fIsystem_architecture\fR\&\fR\&, \fB\fItrace_control_word\fR\&\fR\&, \fB\fIversion\fR\&\fR\&, \fB\fIwordsize\fR\&\fR\& 
+.RE
+.RE
+.LP
+.nf
+
+.B
 erlang:system_info(Item :: allocated_areas) -> [tuple()]
 .br
 .fi
@@ -11087,13 +11403,6 @@ erlang:system_info(Item :: allocator) ->
 .nf
 
 .B
-erlang:system_info(Item :: alloc_util_allocators) -> [Alloc]
-.br
-.fi
-.br
-.nf
-
-.B
 erlang:system_info(Item :: {allocator, Alloc}) -> [term()]
 .br
 .fi
@@ -11101,7 +11410,21 @@ erlang:system_info(Item :: {allocator, Alloc}) -> [term()]
 .nf
 
 .B
+erlang:system_info(Item :: alloc_util_allocators) -> [Alloc]
+.br
+.fi
+.br
+.nf
+
+.B
 erlang:system_info(Item :: {allocator_sizes, Alloc}) -> [term()]
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: elib_malloc) -> false
 .br
 .fi
 .br
@@ -11128,7 +11451,7 @@ Alloc = atom()
 .RE
 .RS
 .LP
-Returns various information about the allocators of the current system (emulator) as specified by \fIItem\fR\&:
+Returns various information about the memory allocators of the current system (emulator) as specified by \fIItem\fR\&:
 .RS 2
 .TP 2
 .B
@@ -11149,11 +11472,7 @@ Notice that the sum of these values is \fInot\fR\& the total amount of memory al
 .TP 2
 .B
 \fIallocator\fR\&:
-
-.RS 2
-.LP
 Returns \fI{Allocator, Version, Features, Settings\fR\&, where:
-.RE
 .RS 2
 .TP 2
 *
@@ -11179,20 +11498,8 @@ See also "System Flags Effecting erts_alloc" in \fB\fIerts_alloc(3)\fR\&\fR\&\&.
 .RE
 .TP 2
 .B
-\fIalloc_util_allocators\fR\&:
-
-.RS 2
-.LP
-Returns a list of the names of all allocators using the ERTS internal \fIalloc_util\fR\& framework as atoms\&. For more information, see section \fBThe alloc_util framework\fR\& in \fIerts_alloc(3)\fR\&\&.
-.RE
-.TP 2
-.B
 \fI{allocator, Alloc}\fR\&:
-
-.RS 2
-.LP
 Returns information about the specified allocator\&. As from ERTS 5\&.6\&.1, the return value is a list of \fI{instance, InstanceNo, InstanceInfo}\fR\& tuples, where \fIInstanceInfo\fR\& contains information about a specific instance of the allocator\&. If \fIAlloc\fR\& is not a recognized allocator, \fIundefined\fR\& is returned\&. If \fIAlloc\fR\& is disabled, \fIfalse\fR\& is returned\&.
-.RE
 .RS 2
 .LP
 Notice that the information returned is highly implementation-dependent and can be changed or removed at any time without prior notice\&. It was initially intended as a tool when developing new allocators, but as it can be of interest for others it has been briefly documented\&.
@@ -11226,12 +11533,16 @@ If only one value is present, it is the current value\&. \fIfix_alloc\fR\& memor
 .RE
 .TP 2
 .B
+\fIalloc_util_allocators\fR\&:
+Returns a list of the names of all allocators using the ERTS internal \fIalloc_util\fR\& framework as atoms\&. For more information, see section \fBThe alloc_util framework\fR\& in \fIerts_alloc(3)\fR\&\&.
+.TP 2
+.B
 \fI{allocator_sizes, Alloc}\fR\&:
-
-.RS 2
-.LP
 Returns various size information for the specified allocator\&. The information returned is a subset of the information returned by \fB\fIerlang:system_info({allocator, Alloc})\fR\&\fR\&\&.
-.RE
+.TP 2
+.B
+\fIelib_malloc\fR\&:
+This option will be removed in a future release\&. The return value will always be \fIfalse\fR\&, as the \fIelib_malloc\fR\& allocator has been removed\&.
 .RE
 .RE
 .LP
@@ -11253,13 +11564,33 @@ erlang:system_info(Item ::
 .br
 .fi
 .br
+.nf
+
+.B
+erlang:system_info(Item ::
+.B
+                       logical_processors |
+.B
+                       logical_processors_available |
+.B
+                       logical_processors_online) ->
+.B
+                      unknown | integer() >= 1
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: update_cpu_info) -> changed | unchanged
+.br
+.fi
+.br
 .RS
 .LP
 Types:
 
 .RS 3
-CpuTopology = \fBcpu_topology()\fR\&
-.br
 .nf
 \fBcpu_topology()\fR\& = [LevelEntry :: \fBlevel_entry()\fR\&] | undefined
 .fi
@@ -11350,6 +11681,26 @@ For more information, see argument \fB\fIcpu_topology\fR\&\fR\&\&.
 .B
 \fI{cpu_topology, used}\fR\&:
 Returns \fICpuTopology\fR\& used by the emulator\&. For more information, see argument \fB\fIcpu_topology\fR\&\fR\&\&.
+.TP 2
+.B
+\fIlogical_processors\fR\&:
+Returns the detected number of logical processors configured in the system\&. The return value is either an integer, or the atom \fIunknown\fR\& if the emulator cannot detect the configured logical processors\&.
+.TP 2
+.B
+\fIlogical_processors_available\fR\&:
+Returns the detected number of logical processors available to the Erlang runtime system\&. The return value is either an integer, or the atom \fIunknown\fR\& if the emulator cannot detect the available logical processors\&. The number of available logical processors is less than or equal to the number of \fB logical processors online\fR\&\&.
+.TP 2
+.B
+\fIlogical_processors_online\fR\&:
+Returns the detected number of logical processors online on the system\&. The return value is either an integer, or the atom \fIunknown\fR\& if the emulator cannot detect logical processors online\&. The number of logical processors online is less than or equal to the number of \fBlogical processors configured\fR\&\&.
+.TP 2
+.B
+\fIupdate_cpu_info\fR\&:
+The runtime system rereads the CPU information available and updates its internally stored information about the \fBdetected CPU topology\fR\& and the number of logical processors \fBconfigured\fR\&, \fBonline\fR\&, and \fB available\fR\&\&.
+.RS 2
+.LP
+If the CPU information has changed since the last time it was read, the atom \fIchanged\fR\& is returned, otherwise the atom \fIunchanged\fR\&\&. If the CPU information has changed, you probably want to \fBadjust the number of schedulers online\fR\&\&. You typically want to have as many schedulers online as \fBlogical processors available\fR\&\&.
+.RE
 .RE
 .RE
 .LP
@@ -11368,6 +11719,20 @@ erlang:system_info(Item :: fullsweep_after) ->
 erlang:system_info(Item :: garbage_collection) ->
 .B
                       [{atom(), integer()}]
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: heap_sizes) -> [integer() >= 0]
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: heap_type) -> private
 .br
 .fi
 .br
@@ -11413,6 +11778,13 @@ erlang:system_info(Item :: min_bin_vheap_size) ->
 .br
 .fi
 .br
+.nf
+
+.B
+erlang:system_info(Item :: procs) -> binary()
+.br
+.fi
+.br
 .RS
 .LP
 Types:
@@ -11450,6 +11822,20 @@ Returns \fI{fullsweep_after, integer() >= 0}\fR\&, which is the \fIfullsweep_aft
 Returns a list describing the default garbage collection settings\&. A process spawned on the local node by a \fIspawn\fR\& or \fIspawn_link\fR\& uses these garbage collection settings\&. The default settings can be changed by using \fB\fIerlang:system_flag/2\fR\&\fR\&\&. \fB\fIspawn_opt/2,3,4\fR\&\fR\& can spawn a process that does not use the default settings\&.
 .TP 2
 .B
+\fIheap_sizes\fR\&:
+Returns a list of integers representing valid heap sizes in words\&. All Erlang heaps are sized from sizes in this list\&.
+.TP 2
+.B
+\fIheap_type\fR\&:
+Returns the heap type used by the current emulator\&. One heap type exists:
+.RS 2
+.TP 2
+.B
+\fIprivate\fR\&:
+ Each process has a heap reserved for its use and no references between heaps of different processes are allowed\&. Messages passed between processes are copied between heaps\&. 
+.RE
+.TP 2
+.B
 \fImax_heap_size\fR\&:
 Returns \fI{max_heap_size, MaxHeapSize}\fR\&, where \fIMaxHeapSize\fR\& is the current system-wide maximum heap size settings for spawned processes\&. This setting can be set using the command-line flags \fB\fI+hmax\fR\&\fR\&, \fB\fI+hmaxk\fR\&\fR\& and \fB\fI+hmaxel\fR\&\fR\& in \fIerl(1)\fR\&\&. It can also be changed at runtime using \fB\fIerlang:system_flag(max_heap_size, MaxHeapSize)\fR\&\fR\&\&. For more details about the \fImax_heap_size\fR\& process flag, see \fB\fIprocess_flag(max_heap_size, MaxHeapSize)\fR\&\fR\&\&.
 .TP 2
@@ -11464,6 +11850,10 @@ Returns \fI{min_heap_size, MinHeapSize}\fR\&, where \fIMinHeapSize\fR\& is the c
 .B
 \fImin_bin_vheap_size\fR\&:
 Returns \fI{min_bin_vheap_size, MinBinVHeapSize}\fR\&, where \fIMinBinVHeapSize\fR\& is the current system-wide minimum binary virtual heap size for spawned processes\&.
+.TP 2
+.B
+\fIprocs\fR\&:
+Returns a binary containing a string of process and port information formatted as in Erlang crash dumps\&. For more information, see section \fB How to interpret the Erlang crash dumps\fR\& in the User\&'s Guide\&.
 .RE
 .RE
 .LP
@@ -11484,300 +11874,7 @@ erlang:system_info(Item :: atom_limit) -> integer() >= 1
 .nf
 
 .B
-erlang:system_info(Item :: build_type) ->
-.B
-                      opt |
-.B
-                      debug |
-.B
-                      purify |
-.B
-                      quantify |
-.B
-                      purecov |
-.B
-                      gcov |
-.B
-                      valgrind |
-.B
-                      gprof |
-.B
-                      lcnt |
-.B
-                      frmptr
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: c_compiler_used) -> {atom(), term()}
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: check_io) -> [term()]
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: compat_rel) -> integer()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: creation) -> integer()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: debug_compiled) -> boolean()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: delayed_node_table_gc) ->
-.B
-                      infinity | integer() >= 0
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: dirty_cpu_schedulers) ->
-.B
-                      integer() >= 0
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: dirty_cpu_schedulers_online) ->
-.B
-                      integer() >= 0
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: dirty_io_schedulers) ->
-.B
-                      integer() >= 0
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: dist) -> binary()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: dist_buf_busy_limit) ->
-.B
-                      integer() >= 0
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: dist_ctrl) ->
-.B
-                      {Node :: node(),
-.B
-                       ControllingEntity :: port() | pid()}
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: driver_version) -> string()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: dynamic_trace) ->
-.B
-                      none | dtrace | systemtap
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: dynamic_trace_probes) -> boolean()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: elib_malloc) -> false
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: eager_check_io) -> boolean()
-.br
-.fi
-.br
-.nf
-
-.B
 erlang:system_info(Item :: ets_limit) -> integer() >= 1
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: heap_sizes) -> [integer() >= 0]
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: heap_type) -> private
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: info) -> binary()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: kernel_poll) -> boolean()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: loaded) -> binary()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item ::
-.B
-                       logical_processors |
-.B
-                       logical_processors_available |
-.B
-                       logical_processors_online) ->
-.B
-                      unknown | integer() >= 1
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: machine) -> string()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: modified_timing_level) ->
-.B
-                      integer() | undefined
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: multi_scheduling) ->
-.B
-                      disabled |
-.B
-                      blocked |
-.B
-                      blocked_normal |
-.B
-                      enabled
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: multi_scheduling_blockers) ->
-.B
-                      [Pid :: pid()]
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: nif_version) -> string()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: normal_multi_scheduling_blockers) ->
-.B
-                      [Pid :: pid()]
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: otp_release) -> string()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: os_monotonic_time_source) ->
-.B
-                      [{atom(), term()}]
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: os_system_time_source) ->
-.B
-                      [{atom(), term()}]
 .br
 .fi
 .br
@@ -11809,65 +11906,67 @@ erlang:system_info(Item :: process_limit) -> integer() >= 1
 .br
 .fi
 .br
+.RS
+.LP
+Returns information about the current system (emulator) limits as specified by \fIItem\fR\&:
+.RS 2
+.TP 2
+.B
+\fIatom_count\fR\&:
+Returns the number of atoms currently existing at the local node\&. The value is given as an integer\&.
+.TP 2
+.B
+\fIatom_limit\fR\&:
+Returns the maximum number of atoms allowed\&. This limit can be increased at startup by passing command-line flag \fB\fI+t\fR\&\fR\& to \fIerl(1)\fR\&\&.
+.TP 2
+.B
+\fIets_count\fR\&:
+Returns the number of ETS tables currently existing at the local node\&.
+.TP 2
+.B
+\fIets_limit\fR\&:
+Returns the limit for number of ETS tables\&. This limit is \fBpartially obsolete\fR\& and number of tables are only limited by available memory\&.
+.TP 2
+.B
+\fIport_count\fR\&:
+Returns the number of ports currently existing at the local node\&. The value is given as an integer\&. This is the same value as returned by \fIlength(erlang:ports())\fR\&, but more efficient\&.
+.TP 2
+.B
+\fIport_limit\fR\&:
+Returns the maximum number of simultaneously existing ports at the local node as an integer\&. This limit can be configured at startup by using command-line flag \fB\fI+Q\fR\&\fR\& in \fIerl(1)\fR\&\&.
+.TP 2
+.B
+\fIprocess_count\fR\&:
+Returns the number of processes currently existing at the local node\&. The value is given as an integer\&. This is the same value as returned by \fIlength(processes())\fR\&, but more efficient\&.
+.TP 2
+.B
+\fIprocess_limit\fR\&:
+Returns the maximum number of simultaneously existing processes at the local node\&. The value is given as an integer\&. This limit can be configured at startup by using command-line flag \fB\fI+P\fR\&\fR\& in \fIerl(1)\fR\&\&.
+.RE
+.RE
+.LP
 .nf
 
 .B
-erlang:system_info(Item :: procs) -> binary()
+erlang:system_info(Item :: end_time) -> integer() >= 0
 .br
 .fi
 .br
 .nf
 
 .B
-erlang:system_info(Item :: scheduler_bind_type) ->
+erlang:system_info(Item :: os_monotonic_time_source) ->
 .B
-                      spread |
-.B
-                      processor_spread |
-.B
-                      thread_spread |
-.B
-                      thread_no_node_processor_spread |
-.B
-                      no_node_processor_spread |
-.B
-                      no_node_thread_spread |
-.B
-                      no_spread |
-.B
-                      unbound
+                      [{atom(), term()}]
 .br
 .fi
 .br
 .nf
 
 .B
-erlang:system_info(Item :: scheduler_bindings) -> tuple()
-.br
-.fi
-.br
-.nf
-
+erlang:system_info(Item :: os_system_time_source) ->
 .B
-erlang:system_info(Item :: scheduler_id) ->
-.B
-                      SchedulerId :: integer() >= 1
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: schedulers | schedulers_online) ->
-.B
-                      integer() >= 1
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: smp_support) -> boolean()
+                      [{atom(), term()}]
 .br
 .fi
 .br
@@ -11875,34 +11974,6 @@ erlang:system_info(Item :: smp_support) -> boolean()
 
 .B
 erlang:system_info(Item :: start_time) -> integer()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: system_version) -> string()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: system_architecture) -> string()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: threads) -> boolean()
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: thread_pool_size) -> integer() >= 0
 .br
 .fi
 .br
@@ -11944,305 +12015,14 @@ erlang:system_info(Item :: tolerant_timeofday) ->
 .br
 .fi
 .br
-.nf
-
-.B
-erlang:system_info(Item :: trace_control_word) ->
-.B
-                      integer() >= 0
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: update_cpu_info) -> changed | unchanged
-.br
-.fi
-.br
-.nf
-
-.B
-erlang:system_info(Item :: version) -> string()
-.br
-.fi
-.br
 .RS
 .LP
-Returns various information about the current system (emulator) as specified by \fIItem\fR\&:
+Returns information about the current system (emulator) time as specified by \fIItem\fR\&:
 .RS 2
-.TP 2
-.B
-\fIatom_count\fR\&:
-
-.RS 2
-.LP
-Returns the number of atoms currently existing at the local node\&. The value is given as an integer\&.
-.RE
-.TP 2
-.B
-\fIatom_limit\fR\&:
-
-.RS 2
-.LP
-Returns the maximum number of atoms allowed\&. This limit can be increased at startup by passing command-line flag \fB\fI+t\fR\&\fR\& to \fIerl(1)\fR\&\&.
-.RE
-.TP 2
-.B
-\fIbuild_type\fR\&:
-Returns an atom describing the build type of the runtime system\&. This is normally the atom \fIopt\fR\& for optimized\&. Other possible return values are \fIdebug\fR\&, \fIpurify\fR\&, \fIquantify\fR\&, \fIpurecov\fR\&, \fIgcov\fR\&, \fIvalgrind\fR\&, \fIgprof\fR\&, and \fIlcnt\fR\&\&. Possible return values can be added or removed at any time without prior notice\&.
-.TP 2
-.B
-\fIc_compiler_used\fR\&:
-Returns a two-tuple describing the C compiler used when compiling the runtime system\&. The first element is an atom describing the name of the compiler, or \fIundefined\fR\& if unknown\&. The second element is a term describing the version of the compiler, or \fIundefined\fR\& if unknown\&.
-.TP 2
-.B
-\fIcheck_io\fR\&:
-Returns a list containing miscellaneous information about the emulators internal I/O checking\&. Notice that the content of the returned list can vary between platforms and over time\&. It is only guaranteed that a list is returned\&.
-.TP 2
-.B
-\fIcompat_rel\fR\&:
-Returns the compatibility mode of the local node as an integer\&. The integer returned represents the Erlang/OTP release that the current emulator has been set to be backward compatible with\&. The compatibility mode can be configured at startup by using command-line flag \fB\fI+R\fR\&\fR\& in \fIerl(1)\fR\&\&.
-.TP 2
-.B
-\fIcpu_topology\fR\&:
-See \fBabove\fR\&\&.
-.TP 2
-.B
-\fIcreation\fR\&:
-Returns the creation of the local node as an integer\&. The creation is changed when a node is restarted\&. The creation of a node is stored in process identifiers, port identifiers, and references\&. This makes it (to some extent) possible to distinguish between identifiers from different incarnations of a node\&. The valid creations are integers in the range 1\&.\&.3, but this will probably change in a future release\&. If the node is not alive, \fI0\fR\& is returned\&.
-.TP 2
-.B
-\fIdebug_compiled\fR\&:
-Returns \fItrue\fR\& if the emulator has been debug-compiled, otherwise \fIfalse\fR\&\&.
-.TP 2
-.B
-\fIdelayed_node_table_gc\fR\&:
-
-.RS 2
-.LP
-Returns the amount of time in seconds garbage collection of an entry in a node table is delayed\&. This limit can be set on startup by passing command-line flag \fB\fI+zdntgc\fR\&\fR\& to \fIerl(1)\fR\&\&. For more information, see the documentation of the command-line flag\&.
-.RE
-.TP 2
-.B
-\fIdirty_cpu_schedulers\fR\&:
-
-.RS 2
-.LP
-Returns the number of dirty CPU scheduler threads used by the emulator\&. Dirty CPU schedulers execute CPU-bound native functions, such as NIFs, linked-in driver code, and BIFs that cannot be managed cleanly by the normal emulator schedulers\&.
-.RE
-.RS 2
-.LP
-The number of dirty CPU scheduler threads is determined at emulator boot time and cannot be changed after that\&. However, the number of dirty CPU scheduler threads online can be changed at any time\&. The number of dirty CPU schedulers can be set at startup by passing command-line flag \fB\fI+SDcpu\fR\&\fR\& or \fB\fI+SDPcpu\fR\&\fR\& in \fIerl(1)\fR\&\&.
-.RE
-.RS 2
-.LP
-See also \fB\fIerlang:system_flag(dirty_cpu_schedulers_online, DirtyCPUSchedulersOnline)\fR\&\fR\&, \fB\fIerlang:system_info(dirty_cpu_schedulers_online)\fR\&\fR\&, \fB\fIerlang:system_info(dirty_io_schedulers)\fR\&\fR\&, \fB\fIerlang:system_info(schedulers)\fR\&\fR\&, \fB\fIerlang:system_info(schedulers_online)\fR\&\fR\&, and \fB\fIerlang:system_flag(schedulers_online, SchedulersOnline)\fR\&\fR\&\&.
-.RE
-.TP 2
-.B
-\fIdirty_cpu_schedulers_online\fR\&:
-
-.RS 2
-.LP
-Returns the number of dirty CPU schedulers online\&. The return value satisfies \fI1 <= DirtyCPUSchedulersOnline <= N\fR\&, where \fIN\fR\& is the smallest of the return values of \fIerlang:system_info(dirty_cpu_schedulers)\fR\& and \fIerlang:system_info(schedulers_online)\fR\&\&.
-.RE
-.RS 2
-.LP
-The number of dirty CPU schedulers online can be set at startup by passing command-line flag \fB\fI+SDcpu\fR\&\fR\& in \fIerl(1)\fR\&\&.
-.RE
-.RS 2
-.LP
-For more information, see \fB\fIerlang:system_info(dirty_cpu_schedulers)\fR\&\fR\&, \fB\fIerlang:system_info(dirty_io_schedulers)\fR\&\fR\&, \fB\fIerlang:system_info(schedulers_online)\fR\&\fR\&, and \fB\fIerlang:system_flag(dirty_cpu_schedulers_online, DirtyCPUSchedulersOnline)\fR\&\fR\&\&.
-.RE
-.TP 2
-.B
-\fIdirty_io_schedulers\fR\&:
-
-.RS 2
-.LP
-Returns the number of dirty I/O schedulers as an integer\&. Dirty I/O schedulers execute I/O-bound native functions, such as NIFs and linked-in driver code, which cannot be managed cleanly by the normal emulator schedulers\&.
-.RE
-.RS 2
-.LP
-This value can be set at startup by passing command-line argument \fB\fI+SDio\fR\&\fR\& in \fIerl(1)\fR\&\&.
-.RE
-.RS 2
-.LP
-For more information, see \fB\fIerlang:system_info(dirty_cpu_schedulers)\fR\&\fR\&, \fB\fIerlang:system_info(dirty_cpu_schedulers_online)\fR\&\fR\&, and \fB\fIerlang:system_flag(dirty_cpu_schedulers_online, DirtyCPUSchedulersOnline)\fR\&\fR\&\&.
-.RE
-.TP 2
-.B
-\fIdist\fR\&:
-Returns a binary containing a string of distribution information formatted as in Erlang crash dumps\&. For more information, see section \fB How to interpret the Erlang crash dumps\fR\& in the User\&'s Guide\&.
-.TP 2
-.B
-\fIdist_buf_busy_limit\fR\&:
-
-.RS 2
-.LP
-Returns the value of the distribution buffer busy limit in bytes\&. This limit can be set at startup by passing command-line flag \fB\fI+zdbbl\fR\&\fR\& to \fIerl(1)\fR\&\&.
-.RE
-.TP 2
-.B
-\fIdist_ctrl\fR\&:
-Returns a list of tuples \fI{Node, ControllingEntity}\fR\&, one entry for each connected remote node\&. \fINode\fR\& is the node name and \fIControllingEntity\fR\& is the port or process identifier responsible for the communication to that node\&. More specifically, \fIControllingEntity\fR\& for nodes connected through TCP/IP (the normal case) is the socket used in communication with the specific node\&.
-.TP 2
-.B
-\fIdriver_version\fR\&:
-Returns a string containing the Erlang driver version used by the runtime system\&. It has the form \fB "<major ver>\&.<minor ver>"\fR\&\&.
-.TP 2
-.B
-\fIdynamic_trace\fR\&:
-Returns an atom describing the dynamic trace framework compiled into the virtual machine\&. It can be \fIdtrace\fR\&, \fIsystemtap\fR\&, or \fInone\fR\&\&. For a commercial or standard build, it is always \fInone\fR\&\&. The other return values indicate a custom configuration (for example, \fI\&./configure --with-dynamic-trace=dtrace\fR\&)\&. For more information about dynamic tracing, see \fB\fIdyntrace(3)\fR\&\fR\& manual page and the \fIREADME\&.dtrace\fR\&/\fIREADME\&.systemtap\fR\& files in the Erlang source code top directory\&.
-.TP 2
-.B
-\fIdynamic_trace_probes\fR\&:
-Returns a \fIboolean()\fR\& indicating if dynamic trace probes (\fIdtrace\fR\& or \fIsystemtap\fR\&) are built into the emulator\&. This can only be \fItrue\fR\& if the virtual machine was built for dynamic tracing (that is, \fIsystem_info(dynamic_trace)\fR\& returns \fIdtrace\fR\& or \fIsystemtap\fR\&)\&.
 .TP 2
 .B
 \fIend_time\fR\&:
 The last \fBErlang monotonic time\fR\& in \fInative\fR\& \fBtime unit\fR\& that can be represented internally in the current Erlang runtime system instance\&. The time between the \fBstart time\fR\& and the end time is at least a quarter of a millennium\&.
-.TP 2
-.B
-\fIelib_malloc\fR\&:
-This option will be removed in a future release\&. The return value will always be \fIfalse\fR\&, as the \fIelib_malloc\fR\& allocator has been removed\&.
-.TP 2
-.B
-\fIeager_check_io\fR\&:
-Returns the value of command-line flag \fB\fI+secio\fR\&\fR\& in \fIerl(1)\fR\&, which is either \fItrue\fR\& or \fIfalse\fR\&\&. For information about the different values, see the documentation of the command-line flag\&.
-.TP 2
-.B
-\fIets_limit\fR\&:
-Returns the maximum number of ETS tables allowed\&. This limit can be increased at startup by passing command-line flag \fB\fI+e\fR\&\fR\& to \fIerl(1)\fR\& or by setting environment variable \fIERL_MAX_ETS_TABLES\fR\& before starting the Erlang runtime system\&.
-.TP 2
-.B
-\fIheap_sizes\fR\&:
-Returns a list of integers representing valid heap sizes in words\&. All Erlang heaps are sized from sizes in this list\&.
-.TP 2
-.B
-\fIheap_type\fR\&:
-Returns the heap type used by the current emulator\&. One heap type exists:
-.RS 2
-.TP 2
-.B
-\fIprivate\fR\&:
- Each process has a heap reserved for its use and no references between heaps of different processes are allowed\&. Messages passed between processes are copied between heaps\&. 
-.RE
-.TP 2
-.B
-\fIinfo\fR\&:
-Returns a binary containing a string of miscellaneous system information formatted as in Erlang crash dumps\&. For more information, see section \fB How to interpret the Erlang crash dumps\fR\& in the User\&'s Guide\&.
-.TP 2
-.B
-\fIkernel_poll\fR\&:
-Returns \fItrue\fR\& if the emulator uses some kind of kernel-poll implementation, otherwise \fIfalse\fR\&\&.
-.TP 2
-.B
-\fIloaded\fR\&:
-Returns a binary containing a string of loaded module information formatted as in Erlang crash dumps\&. For more information, see section \fBHow to interpret the Erlang crash dumps\fR\& in the User\&'s Guide\&.
-.TP 2
-.B
-\fIlogical_processors\fR\&:
-
-.RS 2
-.LP
-Returns the detected number of logical processors configured in the system\&. The return value is either an integer, or the atom \fIunknown\fR\& if the emulator cannot detect the configured logical processors\&.
-.RE
-.TP 2
-.B
-\fIlogical_processors_available\fR\&:
-
-.RS 2
-.LP
-Returns the detected number of logical processors available to the Erlang runtime system\&. The return value is either an integer, or the atom \fIunknown\fR\& if the emulator cannot detect the available logical processors\&. The number of available logical processors is less than or equal to the number of \fB logical processors online\fR\&\&.
-.RE
-.TP 2
-.B
-\fIlogical_processors_online\fR\&:
-
-.RS 2
-.LP
-Returns the detected number of logical processors online on the system\&. The return value is either an integer, or the atom \fIunknown\fR\& if the emulator cannot detect logical processors online\&. The number of logical processors online is less than or equal to the number of \fBlogical processors configured\fR\&\&.
-.RE
-.TP 2
-.B
-\fImachine\fR\&:
-Returns a string containing the Erlang machine name\&.
-.TP 2
-.B
-\fImodified_timing_level\fR\&:
-Returns the modified timing-level (an integer) if modified timing is enabled, otherwise \fIundefined\fR\&\&. For more information about modified timing, see command-line flag \fB\fI+T\fR\&\fR\& in \fIerl(1)\fR\&
-.TP 2
-.B
-\fImulti_scheduling\fR\&:
-
-.RS 2
-.LP
-Returns one of the following:
-.RE
-.RS 2
-.TP 2
-.B
-\fIdisabled\fR\&:
-The emulator has only one scheduler thread\&. The emulator does not have SMP support, or have been started with only one scheduler thread\&.
-.TP 2
-.B
-\fIblocked\fR\&:
-The emulator has more than one scheduler thread, but all scheduler threads except one are blocked\&. That is, only one scheduler thread schedules Erlang processes and executes Erlang code\&.
-.TP 2
-.B
-\fIblocked_normal\fR\&:
-The emulator has more than one scheduler thread, but all normal scheduler threads except one are blocked\&. Notice that dirty schedulers are not blocked, and can schedule Erlang processes and execute native code\&.
-.TP 2
-.B
-\fIenabled\fR\&:
-The emulator has more than one scheduler thread, and no scheduler threads are blocked\&. That is, all available scheduler threads schedule Erlang processes and execute Erlang code\&.
-.RE
-.RS 2
-.LP
-See also \fB\fIerlang:system_flag(multi_scheduling, BlockState)\fR\&\fR\&, \fB\fIerlang:system_info(multi_scheduling_blockers)\fR\&\fR\&, \fB\fIerlang:system_info(normal_multi_scheduling_blockers)\fR\&\fR\&, and \fB\fIerlang:system_info(schedulers)\fR\&\fR\&\&.
-.RE
-.TP 2
-.B
-\fImulti_scheduling_blockers\fR\&:
-
-.RS 2
-.LP
-Returns a list of \fIPid\fR\&s when multi-scheduling is blocked, otherwise the empty list is returned\&. The \fIPid\fR\&s in the list represent all the processes currently blocking multi-scheduling\&. A \fIPid\fR\& occurs only once in the list, even if the corresponding process has blocked multiple times\&.
-.RE
-.RS 2
-.LP
-See also \fB\fIerlang:system_flag(multi_scheduling, BlockState)\fR\&\fR\&, \fB\fIerlang:system_info(multi_scheduling)\fR\&\fR\&, \fB\fIerlang:system_info(normal_multi_scheduling_blockers)\fR\&\fR\&, and \fB\fIerlang:system_info(schedulers)\fR\&\fR\&\&.
-.RE
-.TP 2
-.B
-\fInif_version\fR\&:
-Returns a string containing the version of the Erlang NIF interface used by the runtime system\&. It is on the form "<major ver>\&.<minor ver>"\&.
-.TP 2
-.B
-\fInormal_multi_scheduling_blockers\fR\&:
-
-.RS 2
-.LP
-Returns a list of \fIPid\fR\&s when normal multi-scheduling is blocked (that is, all normal schedulers but one is blocked), otherwise the empty list is returned\&. The \fIPid\fR\&s in the list represent all the processes currently blocking normal multi-scheduling\&. A \fIPid\fR\& occurs only once in the list, even if the corresponding process has blocked multiple times\&.
-.RE
-.RS 2
-.LP
-See also \fB\fIerlang:system_flag(multi_scheduling, BlockState)\fR\&\fR\&, \fB\fIerlang:system_info(multi_scheduling)\fR\&\fR\&, \fB\fIerlang:system_info(multi_scheduling_blockers)\fR\&\fR\&, and \fB\fIerlang:system_info(schedulers)\fR\&\fR\&\&.
-.RE
-.TP 2
-.B
-\fIotp_release\fR\&:
-
-.RS 2
-.LP
-Returns a string containing the OTP release number of the OTP release that the currently executing ERTS application is part of\&.
-.RE
-.RS 2
-.LP
-As from Erlang/OTP 17, the OTP release number corresponds to the major OTP version number\&. No \fIerlang:system_info()\fR\& argument gives the exact OTP version\&. This is because the exact OTP version in the general case is difficult to determine\&. For more information, see the description of versions in \fB System principles\fR\& in System Documentation\&.
-.RE
 .TP 2
 .B
 \fIos_monotonic_time_source\fR\&:
@@ -12309,122 +12089,6 @@ Highest possible \fB resolution\fR\& of current OS system time source as parts p
 .RE
 .TP 2
 .B
-\fIport_parallelism\fR\&:
-
-.RS 2
-.LP
-Returns the default port parallelism scheduling hint used\&. For more information, see command-line argument \fB\fI+spp\fR\&\fR\& in \fIerl(1)\fR\&\&.
-.RE
-.TP 2
-.B
-\fIport_count\fR\&:
-Returns the number of ports currently existing at the local node\&. The value is given as an integer\&. This is the same value as returned by \fIlength(erlang:ports())\fR\&, but more efficient\&.
-.TP 2
-.B
-\fIport_limit\fR\&:
-
-.RS 2
-.LP
-Returns the maximum number of simultaneously existing ports at the local node as an integer\&. This limit can be configured at startup by using command-line flag \fB\fI+Q\fR\&\fR\& in \fIerl(1)\fR\&\&.
-.RE
-.TP 2
-.B
-\fIprocess_count\fR\&:
-Returns the number of processes currently existing at the local node\&. The value is given as an integer\&. This is the same value as returned by \fIlength(processes())\fR\&, but more efficient\&.
-.TP 2
-.B
-\fIprocess_limit\fR\&:
-
-.RS 2
-.LP
-Returns the maximum number of simultaneously existing processes at the local node\&. The value is given as an integer\&. This limit can be configured at startup by using command-line flag \fB\fI+P\fR\&\fR\& in \fIerl(1)\fR\&\&.
-.RE
-.TP 2
-.B
-\fIprocs\fR\&:
-Returns a binary containing a string of process and port information formatted as in Erlang crash dumps\&. For more information, see section \fB How to interpret the Erlang crash dumps\fR\& in the User\&'s Guide\&.
-.TP 2
-.B
-\fIscheduler_bind_type\fR\&:
-
-.RS 2
-.LP
-Returns information about how the user has requested schedulers to be bound or not bound\&.
-.RE
-.RS 2
-.LP
-Notice that although a user has requested schedulers to be bound, they can silently have failed to bind\&. To inspect the scheduler bindings, call \fB\fIerlang:system_info(scheduler_bindings)\fR\&\fR\&\&.
-.RE
-.RS 2
-.LP
-For more information, see command-line argument \fB\fI+sbt\fR\&\fR\& in \fIerl(1)\fR\& and \fB\fIerlang:system_info(scheduler_bindings)\fR\&\fR\&\&.
-.RE
-.TP 2
-.B
-\fIscheduler_bindings\fR\&:
-
-.RS 2
-.LP
-Returns information about the currently used scheduler bindings\&.
-.RE
-.RS 2
-.LP
-A tuple of a size equal to \fB\fIerlang:system_info(schedulers)\fR\&\fR\& is returned\&. The tuple elements are integers or the atom \fIunbound\fR\&\&. Logical processor identifiers are represented as integers\&. The \fIN\fR\&th element of the tuple equals the current binding for the scheduler with the scheduler identifier equal to \fIN\fR\&\&. For example, if the schedulers are bound, \fIelement(erlang:system_info(scheduler_id), erlang:system_info(scheduler_bindings))\fR\& returns the identifier of the logical processor that the calling process is executing on\&.
-.RE
-.RS 2
-.LP
-Notice that only schedulers online can be bound to logical processors\&.
-.RE
-.RS 2
-.LP
-For more information, see command-line argument \fB\fI+sbt\fR\&\fR\& in \fIerl(1)\fR\& and \fB\fIerlang:system_info(schedulers_online)\fR\&\fR\&\&.
-.RE
-.TP 2
-.B
-\fIscheduler_id\fR\&:
-
-.RS 2
-.LP
-Returns the scheduler ID (\fISchedulerId\fR\&) of the scheduler thread that the calling process is executing on\&. \fISchedulerId\fR\& is a positive integer, where \fI1 <= SchedulerId <= erlang:system_info(schedulers)\fR\&\&.
-.RE
-.RS 2
-.LP
-See also \fB\fIerlang:system_info(schedulers)\fR\&\fR\&\&.
-.RE
-.TP 2
-.B
-\fIschedulers\fR\&:
-
-.RS 2
-.LP
-Returns the number of scheduler threads used by the emulator\&. Scheduler threads online schedules Erlang processes and Erlang ports, and execute Erlang code and Erlang linked-in driver code\&.
-.RE
-.RS 2
-.LP
-The number of scheduler threads is determined at emulator boot time and cannot be changed later\&. However, the number of schedulers online can be changed at any time\&.
-.RE
-.RS 2
-.LP
-See also \fB\fIerlang:system_flag(schedulers_online, SchedulersOnline)\fR\&\fR\&, \fB\fIerlang:system_info(schedulers_online)\fR\&\fR\&, \fB\fIerlang:system_info(scheduler_id)\fR\&\fR\&, \fB\fIerlang:system_flag(multi_scheduling, BlockState)\fR\&\fR\&, \fB\fIerlang:system_info(multi_scheduling)\fR\&\fR\&, \fB\fIerlang:system_info(normal_multi_scheduling_blockers)\fR\&\fR\& and \fB\fIerlang:system_info(multi_scheduling_blockers)\fR\&\fR\&\&.
-.RE
-.TP 2
-.B
-\fIschedulers_online\fR\&:
-
-.RS 2
-.LP
-Returns the number of schedulers online\&. The scheduler identifiers of schedulers online satisfy the relationship \fI1 <= SchedulerId <= erlang:system_info(schedulers_online)\fR\&\&.
-.RE
-.RS 2
-.LP
-For more information, see \fB\fIerlang:system_info(schedulers)\fR\&\fR\& and \fB\fIerlang:system_flag(schedulers_online, SchedulersOnline)\fR\&\fR\&\&.
-.RE
-.TP 2
-.B
-\fIsmp_support\fR\&:
-Returns \fItrue\fR\& if the emulator has been compiled with SMP support, otherwise \fIfalse\fR\& is returned\&.
-.TP 2
-.B
 \fIstart_time\fR\&:
 The \fBErlang monotonic time\fR\& in \fInative\fR\& \fBtime unit\fR\& at the time when current Erlang runtime system instance started\&.
 .RS 2
@@ -12433,40 +12097,12 @@ See also \fB\fIerlang:system_info(end_time)\fR\&\fR\&\&.
 .RE
 .TP 2
 .B
-\fIsystem_version\fR\&:
-Returns a string containing version number and some important properties, such as the number of schedulers\&.
-.TP 2
-.B
-\fIsystem_architecture\fR\&:
-Returns a string containing the processor and OS architecture the emulator is built for\&.
-.TP 2
-.B
-\fIthreads\fR\&:
-Returns \fItrue\fR\& if the emulator has been compiled with thread support, otherwise \fIfalse\fR\& is returned\&.
-.TP 2
-.B
-\fIthread_pool_size\fR\&:
-
-.RS 2
-.LP
-Returns the number of async threads in the async thread pool used for asynchronous driver calls (\fB\fIerl_driver:driver_async()\fR\&\fR\&)\&. The value is given as an integer\&.
-.RE
-.TP 2
-.B
 \fItime_correction\fR\&:
-
-.RS 2
-.LP
 Returns a boolean value indicating whether \fB time correction\fR\& is enabled or not\&.
-.RE
 .TP 2
 .B
 \fItime_offset\fR\&:
-
-.RS 2
-.LP
 Returns the state of the time offset:
-.RE
 .RS 2
 .TP 2
 .B
@@ -12502,35 +12138,639 @@ The \fB multi-time warp mode\fR\& is used\&.
 .TP 2
 .B
 \fItolerant_timeofday\fR\&:
+Returns whether a pre ERTS 7\&.0 backwards compatible compensation for sudden changes of system time is \fIenabled\fR\& or \fIdisabled\fR\&\&. Such compensation is \fIenabled\fR\& when the \fBtime offset\fR\& is \fIfinal\fR\&, and \fB time correction\fR\& is enabled\&.
+.RE
+.RE
+.LP
+.nf
+
+.B
+erlang:system_info(Item :: dirty_cpu_schedulers) ->
+.B
+                      integer() >= 0
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: dirty_cpu_schedulers_online) ->
+.B
+                      integer() >= 0
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: dirty_io_schedulers) ->
+.B
+                      integer() >= 0
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: multi_scheduling) ->
+.B
+                      disabled |
+.B
+                      blocked |
+.B
+                      blocked_normal |
+.B
+                      enabled
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: multi_scheduling_blockers) ->
+.B
+                      [Pid :: pid()]
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: normal_multi_scheduling_blockers) ->
+.B
+                      [Pid :: pid()]
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: scheduler_bind_type) ->
+.B
+                      spread |
+.B
+                      processor_spread |
+.B
+                      thread_spread |
+.B
+                      thread_no_node_processor_spread |
+.B
+                      no_node_processor_spread |
+.B
+                      no_node_thread_spread |
+.B
+                      no_spread |
+.B
+                      unbound
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: scheduler_bindings) -> tuple()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: scheduler_id) ->
+.B
+                      SchedulerId :: integer() >= 1
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: schedulers | schedulers_online) ->
+.B
+                      integer() >= 1
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: smp_support) -> boolean()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: threads) -> boolean()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: thread_pool_size) -> integer() >= 0
+.br
+.fi
+.br
+.RS
+.LP
+Returns information about schedulers, scheduling and threads in the current system as specified by \fIItem\fR\&:
+.RS 2
+.TP 2
+.B
+\fIdirty_cpu_schedulers\fR\&:
+Returns the number of dirty CPU scheduler threads used by the emulator\&. Dirty CPU schedulers execute CPU-bound native functions, such as NIFs, linked-in driver code, and BIFs that cannot be managed cleanly by the normal emulator schedulers\&.
+.RS 2
+.LP
+The number of dirty CPU scheduler threads is determined at emulator boot time and cannot be changed after that\&. However, the number of dirty CPU scheduler threads online can be changed at any time\&. The number of dirty CPU schedulers can be set at startup by passing command-line flag \fB\fI+SDcpu\fR\&\fR\& or \fB\fI+SDPcpu\fR\&\fR\& in \fIerl(1)\fR\&\&.
+.RE
+.RS 2
+.LP
+See also \fB\fIerlang:system_flag(dirty_cpu_schedulers_online, DirtyCPUSchedulersOnline)\fR\&\fR\&, \fB\fIerlang:system_info(dirty_cpu_schedulers_online)\fR\&\fR\&, \fB\fIerlang:system_info(dirty_io_schedulers)\fR\&\fR\&, \fB\fIerlang:system_info(schedulers)\fR\&\fR\&, \fB\fIerlang:system_info(schedulers_online)\fR\&\fR\&, and \fB\fIerlang:system_flag(schedulers_online, SchedulersOnline)\fR\&\fR\&\&.
+.RE
+.TP 2
+.B
+\fIdirty_cpu_schedulers_online\fR\&:
+Returns the number of dirty CPU schedulers online\&. The return value satisfies \fI1 <= DirtyCPUSchedulersOnline <= N\fR\&, where \fIN\fR\& is the smallest of the return values of \fIerlang:system_info(dirty_cpu_schedulers)\fR\& and \fIerlang:system_info(schedulers_online)\fR\&\&.
+.RS 2
+.LP
+The number of dirty CPU schedulers online can be set at startup by passing command-line flag \fB\fI+SDcpu\fR\&\fR\& in \fIerl(1)\fR\&\&.
+.RE
+.RS 2
+.LP
+For more information, see \fB\fIerlang:system_info(dirty_cpu_schedulers)\fR\&\fR\&, \fB\fIerlang:system_info(dirty_io_schedulers)\fR\&\fR\&, \fB\fIerlang:system_info(schedulers_online)\fR\&\fR\&, and \fB\fIerlang:system_flag(dirty_cpu_schedulers_online, DirtyCPUSchedulersOnline)\fR\&\fR\&\&.
+.RE
+.TP 2
+.B
+\fIdirty_io_schedulers\fR\&:
+Returns the number of dirty I/O schedulers as an integer\&. Dirty I/O schedulers execute I/O-bound native functions, such as NIFs and linked-in driver code, which cannot be managed cleanly by the normal emulator schedulers\&.
+.RS 2
+.LP
+This value can be set at startup by passing command-line argument \fB\fI+SDio\fR\&\fR\& in \fIerl(1)\fR\&\&.
+.RE
+.RS 2
+.LP
+For more information, see \fB\fIerlang:system_info(dirty_cpu_schedulers)\fR\&\fR\&, \fB\fIerlang:system_info(dirty_cpu_schedulers_online)\fR\&\fR\&, and \fB\fIerlang:system_flag(dirty_cpu_schedulers_online, DirtyCPUSchedulersOnline)\fR\&\fR\&\&.
+.RE
+.TP 2
+.B
+\fImulti_scheduling\fR\&:
+Returns one of the following:
+.RS 2
+.TP 2
+.B
+\fIdisabled\fR\&:
+The emulator has been started with only one scheduler thread\&.
+.TP 2
+.B
+\fIblocked\fR\&:
+The emulator has more than one scheduler thread, but all scheduler threads except one are blocked\&. That is, only one scheduler thread schedules Erlang processes and executes Erlang code\&.
+.TP 2
+.B
+\fIblocked_normal\fR\&:
+The emulator has more than one scheduler thread, but all normal scheduler threads except one are blocked\&. Notice that dirty schedulers are not blocked, and can schedule Erlang processes and execute native code\&.
+.TP 2
+.B
+\fIenabled\fR\&:
+The emulator has more than one scheduler thread, and no scheduler threads are blocked\&. That is, all available scheduler threads schedule Erlang processes and execute Erlang code\&.
+.RE
+.RS 2
+.LP
+See also \fB\fIerlang:system_flag(multi_scheduling, BlockState)\fR\&\fR\&, \fB\fIerlang:system_info(multi_scheduling_blockers)\fR\&\fR\&, \fB\fIerlang:system_info(normal_multi_scheduling_blockers)\fR\&\fR\&, and \fB\fIerlang:system_info(schedulers)\fR\&\fR\&\&.
+.RE
+.TP 2
+.B
+\fImulti_scheduling_blockers\fR\&:
+Returns a list of \fIPid\fR\&s when multi-scheduling is blocked, otherwise the empty list is returned\&. The \fIPid\fR\&s in the list represent all the processes currently blocking multi-scheduling\&. A \fIPid\fR\& occurs only once in the list, even if the corresponding process has blocked multiple times\&.
+.RS 2
+.LP
+See also \fB\fIerlang:system_flag(multi_scheduling, BlockState)\fR\&\fR\&, \fB\fIerlang:system_info(multi_scheduling)\fR\&\fR\&, \fB\fIerlang:system_info(normal_multi_scheduling_blockers)\fR\&\fR\&, and \fB\fIerlang:system_info(schedulers)\fR\&\fR\&\&.
+.RE
+.TP 2
+.B
+\fInormal_multi_scheduling_blockers\fR\&:
+Returns a list of \fIPid\fR\&s when normal multi-scheduling is blocked (that is, all normal schedulers but one is blocked), otherwise the empty list is returned\&. The \fIPid\fR\&s in the list represent all the processes currently blocking normal multi-scheduling\&. A \fIPid\fR\& occurs only once in the list, even if the corresponding process has blocked multiple times\&.
+.RS 2
+.LP
+See also \fB\fIerlang:system_flag(multi_scheduling, BlockState)\fR\&\fR\&, \fB\fIerlang:system_info(multi_scheduling)\fR\&\fR\&, \fB\fIerlang:system_info(multi_scheduling_blockers)\fR\&\fR\&, and \fB\fIerlang:system_info(schedulers)\fR\&\fR\&\&.
+.RE
+.TP 2
+.B
+\fIscheduler_bind_type\fR\&:
+Returns information about how the user has requested schedulers to be bound or not bound\&.
+.RS 2
+.LP
+Notice that although a user has requested schedulers to be bound, they can silently have failed to bind\&. To inspect the scheduler bindings, call \fB\fIerlang:system_info(scheduler_bindings)\fR\&\fR\&\&.
+.RE
+.RS 2
+.LP
+For more information, see command-line argument \fB\fI+sbt\fR\&\fR\& in \fIerl(1)\fR\& and \fB\fIerlang:system_info(scheduler_bindings)\fR\&\fR\&\&.
+.RE
+.TP 2
+.B
+\fIscheduler_bindings\fR\&:
+Returns information about the currently used scheduler bindings\&.
+.RS 2
+.LP
+A tuple of a size equal to \fB\fIerlang:system_info(schedulers)\fR\&\fR\& is returned\&. The tuple elements are integers or the atom \fIunbound\fR\&\&. Logical processor identifiers are represented as integers\&. The \fIN\fR\&th element of the tuple equals the current binding for the scheduler with the scheduler identifier equal to \fIN\fR\&\&. For example, if the schedulers are bound, \fIelement(erlang:system_info(scheduler_id), erlang:system_info(scheduler_bindings))\fR\& returns the identifier of the logical processor that the calling process is executing on\&.
+.RE
+.RS 2
+.LP
+Notice that only schedulers online can be bound to logical processors\&.
+.RE
+.RS 2
+.LP
+For more information, see command-line argument \fB\fI+sbt\fR\&\fR\& in \fIerl(1)\fR\& and \fB\fIerlang:system_info(schedulers_online)\fR\&\fR\&\&.
+.RE
+.TP 2
+.B
+\fIscheduler_id\fR\&:
+Returns the scheduler ID (\fISchedulerId\fR\&) of the scheduler thread that the calling process is executing on\&. \fISchedulerId\fR\& is a positive integer, where \fI1 <= SchedulerId <= erlang:system_info(schedulers)\fR\&\&.
+.RS 2
+.LP
+See also \fB\fIerlang:system_info(schedulers)\fR\&\fR\&\&.
+.RE
+.TP 2
+.B
+\fIschedulers\fR\&:
+Returns the number of scheduler threads used by the emulator\&. Scheduler threads online schedules Erlang processes and Erlang ports, and execute Erlang code and Erlang linked-in driver code\&.
+.RS 2
+.LP
+The number of scheduler threads is determined at emulator boot time and cannot be changed later\&. However, the number of schedulers online can be changed at any time\&.
+.RE
+.RS 2
+.LP
+See also \fB\fIerlang:system_flag(schedulers_online, SchedulersOnline)\fR\&\fR\&, \fB\fIerlang:system_info(schedulers_online)\fR\&\fR\&, \fB\fIerlang:system_info(scheduler_id)\fR\&\fR\&, \fB\fIerlang:system_flag(multi_scheduling, BlockState)\fR\&\fR\&, \fB\fIerlang:system_info(multi_scheduling)\fR\&\fR\&, \fB\fIerlang:system_info(normal_multi_scheduling_blockers)\fR\&\fR\& and \fB\fIerlang:system_info(multi_scheduling_blockers)\fR\&\fR\&\&.
+.RE
+.TP 2
+.B
+\fIschedulers_online\fR\&:
+Returns the number of schedulers online\&. The scheduler identifiers of schedulers online satisfy the relationship \fI1 <= SchedulerId <= erlang:system_info(schedulers_online)\fR\&\&.
+.RS 2
+.LP
+For more information, see \fB\fIerlang:system_info(schedulers)\fR\&\fR\& and \fB\fIerlang:system_flag(schedulers_online, SchedulersOnline)\fR\&\fR\&\&.
+.RE
+.TP 2
+.B
+\fIsmp_support\fR\&:
+Returns \fItrue\fR\&\&.
+.TP 2
+.B
+\fIthreads\fR\&:
+Returns \fItrue\fR\&\&.
+.TP 2
+.B
+\fIthread_pool_size\fR\&:
 
 .RS 2
 .LP
-Returns whether a pre ERTS 7\&.0 backwards compatible compensation for sudden changes of system time is \fIenabled\fR\& or \fIdisabled\fR\&\&. Such compensation is \fIenabled\fR\& when the \fBtime offset\fR\& is \fIfinal\fR\&, and \fB time correction\fR\& is enabled\&.
+Returns the number of async threads in the async thread pool used for asynchronous driver calls (\fB\fIerl_driver:driver_async()\fR\&\fR\&)\&. The value is given as an integer\&.
 .RE
+.RE
+.RE
+.LP
+.nf
+
+.B
+erlang:system_info(Item :: creation) -> integer()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: delayed_node_table_gc) ->
+.B
+                      infinity | integer() >= 0
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: dist) -> binary()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: dist_buf_busy_limit) ->
+.B
+                      integer() >= 0
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: dist_ctrl) ->
+.B
+                      {Node :: node(),
+.B
+                       ControllingEntity :: port() | pid()}
+.br
+.fi
+.br
+.RS
+.LP
+Returns information about Erlang Distribution in the current system as specified by \fIItem\fR\&:
+.RS 2
+.TP 2
+.B
+\fIcreation\fR\&:
+Returns the creation of the local node as an integer\&. The creation is changed when a node is restarted\&. The creation of a node is stored in process identifiers, port identifiers, and references\&. This makes it (to some extent) possible to distinguish between identifiers from different incarnations of a node\&. The valid creations are integers in the range 1\&.\&.3, but this will probably change in a future release\&. If the node is not alive, \fI0\fR\& is returned\&.
+.TP 2
+.B
+\fIdelayed_node_table_gc\fR\&:
+Returns the amount of time in seconds garbage collection of an entry in a node table is delayed\&. This limit can be set on startup by passing command-line flag \fB\fI+zdntgc\fR\&\fR\& to \fIerl(1)\fR\&\&. For more information, see the documentation of the command-line flag\&.
+.TP 2
+.B
+\fIdist\fR\&:
+Returns a binary containing a string of distribution information formatted as in Erlang crash dumps\&. For more information, see section \fB How to interpret the Erlang crash dumps\fR\& in the User\&'s Guide\&.
+.TP 2
+.B
+\fIdist_buf_busy_limit\fR\&:
+Returns the value of the distribution buffer busy limit in bytes\&. This limit can be set at startup by passing command-line flag \fB\fI+zdbbl\fR\&\fR\& to \fIerl(1)\fR\&\&.
+.TP 2
+.B
+\fIdist_ctrl\fR\&:
+Returns a list of tuples \fI{Node, ControllingEntity}\fR\&, one entry for each connected remote node\&. \fINode\fR\& is the node name and \fIControllingEntity\fR\& is the port or process identifier responsible for the communication to that node\&. More specifically, \fIControllingEntity\fR\& for nodes connected through TCP/IP (the normal case) is the socket used in communication with the specific node\&.
+.RE
+.RE
+.LP
+.nf
+
+.B
+erlang:system_info(Item :: build_type) ->
+.B
+                      opt |
+.B
+                      debug |
+.B
+                      purify |
+.B
+                      quantify |
+.B
+                      purecov |
+.B
+                      gcov |
+.B
+                      valgrind |
+.B
+                      gprof |
+.B
+                      lcnt |
+.B
+                      frmptr
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: c_compiler_used) -> {atom(), term()}
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: check_io) -> [term()]
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: compat_rel) -> integer()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: debug_compiled) -> boolean()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: driver_version) -> string()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: dynamic_trace) ->
+.B
+                      none | dtrace | systemtap
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: dynamic_trace_probes) -> boolean()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: info) -> binary()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: kernel_poll) -> boolean()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: loaded) -> binary()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: machine) -> string()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: modified_timing_level) ->
+.B
+                      integer() | undefined
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: nif_version) -> string()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: otp_release) -> string()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: port_parallelism) -> boolean()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: system_version) -> string()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: system_architecture) -> string()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: trace_control_word) ->
+.B
+                      integer() >= 0
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item :: version) -> string()
+.br
+.fi
+.br
+.nf
+
+.B
+erlang:system_info(Item ::
+.B
+                       wordsize |
+.B
+                       {wordsize, internal} |
+.B
+                       {wordsize, external}) ->
+.B
+                      4 | 8
+.br
+.fi
+.br
+.RS
+.LP
+Returns various information about the current system (emulator) as specified by \fIItem\fR\&:
+.RS 2
+.TP 2
+.B
+\fIbuild_type\fR\&:
+Returns an atom describing the build type of the runtime system\&. This is normally the atom \fIopt\fR\& for optimized\&. Other possible return values are \fIdebug\fR\&, \fIpurify\fR\&, \fIquantify\fR\&, \fIpurecov\fR\&, \fIgcov\fR\&, \fIvalgrind\fR\&, \fIgprof\fR\&, and \fIlcnt\fR\&\&. Possible return values can be added or removed at any time without prior notice\&.
+.TP 2
+.B
+\fIc_compiler_used\fR\&:
+Returns a two-tuple describing the C compiler used when compiling the runtime system\&. The first element is an atom describing the name of the compiler, or \fIundefined\fR\& if unknown\&. The second element is a term describing the version of the compiler, or \fIundefined\fR\& if unknown\&.
+.TP 2
+.B
+\fIcheck_io\fR\&:
+Returns a list containing miscellaneous information about the emulators internal I/O checking\&. Notice that the content of the returned list can vary between platforms and over time\&. It is only guaranteed that a list is returned\&.
+.TP 2
+.B
+\fIcompat_rel\fR\&:
+Returns the compatibility mode of the local node as an integer\&. The integer returned represents the Erlang/OTP release that the current emulator has been set to be backward compatible with\&. The compatibility mode can be configured at startup by using command-line flag \fB\fI+R\fR\&\fR\& in \fIerl(1)\fR\&\&.
+.TP 2
+.B
+\fIdebug_compiled\fR\&:
+Returns \fItrue\fR\& if the emulator has been debug-compiled, otherwise \fIfalse\fR\&\&.
+.TP 2
+.B
+\fIdriver_version\fR\&:
+Returns a string containing the Erlang driver version used by the runtime system\&. It has the form \fB "<major ver>\&.<minor ver>"\fR\&\&.
+.TP 2
+.B
+\fIdynamic_trace\fR\&:
+Returns an atom describing the dynamic trace framework compiled into the virtual machine\&. It can be \fIdtrace\fR\&, \fIsystemtap\fR\&, or \fInone\fR\&\&. For a commercial or standard build, it is always \fInone\fR\&\&. The other return values indicate a custom configuration (for example, \fI\&./configure --with-dynamic-trace=dtrace\fR\&)\&. For more information about dynamic tracing, see \fB\fIdyntrace(3)\fR\&\fR\& manual page and the \fIREADME\&.dtrace\fR\&/\fIREADME\&.systemtap\fR\& files in the Erlang source code top directory\&.
+.TP 2
+.B
+\fIdynamic_trace_probes\fR\&:
+Returns a \fIboolean()\fR\& indicating if dynamic trace probes (\fIdtrace\fR\& or \fIsystemtap\fR\&) are built into the emulator\&. This can only be \fItrue\fR\& if the virtual machine was built for dynamic tracing (that is, \fIsystem_info(dynamic_trace)\fR\& returns \fIdtrace\fR\& or \fIsystemtap\fR\&)\&.
+.TP 2
+.B
+\fIinfo\fR\&:
+Returns a binary containing a string of miscellaneous system information formatted as in Erlang crash dumps\&. For more information, see section \fB How to interpret the Erlang crash dumps\fR\& in the User\&'s Guide\&.
+.TP 2
+.B
+\fIkernel_poll\fR\&:
+Returns \fItrue\fR\& if the emulator uses some kind of kernel-poll implementation, otherwise \fIfalse\fR\&\&.
+.TP 2
+.B
+\fIloaded\fR\&:
+Returns a binary containing a string of loaded module information formatted as in Erlang crash dumps\&. For more information, see section \fBHow to interpret the Erlang crash dumps\fR\& in the User\&'s Guide\&.
+.TP 2
+.B
+\fImachine\fR\&:
+Returns a string containing the Erlang machine name\&.
+.TP 2
+.B
+\fImodified_timing_level\fR\&:
+Returns the modified timing-level (an integer) if modified timing is enabled, otherwise \fIundefined\fR\&\&. For more information about modified timing, see command-line flag \fB\fI+T\fR\&\fR\& in \fIerl(1)\fR\&
+.TP 2
+.B
+\fInif_version\fR\&:
+Returns a string containing the version of the Erlang NIF interface used by the runtime system\&. It is on the form "<major ver>\&.<minor ver>"\&.
+.TP 2
+.B
+\fIotp_release\fR\&:
+
+.RS 2
+.LP
+Returns a string containing the OTP release number of the OTP release that the currently executing ERTS application is part of\&.
+.RE
+.RS 2
+.LP
+As from Erlang/OTP 17, the OTP release number corresponds to the major OTP version number\&. No \fIerlang:system_info()\fR\& argument gives the exact OTP version\&. This is because the exact OTP version in the general case is difficult to determine\&. For more information, see the description of versions in \fB System principles\fR\& in System Documentation\&.
+.RE
+.TP 2
+.B
+\fIport_parallelism\fR\&:
+Returns the default port parallelism scheduling hint used\&. For more information, see command-line argument \fB\fI+spp\fR\&\fR\& in \fIerl(1)\fR\&\&.
+.TP 2
+.B
+\fIsystem_version\fR\&:
+Returns a string containing version number and some important properties, such as the number of schedulers\&.
+.TP 2
+.B
+\fIsystem_architecture\fR\&:
+Returns a string containing the processor and OS architecture the emulator is built for\&.
 .TP 2
 .B
 \fItrace_control_word\fR\&:
 Returns the value of the node trace control word\&. For more information, see function \fIget_tcw\fR\& in section \fB Match Specifications in Erlang\fR\& in the User\&'s Guide\&.
 .TP 2
 .B
-\fIupdate_cpu_info\fR\&:
-
-.RS 2
-.LP
-The runtime system rereads the CPU information available and updates its internally stored information about the \fBdetected CPU topology\fR\& and the number of logical processors \fBconfigured\fR\&, \fBonline\fR\&, and \fB available\fR\&\&.
-.RE
-.RS 2
-.LP
-If the CPU information has changed since the last time it was read, the atom \fIchanged\fR\& is returned, otherwise the atom \fIunchanged\fR\&\&. If the CPU information has changed, you probably want to \fBadjust the number of schedulers online\fR\&\&. You typically want to have as many schedulers online as \fBlogical processors available\fR\&\&.
-.RE
-.TP 2
-.B
 \fIversion\fR\&:
-
-.RS 2
-.LP
 Returns a string containing the version number of the emulator\&.
-.RE
 .TP 2
 .B
 \fIwordsize\fR\&:
@@ -12544,14 +12784,6 @@ Returns the size of Erlang term words in bytes as an integer, that is, 4 is retu
 \fI{wordsize, external}\fR\&:
 Returns the true word size of the emulator, that is, the size of a pointer\&. The value is given in bytes as an integer\&. On a pure 32-bit architecture, 4 is returned\&. On both a half word and on a pure 64-bit architecture, 8 is returned\&.
 .RE
-.LP
-
-.RS -4
-.B
-Note:
-.RE
-Argument \fIscheduler\fR\& has changed name to \fIscheduler_id\fR\& to avoid mix up with argument \fIschedulers\fR\&\&. Argument \fIscheduler\fR\& was introduced in ERTS 5\&.5 and renamed in ERTS 5\&.5\&.1\&.
-
 .RE
 .LP
 .nf
@@ -14775,6 +15007,6 @@ Voluntarily lets other processes (if any) get a chance to execute\&. Using this 
 .B
 Warning:
 .RE
-There is seldom or never any need to use this BIF, especially in the SMP emulator, as other processes have a chance to run in another scheduler thread anyway\&. Using this BIF without a thorough grasp of how the scheduler works can cause performance degradation\&.
+There is seldom or never any need to use this BIF as other processes have a chance to run in another scheduler thread anyway\&. Using this BIF without a thorough grasp of how the scheduler works can cause performance degradation\&.
 
 .RE

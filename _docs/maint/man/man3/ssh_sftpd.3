@@ -1,4 +1,4 @@
-.TH ssh_sftpd 3 "ssh 4.6.9" "Ericsson AB" "Erlang Module Definition"
+.TH ssh_sftpd 3 "ssh 4.7" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 ssh_sftpd \- Specifies the channel process to handle an SFTP subsystem.
 .SH DESCRIPTION
@@ -18,7 +18,7 @@ Specifies a channel process to handle an SFTP subsystem\&.
 .TP 2
 .B
 \fIchannel_callback() =\fR\&:
-\fIatom()\fR\& - Name of the Erlang module implementing the subsystem using the \fIssh_channel\fR\& behavior, see the \fBssh_channel(3)\fR\& manual page\&.
+\fIatom()\fR\& - Name of the Erlang module implementing the subsystem using the \fBssh_server_channel\fR\& (replaces ssh_daemon_channel) behaviour\&.
 .TP 2
 .B
 \fIchannel_init_args() =\fR\&:

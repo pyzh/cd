@@ -1,4 +1,4 @@
-.TH erl_driver 3 "erts 9.3.3" "Ericsson AB" "C Library Functions"
+.TH erl_driver 3 "erts 10.0" "Ericsson AB" "C Library Functions"
 .SH NAME
 erl_driver \- API functions for an Erlang driver.
 .SH DESCRIPTION
@@ -70,7 +70,7 @@ Note:
 Regardless of locking scheme used, calls to driver callbacks can be made from different threads\&.
 
 .LP
-Most functions in this API are \fInot\fR\& thread-safe, that is, they \fIcannot\fR\& be called from any thread\&. Functions that are not documented as thread-safe can only be called from driver callbacks or function calls descending from a driver callback call\&. Notice that driver callbacks can be called from different threads\&. This, however, is not a problem for any function in this API, as the emulator has control over these threads\&.
+Most functions in this API are \fInot\fR\& thread-safe, that is, they \fIcannot\fR\& be called from arbitrary threads\&. Functions that are not documented as thread-safe can only be called from driver callbacks or function calls descending from a driver callback call\&. Notice that driver callbacks can be called from different threads\&. This, however, is not a problem for any function in this API, as the emulator has control over these threads\&.
 .LP
 
 .RS -4
@@ -256,7 +256,7 @@ The following is a checklist for rewriting a pre ERTS 5\&.9 driver, most importa
 .TP 2
 .B
 Return types for driver callbacks:
-Rrewrite driver callback \fB\fIcontrol\fR\&\fR\& to use return type \fIErlDrvSSizeT\fR\& instead of \fIint\fR\&\&.
+Rewrite driver callback \fB\fIcontrol\fR\&\fR\& to use return type \fIErlDrvSSizeT\fR\& instead of \fIint\fR\&\&.
 .RS 2
 .LP
 Rewrite driver callback \fB\fIcall\fR\&\fR\& to use return type \fIErlDrvSSizeT\fR\& instead of \fIint\fR\&\&.
@@ -621,7 +621,7 @@ int suggested_stack_size;
 .fi
 .RS 2
 .LP
-Thread options structure passed to \fB\fIerl_drv_thread_create\fR\&\fR\&\&. The following fields exists:
+Thread options structure passed to \fB\fIerl_drv_thread_create\fR\&\fR\&\&. The following field exists:
 .RE
 .RS 2
 .TP 2
@@ -1724,7 +1724,7 @@ On failure, that is, no such environment variable was found, a value < \fI0\fR\&
 .B
 Warning:
 .RE
-Do \fInot\fR\& use libc\&'s \fIgetenv\fR\& or similar C library interfaces from a driver\&.
+This function reads the emulated environment used by \fB\fIos:getenv/1\fR\&\fR\& and not the environment used by libc\&'s \fIgetenv(3)\fR\& or similar\&. Drivers that \fIrequire\fR\& that these are in sync will need to do so themselves, but keep in mind that they are segregated for a reason; \fIgetenv(3)\fR\& and its friends are \fInot thread-safe\fR\& and may cause unrelated code to misbehave or crash the emulator\&.
 
 .LP
 This function is thread-safe\&.
@@ -2044,7 +2044,7 @@ The result of passing the empty string (\fI""\fR\&) as a value is platform-depen
 .B
 Warning:
 .RE
-Do \fInot\fR\& use libc\&'s \fIputenv\fR\& or similar C library interfaces from a driver\&.
+This function modifies the emulated environment used by \fB\fIos:putenv/2\fR\&\fR\& and not the environment used by libc\&'s \fIputenv(3)\fR\& or similar\&. Drivers that \fIrequire\fR\& that these are in sync will need to do so themselves, but keep in mind that they are segregated for a reason; \fIputenv(3)\fR\& and its friends are \fInot thread-safe\fR\& and may cause unrelated code to misbehave or crash the emulator\&.
 
 .LP
 This function is thread-safe\&.
@@ -2530,4 +2530,4 @@ Currently there are only two meaningful values for \fIflags\fR\&: \fI0\fR\& mean
 .SH "SEE ALSO"
 
 .LP
-\fB\fIdriver_entry(3)\fR\&\fR\&, \fB\fIerlang(3)\fR\&\fR\&, \fB\fIerl_ddll(3)\fR\&\fR\&, section \fBHow to Implement an Alternative Carrier for the Erlang Distribution>\fR\& in the User\&'s Guide
+\fB\fIdriver_entry(3)\fR\&\fR\&, \fB\fIerlang(3)\fR\&\fR\&, \fB\fIerl_ddll(3)\fR\&\fR\&, section \fBHow to Implement an Alternative Carrier for the Erlang Distribution\fR\& in the User\&'s Guide

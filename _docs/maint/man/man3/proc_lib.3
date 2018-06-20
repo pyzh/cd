@@ -1,4 +1,4 @@
-.TH proc_lib 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH proc_lib 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 proc_lib \- Functions for asynchronous and synchronous start of processes
     adhering to the OTP design principles.
@@ -10,9 +10,9 @@ Some useful information is initialized when a process starts\&. The registered n
 .LP
 While in "plain Erlang", a process is said to terminate normally only for exit reason \fInormal\fR\&, a process started using \fIproc_lib\fR\& is also said to terminate normally if it exits with reason \fIshutdown\fR\& or \fI{shutdown,Term}\fR\&\&. \fIshutdown\fR\& is the reason used when an application (supervision tree) is stopped\&.
 .LP
-When a process that is started using \fIproc_lib\fR\& terminates abnormally (that is, with another exit reason than \fInormal\fR\&, \fIshutdown\fR\&, or \fI{shutdown,Term}\fR\&), a \fIcrash report\fR\& is generated, which is written to terminal by the default SASL event handler\&. That is, the crash report is normally only visible if the SASL application is started; see \fB\fIsasl(6)\fR\&\fR\& and section \fBSASL Error Logging\fR\& in the SASL User\&'s Guide\&.
+When a process that is started using \fIproc_lib\fR\& terminates abnormally (that is, with another exit reason than \fInormal\fR\&, \fIshutdown\fR\&, or \fI{shutdown,Term}\fR\&), a \fIcrash report\fR\& is generated, which is written to terminal by the default logger handler setup by Kernel\&. For more information about how crash reports were logged prior to Erlang/OTP 21\&.0, see \fBSASL Error Logging\fR\& in the SASL User\&'s Guide\&.
 .LP
-Unlike in "plain Erlang", \fIproc_lib\fR\& processes will not generate \fIerror reports\fR\&, which are written to the terminal by the emulator and do not require SASL to be started\&. All exceptions are converted to \fIexits\fR\& which are ignored by the default \fIerror_logger\fR\& handler\&.
+Unlike in "plain Erlang", \fIproc_lib\fR\& processes will not generate \fIerror reports\fR\&, which are written to the terminal by the emulator\&. All exceptions are converted to \fIexits\fR\& which are ignored by the default \fIlogger\fR\& handler\&.
 .LP
 The crash report contains the previously stored information, such as ancestors and initial function, the termination reason, and information about other processes that terminate as a result of this process terminating\&.
 .SH DATA TYPES
@@ -117,7 +117,15 @@ Encoding = latin1 | unicode | utf8
 .RE
 .RS
 .LP
-This function can be used by a user-defined event handler to format a crash report\&. The crash report is sent using \fB\fIerror_logger:error_report(crash_report, CrashReport)\fR\&\fR\&\&. That is, the event to be handled is of the format \fI{error_report, GL, {Pid, crash_report, CrashReport}}\fR\&, where \fIGL\fR\& is the group leader pid of process \fIPid\fR\& that sent the crash report\&.
+
+.RS -4
+.B
+Note:
+.RE
+This function is deprecated in the sense that the \fIerror_logger\fR\& is no longer the preferred interface for logging in Erlang/OTP\&. A new \fBlogging API\fR\& was added in Erlang/OTP 21\&.0, but legacy \fIerror_logger\fR\& handlers can still be used\&. New Logger handlers do not need to use this function, since the formatting callback (\fIreport_cb\fR\&) is included as metadata in the log event\&.
+
+.LP
+This function can be used by a user-defined legacy \fIerror_logger\fR\& event handler to format a crash report\&. The crash report is sent using \fB\fIlogger(3)\fR\&\fR\&, and the event to be handled is of the format \fI{error_report, GL, {Pid, crash_report, CrashReport}}\fR\&, where \fIGL\fR\& is the group leader pid of process \fIPid\fR\& that sent the crash report\&.
 .RE
 .LP
 .nf
@@ -142,7 +150,15 @@ Depth = unlimited | integer() >= 1
 .RE
 .RS
 .LP
-This function can be used by a user-defined event handler to format a crash report\&. When Depth is specified as a positive integer, it is used in the format string to limit the output as follows: \fIio_lib:format("~P", [Term,Depth])\fR\&\&.
+
+.RS -4
+.B
+Note:
+.RE
+This function is deprecated in the sense that the \fIerror_logger\fR\& is no longer the preferred interface for logging in Erlang/OTP\&. A new \fBlogging API\fR\& was added in Erlang/OTP 21\&.0, but legacy \fIerror_logger\fR\& handlers can still be used\&. New Logger handlers do not need to used this function, since the formatting callback (\fIreport_cb\fR\&) is included as metadata in the log event\&.
+
+.LP
+This function can be used by a user-defined legacy \fIerror_logger\fR\& event handler to format a crash report\&. When Depth is specified as a positive integer, it is used in the format string to limit the output as follows: \fIio_lib:format("~P", [Term,Depth])\fR\&\&.
 .RE
 .LP
 .nf
@@ -598,3 +614,5 @@ By default, \fI{proc_lib,init_p,5}\fR\& is returned if no information about the 
 
 .LP
 \fB\fIerror_logger(3)\fR\&\fR\&
+.LP
+\fB\fIlogger(3)\fR\&\fR\&

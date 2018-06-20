@@ -1,4 +1,4 @@
-.TH gen_udp 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.TH gen_udp 3 "kernel 6.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 gen_udp \- Interface to UDP sockets.
 .SH DESCRIPTION
@@ -209,6 +209,10 @@ Option =
     \fBinet:address_family()\fR\& |
 .br
     {port, \fBinet:port_number()\fR\&} |
+.br
+    {netns, \fBfile:filename_all()\fR\&} |
+.br
+    {bind_to_device, binary()} |
 .br
     \fBoption()\fR\&
 .br

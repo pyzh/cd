@@ -1,4 +1,4 @@
-.TH io_lib 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH io_lib 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 io_lib \- I/O library functions.
 .SH DESCRIPTION
@@ -19,6 +19,11 @@ This module contains functions for converting to and from strings (lists of char
 .LP
 A continuation as returned by \fB\fIfread/3\fR\&\fR\&\&.
 .RE
+.nf
+
+\fBchars_limit()\fR\& = integer()
+.br
+.fi
 .nf
 
 \fBdepth()\fR\& = -1 | integer() >= 0
@@ -233,6 +238,50 @@ Data = [term()]
 Returns a character list that represents \fIData\fR\& formatted in accordance with \fIFormat\fR\&\&. For a detailed description of the available formatting options, see \fB\fIio:fwrite/1,2,3\fR\&\fR\&\&. If the format string or argument list contains an error, a fault is generated\&.
 .LP
 If and only if the Unicode translation modifier is used in the format string (that is, \fI~ts\fR\& or \fI~tc\fR\&), the resulting list can contain characters beyond the ISO Latin-1 character range (that is, numbers > 255)\&. If so, the result is still an ordinary Erlang \fIstring()\fR\&, and can well be used in any context where Unicode data is allowed\&.
+.RE
+.LP
+.nf
+
+.B
+format(Format, Data, Options) -> chars()
+.br
+.fi
+.br
+.nf
+
+.B
+fwrite(Format, Data, Options) -> chars()
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Format = \fBio:format()\fR\&
+.br
+Data = [term()]
+.br
+Options = [Option]
+.br
+Option = {chars_limit, CharsLimit}
+.br
+CharsLimit = \fBchars_limit()\fR\&
+.br
+.RE
+.RE
+.RS
+.LP
+Returns a character list that represents \fIData\fR\& formatted in accordance with \fIFormat\fR\& in the same way as \fB\fIfwrite/2\fR\&\fR\& and \fB\fIformat/2\fR\&\fR\&, but takes an extra argument, a list of options\&.
+.LP
+Valid option:
+.RS 2
+.TP 2
+.B
+\fI{chars_limit, CharsLimit}\fR\&:
+A soft limit on the number of characters returned\&. When the number of characters is reached, remaining structures are replaced by "\fI\&.\&.\&.\fR\&"\&. \fICharsLimit\fR\& defaults to -1, which means no limit on the number of characters returned\&.
+.RE
 .RE
 .LP
 .nf
@@ -620,7 +669,15 @@ Term = term()
 .br
 Options = [Option]
 .br
-Option = {depth, Depth} | {encoding, latin1 | utf8 | unicode}
+Option = 
+.br
+    {chars_limit, CharsLimit} |
+.br
+    {depth, Depth} |
+.br
+    {encoding, latin1 | utf8 | unicode}
+.br
+CharsLimit = \fBchars_limit()\fR\&
 .br
 Depth = \fBdepth()\fR\&
 .br
@@ -628,7 +685,7 @@ Depth = \fBdepth()\fR\&
 .RE
 .RS
 .LP
-Returns a character list that represents \fITerm\fR\&\&. Argument \fIDepth\fR\& controls the depth of the structures written\&. When the specified depth is reached, everything below this level is replaced by "\fI\&.\&.\&.\fR\&"\&. \fIDepth\fR\& defaults to -1, which means no limitation\&.
+Returns a character list that represents \fITerm\fR\&\&. Option \fIDepth\fR\& controls the depth of the structures written\&. When the specified depth is reached, everything below this level is replaced by "\fI\&.\&.\&.\fR\&"\&. \fIDepth\fR\& defaults to -1, which means no limitation\&. Option \fICharsLimit\fR\& puts a soft limit on the number of characters returned\&. When the number of characters is reached, remaining structures are replaced by "\fI\&.\&.\&.\fR\&"\&. \fICharsLimit\fR\& defaults to -1, which means no limit on the number of characters returned\&.
 .LP
 \fIExample:\fR\&
 .LP
@@ -638,6 +695,8 @@ Returns a character list that represents \fITerm\fR\&\&. Argument \fIDepth\fR\& 
 "{1,[2],[3],[4,5],6,7,8,9}"
 2> lists:flatten(io_lib:write({1,[2],[3],[4,5],6,7,8,9}, 5))\&.
 "{1,[2],[3],[...],...}"
+3> lists:flatten(io_lib:write({[1,2,3],[4,5],6,7,8,9}, [{chars_limit,20}]))\&.
+"{[1,2|...],[4|...],...}"
 .fi
 .RE
 .LP

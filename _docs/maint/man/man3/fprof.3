@@ -1,4 +1,4 @@
-.TH fprof 3 "tools 2.11.2" "Ericsson AB" "Erlang Module Definition"
+.TH fprof 3 "tools 3.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 fprof \- A Time Profiling Tool using trace to file for minimal runtime performance impact.
 .SH DESCRIPTION
@@ -341,7 +341,15 @@ The options \fIverbose\fR\& or \fI{verbose, true}\fR\& adds some trace flags tha
 .TP 2
 .B
 \fIcpu_time\fR\&| \fI{cpu_time, bool()}\fR\&:
-The options \fIcpu_time\fR\& or \fI{cpu_time, true>\fR\& makes the timestamps in the trace be in CPU time instead of wallclock time which is the default\&. This option is only allowed with the \fIstart\fR\& option\&.
+The options \fIcpu_time\fR\& or \fI{cpu_time, true}\fR\& makes the timestamps in the trace be in CPU time instead of wallclock time which is the default\&. This option is only allowed with the \fIstart\fR\& option\&. 
+.LP
+
+.RS -4
+.B
+Warning:
+.RE
+Getting correct values out of cpu_time can be difficult\&. The best way to get correct values is to run using a single scheduler and bind that scheduler to a specific CPU, i\&.e\&. \fIerl +S 1 +sbt db\fR\&\&.
+
 .TP 2
 .B
 \fI{procs, PidSpec}\fR\&| \fI{procs, [PidSpec]}\fR\&:

@@ -1,4 +1,4 @@
-.TH lists 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH lists 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 lists \- List processing functions.
 .SH DESCRIPTION
@@ -1585,6 +1585,31 @@ T = term()
 .RS
 .LP
 Splits \fIList1\fR\& into \fIList2\fR\& and \fIList3\fR\&\&. \fIList2\fR\& contains the first \fIN\fR\& elements and \fIList3\fR\& the remaining elements (the \fIN\fR\&th tail)\&.
+.RE
+.LP
+.nf
+
+.B
+search(Pred, List) -> {value, Value} | false
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Pred = fun((T) -> boolean())
+.br
+List = [T]
+.br
+Value = T
+.br
+.RE
+.RE
+.RS
+.LP
+If there is a \fIValue\fR\& in \fIList\fR\& such that \fIPred(Value)\fR\& returns \fItrue\fR\&, returns \fI{value, Value}\fR\& for the first such \fIValue\fR\&, otherwise returns \fIfalse\fR\&\&.
 .RE
 .LP
 .nf

@@ -48,10 +48,10 @@
 <div class="erlang-logo-wrapper"><a href="../index.html"><img alt="Erlang Logo" src="../erlang-logo.png" class="erlang-logo"></a></div>
 <p class="section-title">System Architecture</p>
 <p class="section-subtitle">User's Guide</p>
-<p class="section-version">Version 9.3.3</p>
+<p class="section-version">Version 10.0</p>
 <ul class="panel-sections">
 <li><a href="users_guide.html">User's Guide</a></li>
-<li><a href="../pdf/otp-system-documentation-9.3.3.pdf">PDF</a></li>
+<li><a href="../pdf/otp-system-documentation-10.0.pdf">PDF</a></li>
 <li><a href="../index.html">Top</a></li>
 </ul>
 <ul class="expand-collapse-items">
@@ -63,10 +63,10 @@
 <li><a href="sys_arch_intro.html">
               Top of chapter
             </a></li>
-<li title="Erlang and OTP"><a href="sys_arch_intro.html#idm3413968">Erlang and OTP</a></li>
-<li title="Erlang/OTP"><a href="sys_arch_intro.html#idm3416432">Erlang/OTP</a></li>
-<li title="Scope and Purpose"><a href="sys_arch_intro.html#idp24326960">Scope and Purpose</a></li>
-<li title="About the Erlang/OTP Documentation"><a href="sys_arch_intro.html#idp24324944">About the Erlang/OTP Documentation</a></li>
+<li title="Erlang and OTP"><a href="sys_arch_intro.html#erlang-and-otp">Erlang and OTP</a></li>
+<li title="Erlang/OTP"><a href="sys_arch_intro.html#erlang-otp">Erlang/OTP</a></li>
+<li title="Scope and Purpose"><a href="sys_arch_intro.html#scope-and-purpose">Scope and Purpose</a></li>
+<li title="About the Erlang/OTP Documentation"><a href="sys_arch_intro.html#about-the-erlang-otp-documentation">About the Erlang/OTP Documentation</a></li>
 </ul>
 </li></ul>
 </div></div>
@@ -75,8 +75,8 @@
 <h1>1 Introduction</h1>
   
 
-  <h3><a name="idm3413968">1.1 
-        Erlang and OTP</a></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-erlang-and-otp-idp71215229831568').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-erlang-and-otp-idp71215229831568').style.visibility = 'hidden';"><span id="ghlink-erlang-and-otp-idp71215229831568" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/system_architecture_intro/sys_arch_intro.xml#L33" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="erlang-and-otp" href="#erlang-and-otp">1.1 
+          Erlang and OTP</a></span></h3>
     
     <p>Erlang is a general-purpose programming language with built-in 
       support for concurrency, distribution and fault tolerance.</p>
@@ -88,17 +88,17 @@
       the term Erlang/OTP is normally used instead of OTP.</p>
   
 
-  <h3><a name="idm3416432">1.2 
-        Erlang/OTP</a></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-erlang-otp-idp71215229829232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-erlang-otp-idp71215229829232').style.visibility = 'hidden';"><span id="ghlink-erlang-otp-idp71215229829232" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/system_architecture_intro/sys_arch_intro.xml#L45" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="erlang-otp" href="#erlang-otp">1.2 
+          Erlang/OTP</a></span></h3>
     
 
-    <h4>Erlang Runtime System</h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-erlang-runtime-system-idp71215229828096').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-erlang-runtime-system-idp71215229828096').style.visibility = 'hidden';"><span id="ghlink-erlang-runtime-system-idp71215229828096" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/system_architecture_intro/sys_arch_intro.xml#L48" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="erlang-runtime-system" href="#erlang-runtime-system">Erlang Runtime System</a></span></h4>
       
       <p>The Erlang runtime system (ERTS) is made up of an emulator running on top of the host operating system, a kernel providing low-level services such as distribution and I/O handling, and a standard library containing a large number of re-usable modules.</p>
       <p>The OTP design principles provides the user with a way to structure the system based on a concept called application. An OTP application is a way to package a system component and is either a set of library modules or a supervision tree. A supervision tree is a hierarchical tree of processes used to program fault-tolerant systems. The processes are easiest implemented using behavior modules which are formalizations of design patterns. The standard library includes behavior modules for supervisors, servers, state machines and generic event handlers. In chapter 4 "OTP Design Principles" the design principles are explained in detail.</p>
     
 
-    <h4>OTP Components</h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-otp-components-idp71215229872400').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-otp-components-idp71215229872400').style.visibility = 'hidden';"><span id="ghlink-otp-components-idp71215229872400" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/system_architecture_intro/sys_arch_intro.xml#L54" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="otp-components" href="#otp-components">OTP Components</a></span></h4>
       
       <p>The OTP components can be divided into six categories:</p>
       <ul>
@@ -163,26 +163,6 @@
           </ul>
         </li>
         <li>
-          <p>CORBA services and IDL compiler.</p>
-          <ul>
-            <li>
-<strong>cosEvent</strong> Orber OMG Event Service.</li>
-            <li>
-<strong>cosNotification</strong> Orber OMG Notification 
-             Service.</li>
-            <li>
-<strong>cosTime</strong> Orber OMG Timer and TimerEvent 
-             Services.</li>
-            <li>
-<strong>cosTransactions</strong> Orber OMG Transaction 
-             Service.</li>
-            <li>
-<strong>IC</strong> IDL compiler</li>
-            <li>
-<strong>Orber</strong> A CORBA object request broker.</li>
-          </ul>
-        </li>
-        <li>
           <p>Tools.</p>
           <ul>
             <li>
@@ -207,17 +187,17 @@
     
   
 
-  <h3><a name="idp24326960">1.3 
-        Scope and Purpose</a></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-scope-and-purpose-idp71215229653424').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-scope-and-purpose-idp71215229653424').style.visibility = 'hidden';"><span id="ghlink-scope-and-purpose-idp71215229653424" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/system_architecture_intro/sys_arch_intro.xml#L117" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="scope-and-purpose" href="#scope-and-purpose">1.3 
+          Scope and Purpose</a></span></h3>
     
     <p>This documentation describes the Erlang runtime system, the OTP applications and the OTP design principles. It assumes that the reader is familiar with the Erlang programming language and does not explain how to program in Erlang. The language is described in <strong>Concurrent Programming in Erlang, 2nd Edition</strong>, ISBN 0-13-508301-X.</p>
   
 
-  <h3><a name="idp24324944">1.4 
-        About the Erlang/OTP Documentation</a></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-about-the-erlang-otp-documentation-idp71215229651536').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-about-the-erlang-otp-documentation-idp71215229651536').style.visibility = 'hidden';"><span id="ghlink-about-the-erlang-otp-documentation-idp71215229651536" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/system_architecture_intro/sys_arch_intro.xml#L122" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="about-the-erlang-otp-documentation" href="#about-the-erlang-otp-documentation">1.4 
+          About the Erlang/OTP Documentation</a></span></h3>
     
 
-    <h4>Structure of this Book</h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-structure-of-this-book-idp71215229533520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-structure-of-this-book-idp71215229533520').style.visibility = 'hidden';"><span id="ghlink-structure-of-this-book-idp71215229533520" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/system_architecture_intro/sys_arch_intro.xml#L125" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="structure-of-this-book" href="#structure-of-this-book">Structure of this Book</a></span></h4>
       
       <p>The documentation is divided into eight parts. This book, <strong>Erlang 5.1/OTP R8 System Documentation, EN/LZT 108 4095 R2</strong>, is the starting point of the documentation and contains information about the Erlang programming language and runtime system, the OTP design principles, and how to install and configure Erlang/OTP.</p>
       <ul>
@@ -236,7 +216,7 @@
       </ul>
     
 
-    <h4>Typographical Conventions</h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-typographical-conventions-idp71215229887248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-typographical-conventions-idp71215229887248').style.visibility = 'hidden';"><span id="ghlink-typographical-conventions-idp71215229887248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/system_architecture_intro/sys_arch_intro.xml#L144" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="typographical-conventions" href="#typographical-conventions">Typographical Conventions</a></span></h4>
       
       <p>The following typographical conventions are used in the documentation.</p>
       <div class="doc-table-wrapper">

@@ -1,4 +1,4 @@
-.TH inet_res 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.TH inet_res 3 "kernel 6.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 inet_res \- A rudimentary DNS client.
 .SH DESCRIPTION
@@ -169,7 +169,7 @@ dns_header() = DnsHeader
     inet_dns:header(DnsHeader) ->
         [ {id, integer()}
         | {qr, boolean()}
-        | {opcode, 'query' | iquery | status | integer()}
+        | {opcode, query | iquery | status | integer()}
         | {aa, boolean()}
         | {tc, boolean()}
         | {rd, boolean()}
@@ -398,7 +398,7 @@ Backend functions used by \fB\fIinet:gethostbyname/1,2\fR\&\fR\&\&.
 .LP
 This function uses resolver option \fIsearch\fR\& just like \fB\fIgetbyname/2,3\fR\&\fR\&\&.
 .LP
-If resolver option \fIinet6\fR\& is \fItrue\fR\&, an IPv6 address is looked up\&. If that fails, the IPv4 address is looked up and returned on IPv6-mapped IPv4 format\&.
+If resolver option \fIinet6\fR\& is \fItrue\fR\&, an IPv6 address is looked up\&.
 .RE
 .LP
 .nf

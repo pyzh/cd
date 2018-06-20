@@ -1,4 +1,4 @@
-.TH net_kernel 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.TH net_kernel 3 "kernel 6.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 net_kernel \- Erlang networking kernel.
 .SH DESCRIPTION
@@ -23,7 +23,7 @@ It is also possible to call \fInet_kernel:start([foobar])\fR\& directly from the
 .LP
 If the node is started with command-line flag \fI-sname\fR\&, the node name is \fIfoobar@Host\fR\&, where \fIHost\fR\& is the short name of the host (not the fully qualified domain name)\&. If started with flag \fI-name\fR\&, the node name is \fIfoobar@Host\fR\&, where \fIHost\fR\& is the fully qualified domain name\&. For more information, see \fB\fIerl\fR\&\fR\&\&.
 .LP
-Normally, connections are established automatically when another node is referenced\&. This functionality can be disabled by setting Kernel configuration parameter \fIdist_auto_connect\fR\& to \fIfalse\fR\&, see \fB\fIkernel(6)\fR\&\fR\&\&. In this case, connections must be established explicitly by calling \fB\fIconnect_node/1\fR\&\fR\&\&.
+Normally, connections are established automatically when another node is referenced\&. This functionality can be disabled by setting Kernel configuration parameter \fIdist_auto_connect\fR\& to \fInever\fR\&, see \fB\fIkernel(6)\fR\&\fR\&\&. In this case, connections must be established explicitly by calling \fB\fIconnect_node/1\fR\&\fR\&\&.
 .LP
 Which nodes that are allowed to communicate with each other is handled by the magic cookie system, see section \fBDistributed Erlang\fR\& in the Erlang Reference Manual\&.
 .LP
@@ -272,7 +272,7 @@ Subscribe to node status change messages for both visible and hidden nodes\&. Th
 The tuple \fI{nodedown_reason, Reason}\fR\& is included in \fIInfoList\fR\& in \fInodedown\fR\& messages\&.
 .RS 2
 .LP
-\fIReason\fR\& can be any of the following:
+\fIReason\fR\& can, depending on which distribution module or process that is used be any term, but for the standard TCP distribution module it is any of the following:
 .RE
 .RS 2
 .TP 2

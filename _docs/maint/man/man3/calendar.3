@@ -1,4 +1,4 @@
-.TH calendar 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH calendar 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 calendar \- Local and universal time, day of the week, date and time
     conversions.
@@ -455,6 +455,64 @@ Returns Universal Coordinated Time (UTC) converted from the return value from \f
 .nf
 
 .B
+rfc3339_to_system_time(DateTimeString) -> integer()
+.br
+.fi
+.br
+.nf
+
+.B
+rfc3339_to_system_time(DateTimeString, Options) -> integer()
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+DateTimeString = \fBrfc3339_string()\fR\&
+.br
+Options = [Option]
+.br
+Option = {unit, \fBrfc3339_time_unit()\fR\&}
+.br
+.nf
+\fBrfc3339_string()\fR\& = [byte(), \&.\&.\&.]
+.fi
+.br
+.nf
+\fBrfc3339_time_unit()\fR\& = 
+.br
+    microsecond | millisecond | nanosecond | second
+.fi
+.br
+.RE
+.RE
+.RS
+.LP
+Converts an RFC 3339 timestamp into system time\&. The data format of RFC 3339 timestamps is described by RFC 3339\&.
+.LP
+Valid option:
+.RS 2
+.TP 2
+.B
+\fI{unit, Unit}\fR\&:
+The time unit of the return value\&. The default is \fIsecond\fR\&\&.
+.RE
+.LP
+.nf
+
+1> calendar:rfc3339_to_system_time("2018-02-01T16:17:58+01:00")\&.
+1517498278
+2> calendar:rfc3339_to_system_time("2018-02-01 15:18:02\&.088Z", [{unit, nanosecond}])\&.
+1517498282088000000
+.fi
+.RE
+.LP
+.nf
+
+.B
 seconds_to_daystime(Seconds) -> {Days, Time}
 .br
 .fi
@@ -498,6 +556,134 @@ Seconds = \fBsecs_per_day()\fR\&
 .RS
 .LP
 Computes the time from the specified number of seconds\&. \fISeconds\fR\& must be less than the number of seconds per day (86400)\&.
+.RE
+.LP
+.nf
+
+.B
+system_time_to_local_time(Time, TimeUnit) -> datetime()
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Time = integer()
+.br
+TimeUnit = \fBerlang:time_unit()\fR\&
+.br
+.RE
+.RE
+.RS
+.LP
+Converts a specified system time into local date and time\&.
+.RE
+.LP
+.nf
+
+.B
+system_time_to_rfc3339(Time) -> DateTimeString
+.br
+.fi
+.br
+.nf
+
+.B
+system_time_to_rfc3339(Time, Options) -> DateTimeString
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Time = integer()
+.br
+Options = [Option]
+.br
+Option = 
+.br
+    {offset, \fBoffset()\fR\&} |
+.br
+    {time_designator, byte()} |
+.br
+    {unit, \fBrfc3339_time_unit()\fR\&}
+.br
+DateTimeString = \fBrfc3339_string()\fR\&
+.br
+.nf
+\fBoffset()\fR\& = [byte()] | (Time :: integer())
+.fi
+.br
+.nf
+\fBrfc3339_string()\fR\& = [byte(), \&.\&.\&.]
+.fi
+.br
+.nf
+\fBrfc3339_time_unit()\fR\& = 
+.br
+    microsecond | millisecond | nanosecond | second
+.fi
+.br
+.RE
+.RE
+.RS
+.LP
+Converts a system time into an RFC 3339 timestamp\&. The data format of RFC 3339 timestamps is described by RFC 3339\&. The data format of offsets is also described by RFC 3339\&.
+.LP
+Valid options:
+.RS 2
+.TP 2
+.B
+\fI{offset, Offset}\fR\&:
+The offset, either a string or an integer, to be included in the formatted string\&. An empty string, which is the default, is interpreted as local time\&. A non-empty string is included as is\&. The time unit of the integer is the same as the one of \fITime\fR\&\&.
+.TP 2
+.B
+\fI{time_designator, Character}\fR\&:
+The character used as time designator, that is, the date and time separator\&. The default is \fI$T\fR\&\&.
+.TP 2
+.B
+\fI{unit, Unit}\fR\&:
+The time unit of \fITime\fR\&\&. The default is \fIsecond\fR\&\&. If some other unit is given (\fImillisecond\fR\&, \fImicrosecond\fR\&, or \fInanosecond\fR\&), the formatted string includes a fraction of a second\&.
+.RE
+.LP
+.nf
+
+1> calendar:system_time_to_rfc3339(erlang:system_time(second))\&.
+"2018-04-23T14:56:28+02:00"
+2> calendar:system_time_to_rfc3339(erlang:system_time(second), [{offset, "-02:00"}])\&.
+"2018-04-23T10:56:52-02:00"
+3> calendar:system_time_to_rfc3339(erlang:system_time(second), [{offset, -7200}])\&.
+"2018-04-23T10:57:05-02:00"
+4> calendar:system_time_to_rfc3339(erlang:system_time(millisecond), [{unit, millisecond}, {time_designator, $\\s}, {offset, "Z"}])\&.
+"2018-04-23 12:57:20.482Z"
+.fi
+.RE
+.LP
+.nf
+
+.B
+system_time_to_universal_time(Time, TimeUnit) -> datetime()
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Time = integer()
+.br
+TimeUnit = \fBerlang:time_unit()\fR\&
+.br
+.RE
+.RE
+.RS
+.LP
+Converts a specified system time into universal date and time\&.
 .RE
 .LP
 .nf

@@ -1,4 +1,4 @@
-.TH gen_event 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH gen_event 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 gen_event \- Generic event handling behavior.
 .SH DESCRIPTION
@@ -175,7 +175,7 @@ If the calling process later terminates with \fIReason\fR\&, the event manager d
 .LP
 .TP 2
 *
-If the event handler is deleted later, the event manager sends a message\fI{gen_event_EXIT,Handler,Reason}\fR\& to the calling process\&. \fIReason\fR\& is one of the following:
+If the event handler is deleted later, the event manager sends a message \fI{gen_event_EXIT,Handler,Reason}\fR\& to the calling process\&. \fIReason\fR\& is one of the following:
 .RS 2
 .TP 2
 *
@@ -457,7 +457,7 @@ Timeout = int()>0 | infinity
 .LP
 Orders event manager \fIEventMgrRef\fR\& to exit with the specifies \fIReason\fR\& and waits for it to terminate\&. Before terminating, \fIgen_event\fR\& calls \fB\fIModule:terminate(stop,\&.\&.\&.)\fR\&\fR\& for each installed event handler\&.
 .LP
-The function returns \fIok\fR\& if the event manager terminates with the expected reason\&. Any other reason than \fInormal\fR\&, \fIshutdown\fR\&, or \fI{shutdown,Term}\fR\& causes an error report to be issued using \fB\fIerror_logger:format/2\fR\&\fR\&\&. The default \fIReason\fR\& is \fInormal\fR\&\&.
+The function returns \fIok\fR\& if the event manager terminates with the expected reason\&. Any other reason than \fInormal\fR\&, \fIshutdown\fR\&, or \fI{shutdown,Term}\fR\& causes an error report to be issued using \fB\fIlogger(3)\fR\&\fR\&\&. The default \fIReason\fR\& is \fInormal\fR\&\&.
 .LP
 \fITimeout\fR\& is an integer greater than zero that specifies how many milliseconds to wait for the event manager to terminate, or the atom \fIinfinity\fR\& to wait indefinitely\&. Defaults to \fIinfinity\fR\&\&. If the event manager has not terminated within the specified time, a \fItimeout\fR\& exception is raised\&.
 .LP

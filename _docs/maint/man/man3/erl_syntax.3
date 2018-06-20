@@ -1,4 +1,4 @@
-.TH erl_syntax 3 "syntax_tools 2.1.4" "" "Erlang Module Definition"
+.TH erl_syntax 3 "syntax_tools 2.1.5" "" "Erlang Module Definition"
 .SH NAME
 erl_syntax \- Abstract Erlang syntax trees.
 .SH DESCRIPTION
@@ -597,6 +597,16 @@ class_qualifier(Class::\fBsyntaxTree()\fR\&, Body::\fBsyntaxTree()\fR\&) -> \fBs
 .LP
 Creates an abstract class qualifier\&. The result represents "\fIClass:Body\fR\&"\&.
 .LP
+\fISee also:\fR\& \fBclass_qualifier_argument/1\fR\&, \fBclass_qualifier_body/1\fR\&, \fBclass_qualifier_stacktrace/1\fR\&, \fBtry_expr/4\fR\&\&.
+.RE
+.LP
+.B
+class_qualifier(Class::\fBsyntaxTree()\fR\&, Body::\fBsyntaxTree()\fR\&, Stacktrace::\fBsyntaxTree()\fR\&) -> \fBsyntaxTree()\fR\&
+.br
+.RS
+.LP
+Creates an abstract class qualifier\&. The result represents "\fIClass:Body:Stacktrace\fR\&"\&.
+.LP
 \fISee also:\fR\& \fBclass_qualifier_argument/1\fR\&, \fBclass_qualifier_body/1\fR\&, \fBtry_expr/4\fR\&\&.
 .RE
 .LP
@@ -616,6 +626,16 @@ class_qualifier_body(Node::\fBsyntaxTree()\fR\&) -> \fBsyntaxTree()\fR\&
 .RS
 .LP
 Returns the body subtree of a \fIclass_qualifier\fR\& node\&.
+.LP
+\fISee also:\fR\& \fBclass_qualifier/2\fR\&\&.
+.RE
+.LP
+.B
+class_qualifier_stacktrace(Node::\fBsyntaxTree()\fR\&) -> \fBsyntaxTree()\fR\&
+.br
+.RS
+.LP
+Returns the stacktrace subtree of a \fIclass_qualifier\fR\& node\&.
 .LP
 \fISee also:\fR\& \fBclass_qualifier/2\fR\&\&.
 .RE

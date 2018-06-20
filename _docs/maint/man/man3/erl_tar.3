@@ -1,4 +1,4 @@
-.TH erl_tar 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH erl_tar 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 erl_tar \- Unix 'tar' utility for reading and writing tar archives.
   
@@ -28,7 +28,7 @@ Unicode metadata stored in PAX headers is preserved
 .SH "OTHER STORAGE MEDIA"
 
 .LP
-The \fB\fIftp\fR\&\fR\& module (Inets) normally accesses the tar file on disk using the \fB\fIfile\fR\&\fR\& module\&. When other needs arise, you can define your own low-level Erlang functions to perform the writing and reading on the storage media; use function \fB\fIinit/3\fR\&\fR\&\&.
+The \fB\fIftp\fR\&\fR\& module normally accesses the tar file on disk using the \fB\fIfile\fR\&\fR\& module\&. When other needs arise, you can define your own low-level Erlang functions to perform the writing and reading on the storage media; use function \fB\fIinit/3\fR\&\fR\&\&.
 .LP
 An example of this is the SFTP support in \fB\fIssh_sftp:open_tar/3\fR\&\fR\&\&. This function opens a tar file on a remote machine using an SFTP channel\&.
 .SH "LIMITATIONS"
@@ -66,6 +66,12 @@ Options = [Option]
 .br
 Option = dereference|verbose|{chunks,ChunkSize}
 .br
+|{atime,non_neg_integer()}|{mtime,non_neg_integer()}
+.br
+|{ctime,non_neg_integer()}|{uid,non_neg_integer()}
+.br
+|{gid,non_neg_integer()}
+.br
 ChunkSize = positive_integer()
 .br
 RetValue = ok|{error,{Filename,Reason}}
@@ -94,6 +100,26 @@ Prints an informational message about the added file\&.
 .B
 \fI{chunks,ChunkSize}\fR\&:
 Reads data in parts from the file\&. This is intended for memory-limited machines that, for example, builds a tar file on a remote machine over SFTP, see \fB\fIssh_sftp:open_tar/3\fR\&\fR\&\&.
+.TP 2
+.B
+\fI{atime,non_neg_integer()}\fR\&:
+Sets the last time, as \fB POSIX time\fR\&, when the file was read\&. See also \fB\fIfile:read_file_info/1\fR\&\fR\&\&.
+.TP 2
+.B
+\fI{mtime,non_neg_integer()}\fR\&:
+Sets the last time, as \fB POSIX time\fR\&, when the file was written\&. See also \fB\fIfile:read_file_info/1\fR\&\fR\&\&.
+.TP 2
+.B
+\fI{ctime,non_neg_integer()}\fR\&:
+Sets the time, as \fB POSIX time\fR\&, when the file was created\&. See also \fB\fIfile:read_file_info/1\fR\&\fR\&\&.
+.TP 2
+.B
+\fI{uid,non_neg_integer()}\fR\&:
+Sets the file owner\&. \fB\fIfile:read_file_info/1\fR\&\fR\&\&.
+.TP 2
+.B
+\fI{gid,non_neg_integer()}\fR\&:
+Sets the group that the file owner belongs to\&. \fB\fIfile:read_file_info/1\fR\&\fR\&\&.
 .RE
 .RE
 .LP
@@ -351,7 +377,7 @@ Reason = term()
 .RE
 .RS
 .LP
-Cconverts an error reason term to a human-readable error message string\&.
+Converts an error reason term to a human-readable error message string\&.
 .RE
 .LP
 .B

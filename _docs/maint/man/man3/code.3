@@ -1,11 +1,11 @@
-.TH code 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.TH code 3 "kernel 6.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 code \- Erlang code server.
 .SH DESCRIPTION
 .LP
 This module contains the interface to the Erlang \fIcode server\fR\&, which deals with the loading of compiled code into a running Erlang runtime system\&.
 .LP
-The runtime system can be started in \fIembedded\fR\& or \fIinteractive\fR\& mode\&. Which one is decided by command-line flag \fI-mode\fR\&:
+The runtime system can be started in \fIinteractive\fR\& or \fIembedded\fR\& mode\&. Which one is decided by the command-line flag \fI-mode\fR\&:
 .LP
 .nf
 
@@ -16,11 +16,11 @@ The modes are as follows:
 .RS 2
 .TP 2
 *
-In embedded mode, all code is loaded during system startup according to the boot script\&. (Code can also be loaded later by explicitly ordering the code server to do so)\&.
+In interactive mode, which is default, only some code is loaded during system startup, basically the modules needed by the runtime system\&. Other code is dynamically loaded when first referenced\&. When a call to a function in a certain module is made, and the module is not loaded, the code server searches for and tries to load the module\&.
 .LP
 .TP 2
 *
-In interactive mode, which is default, only some code is loaded during system startup, basically the modules needed by the runtime system\&. Other code is dynamically loaded when first referenced\&. When a call to a function in a certain module is made, and the module is not loaded, the code server searches for and tries to load the module\&.
+In embedded mode, modules are not auto loaded\&. Trying to use a module that has not been loaded results in an error\&. This mode is recommended when the boot script loads all modules, as it is typically done in OTP releases\&. (Code can still be loaded later by explicitly ordering the code server to do so)\&.
 .LP
 .RE
 

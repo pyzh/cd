@@ -1,4 +1,4 @@
-.TH timer 3 "stdlib 3.4.5" "Ericsson AB" "Erlang Module Definition"
+.TH timer 3 "stdlib 3.5" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 timer \- Timer functions.
 .SH DESCRIPTION
@@ -481,7 +481,7 @@ Value = term()
 .TP 2
 .B
 \fItc/3\fR\&:
-Evaluates \fIapply(Module, Function, Arguments)\fR\& and measures the elapsed real time as reported by \fB\fIos:timestamp/0\fR\&\fR\&\&.
+Evaluates \fIapply(Module, Function, Arguments)\fR\& and measures the elapsed real time as reported by \fB\fIerlang:monotonic_time/0\fR\&\fR\&\&.
 .RS 2
 .LP
 Returns \fI{Time, Value}\fR\&, where \fITime\fR\& is the elapsed real time in \fImicroseconds\fR\&, and \fIValue\fR\& is what is returned from the apply\&.

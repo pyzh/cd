@@ -1,4 +1,4 @@
-.TH crypto 3 "crypto 4.2.2" "Ericsson AB" "Erlang Module Definition"
+.TH crypto 3 "crypto 4.3" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 crypto \- Crypto Functions
 .SH DESCRIPTION
@@ -1074,7 +1074,9 @@ rand_seed() -> rand:state()
 .br
 .RS
 .LP
-Creates state object for \fBrandom number generation\fR\&, in order to generate cryptographically strong random numbers (based on OpenSSL\&'s \fIBN_rand_range\fR\&), and saves it on process dictionary before returning it as well\&. See also \fBrand:seed/1\fR\&\&.
+Creates state object for \fBrandom number generation\fR\&, in order to generate cryptographically strong random numbers (based on OpenSSL\&'s \fIBN_rand_range\fR\&), and saves it in the process dictionary before returning it as well\&. See also \fBrand:seed/1\fR\& and \fBrand_seed_s/0\fR\&\&.
+.LP
+When using the state object from this function the \fBrand\fR\& functions using it may throw exception \fIlow_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
 .LP
 \fIExample\fR\&
 .LP
@@ -1092,6 +1094,85 @@ rand_seed_s() -> rand:state()
 .RS
 .LP
 Creates state object for \fBrandom number generation\fR\&, in order to generate cryptographically strongly random numbers (based on OpenSSL\&'s \fIBN_rand_range\fR\&)\&. See also \fBrand:seed_s/1\fR\&\&.
+.LP
+When using the state object from this function the \fBrand\fR\& functions using it may throw exception \fIlow_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+The state returned from this function can not be used to get a reproducable random sequence as from the other \fBrand\fR\& functions, since reproducability does not match cryptographically safe\&.
+.LP
+The only supported usage is to generate one distinct random sequence from this start state\&.
+
+.RE
+.LP
+.B
+rand_seed_alg(Alg) -> rand:state()
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Alg = crypto | crypto_cache
+.br
+.RE
+.RE
+.RS
+.LP
+Creates state object for \fBrandom number generation\fR\&, in order to generate cryptographically strong random numbers\&. See also \fBrand:seed/1\fR\& and \fBrand_seed_alg_s/1\fR\&\&.
+.LP
+When using the state object from this function the \fBrand\fR\& functions using it may throw exception \fIlow_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
+.LP
+The cache size can be changed from its default value using the \fB crypto app\&'s \fR\& configuration parameter \fIrand_cache_size\fR\&\&.
+.LP
+\fIExample\fR\&
+.LP
+.nf
+
+_ = crypto:rand_seed_alg(crypto_cache),
+_IntegerValue = rand:uniform(42), % [1; 42]
+_FloatValue = rand:uniform().     % [0.0; 1.0[
+.fi
+.RE
+.LP
+.B
+rand_seed_alg_s(Alg) -> rand:state()
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Alg = crypto | crypto_cache
+.br
+.RE
+.RE
+.RS
+.LP
+Creates state object for \fBrandom number generation\fR\&, in order to generate cryptographically strongly random numbers\&. See also \fBrand:seed_s/1\fR\&\&.
+.LP
+If \fIAlg\fR\& is \fIcrypto\fR\& this function behaves exactly like \fBrand_seed_s/0\fR\&\&.
+.LP
+If \fIAlg\fR\& is \fIcrypto_cache\fR\& this function fetches random data with OpenSSL\&'s \fIRAND_bytes\fR\& and caches it for speed using an internal word size of 56 bits that makes calculations fast on 64 bit machines\&.
+.LP
+When using the state object from this function the \fBrand\fR\& functions using it may throw exception \fIlow_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
+.LP
+The cache size can be changed from its default value using the \fB crypto app\&'s \fR\& configuration parameter \fIrand_cache_size\fR\&\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+The state returned from this function can not be used to get a reproducable random sequence as from the other \fBrand\fR\& functions, since reproducability does not match cryptographically safe\&.
+.LP
+In fact since random data is cached some numbers may get reproduced if you try, but this is unpredictable\&.
+.LP
+The only supported usage is to generate one distinct random sequence from this start state\&.
+
 .RE
 .LP
 .B

@@ -1,11 +1,17 @@
-.TH file 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.TH file 3 "kernel 6.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 file \- File interface module.
 .SH DESCRIPTION
 .LP
 This module provides an interface to the file system\&.
 .LP
-On operating systems with thread support, file operations can be performed in threads of their own, allowing other Erlang processes to continue executing in parallel with the file operations\&. See command-line flag \fI+A\fR\& in \fB\fIerl(1)\fR\&\fR\&\&.
+
+.RS -4
+.B
+Warning:
+.RE
+File operations are only guaranteed to appear atomic when going through the same file server\&. A NIF or other OS process may observe intermediate steps on certain operations on some operating systems, eg\&. renaming an existing file on Windows, or \fB\fIwrite_file_info/2\fR\&\fR\& on any OS at the time of writing\&.
+
 .LP
 Regarding filename encoding, the Erlang VM can operate in two modes\&. The current mode can be queried using function \fB\fInative_name_encoding/0\fR\&\fR\&\&. It returns \fIlatin1\fR\& or \fIutf8\fR\&\&.
 .LP
@@ -13,7 +19,7 @@ In \fIlatin1\fR\& mode, the Erlang VM does not change the encoding of filenames\
 .LP
 The default mode depends on the operating system\&. Windows and MacOS X enforce consistent filename encoding and therefore the VM uses \fIutf8\fR\& mode\&.
 .LP
-On operating systems with transparent naming (for example, all Unix systems except MacOS X), default is \fIutf8\fR\& if the terminal supports UTF-8, otherwise \fIlatin1\fR\&\&. The default can be overridden using \fI+fnl\fR\& (to force \fIlatin1\fR\& mode) or \fI+fnu\fR\& (to force \fIutf8\fR\& mode) when starting \fB\fIerts:erl\fR\&\fR\&\&.
+On operating systems with transparent naming (for example, all Unix systems except MacOS X), default is \fIutf8\fR\& if the terminal supports UTF-8, otherwise \fIlatin1\fR\&\&. The default can be overridden using \fI+fnl\fR\& (to force \fIlatin1\fR\& mode) or \fI+fnu\fR\& (to force \fIutf8\fR\& mode) when starting \fB\fIerl\fR\&\fR\&\&.
 .LP
 On operating systems with transparent naming, files can be inconsistently named, for example, some files are encoded in UTF-8 while others are encoded in ISO Latin-1\&. The concept of \fIraw filenames\fR\& is introduced to handle file systems with inconsistent naming when running in \fIutf8\fR\& mode\&.
 .LP
@@ -22,6 +28,14 @@ A \fIraw filename\fR\& is a filename specified as a binary\&. The Erlang VM does
 When running in \fIutf8\fR\& mode, functions \fB\fIlist_dir/1\fR\&\fR\& and \fB\fIread_link/1\fR\&\fR\& never return raw filenames\&. To return all filenames including raw filenames, use functions \fB\fIlist_dir_all/1\fR\&\fR\& and \fB\fIread_link_all/1\fR\&\fR\&\&.
 .LP
 See also section \fBNotes About Raw Filenames\fR\& in the STDLIB User\&'s Guide\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+File operations used to accept filenames containing null characters (integer value zero)\&. This caused the name to be truncated and in some cases arguments to primitive operations to be mixed up\&. Filenames containing null characters inside the filename are now \fIrejected\fR\& and will cause primitive file operations fail\&.
+
 .SH DATA TYPES
 .nf
 
@@ -43,11 +57,19 @@ A file descriptor representing a file opened in \fB\fIraw\fR\&\fR\& mode\&.
 \fBfilename()\fR\& = string()
 .br
 .fi
+.RS
+.LP
+See also the documentation of the \fB\fIname_all()\fR\&\fR\& type\&.
+.RE
 .nf
 
 \fBfilename_all()\fR\& = string() | binary()
 .br
 .fi
+.RS
+.LP
+See also the documentation of the \fB\fIname_all()\fR\&\fR\& type\&.
+.RE
 .nf
 
 \fBio_device()\fR\& = pid() | \fBfd()\fR\&
@@ -64,7 +86,7 @@ As returned by \fB\fIopen/2\fR\&\fR\&; \fIpid()\fR\& is a process handling I/O-p
 .fi
 .RS
 .LP
-If VM is in Unicode filename mode, \fIstring()\fR\& and \fIchar()\fR\& are allowed to be > 255\&.
+If VM is in Unicode filename mode, \fIstring()\fR\& and \fIchar()\fR\& are allowed to be > 255\&. See also the documentation of the \fB\fIname_all()\fR\&\fR\& type\&.
 .RE
 .nf
 
@@ -75,7 +97,7 @@ If VM is in Unicode filename mode, \fIstring()\fR\& and \fIchar()\fR\& are allow
 .fi
 .RS
 .LP
-If VM is in Unicode filename mode, \fIstring()\fR\& and \fIchar()\fR\& are allowed to be > 255\&. \fIRawFilename\fR\& is a filename not subject to Unicode translation, meaning that it can contain characters not conforming to the Unicode encoding expected from the file system (that is, non-UTF-8 characters although the VM is started in Unicode filename mode)\&.
+If VM is in Unicode filename mode, characters are allowed to be > 255\&. \fIRawFilename\fR\& is a filename not subject to Unicode translation, meaning that it can contain characters not conforming to the Unicode encoding expected from the file system (that is, non-UTF-8 characters although the VM is started in Unicode filename mode)\&. Null characters (integer value zero) are \fInot\fR\& allowed in filenames (not even at the end)\&.
 .RE
 .nf
 
@@ -87,7 +109,13 @@ If VM is in Unicode filename mode, \fIstring()\fR\& and \fIchar()\fR\& are allow
 .br
     ebadf |
 .br
+    ebadmsg |
+.br
     ebusy |
+.br
+    edeadlk |
+.br
+    edeadlock |
 .br
     edquot |
 .br
@@ -96,6 +124,8 @@ If VM is in Unicode filename mode, \fIstring()\fR\& and \fIchar()\fR\& are allow
     efault |
 .br
     efbig |
+.br
+    eftype |
 .br
     eintr |
 .br
@@ -111,17 +141,31 @@ If VM is in Unicode filename mode, \fIstring()\fR\& and \fIchar()\fR\& are allow
 .br
     emlink |
 .br
+    emultihop |
+.br
     enametoolong |
 .br
     enfile |
 .br
+    enobufs |
+.br
     enodev |
+.br
+    enolck |
+.br
+    enolink |
 .br
     enoent |
 .br
     enomem |
 .br
     enospc |
+.br
+    enosr |
+.br
+    enostr |
+.br
+    enosys |
 .br
     enotblk |
 .br
@@ -131,9 +175,15 @@ If VM is in Unicode filename mode, \fIstring()\fR\& and \fIchar()\fR\& are allow
 .br
     enxio |
 .br
+    eopnotsupp |
+.br
+    eoverflow |
+.br
     eperm |
 .br
     epipe |
+.br
+    erange |
 .br
     erofs |
 .br
@@ -142,6 +192,8 @@ If VM is in Unicode filename mode, \fIstring()\fR\& and \fIchar()\fR\& are allow
     esrch |
 .br
     estale |
+.br
+    etxtbsy |
 .br
     exdev
 .br
@@ -1420,7 +1472,7 @@ Missing permission for reading the file or searching one of the parent directori
 .TP 2
 .B
 \fIeisdir\fR\&:
-The named file is not a regular file\&. It can be a directory, a FIFO, or a device\&.
+The named file is a directory\&.
 .TP 2
 .B
 \fIenotdir\fR\&:
@@ -2129,7 +2181,7 @@ Returns seconds since or before Unix time epoch, which is 1970-01-01 00:00 UTC\&
 .LP
 Default is \fI{time, local}\fR\&\&.
 .LP
-If the option \fIraw\fR\& is set, the file server is not called and only information about local files is returned\&.
+If the option \fIraw\fR\& is set, the file server is not called and only information about local files is returned\&. Note that this will break this module\&'s atomicity guarantees as it can race with a concurrent call to \fB\fIwrite_file_info/1,2\fR\&\fR\&
 .LP
 
 .RS -4
@@ -2448,7 +2500,7 @@ Reason = \fBposix()\fR\& | badarg
 .LP
 Works like \fB\fIread_file_info/1,2\fR\&\fR\& except that if \fIName\fR\& is a symbolic link, information about the link is returned in the \fIfile_info\fR\& record and the \fItype\fR\& field of the record is set to \fIsymlink\fR\&\&.
 .LP
-If the option \fIraw\fR\& is set, the file server is not called and only information about local files is returned\&.
+If the option \fIraw\fR\& is set, the file server is not called and only information about local files is returned\&. Note that this will break this module\&'s atomicity guarantees as it can race with a concurrent call to \fB\fIwrite_file_info/1,2\fR\&\fR\&
 .LP
 If \fIName\fR\& is not a symbolic link, this function returns the same result as \fIread_file_info/1\fR\&\&. On platforms that do not support symbolic links, this function is always equivalent to \fIread_file_info/1\fR\&\&.
 .RE
@@ -2671,7 +2723,7 @@ Sends \fIBytes\fR\& from the file referenced by \fIRawFile\fR\& beginning at \fI
 .LP
 The file used must be opened using the \fIraw\fR\& flag, and the process calling \fIsendfile\fR\& must be the controlling process of the socket\&. See \fB\fIgen_tcp:controlling_process/2\fR\&\fR\&\&.
 .LP
-If the OS used does not support \fIsendfile\fR\&, an Erlang fallback using \fB\fIread/2\fR\&\fR\& and \fB\fIgen_tcp:send/2\fR\&\fR\& is used\&.
+If the OS used does not support non-blocking \fIsendfile\fR\&, an Erlang fallback using \fB\fIread/2\fR\&\fR\& and \fB\fIgen_tcp:send/2\fR\&\fR\& is used\&.
 .LP
 The option list can contain the following options:
 .RS 2
@@ -2679,10 +2731,6 @@ The option list can contain the following options:
 .B
 \fIchunk_size\fR\&:
 The chunk size used by the Erlang fallback to send data\&. If using the fallback, set this to a value that comfortably fits in the systems memory\&. Default is 20 MB\&.
-.TP 2
-.B
-\fIuse_threads\fR\&:
-Instructs the emulator to use the \fIasync\fR\& thread pool for the \fIsendfile\fR\& system call\&. This can be useful if the OS you are running on does not properly support non-blocking \fIsendfile\fR\& calls\&. Notice that using \fIasync\fR\& threads potentially makes your system vulnerable to slow client attacks\&. If set to \fItrue\fR\& and no \fIasync\fR\& threads are available, the \fIsendfile\fR\& call returns \fI{error,einval}\fR\&\&. Introduced in Erlang/OTP 17\&.0\&. Default is \fIfalse\fR\&\&.
 .RE
 .RE
 .LP
@@ -3202,93 +3250,55 @@ A component of the filename is not a directory\&. On some platforms, \fIenoent\f
 .SH "PERFORMANCE"
 
 .LP
-Some operating system file operations, for example, a \fIsync/1\fR\& or \fIclose/1\fR\& on a huge file, can block their calling thread for seconds\&. If this affects the emulator main thread, the response time is no longer in the order of milliseconds, depending on the definition of "soft" in soft real-time system\&.
-.LP
-If the device driver thread pool is active, file operations are done through those threads instead, so the emulator can go on executing Erlang processes\&. Unfortunately, the time for serving a file operation increases because of the extra scheduling required from the operating system\&.
-.LP
-If the device driver thread pool is disabled or of size 0, large file reads and writes are segmented into many smaller, which enable the emulator to serve other processes during the file operation\&. This has the same effect as when using the thread pool, but with larger overhead\&. Other file operations, for example, \fIsync/1\fR\& or \fIclose/1\fR\& on a huge file, still are a problem\&.
-.LP
-For increased performance, raw files are recommended\&. Raw files use the file system of the host machine of the node\&.
-.LP
-
-.RS -4
-.B
-Note:
-.RE
-For normal files (non-raw), the file server is used to find the files, and if the node is running its file server as slave to the file server of another node, and the other node runs on some other host machine, they can have different file systems\&. However, this is seldom a problem\&.
-
+For increased performance, raw files are recommended\&.
 .LP
 A normal file is really a process so it can be used as an I/O device (see \fB\fIio\fR\&\fR\&)\&. Therefore, when data is written to a normal file, the sending of the data to the file process, copies all data that are not binaries\&. Opening the file in binary mode and writing binaries is therefore recommended\&. If the file is opened on another node, or if the file server runs as slave to the file server of another node, also binaries are copied\&.
 .LP
-Caching data to reduce the number of file operations, or rather the number of calls to the file driver, generally increases performance\&. The following function writes 4 MBytes in 23 seconds when tested:
-.LP
-.nf
-
-create_file_slow(Name, N) when integer(N), N >= 0 ->
-    {ok, FD} = file:open(Name, [raw, write, delayed_write, binary]),
-    ok = create_file_slow(FD, 0, N),
-    ok = ?FILE_MODULE:close(FD),
-    ok.
-      
-create_file_slow(FD, M, M) ->
-    ok;
-create_file_slow(FD, M, N) ->
-    ok = file:write(FD, <<M:32/unsigned>>),
-    create_file_slow(FD, M+1, N).
-.fi
-.LP
-The following, functionally equivalent, function collects 1024 entries into a list of 128 32-byte binaries before each call to \fB\fIwrite/2\fR\&\fR\& and so does the same work in 0\&.52 seconds, which is 44 times faster:
-.LP
-.nf
-
-create_file(Name, N) when integer(N), N >= 0 ->
-    {ok, FD} = file:open(Name, [raw, write, delayed_write, binary]),
-    ok = create_file(FD, 0, N),
-    ok = ?FILE_MODULE:close(FD),
-    ok.
-      
-create_file(FD, M, M) ->
-    ok;
-create_file(FD, M, N) when M + 1024 =&lt; N ->
-    create_file(FD, M, M + 1024, []),
-    create_file(FD, M + 1024, N);
-create_file(FD, M, N) ->
-    create_file(FD, M, N, []).
-      
-create_file(FD, M, M, R) ->
-    ok = file:write(FD, R);
-create_file(FD, M, N0, R) when M + 8 =&lt; N0 ->
-    N1  = N0-1,  N2  = N0-2,  N3  = N0-3,  N4  = N0-4, 
-    N5  = N0-5,  N6  = N0-6,  N7  = N0-7,  N8  = N0-8, 
-    create_file(FD, M, N8, 
-                [<<N8:32/unsigned,  N7:32/unsigned, 
-                   N6:32/unsigned,  N5:32/unsigned, 
-                   N4:32/unsigned,  N3:32/unsigned, 
-                   N2:32/unsigned,  N1:32/unsigned>> | R]);
-create_file(FD, M, N0, R) ->
-    N1 = N0-1,
-    create_file(FD, M, N1, [<<N1:32/unsigned>> | R]).
-.fi
-.LP
 
 .RS -4
 .B
 Note:
 .RE
-Trust only your own benchmarks\&. If the list length in \fIcreate_file/2\fR\& above is increased, it runs slightly faster, but consumes more memory and causes more memory fragmentation\&. How much this affects your application is something that this simple benchmark cannot predict\&.
-.LP
-If the size of each binary is increased to 64 bytes, it also runs slightly faster, but the code is then twice as clumsy\&. In the current implementation, binaries larger than 64 bytes are stored in memory common to all processes and not copied when sent between processes, while these smaller binaries are stored on the process heap and copied when sent like any other term\&.
-.LP
-So, with a binary size of 68 bytes, \fIcreate_file/2\fR\& runs 30 percent slower than with 64 bytes, and causes much more memory fragmentation\&. Notice that if the binaries were to be sent between processes (for example, a non-raw file), the results would probably be completely different\&.
+Raw files use the file system of the host machine of the node\&. For normal files (non-raw), the file server is used to find the files, and if the node is running its file server as slave to the file server of another node, and the other node runs on some other host machine, they can have different file systems\&. However, this is seldom a problem\&.
 
 .LP
-A raw file is really a port\&. When writing data to a port, it is efficient to write a list of binaries\&. It is not needed to flatten a deep list before writing\&. On Unix hosts, scatter output, which writes a set of buffers in one operation, is used when possible\&. In this way \fIwrite(FD, [Bin1, Bin2 | Bin3])\fR\& writes the contents of the binaries without copying the data at all, except for perhaps deep down in the operating system kernel\&.
+\fB\fIopen/2\fR\&\fR\& can be given the options \fIdelayed_write\fR\& and \fIread_ahead\fR\& to turn on caching, which will reduce the number of operating system calls and greatly improve performance for small reads and writes\&. However, the overhead won\&'t disappear completely and it\&'s best to keep the number of file operations to a minimum\&. As a contrived example, the following function writes 4MB in 2\&.5 seconds when tested:
 .LP
-For raw files, \fIpwrite/2\fR\& and \fIpread/2\fR\& are efficiently implemented\&. The file driver is called only once for the whole operation, and the list iteration is done in the file driver\&.
+.nf
+
+create_file_slow(Name) ->
+    {ok, Fd} = file:open(Name, [raw, write, delayed_write, binary]),
+    create_file_slow_1(Fd, 4 bsl 20),
+    file:close(Fd).
+
+create_file_slow_1(_Fd, 0) ->
+    ok;
+create_file_slow_1(Fd, M) ->
+    ok = file:write(Fd, <<0>>),
+    create_file_slow_1(Fd, M - 1).
+.fi
 .LP
-The options \fIdelayed_write\fR\& and \fIread_ahead\fR\& to \fB\fIopen/2\fR\&\fR\& make the file driver cache data to reduce the number of operating system calls\&. The function \fIcreate_file/2\fR\& in the recent example takes 60 seconds without option \fIdelayed_write\fR\&, which is 2\&.6 times slower\&.
+The following functionally equivalent code writes 128 bytes per call to \fB\fIwrite/2\fR\&\fR\& and so does the same work in 0\&.08 seconds, which is roughly 30 times faster:
 .LP
-As a bad example, \fIcreate_file_slow/2\fR\& without options \fIraw\fR\&, \fIbinary\fR\&, and \fIdelayed_write\fR\&, meaning it calls \fIopen(Name, [write])\fR\&, needs 1 min 20 seconds for the job, which is 3\&.5 times slower than the first example, and 150 times slower than the optimized \fIcreate_file/2\fR\&\&.
+.nf
+
+create_file(Name) ->
+    {ok, Fd} = file:open(Name, [raw, write, delayed_write, binary]),
+    create_file_1(Fd, 4 bsl 20),
+    file:close(Fd),
+    ok.
+
+create_file_1(_Fd, 0) ->
+    ok;
+create_file_1(Fd, M) when M >= 128 ->
+    ok = file:write(Fd, <<0:(128)/unit:8>>),
+    create_file_1(Fd, M - 128);
+create_file_1(Fd, M) ->
+    ok = file:write(Fd, <<0:(M)/unit:8>>),
+    create_file_1(Fd, M - 1).
+.fi
+.LP
+When writing data it\&'s generally more efficient to write a list of binaries rather than a list of integers\&. It is not needed to flatten a deep list before writing\&. On Unix hosts, scatter output, which writes a set of buffers in one operation, is used when possible\&. In this way \fIwrite(FD, [Bin1, Bin2 | Bin3])\fR\& writes the contents of the binaries without copying the data at all, except for perhaps deep down in the operating system kernel\&.
 .LP
 
 .RS -4

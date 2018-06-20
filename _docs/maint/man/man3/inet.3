@@ -1,4 +1,4 @@
-.TH inet 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.TH inet 3 "kernel 6.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 inet \- Access to TCP/IP protocols.
 .SH DESCRIPTION
@@ -193,7 +193,65 @@ Addresses besides \fB\fIip_address()\fR\&\fR\& ones that are returned from socke
 .RE
 .nf
 
-\fBposix()\fR\& = exbadport | exbadseq | \fBfile:posix()\fR\&
+\fBposix()\fR\& = 
+.br
+    eaddrinuse |
+.br
+    eaddrnotavail |
+.br
+    eafnosupport |
+.br
+    ealready |
+.br
+    econnaborted |
+.br
+    econnrefused |
+.br
+    econnreset |
+.br
+    edestaddrreq |
+.br
+    ehostdown |
+.br
+    ehostunreach |
+.br
+    einprogress |
+.br
+    eisconn |
+.br
+    emsgsize |
+.br
+    enetdown |
+.br
+    enetunreach |
+.br
+    enopkg |
+.br
+    enoprotoopt |
+.br
+    enotconn |
+.br
+    enotty |
+.br
+    enotsock |
+.br
+    eproto |
+.br
+    eprotonosupport |
+.br
+    eprototype |
+.br
+    esocktnosupport |
+.br
+    etimedout |
+.br
+    ewouldblock |
+.br
+    exbadport |
+.br
+    exbadseq |
+.br
+    \fBfile:posix()\fR\&
 .br
 .fi
 .RS
@@ -213,6 +271,11 @@ See \fB\fIgen_tcp:type-socket\fR\&\fR\& and \fB\fIgen_udp:type-socket\fR\&\fR\&\
 .nf
 
 \fBaddress_family()\fR\& = inet | inet6 | local
+.br
+.fi
+.nf
+
+\fBsocket_protocol()\fR\& = tcp | udp | sctp
 .br
 .fi
 .SH EXPORTS
@@ -372,7 +435,7 @@ Hostent = \fBhostent()\fR\&
 .LP
 Returns a \fIhostent\fR\& record for the host with the specified hostname\&.
 .LP
-If resolver option \fIinet6\fR\& is \fItrue\fR\&, an IPv6 address is looked up\&. If that fails, the IPv4 address is looked up and returned on IPv6-mapped IPv4 format\&.
+If resolver option \fIinet6\fR\& is \fItrue\fR\&, an IPv6 address is looked up\&.
 .RE
 .LP
 .nf
@@ -670,6 +733,72 @@ Number of bytes sent from the socket\&.
 .nf
 
 .B
+i() -> ok
+.br
+.fi
+.br
+.nf
+
+.B
+i(Proto :: socket_protocol()) -> ok
+.br
+.fi
+.br
+.nf
+
+.B
+i(X1 :: socket_protocol(), Fs :: [atom()]) -> ok
+.br
+.fi
+.br
+.RS
+.LP
+Lists all TCP, UDP and SCTP sockets, including those that the Erlang runtime system uses as well as those created by the application\&.
+.LP
+The following options are available:
+.RS 2
+.TP 2
+.B
+\fIport\fR\&:
+The internal index of the port\&.
+.TP 2
+.B
+\fImodule\fR\&:
+The callback module of the socket\&.
+.TP 2
+.B
+\fIrecv\fR\&:
+Number of bytes received by the socket\&.
+.TP 2
+.B
+\fIsent\fR\&:
+Number of bytes sent from the socket\&.
+.TP 2
+.B
+\fIowner\fR\&:
+The socket owner process\&.
+.TP 2
+.B
+\fIlocal_address\fR\&:
+The local address of the socket\&.
+.TP 2
+.B
+\fIforeign_address\fR\&:
+The address and port of the other end of the connection\&.
+.TP 2
+.B
+\fIstate\fR\&:
+The connection state\&.
+.TP 2
+.B
+\fItype\fR\&:
+STREAM or DGRAM or SEQPACKET\&.
+.RE
+.RE
+.LP
+.nf
+
+.B
 ntoa(IpAddress) -> Address | {error, einval}
 .br
 .fi
@@ -807,6 +936,18 @@ IPv6Address = \fBip_address()\fR\&
 .RS
 .LP
 Parses an IPv6 address string and returns an \fB\fIip6_address()\fR\&\fR\&\&. Does \fInot\fR\& accept IPv4 addresses\&.
+.RE
+.LP
+.nf
+
+.B
+ipv4_mapped_ipv6_address(X1 :: ip_address()) -> ip_address()
+.br
+.fi
+.br
+.RS
+.LP
+Convert an IPv4 address to an IPv4-mapped IPv6 address or the reverse\&. When converting from an IPv6 address all but the 2 low words are ignored so this function also works on some other types of addresses than IPv4-mapped\&.
 .RE
 .LP
 .nf
@@ -1300,7 +1441,7 @@ Used together with \fIsend_timeout\fR\& to specify whether the socket is to be a
 .TP 2
 .B
 \fI{show_econnreset, Boolean}\fR\&(TCP/IP sockets):
-When this option is set to \fIfalse\fR\&, which is default, an RST received from the TCP peer is treated as a normal close (as though an FIN was sent)\&. A caller to \fB\fIgen_tcp:recv/2\fR\&\fR\& gets \fI{error, closed}\fR\&\&. In active mode, the controlling process receives a \fI{tcp_close, Socket}\fR\& message, indicating that the peer has closed the connection\&.
+When this option is set to \fIfalse\fR\&, which is default, an RST received from the TCP peer is treated as a normal close (as though an FIN was sent)\&. A caller to \fB\fIgen_tcp:recv/2\fR\&\fR\& gets \fI{error, closed}\fR\&\&. In active mode, the controlling process receives a \fI{tcp_closed, Socket}\fR\& message, indicating that the peer has closed the connection\&.
 .RS 2
 .LP
 Setting this option to \fItrue\fR\& allows you to distinguish between a connection that was closed normally, and one that was aborted (intentionally or unintentionally) by the TCP peer\&. A call to \fB\fIgen_tcp:recv/2\fR\&\fR\& returns \fI{error, econnreset}\fR\&\&. In active mode, the controlling process receives a \fI{tcp_error, Socket, econnreset}\fR\& message before the usual \fI{tcp_closed, Socket}\fR\&, as is the case for any other socket error\&. Calls to \fB\fIgen_tcp:send/2\fR\&\fR\& also returns \fI{error, econnreset}\fR\& when it is detected that a TCP peer has sent an RST\&.
@@ -1424,7 +1565,7 @@ Returns a list of all local address/port number pairs for a socket for the speci
 .LP
 This function can return multiple addresses for multihomed sockets, such as SCTP sockets\&. For other sockets it returns a one-element list\&.
 .LP
-Notice that parameter \fIAssoc\fR\& is by the SCTP Sockets API Extensions defined to be ignored for one-to-one style sockets\&. For one-to-many style sockets, the special value \fI0\fR\& is defined to mean that the returned addresses must be without any particular association\&. How different SCTP implementations interprets this varies somewhat\&.
+Notice that parameter \fIAssoc\fR\& is by the SCTP Sockets API Extensions defined to be ignored for one-to-one style sockets\&. For one-to-many style sockets, the special value \fI0\fR\& is defined to mean that the returned addresses must be without any particular association\&. How different SCTP implementations interpret this varies somewhat\&.
 .RE
 .SH "POSIX ERROR CODES"
 

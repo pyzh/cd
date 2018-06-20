@@ -1,4 +1,4 @@
-.TH public_key 3 "public_key 1.5.2" "Ericsson AB" "Erlang Module Definition"
+.TH public_key 3 "public_key 1.6" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 public_key \- API module for public-key infrastructure.
 .SH DESCRIPTION
@@ -1187,13 +1187,93 @@ FqdnExtractOpt = {fqdn_fun, fun(RefID) -> FQDN::string() | default | undefined}
 .RE
 .RS
 .LP
-This function checks that the \fIPresented Identifier\fR\&  (e\&.g hostname) in a peer certificate is in agreement with the \fIReference Identifier\fR\&  that the client expects to be connected to\&. The function is intended to be added as an extra client check of the peer certificate when performing \fBpublic_key:pkix_path_validation/3\fR\& 
+This function checks that the \fIPresented Identifier\fR\&  (e\&.g hostname) in a peer certificate is in agreement with at least one of the \fIReference Identifier\fR\&  that the client expects to be connected to\&. The function is intended to be added as an extra client check of the peer certificate when performing \fBpublic_key:pkix_path_validation/3\fR\& 
 .LP
-See RFC 6125 for detailed information about hostname verification\&. The \fBUser\&'s Manual\fR\& and \fBcode examples\fR\& describes this function more detailed\&.
+See RFC 6125 for detailed information about hostname verification\&. The \fBUser\&'s Guide\fR\& and \fBcode examples\fR\& describes this function more detailed\&.
 .LP
-The \fI{OtherRefId,term()}\fR\& is defined by the user and is passed to the \fImatch_fun\fR\&, if defined\&. If that term is a binary, it will be converted to a string\&.
+The \fI{OtherRefId,term()}\fR\& is defined by the user and is passed to the \fImatch_fun\fR\&, if defined\&. If the term in \fIOtherRefId\fR\& is a binary, it will be converted to a string\&.
 .LP
 The \fIip\fR\& Reference ID takes an \fBinet:ip_address()\fR\& or an ip address in string format (E\&.g "10\&.0\&.1\&.1" or "1234::5678:9012") as second element\&.
+.LP
+The options are:
+.RS 2
+.TP 2
+.B
+\fImatch_fun\fR\&:
+ The \fIfun/2\fR\& in this option replaces the default host name matching rules\&. The fun should return a boolean to tell if the Reference ID and Presented ID matches or not\&. The fun can also return a third value, the atom \fIdefault\fR\&, if the default matching rules shall apply\&. This makes it possible to augment the tests with a special case: 
+.LP
+.nf
+
+fun(....) -> true;   % My special case
+   (_, _) -> default % all others falls back to the inherit tests
+end
+	  
+.fi
+.br
+See \fBpkix_verify_hostname_match_fun/1\fR\& for a function that takes a protocol name as argument and returns a \fIfun/2\fR\& suitable for this option and \fBRe-defining the match operation\fR\& in the User\&'s Guide for an example\&. 
+.TP 2
+.B
+\fIfail_callback\fR\&:
+If a matching fails, there could be circumstances when the certificate should be accepted anyway\&. Think for example of a web browser where you choose to accept an outdated certificate\&. This option enables implementation of such a function\&. This \fIfun/1\fR\& is called when no \fIReferenceID\fR\& matches\&. The return value of the fun (a \fIboolean()\fR\&) decides the outcome\&. If \fItrue\fR\& the the certificate is accepted otherwise it is rejected\&. See \fB"Pinning" a Certificate\fR\& in the User\&'s Guide\&. 
+.TP 2
+.B
+\fIfqdn_fun\fR\&:
+This option augments the host name extraction from URIs and other Reference IDs\&. It could for example be a very special URI that is not standardised\&. The fun takes a Reference ID as argument and returns one of: 
+.RS 2
+.TP 2
+*
+the hostname
+.LP
+.TP 2
+*
+the atom \fIdefault\fR\&: the default host name extract function will be used
+.LP
+.TP 2
+*
+the atom \fIundefined\fR\&: a host name could not be extracted\&. The pkix_verify_hostname/3 will return \fIfalse\fR\&\&.
+.LP
+.RE
+
+.br
+For an example, see \fBHostname extraction\fR\& in the User\&'s Guide\&. 
+.RE
+.RE
+.LP
+.B
+pkix_verify_hostname_match_fun(Protcol) -> fun(RefId | FQDN::string(), PresentedID) -> boolean() | default
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Protocol = https
+.br
+.RS 2
+The algorithm for wich the fun should implement the special matching rules
+.RE
+RefId
+.br
+.RS 2
+See \fBpkix_verify_hostname/3\fR\&\&.
+.RE
+FQDN
+.br
+.RS 2
+See \fBpkix_verify_hostname/3\fR\&\&.
+.RE
+PresentedID
+.br
+.RS 2
+See \fBpkix_verify_hostname/3\fR\&\&.
+.RE
+.RE
+.RE
+.RS
+.LP
+The return value of calling this function is intended to be used in the \fImatch_fun\fR\& option in \fBpkix_verify_hostname/3\fR\&\&.
+.LP
+The returned fun augments the verify hostname matching according to the specific rules for the protocol in the argument\&.
 .RE
 .LP
 .B

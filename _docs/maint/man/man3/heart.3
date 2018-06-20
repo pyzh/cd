@@ -1,4 +1,4 @@
-.TH heart 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.TH heart 3 "kernel 6.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 heart \- Heartbeat monitoring of an Erlang runtime system.
 .SH DESCRIPTION
@@ -25,7 +25,7 @@ The environment variable \fIHEART_BEAT_TIMEOUT\fR\& can be used to configure the
 .LP
 The value (in seconds) must be in the range 10 < X <= 65535\&.
 .LP
-Notice that if the system clock is adjusted with more than \fIHEART_BEAT_TIMEOUT\fR\& seconds, \fIheart\fR\& times out and tries to reboot the system\&. This can occur, for example, if the system clock is adjusted automatically by use of the Network Time Protocol (NTP)\&.
+When running on OSs lacking support for monotonic time, \fIheart\fR\& is susceptible to system clock adjustments of more than \fIHEART_BEAT_TIMEOUT\fR\& seconds\&. When this happens, \fIheart\fR\& times out and tries to reboot the system\&. This can occur, for example, if the system clock is adjusted automatically by use of the Network Time Protocol (NTP)\&.
 .LP
 If a crash occurs, an \fIerl_crash\&.dump\fR\& is \fInot\fR\& written unless environment variable \fIERL_CRASH_DUMP_SECONDS\fR\& is set:
 .LP

@@ -1,4 +1,4 @@
-.TH gen_tcp 3 "kernel 5.4.3" "Ericsson AB" "Erlang Module Definition"
+.TH gen_tcp 3 "kernel 6.0" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 gen_tcp \- Interface to TCP/IP sockets.
 .SH DESCRIPTION
@@ -223,6 +223,10 @@ For more examples, see section \fBExamples\fR\&\&.
 .br
     {tcp_module, module()} |
 .br
+    {netns, \fBfile:filename_all()\fR\&} |
+.br
+    {bind_to_device, binary()} |
+.br
     \fBoption()\fR\&
 .br
 .fi
@@ -243,6 +247,10 @@ For more examples, see section \fBExamples\fR\&\&.
     {backlog, B :: integer() >= 0} |
 .br
     {tcp_module, module()} |
+.br
+    {netns, \fBfile:filename_all()\fR\&} |
+.br
+    {bind_to_device, binary()} |
 .br
     \fBoption()\fR\&
 .br
