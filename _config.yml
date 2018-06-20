@@ -22,9 +22,9 @@ footer-links:
   twitter: erlang_org
 
 # Your website URL, used for Sitemap.xml and your RSS feed
-url: http://blog.erlang.org/otp
+url: http://blog.erlang.org/cd
 
-baseurl: "/otp"
+baseurl: "/cd"
 
 #
 # !! You don't need to change any of the configuration flags below !!
