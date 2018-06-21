@@ -1,6 +1,6 @@
 %% 
 %% Search data file for hipe 3.18
-%% generated June 20, 2018
+%% generated June 21, 2018
 %% 
 {"HiPE_app.html", {app, "hipe"}, ["HiPE"]}.
 {notused, application, ["hipe"]}.
