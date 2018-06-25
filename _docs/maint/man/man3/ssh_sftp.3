@@ -12,14 +12,22 @@ Type definitions that are used more than once in this module, or abstractions to
 .TP 2
 .B
 \fIreason()\fR\&:
-= \fIatom()\fR\& A description of the reason why an operation failed\&.
+= \fIatom() | string() | tuple() \fR\&A description of the reason why an operation failed\&.
 .RS 2
 .LP
-The value is formed from the sftp error codes in the protocol-level responses as defined in draft-ietf-secsh-filexfer-13\&.txt section 9\&.1\&.
+The \fIatom()\fR\& value is formed from the sftp error codes in the protocol-level responses as defined in draft-ietf-secsh-filexfer-13\&.txt section 9\&.1\&.
 .RE
 .RS 2
 .LP
 The codes are named as \fISSH_FX_*\fR\& which are transformed into lowercase of the star-part\&. E\&.g\&. the error code \fISSH_FX_NO_SUCH_FILE\fR\& will cause the \fIreason()\fR\& to be \fIno_such_file\fR\&\&.
+.RE
+.RS 2
+.LP
+The \fIstring()\fR\& reason is the error information from the server in case of an exit-signal\&. If that information is empty, the reason is the exit signal name\&.
+.RE
+.RS 2
+.LP
+The \fItuple()\fR\& reason are other errors like the \fI{exit_status,integer()}\fR\& if the exit status is not 0\&.
 .RE
 .TP 2
 .B
