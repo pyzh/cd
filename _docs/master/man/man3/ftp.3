@@ -584,7 +584,7 @@ verbose() = boolean() (default is false)
 .br
 debug() = disable | debug | trace (default is disable)
 .br
-open_option() = {ipfamily, ipfamily()} | {port, port()} | {mode, mode()} | {tls, tls_options()} | {timeout, timeout()} | {dtimeout, dtimeout()} | {progress, progress()}
+open_option() = {ipfamily, ipfamily()} | {port, port()} | {mode, mode()} | {tls, tls_options()} | {timeout, timeout()} | {dtimeout, dtimeout()} | {progress, progress() | {sock_ctrl, sock_opts()} | {sock_data_act, sock_opts()} | {sock_data_pass, sock_opts()} }
 .br
 ipfamily() = inet | inet6 | inet6fb4 (default is inet)
 .br
@@ -593,6 +593,8 @@ port() = integer() > 0 (default is 21)
 mode() = active | passive (default is passive)
 .br
 tls_options() = [\fBssl:ssloption()\fR\&]
+.br
+sock_opts() = [\fBgen_tcp:option()\fR\& except for ipv6_v6only, active, packet, mode, packet_size and header
 .br
 timeout() = integer() > 0 (default is 60000 milliseconds)
 .br
@@ -615,6 +617,8 @@ Reason = ehost | term()
 Starts a standalone FTP client process (without the \fIftp\fR\& service framework) and opens a session with the FTP server at \fIHost\fR\&\&.
 .LP
 If option \fI{tls, tls_options()}\fR\& is present, the FTP session is transported over \fItls\fR\& (\fIftps\fR\&, see RFC 4217)\&. The list \fItls_options()\fR\& can be empty\&. The function \fB\fIssl:connect/3\fR\&\fR\& is used for securing both the control connection and the data sessions\&.
+.LP
+The options \fIsock_ctrl\fR\&, \fIsock_data_act\fR\& and \fIsock_data_pass\fR\& passes options down to the underlying transport layer (tcp)\&. The default value for \fIsock_ctrl\fR\& is \fI[]\fR\&\&. Both \fIsock_data_act\fR\& and \fIsock_data_pass\fR\& uses the value of \fIsock_ctrl\fR\& as default value\&.
 .LP
 A session opened in this way is closed using function \fBclose\fR\&\&.
 .RE
