@@ -48,10 +48,10 @@
 <div class="erlang-logo-wrapper"><a href="../index.html"><img alt="Erlang Logo" src="../erlang-logo.png" class="erlang-logo"></a></div>
 <p class="section-title">Interoperability Tutorial</p>
 <p class="section-subtitle">User's Guide</p>
-<p class="section-version">Version 10.0</p>
+<p class="section-version">Version 10.0.1</p>
 <ul class="panel-sections">
 <li><a href="users_guide.html">User's Guide</a></li>
-<li><a href="../pdf/otp-system-documentation-10.0.pdf">PDF</a></li>
+<li><a href="../pdf/otp-system-documentation-10.0.1.pdf">PDF</a></li>
 <li><a href="../index.html">Top</a></li>
 </ul>
 <ul class="expand-collapse-items">
@@ -143,7 +143,7 @@
     used for solving simple problems like this, a port is
     sufficient.</p>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-erlang-program-idp71993077208016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-erlang-program-idp71993077208016').style.visibility = 'hidden';"><span id="ghlink-erlang-program-idp71993077208016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/tutorial/cnode.xmlsrc#L38" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="erlang-program" href="#erlang-program">7.1 
+  <h3><span onMouseOver="document.getElementById('ghlink-erlang-program-idp47503881173632').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-erlang-program-idp47503881173632').style.visibility = 'hidden';"><span id="ghlink-erlang-program-idp47503881173632" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/tutorial/cnode.xmlsrc#L38" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="erlang-program" href="#erlang-program">7.1 
           Erlang Program</a></span></h3>
     
     <p>From Erlang's point of view, the C node is treated like a
@@ -200,11 +200,11 @@ call_cnode(Msg) -&gt;
     end.</pre></div>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-c-program-idp71993077217952').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-c-program-idp71993077217952').style.visibility = 'hidden';"><span id="ghlink-c-program-idp71993077217952" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/tutorial/cnode.xmlsrc#L70" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="c-program" href="#c-program">7.2 
+  <h3><span onMouseOver="document.getElementById('ghlink-c-program-idp47503881183568').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-c-program-idp47503881183568').style.visibility = 'hidden';"><span id="ghlink-c-program-idp47503881183568" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/tutorial/cnode.xmlsrc#L70" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="c-program" href="#c-program">7.2 
           C Program</a></span></h3>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-setting-up-communication-idp71993077218992').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-setting-up-communication-idp71993077218992').style.visibility = 'hidden';"><span id="ghlink-setting-up-communication-idp71993077218992" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/tutorial/cnode.xmlsrc#L73" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="setting-up-communication" href="#setting-up-communication">Setting Up Communication</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-setting-up-communication-idp47503881184608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-setting-up-communication-idp47503881184608').style.visibility = 'hidden';"><span id="ghlink-setting-up-communication-idp47503881184608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/tutorial/cnode.xmlsrc#L73" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="setting-up-communication" href="#setting-up-communication">Setting Up Communication</a></span></h4>
       
       <p>Before calling any other function in Erl_Interface, the
         memory handling must be initiated:</p>
@@ -260,7 +260,7 @@ fd = erl_accept(listen, &amp;conn);</pre></div>
         Erlang node.</p>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-sending-and-receiving-messages-idp71993077239664').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-sending-and-receiving-messages-idp71993077239664').style.visibility = 'hidden';"><span id="ghlink-sending-and-receiving-messages-idp71993077239664" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/tutorial/cnode.xmlsrc#L129" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="sending-and-receiving-messages" href="#sending-and-receiving-messages">Sending and Receiving Messages</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-sending-and-receiving-messages-idp47503881205280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-sending-and-receiving-messages-idp47503881205280').style.visibility = 'hidden';"><span id="ghlink-sending-and-receiving-messages-idp47503881205280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/tutorial/cnode.xmlsrc#L129" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="sending-and-receiving-messages" href="#sending-and-receiving-messages">Sending and Receiving Messages</a></span></h4>
       
       <p>The C node can receive a message from Erlang by calling
         <span class="code">erl_receive msg()</span>. This function reads data from the
@@ -587,7 +587,7 @@ int main(int argc, char **argv) {
 }</pre></div>    
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-running-the-example-idp71993077264176').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-running-the-example-idp71993077264176').style.visibility = 'hidden';"><span id="ghlink-running-the-example-idp71993077264176" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/tutorial/cnode.xmlsrc#L197" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="running-the-example" href="#running-the-example">7.3 
+  <h3><span onMouseOver="document.getElementById('ghlink-running-the-example-idp47503881229792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-running-the-example-idp47503881229792').style.visibility = 'hidden';"><span id="ghlink-running-the-example-idp47503881229792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/tutorial/cnode.xmlsrc#L197" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="running-the-example" href="#running-the-example">7.3 
           Running the Example</a></span></h3>
     
     <p><strong>Step 1.</strong> Compile the C code. This provides the paths to
