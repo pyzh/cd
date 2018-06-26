@@ -48,10 +48,10 @@
 <div class="erlang-logo-wrapper"><a href="../index.html"><img alt="Erlang Logo" src="../erlang-logo.png" class="erlang-logo"></a></div>
 <p class="section-title">OTP Design Principles</p>
 <p class="section-subtitle">User's Guide</p>
-<p class="section-version">Version 10.0</p>
+<p class="section-version">Version 10.0.1</p>
 <ul class="panel-sections">
 <li><a href="users_guide.html">User's Guide</a></li>
-<li><a href="../pdf/otp-system-documentation-10.0.pdf">PDF</a></li>
+<li><a href="../pdf/otp-system-documentation-10.0.1.pdf">PDF</a></li>
 <li><a href="../index.html">Top</a></li>
 </ul>
 <ul class="expand-collapse-items">
@@ -249,7 +249,7 @@
     in STDLIB, where all details about the supervisor
     behaviour is given.</p>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-supervision-principles-idp46294092887904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-supervision-principles-idp46294092887904').style.visibility = 'hidden';"><span id="ghlink-supervision-principles-idp46294092887904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L37" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="supervision-principles" href="#supervision-principles">5.1 
+  <h3><span onMouseOver="document.getElementById('ghlink-supervision-principles-idp70713632011824').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-supervision-principles-idp70713632011824').style.visibility = 'hidden';"><span id="ghlink-supervision-principles-idp70713632011824" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L37" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="supervision-principles" href="#supervision-principles">5.1 
           Supervision Principles</a></span></h3>
     
     <p>A supervisor is responsible for starting, stopping, and
@@ -262,7 +262,7 @@
       list, and terminated in the reversed order.</p>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-example-idp46294092891104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-example-idp46294092891104').style.visibility = 'hidden';"><span id="ghlink-example-idp46294092891104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L49" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="example" href="#example">5.2 
+  <h3><span onMouseOver="document.getElementById('ghlink-example-idp70713632015024').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-example-idp70713632015024').style.visibility = 'hidden';"><span id="ghlink-example-idp70713632015024" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L49" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="example" href="#example">5.2 
           Example</a></span></h3>
     
     <p>The callback module for a supervisor starting the server from
@@ -295,7 +295,7 @@ init(_Args) -&gt;
     
 
   <h3>
-<a name="flags"></a><span onMouseOver="document.getElementById('ghlink-supervisor-flags-idp46294092899520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-supervisor-flags-idp46294092899520').style.visibility = 'hidden';"><span id="ghlink-supervisor-flags-idp46294092899520" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L82" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="supervisor-flags" href="#supervisor-flags">5.3 
+<a name="flags"></a><span onMouseOver="document.getElementById('ghlink-supervisor-flags-idp70713632023440').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-supervisor-flags-idp70713632023440').style.visibility = 'hidden';"><span id="ghlink-supervisor-flags-idp70713632023440" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L82" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="supervisor-flags" href="#supervisor-flags">5.3 
           Supervisor Flags</a></span>
 </h3>
     
@@ -321,7 +321,7 @@ init(_Args) -&gt;
   
 
   <h3>
-<a name="strategy"></a><span onMouseOver="document.getElementById('ghlink-restart-strategy-idp46294092907760').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-restart-strategy-idp46294092907760').style.visibility = 'hidden';"><span id="ghlink-restart-strategy-idp46294092907760" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L108" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="restart-strategy" href="#restart-strategy">5.4 
+<a name="strategy"></a><span onMouseOver="document.getElementById('ghlink-restart-strategy-idp70713632031680').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-restart-strategy-idp70713632031680').style.visibility = 'hidden';"><span id="ghlink-restart-strategy-idp70713632031680" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L108" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="restart-strategy" href="#restart-strategy">5.4 
           Restart Strategy</a></span>
 </h3>
     
@@ -333,7 +333,7 @@ init(_Args) -&gt;
     <p>The <span class="code">strategy</span> key is optional in this map. If it is not
       given, it defaults to <span class="code">one_for_one</span>.</p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-one_for_one-idp46294092912944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-one_for_one-idp46294092912944').style.visibility = 'hidden';"><span id="ghlink-one_for_one-idp46294092912944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L119" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="one_for_one" href="#one_for_one">one_for_one</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-one_for_one-idp70713632036864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-one_for_one-idp70713632036864').style.visibility = 'hidden';"><span id="ghlink-one_for_one-idp70713632036864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L119" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="one_for_one" href="#one_for_one">one_for_one</a></span></h4>
       
       <p>If a child process terminates, only that process is restarted.</p>
       <a name="sup4"></a>
@@ -346,7 +346,7 @@ init(_Args) -&gt;
       </div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-one_for_all-idp46294092916384').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-one_for_all-idp46294092916384').style.visibility = 'hidden';"><span id="ghlink-one_for_all-idp46294092916384" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L128" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="one_for_all" href="#one_for_all">one_for_all</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-one_for_all-idp70713632040304').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-one_for_all-idp70713632040304').style.visibility = 'hidden';"><span id="ghlink-one_for_all-idp70713632040304" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L128" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="one_for_all" href="#one_for_all">one_for_all</a></span></h4>
       
       <p>If a child process terminates, all other child processes are
         terminated, and then all child processes, including
@@ -361,7 +361,7 @@ init(_Args) -&gt;
       </div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-rest_for_one-idp46294092919920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rest_for_one-idp46294092919920').style.visibility = 'hidden';"><span id="ghlink-rest_for_one-idp46294092919920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L139" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rest_for_one" href="#rest_for_one">rest_for_one</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-rest_for_one-idp70713632043840').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rest_for_one-idp70713632043840').style.visibility = 'hidden';"><span id="ghlink-rest_for_one-idp70713632043840" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L139" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rest_for_one" href="#rest_for_one">rest_for_one</a></span></h4>
       
       <p>If a child process terminates, the rest of the child
         processes (that is, the child processes after the terminated
@@ -369,14 +369,14 @@ init(_Args) -&gt;
         child process and the rest of the child processes are restarted.</p>
     
 
-     <h4><span onMouseOver="document.getElementById('ghlink-simple_one_for_one-idp46294092921808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-simple_one_for_one-idp46294092921808').style.visibility = 'hidden';"><span id="ghlink-simple_one_for_one-idp46294092921808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L147" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="simple_one_for_one" href="#simple_one_for_one">simple_one_for_one</a></span></h4>
+     <h4><span onMouseOver="document.getElementById('ghlink-simple_one_for_one-idp70713632045728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-simple_one_for_one-idp70713632045728').style.visibility = 'hidden';"><span id="ghlink-simple_one_for_one-idp70713632045728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L147" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="simple_one_for_one" href="#simple_one_for_one">simple_one_for_one</a></span></h4>
       
       <p>See <span class="bold_code bc-17"><a href="#simple">simple-one-for-one supervisors</a></span>.</p>
     
   
 
   <h3>
-<a name="max_intensity"></a><span onMouseOver="document.getElementById('ghlink-maximum-restart-intensity-idp46294092924352').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-maximum-restart-intensity-idp46294092924352').style.visibility = 'hidden';"><span id="ghlink-maximum-restart-intensity-idp46294092924352" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L154" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="maximum-restart-intensity" href="#maximum-restart-intensity">5.5 
+<a name="max_intensity"></a><span onMouseOver="document.getElementById('ghlink-maximum-restart-intensity-idp70713632048272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-maximum-restart-intensity-idp70713632048272').style.visibility = 'hidden';"><span id="ghlink-maximum-restart-intensity-idp70713632048272" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L154" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="maximum-restart-intensity" href="#maximum-restart-intensity">5.5 
           Maximum Restart Intensity</a></span>
 </h3>
     
@@ -401,7 +401,7 @@ init(_Args) -&gt;
     <p>The keys <span class="code">intensity</span> and <span class="code">period</span> are optional in the
       supervisor flags map. If they are not given, they default
       to <span class="code">1</span> and <span class="code">5</span>, respectively.</p>
-    <h4><span onMouseOver="document.getElementById('ghlink-tuning-the-intensity-and-period-idp46294092934176').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-tuning-the-intensity-and-period-idp46294092934176').style.visibility = 'hidden';"><span id="ghlink-tuning-the-intensity-and-period-idp46294092934176" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L178" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="tuning-the-intensity-and-period" href="#tuning-the-intensity-and-period">Tuning the intensity and period</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-tuning-the-intensity-and-period-idp70713632058096').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-tuning-the-intensity-and-period-idp70713632058096').style.visibility = 'hidden';"><span id="ghlink-tuning-the-intensity-and-period-idp70713632058096" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L178" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="tuning-the-intensity-and-period" href="#tuning-the-intensity-and-period">Tuning the intensity and period</a></span></h4>
       
       <p>The default values are 1 restart per 5 seconds. This was chosen to
         be safe for most systems, even with deep supervision hierarchies,
@@ -467,7 +467,7 @@ init(_Args) -&gt;
   
 
   <h3>
-<a name="spec"></a><span onMouseOver="document.getElementById('ghlink-child-specification-idp46294092945328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-child-specification-idp46294092945328').style.visibility = 'hidden';"><span id="ghlink-child-specification-idp46294092945328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L243" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="child-specification" href="#child-specification">5.6 
+<a name="spec"></a><span onMouseOver="document.getElementById('ghlink-child-specification-idp70713632069248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-child-specification-idp70713632069248').style.visibility = 'hidden';"><span id="ghlink-child-specification-idp70713632069248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L243" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="child-specification" href="#child-specification">5.6 
           Child Specification</a></span>
 </h3>
     
@@ -618,7 +618,7 @@ init(_Args) -&gt;
   
 
   <h3>
-<a name="super_tree"></a><span onMouseOver="document.getElementById('ghlink-starting-a-supervisor-idp46294092997888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-starting-a-supervisor-idp46294092997888').style.visibility = 'hidden';"><span id="ghlink-starting-a-supervisor-idp46294092997888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L392" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="starting-a-supervisor" href="#starting-a-supervisor">5.7 
+<a name="super_tree"></a><span onMouseOver="document.getElementById('ghlink-starting-a-supervisor-idp70713632121808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-starting-a-supervisor-idp70713632121808').style.visibility = 'hidden';"><span id="ghlink-starting-a-supervisor-idp70713632121808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L392" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="starting-a-supervisor" href="#starting-a-supervisor">5.7 
           Starting a Supervisor</a></span>
 </h3>
     
@@ -659,7 +659,7 @@ init(_Args) -&gt;
       not return until all child processes have been started.</p>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-adding-a-child-process-idp46294093012752').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-adding-a-child-process-idp46294093012752').style.visibility = 'hidden';"><span id="ghlink-adding-a-child-process-idp46294093012752" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L433" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="adding-a-child-process" href="#adding-a-child-process">5.8 
+  <h3><span onMouseOver="document.getElementById('ghlink-adding-a-child-process-idp70713632136672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-adding-a-child-process-idp70713632136672').style.visibility = 'hidden';"><span id="ghlink-adding-a-child-process-idp70713632136672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L433" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="adding-a-child-process" href="#adding-a-child-process">5.8 
           Adding a Child Process</a></span></h3>
     
     <p>In addition to the static supervision tree, dynamic child
@@ -676,7 +676,7 @@ init(_Args) -&gt;
       are lost.</p>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-stopping-a-child-process-idp46294093018320').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stopping-a-child-process-idp46294093018320').style.visibility = 'hidden';"><span id="ghlink-stopping-a-child-process-idp46294093018320" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L450" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stopping-a-child-process" href="#stopping-a-child-process">5.9 
+  <h3><span onMouseOver="document.getElementById('ghlink-stopping-a-child-process-idp70713632142240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stopping-a-child-process-idp70713632142240').style.visibility = 'hidden';"><span id="ghlink-stopping-a-child-process-idp70713632142240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L450" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stopping-a-child-process" href="#stopping-a-child-process">5.9 
           Stopping a Child Process</a></span></h3>
     
     <p>Any child process, static or dynamic, can be stopped in
@@ -694,7 +694,7 @@ init(_Args) -&gt;
   
 
   <h3>
-<a name="simple"></a><span onMouseOver="document.getElementById('ghlink-simplified-one_for_one-supervisors-idp46294093025056').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-simplified-one_for_one-supervisors-idp46294093025056').style.visibility = 'hidden';"><span id="ghlink-simplified-one_for_one-supervisors-idp46294093025056" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L468" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="simplified-one_for_one-supervisors" href="#simplified-one_for_one-supervisors">5.10 
+<a name="simple"></a><span onMouseOver="document.getElementById('ghlink-simplified-one_for_one-supervisors-idp70713632148976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-simplified-one_for_one-supervisors-idp70713632148976').style.visibility = 'hidden';"><span id="ghlink-simplified-one_for_one-supervisors-idp70713632148976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L468" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="simplified-one_for_one-supervisors" href="#simplified-one_for_one-supervisors">5.10 
           Simplified one_for_one Supervisors</a></span>
 </h3>
     
@@ -746,7 +746,7 @@ init(_Args) -&gt;
       order in which they are stopped is not defined.</p>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-stopping-idp46294093041280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stopping-idp46294093041280').style.visibility = 'hidden';"><span id="ghlink-stopping-idp46294093041280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L523" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stopping" href="#stopping">5.11 
+  <h3><span onMouseOver="document.getElementById('ghlink-stopping-idp70713632165200').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stopping-idp70713632165200').style.visibility = 'hidden';"><span id="ghlink-stopping-idp70713632165200" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/sup_princ.xml#L523" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stopping" href="#stopping">5.11 
           Stopping</a></span></h3>
     
     <p>Since the supervisor is part of a supervision tree, it is

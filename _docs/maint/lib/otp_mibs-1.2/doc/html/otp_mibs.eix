@@ -1,6 +1,6 @@
 %% 
 %% Search data file for otp_mibs 1.2
-%% generated June 25, 2018
+%% generated June 26, 2018
 %% 
 {"otp_mib.html", {function, {"otp_mibs", "otp_mib"}},
 [
