@@ -207,7 +207,7 @@ compose_query(QueryList) -> QueryString
 Types:
 
 .RS 3
-QueryList = [{\fBunicode:chardata()\fR\&, \fBunicode:chardata()\fR\&}]
+QueryList = [{\fBunicode:chardata()\fR\&, \fBunicode:chardata()\fR\& | true}]
 .br
 QueryString = \fBuri_string()\fR\& | \fBerror()\fR\&
 .br
@@ -244,7 +244,7 @@ compose_query(QueryList, Options) -> QueryString
 Types:
 
 .RS 3
-QueryList = [{\fBunicode:chardata()\fR\&, \fBunicode:chardata()\fR\&}]
+QueryList = [{\fBunicode:chardata()\fR\&, \fBunicode:chardata()\fR\& | true}]
 .br
 Options = [{encoding, atom()}]
 .br
@@ -292,7 +292,7 @@ QueryString = \fBuri_string()\fR\&
 .br
 QueryList = 
 .br
-    [{\fBunicode:chardata()\fR\&, \fBunicode:chardata()\fR\&}] | \fBerror()\fR\&
+    [{\fBunicode:chardata()\fR\&, \fBunicode:chardata()\fR\& | true}] | \fBerror()\fR\&
 .br
 .RE
 .RE
