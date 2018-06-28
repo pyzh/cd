@@ -11364,7 +11364,7 @@ Returns information about the current system\&. The documentation of this functi
 .TP 2
 .B
 \fB\fISystem Limits\fR\&\fR\&:
-\fB\fIatom_count\fR\&\fR\&, \fB\fIatom_limit\fR\&\fR\&, \fB\fIets_limit\fR\&\fR\&, \fB\fIport_count\fR\&\fR\&, \fB\fIport_limit\fR\&\fR\&, \fB\fIprocess_count\fR\&\fR\&, \fB\fIprocess_limit\fR\&\fR\& 
+\fB\fIatom_count\fR\&\fR\&, \fB\fIatom_limit\fR\&\fR\&, \fB\fIets_count\fR\&\fR\&, \fB\fIets_limit\fR\&\fR\&, \fB\fIport_count\fR\&\fR\&, \fB\fIport_limit\fR\&\fR\&, \fB\fIprocess_count\fR\&\fR\&, \fB\fIprocess_limit\fR\&\fR\& 
 .TP 2
 .B
 \fB\fISystem Time\fR\&\fR\&:
@@ -11874,6 +11874,13 @@ erlang:system_info(Item :: atom_limit) -> integer() >= 1
 .nf
 
 .B
+erlang:system_info(Item :: ets_count) -> integer() >= 1
+.br
+.fi
+.br
+.nf
+
+.B
 erlang:system_info(Item :: ets_limit) -> integer() >= 1
 .br
 .fi
@@ -12196,9 +12203,7 @@ erlang:system_info(Item :: multi_scheduling_blockers) ->
 .nf
 
 .B
-erlang:system_info(Item :: normal_multi_scheduling_blockers) ->
-.B
-                      [Pid :: pid()]
+erlang:system_info(Item :: otp_release) -> string()
 .br
 .fi
 .br
