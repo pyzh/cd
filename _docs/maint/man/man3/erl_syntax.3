@@ -69,7 +69,7 @@ abstract(T::term()) -> \fBsyntaxTree()\fR\&
 .br
 .RS
 .LP
-Returns the syntax tree corresponding to an Erlang term\&. \fITerm\fR\& must be a literal term, i\&.e\&., one that can be represented as a source code literal\&. Thus, it may not contain a process identifier, port, reference, binary or function value as a subterm\&. The function recognises printable strings, in order to get a compact and readable representation\&. Evaluation fails with reason \fIbadarg\fR\& if \fITerm\fR\& is not a literal term\&.
+Returns the syntax tree corresponding to an Erlang term\&. \fITerm\fR\& must be a literal term, i\&.e\&., one that can be represented as a source code literal\&. Thus, it may not contain a process identifier, port, reference or function value as a subterm\&. The function recognises printable strings, in order to get a compact and readable representation\&. Evaluation fails with reason \fIbadarg\fR\& if \fITerm\fR\& is not a literal term\&.
 .LP
 \fISee also:\fR\& \fBconcrete/1\fR\&, \fBis_literal/1\fR\&\&.
 .RE
