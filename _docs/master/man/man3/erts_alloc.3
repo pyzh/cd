@@ -381,7 +381,7 @@ If \fIu\fR\& is used as subsystem identifier (that is, \fI<S> = u\fR\&), all all
 Abandon carrier utilization limit\&. A valid \fI<utilization>\fR\& is an integer in the range \fI[0, 100]\fR\& representing utilization in percent\&. When a utilization value > 0 is used, allocator instances are allowed to abandon multiblock carriers\&. If \fIde\fR\& (default enabled) is passed instead of a \fI<utilization>\fR\&, a recommended non-zero utilization value is used\&. The value chosen depends on the allocator type and can be changed between ERTS versions\&. Defaults to \fIde\fR\&, but this can be changed in the future\&.
 .RS 2
 .LP
-Carriers are abandoned when memory utilization in the allocator instance falls below the utilization value used\&. Once a carrier is abandoned, no new allocations are made in it\&. When an allocator instance gets an increased multiblock carrier need, it first tries to fetch an abandoned carrier from an allocator instance of the same allocator type\&. If no abandoned carrier can be fetched, it creates a new empty carrier\&. When an abandoned carrier has been fetched, it will function as an ordinary carrier\&. This feature has special requirements on the \fBallocation strategy\fR\& used\&. Only the strategies \fIaoff\fR\&, \fIaoffcbf\fR\&, \fIaoffcaobf\fR\&, \fIageffcaoff\fR\&m, \fIageffcbf\fR\& and \fIageffcaobf\fR\& support abandoned carriers\&.
+Carriers are abandoned when memory utilization in the allocator instance falls below the utilization value used\&. Once a carrier is abandoned, no new allocations are made in it\&. When an allocator instance gets an increased multiblock carrier need, it first tries to fetch an abandoned carrier from another allocator instance\&. If no abandoned carrier can be fetched, it creates a new empty carrier\&. When an abandoned carrier has been fetched, it will function as an ordinary carrier\&. This feature has special requirements on the \fBallocation strategy\fR\& used\&. Only the strategies \fIaoff\fR\&, \fIaoffcbf\fR\&, \fIaoffcaobf\fR\&, \fIageffcaoff\fR\&m, \fIageffcbf\fR\& and \fIageffcaobf\fR\& support abandoned carriers\&.
 .RE
 .RS 2
 .LP
@@ -477,7 +477,7 @@ Enables allocator \fI<S>\fR\&\&.
 .TP 2
 .B
 \fI+M<S>lmbcs <size>\fR\&:
-Largest (\fImseg_alloc\fR\&) multiblock carrier size (in kilobytes)\&. See the description on how sizes for \fImseg_alloc\fR\& multiblock carriers are decided in section \fB The alloc_util Framework\fR\&\&. On 32-bit Unix style OS this limit cannot be set > 128 MB\&.
+Largest (\fImseg_alloc\fR\&) multiblock carrier size (in kilobytes)\&. See the description on how sizes for \fImseg_alloc\fR\& multiblock carriers are decided in section \fB The alloc_util Framework\fR\&\&. On 32-bit Unix style OS this limit cannot be set > 64 MB\&.
 .TP 2
 .B
 \fI+M<S>mbcgs <ratio>\fR\&:

@@ -147,14 +147,18 @@ Returns a summary of all tagged allocations in the system, optionally filtered b
 .LP
 Only binaries and allocations made by NIFs and drivers are tagged by default, but this can be configured an a per-allocator basis with the \fB\fI+M<S>atags\fR\&\fR\& emulator option\&.
 .LP
-If tagged allocations are not enabled on any of the specified allocator types, the call will fail with \fI{error, not_enabled}\fR\&\&.
+If the specified allocator types are not enabled, the call will fail with \fI{error, not_enabled}\fR\&\&.
 .LP
 The following options can be used:
 .RS 2
 .TP 2
 .B
 \fIallocator_types\fR\&:
-The allocator types that will be searched\&. Defaults to all \fIalloc_util\fR\& allocators\&.
+The allocator types that will be searched\&. Note that blocks can move freely between allocator types, so restricting the search to certain allocators may return unexpected types (e\&.g\&. process heaps when searching binary_alloc), or hide blocks that were migrated out\&.
+.RS 2
+.LP
+Defaults to all \fIalloc_util\fR\& allocators\&.
+.RE
 .TP 2
 .B
 \fIscheduler_ids\fR\&:
