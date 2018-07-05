@@ -1,6 +1,6 @@
 %% 
 %% Search data file for runtime_tools 1.13
-%% generated July  4, 2018
+%% generated July  5, 2018
 %% 
 {"runtime_tools_app.html", {app, "runtime_tools"}, ["runtime_tools"]}.
 {"dbg.html", {function, {"runtime_tools", "dbg"}},
