@@ -1015,7 +1015,7 @@ Types:
 .RS 3
 SslSocket = sslsocket()
 .br
-Item = protocol | cipher_suite | sni_hostname | ecc | session_id | atom()
+Item = protocol | selected_cipher_suite | sni_hostname | ecc | session_id | atom()
 .br
 .RS 2
 Meaningful atoms, not specified above, are the ssl option names\&.
@@ -1029,6 +1029,14 @@ Reason = term()
 .RS
 .LP
 Returns the most relevant information about the connection, ssl options that are undefined will be filtered out\&. Note that values that affect the security of the connection will only be returned if explicitly requested by connection_information/2\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+The legacy \fIItem = cipher_suite\fR\& is still supported and returns the cipher suite on its (undocumented) legacy format\&. It should be replaced by \fIselected_cipher_suite\fR\&\&.
+
 .RE
 .LP
 .B
