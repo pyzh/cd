@@ -5998,10 +5998,6 @@ The characters in the name (if specified as a list) can only be > 255 if the Erl
 Starts an external program\&. \fICommand\fR\& is the name of the external program to be run\&. \fICommand\fR\& runs outside the Erlang work space unless an Erlang driver with the name \fICommand\fR\& is found\&. If found, that driver is started\&. A driver runs in the Erlang work space, which means that it is linked with the Erlang runtime system\&.
 .RS 2
 .LP
-When starting external programs on Solaris, the system call \fIvfork\fR\& is used in preference to \fIfork\fR\& for performance reasons, although it has a history of being less robust\&. If there are problems using \fIvfork\fR\&, setting environment variable \fIERL_NO_VFORK\fR\& to any value causes \fIfork\fR\& to be used instead\&.
-.RE
-.RS 2
-.LP
 For external programs, \fIPATH\fR\& is searched (or an equivalent method is used to find programs, depending on the OS)\&. This is done by invoking the shell on certain platforms\&. The first space-separated token of the command is considered as the name of the executable (or driver)\&. This (among other things) makes this option unsuitable for running programs with spaces in filenames or directory names\&. If spaces in executable filenames are desired, use \fI{spawn_executable, Command}\fR\& instead\&.
 .RE
 .TP 2
