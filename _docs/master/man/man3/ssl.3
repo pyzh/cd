@@ -1,4 +1,4 @@
-.TH ssl 3 "ssl 9.0" "Ericsson AB" "Erlang Module Definition"
+.TH ssl 3 "ssl 9.1" "Ericsson AB" "Erlang Module Definition"
 .SH NAME
 ssl \- Interface Functions for Secure Socket Layer
 .SH DESCRIPTION
@@ -104,6 +104,10 @@ For valid options, see the \fBinet(3)\fR\&, \fBgen_tcp(3)\fR\& and \fBgen_udp(3)
 .RS 2
 .LP
 \fI| {log_alert, boolean()}\fR\&
+.RE
+.RS 2
+.LP
+\fI| {log_level, atom()}\fR\&
 .RE
 .RS 2
 .LP
@@ -717,6 +721,18 @@ Specifies the server identity hint, which the server presents to the client\&.
 .B
 \fI{log_alert, boolean()}\fR\&:
 If set to \fIfalse\fR\&, error reports are not displayed\&.
+.RS 2
+.LP
+Deprecated in OTP 22, use \fBlog_level\fR\& instead\&.
+.RE
+.TP 2
+.B
+\fI{log_level, atom()}\fR\&:
+Specifies the log level for TLS/DTLS\&. It can take the following values (ordered by increasing verbosity level): \fIemergency, alert, critical, error, warning, notice, info, debug\&.\fR\&
+.RS 2
+.LP
+At verbosity level \fInotice\fR\& and above error reports are displayed in TLS\&. The level \fIdebug\fR\& triggers verbose logging of TLS protocol messages and logging of ignored alerts in DTLS\&.
+.RE
 .TP 2
 .B
 \fI{honor_cipher_order, boolean()}\fR\&:
@@ -1454,6 +1470,23 @@ Options = [socketoption]()
 .RS
 .LP
 Sets options according to \fIOptions\fR\& for socket \fISocket\fR\&\&.
+.RE
+.LP
+.B
+set_log_level(Level) -> ok | {error, Reason}
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Level = atom()
+.br
+.RE
+.RE
+.RS
+.LP
+Sets log level for the SSL application\&.
 .RE
 .LP
 .B

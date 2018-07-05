@@ -48,12 +48,12 @@
 <div class="erlang-logo-wrapper"><a href="../../../../doc/index.html"><img alt="Erlang Logo" src="../../../../doc/erlang-logo.png" class="erlang-logo"></a></div>
 <p class="section-title">Secure Socket Layer </p>
 <p class="section-subtitle">Reference Manual</p>
-<p class="section-version">Version 9.0</p>
+<p class="section-version">Version 9.1</p>
 <ul class="panel-sections">
 <li><a href="users_guide.html">User's Guide</a></li>
 <li><a href="index.html">Reference Manual</a></li>
 <li><a href="release_notes.html">Release Notes</a></li>
-<li><a href="../pdf/ssl-9.0.pdf">PDF</a></li>
+<li><a href="../pdf/ssl-9.1.pdf">PDF</a></li>
 <li><a href="../../../../doc/index.html">Top</a></li>
 </ul>
 <ul class="expand-collapse-items">
@@ -106,6 +106,7 @@
     <li title="recv-3"><a href="ssl.html#recv-3">recv/3</a></li>
     <li title="renegotiate-1"><a href="ssl.html#renegotiate-1">renegotiate/1</a></li>
     <li title="send-2"><a href="ssl.html#send-2">send/2</a></li>
+    <li title="set_log_level-1"><a href="ssl.html#set_log_level-1">set_log_level/1</a></li>
     <li title="setopts-2"><a href="ssl.html#setopts-2">setopts/2</a></li>
     <li title="shutdown-2"><a href="ssl.html#shutdown-2">shutdown/2</a></li>
     <li title="sockname-1"><a href="ssl.html#sockname-1">sockname/1</a></li>
@@ -161,11 +162,11 @@
 <div class="innertube">
 <!-- refpage --><center><h1>ssl</h1></center>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-module-idp71423478105920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp71423478105920').style.visibility = 'hidden';"><span id="ghlink-module-idp71423478105920"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-idp47156668137280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp47156668137280').style.visibility = 'hidden';"><span id="ghlink-module-idp47156668137280"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
 <div class="REFBODY module-body">ssl</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp71423478108000').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp71423478108000').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp71423478108000"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp47156668032944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp47156668032944').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp47156668032944"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
 <div class="REFBODY module-summary-body">Interface Functions for Secure Socket Layer</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-description-idp71423478111216').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp71423478111216').style.visibility = 'hidden';"><span id="ghlink-description-idp71423478111216" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L33" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-description-idp47156667915488').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp47156667915488').style.visibility = 'hidden';"><span id="ghlink-description-idp47156667915488" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L33" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
 <div class="REFBODY description-body"><p>
     <p>
       This module contains interface functions for the SSL/TLS/DTLS protocol.
@@ -174,7 +175,7 @@
     </p>
   </p></div>
     
-  <h3><span onMouseOver="document.getElementById('ghlink-data-types-idp71423478515040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types-idp71423478515040').style.visibility = 'hidden';"><span id="ghlink-data-types-idp71423478515040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L41" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="data-types" href="#data-types">DATA TYPES</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-data-types-idp47156668497536').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types-idp47156668497536').style.visibility = 'hidden';"><span id="ghlink-data-types-idp47156668497536" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L41" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="data-types" href="#data-types">DATA TYPES</a></span></h3>
 <div class="REFBODY rb-3">
     
     <p>The following data types are used in the functions for SSL/TLS/DTLS:</p>
@@ -228,6 +229,7 @@
 	<p><span class="code">| {client_preferred_next_protocols, {client | server,
 	[binary()]} | {client | server, [binary()], binary()}}</span></p>
 	<p><span class="code">| {log_alert, boolean()}</span></p>
+	<p><span class="code">| {log_level, atom()}</span></p>
 	<p><span class="code">| {server_name_indication, hostname() | disable}</span></p>
 	<p><span class="code">| {customize_hostname_check, list()}</span></p>
 	<p><span class="code">| {sni_hosts, [{hostname(), [ssl_option()]}]}</span></p>
@@ -364,7 +366,7 @@
     </dl>
   </div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-tls-dtls-option-descriptions---common-for-server-and-client-idp71423477996608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-tls-dtls-option-descriptions---common-for-server-and-client-idp71423477996608').style.visibility = 'hidden';"><span id="ghlink-tls-dtls-option-descriptions---common-for-server-and-client-idp71423477996608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L216" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="tls-dtls-option-descriptions---common-for-server-and-client" href="#tls-dtls-option-descriptions---common-for-server-and-client">TLS/DTLS OPTION DESCRIPTIONS - COMMON for SERVER and CLIENT</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-tls-dtls-option-descriptions---common-for-server-and-client-idp47156668304800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-tls-dtls-option-descriptions---common-for-server-and-client-idp47156668304800').style.visibility = 'hidden';"><span id="ghlink-tls-dtls-option-descriptions---common-for-server-and-client-idp47156668304800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L217" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="tls-dtls-option-descriptions---common-for-server-and-client" href="#tls-dtls-option-descriptions---common-for-server-and-client">TLS/DTLS OPTION DESCRIPTIONS - COMMON for SERVER and CLIENT</a></span></h3>
 <div class="REFBODY rb-3">
     
 
@@ -712,7 +714,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 
   </div>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-tls-dtls-option-descriptions---client-side-idp71423478302640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-tls-dtls-option-descriptions---client-side-idp71423478302640').style.visibility = 'hidden';"><span id="ghlink-tls-dtls-option-descriptions---client-side-idp71423478302640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L566" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="tls-dtls-option-descriptions---client-side" href="#tls-dtls-option-descriptions---client-side">TLS/DTLS OPTION DESCRIPTIONS - CLIENT SIDE</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-tls-dtls-option-descriptions---client-side-idp47156668022368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-tls-dtls-option-descriptions---client-side-idp47156668022368').style.visibility = 'hidden';"><span id="ghlink-tls-dtls-option-descriptions---client-side-idp47156668022368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L567" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="tls-dtls-option-descriptions---client-side" href="#tls-dtls-option-descriptions---client-side">TLS/DTLS OPTION DESCRIPTIONS - CLIENT SIDE</a></span></h3>
 <div class="REFBODY rb-3">
     
 
@@ -867,7 +869,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
       </dl>
    </div>
    
-  <h3><span onMouseOver="document.getElementById('ghlink-tls-dtls-option-descriptions---server-side-idp71423478338672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-tls-dtls-option-descriptions---server-side-idp71423478338672').style.visibility = 'hidden';"><span id="ghlink-tls-dtls-option-descriptions---server-side-idp71423478338672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L714" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="tls-dtls-option-descriptions---server-side" href="#tls-dtls-option-descriptions---server-side">TLS/DTLS OPTION DESCRIPTIONS - SERVER SIDE</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-tls-dtls-option-descriptions---server-side-idp47156668201248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-tls-dtls-option-descriptions---server-side-idp47156668201248').style.visibility = 'hidden';"><span id="ghlink-tls-dtls-option-descriptions---server-side-idp47156668201248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L715" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="tls-dtls-option-descriptions---server-side" href="#tls-dtls-option-descriptions---server-side">TLS/DTLS OPTION DESCRIPTIONS - SERVER SIDE</a></span></h3>
 <div class="REFBODY rb-3">
     
 
@@ -954,7 +956,20 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
       the client.</p></dd>
 
       <dt><strong><span class="code">{log_alert, boolean()}</span></strong></dt>
-      <dd><p>If set to <span class="code">false</span>, error reports are not displayed.</p></dd>
+      <dd>
+<p>If set to <span class="code">false</span>, error reports are not displayed.</p>
+      <p>Deprecated in OTP 22, use <span class="bold_code bc-17"><a href="#log_level">log_level</a></span> instead.</p>
+      </dd>
+
+      <dt><strong><a name="log_level"></a><span class="code">{log_level, atom()}</span></strong></dt>
+      <dd>
+<p>Specifies the log level for TLS/DTLS. It can take the following
+      values (ordered by increasing verbosity level): <span class="code">emergency, alert, critical, error,
+      warning, notice, info, debug.</span></p>
+      <p>At verbosity level <span class="code">notice</span> and above error reports are
+      displayed in TLS. The level <span class="code">debug</span> triggers verbose logging of TLS protocol
+      messages and logging of ignored alerts in DTLS.</p>
+</dd>
 
       <dt><strong><span class="code">{honor_cipher_order, boolean()}</span></strong></dt>
       <dd><p>If set to <span class="code">true</span>, use the server preference for cipher
@@ -1012,7 +1027,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
     </dl>
   </div>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-general-idp71423478154288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-general-idp71423478154288').style.visibility = 'hidden';"><span id="ghlink-general-idp71423478154288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L856" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="general" href="#general">General</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-general-idp47156668250800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-general-idp47156668250800').style.visibility = 'hidden';"><span id="ghlink-general-idp47156668250800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L867" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="general" href="#general">General</a></span></h3>
 <div class="REFBODY rb-3">
     
       
@@ -1030,10 +1045,10 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
       default value for argument <span class="code">Timeout</span> is <span class="code">infinity</span>.</p>
   </div>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp71423478432784').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp71423478432784').style.visibility = 'hidden';"><span id="ghlink-exports-idp71423478432784"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp47156668314912').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp47156668314912').style.visibility = 'hidden';"><span id="ghlink-exports-idp47156668314912"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
 <div class="exports-body">
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-append_cipher_suites-2-idp71423478433536').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-append_cipher_suites-2-idp71423478433536').style.visibility = 'hidden';"><span id="ghlink-append_cipher_suites-2-idp71423478433536" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L875" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="append_cipher_suites-2" href="#append_cipher_suites-2">append_cipher_suites(Deferred, Suites) -&gt; ciphers() </a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-append_cipher_suites-2-idp47156668315664').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-append_cipher_suites-2-idp47156668315664').style.visibility = 'hidden';"><span id="ghlink-append_cipher_suites-2-idp47156668315664" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L886" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="append_cipher_suites-2" href="#append_cipher_suites-2">append_cipher_suites(Deferred, Suites) -&gt; ciphers() </a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
            <div class="REFTYPES rt-4">
@@ -1051,7 +1066,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
       extract the Deferred cipher list.</p> 
       </p></div>
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-cipher_suites-0-idp71423478439200').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-cipher_suites-0-idp71423478439200').style.visibility = 'hidden';"><span id="ghlink-cipher_suites-0-idp71423478439200" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L891" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="cipher_suites-0" href="#cipher_suites-0">cipher_suites() -&gt;</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-cipher_suites-1-idp71423478439648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-cipher_suites-1-idp71423478439648').style.visibility = 'hidden';"><span id="ghlink-cipher_suites-1-idp71423478439648" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L891" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="cipher_suites-1" href="#cipher_suites-1">cipher_suites(Type) -&gt; old_ciphers()</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-cipher_suites-0-idp47156668321328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-cipher_suites-0-idp47156668321328').style.visibility = 'hidden';"><span id="ghlink-cipher_suites-0-idp47156668321328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L902" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="cipher_suites-0" href="#cipher_suites-0">cipher_suites() -&gt;</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-cipher_suites-1-idp47156668321776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-cipher_suites-1-idp47156668321776').style.visibility = 'hidden';"><span id="ghlink-cipher_suites-1-idp47156668321776" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L902" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="cipher_suites-1" href="#cipher_suites-1">cipher_suites(Type) -&gt; old_ciphers()</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1062,7 +1077,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 	<p>Deprecated in OTP 21, use <span class="bold_code bc-17"><a href="#cipher_suites-2">cipher_suites/2</a></span> instead.</p>
       </p></div>
     
-   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-cipher_suites-2-idp71423478443584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-cipher_suites-2-idp71423478443584').style.visibility = 'hidden';"><span id="ghlink-cipher_suites-2-idp71423478443584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L903" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="cipher_suites-2" href="#cipher_suites-2">cipher_suites(Supported, Version) -&gt;  ciphers()</a></span></div></p>
+   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-cipher_suites-2-idp47156668325712').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-cipher_suites-2-idp47156668325712').style.visibility = 'hidden';"><span id="ghlink-cipher_suites-2-idp47156668325712" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L914" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="cipher_suites-2" href="#cipher_suites-2">cipher_suites(Supported, Version) -&gt;  ciphers()</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1077,13 +1092,13 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
       TLS version</p>
     </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-eccs-0-idp71423478447248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-eccs-0-idp71423478447248').style.visibility = 'hidden';"><span id="ghlink-eccs-0-idp71423478447248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L917" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="eccs-0" href="#eccs-0">eccs() -&gt;</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-eccs-1-idp71423478447696').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-eccs-1-idp71423478447696').style.visibility = 'hidden';"><span id="ghlink-eccs-1-idp71423478447696" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L917" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="eccs-1" href="#eccs-1">eccs(protocol_version()) -&gt; [named_curve()]</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-eccs-0-idp47156668329376').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-eccs-0-idp47156668329376').style.visibility = 'hidden';"><span id="ghlink-eccs-0-idp47156668329376" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L928" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="eccs-0" href="#eccs-0">eccs() -&gt;</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-eccs-1-idp47156668329824').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-eccs-1-idp47156668329824').style.visibility = 'hidden';"><span id="ghlink-eccs-1-idp47156668329824" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L928" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="eccs-1" href="#eccs-1">eccs(protocol_version()) -&gt; [named_curve()]</a></span></div></p>
 <div class="REFBODY rb-7"><p><p>Returns a list of supported ECCs. <span class="code">eccs()</span>
       is equivalent to calling <span class="code">eccs(Protocol)</span> with all
       supported protocols and then deduplicating the output.</p>
       </p></div>
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-clear_pem_cache-0-idp71423478450832').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-clear_pem_cache-0-idp71423478450832').style.visibility = 'hidden';"><span id="ghlink-clear_pem_cache-0-idp71423478450832" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L928" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="clear_pem_cache-0" href="#clear_pem_cache-0">clear_pem_cache() -&gt; ok </a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-clear_pem_cache-0-idp47156668332960').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-clear_pem_cache-0-idp47156668332960').style.visibility = 'hidden';"><span id="ghlink-clear_pem_cache-0-idp47156668332960" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L939" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="clear_pem_cache-0" href="#clear_pem_cache-0">clear_pem_cache() -&gt; ok </a></span></div></p>
 <div class="REFBODY rb-7"><p><p>PEM files, used by ssl API-functions, are cached. The
       cache is regularly checked to see if any cache entries should be
       invalidated, however this function provides a way to
@@ -1091,7 +1106,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
       </p>
       </p></div>
    
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-2-idp71423478453328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-2-idp71423478453328').style.visibility = 'hidden';"><span id="ghlink-connect-2-idp71423478453328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L940" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-2" href="#connect-2">connect(Socket, SslOptions) -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-3-idp71423478453792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-3-idp71423478453792').style.visibility = 'hidden';"><span id="ghlink-connect-3-idp71423478453792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L940" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-3" href="#connect-3">connect(Socket, SslOptions, Timeout) -&gt; {ok, SslSocket} | {ok, SslSocket, Ext}
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-2-idp47156668335456').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-2-idp47156668335456').style.visibility = 'hidden';"><span id="ghlink-connect-2-idp47156668335456" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L951" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-2" href="#connect-2">connect(Socket, SslOptions) -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-3-idp47156668335920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-3-idp47156668335920').style.visibility = 'hidden';"><span id="ghlink-connect-3-idp47156668335920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L951" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-3" href="#connect-3">connect(Socket, SslOptions, Timeout) -&gt; {ok, SslSocket} | {ok, SslSocket, Ext}
 	| {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
@@ -1137,7 +1152,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 	  
     </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-3-idp71423478466672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-3-idp71423478466672').style.visibility = 'hidden';"><span id="ghlink-connect-3-idp71423478466672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L977" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-3" href="#connect-3">connect(Host, Port, Options) -&gt;</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-4-idp71423478467136').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-4-idp71423478467136').style.visibility = 'hidden';"><span id="ghlink-connect-4-idp71423478467136" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L977" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-4" href="#connect-4">connect(Host, Port, Options, Timeout) -&gt;
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-3-idp47156668348800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-3-idp47156668348800').style.visibility = 'hidden';"><span id="ghlink-connect-3-idp47156668348800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L988" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-3" href="#connect-3">connect(Host, Port, Options) -&gt;</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-4-idp47156668349264').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-4-idp47156668349264').style.visibility = 'hidden';"><span id="ghlink-connect-4-idp47156668349264" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L988" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-4" href="#connect-4">connect(Host, Port, Options, Timeout) -&gt;
 	  {ok, SslSocket}| {ok, SslSocket, Ext} | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
@@ -1190,7 +1205,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 	  </p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-close-1-idp71423478487888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-close-1-idp71423478487888').style.visibility = 'hidden';"><span id="ghlink-close-1-idp71423478487888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1020" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="close-1" href="#close-1">close(SslSocket) -&gt; ok | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-close-1-idp47156668370016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-close-1-idp47156668370016').style.visibility = 'hidden';"><span id="ghlink-close-1-idp47156668370016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1031" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="close-1" href="#close-1">close(SslSocket) -&gt; ok | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	  <div class="REFTYPES rt-4">
@@ -1203,7 +1218,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 <div class="REFBODY rb-7"><p><p>Closes an TLS/DTLS connection.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-close-2-idp71423478491488').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-close-2-idp71423478491488').style.visibility = 'hidden';"><span id="ghlink-close-2-idp71423478491488" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1031" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="close-2" href="#close-2">close(SslSocket, How) -&gt; ok | {ok, port()} | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-close-2-idp47156668377280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-close-2-idp47156668377280').style.visibility = 'hidden';"><span id="ghlink-close-2-idp47156668377280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1042" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="close-2" href="#close-2">close(SslSocket, How) -&gt; ok | {ok, port()} | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	  <div class="REFTYPES rt-4">
@@ -1222,7 +1237,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
       the following options set: <span class="code">[{active, false}, {packet, 0}, {mode, binary}]</span></p>
       </p></div>
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-controlling_process-2-idp71423478496416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-controlling_process-2-idp71423478496416').style.visibility = 'hidden';"><span id="ghlink-controlling_process-2-idp71423478496416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1046" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="controlling_process-2" href="#controlling_process-2">controlling_process(SslSocket, NewOwner) -&gt;
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-controlling_process-2-idp47156668382208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-controlling_process-2-idp47156668382208').style.visibility = 'hidden';"><span id="ghlink-controlling_process-2-idp47156668382208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1057" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="controlling_process-2" href="#controlling_process-2">controlling_process(SslSocket, NewOwner) -&gt;
 	ok | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
@@ -1241,7 +1256,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 	all messages from the socket.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connection_information-1-idp71423478500528').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connection_information-1-idp71423478500528').style.visibility = 'hidden';"><span id="ghlink-connection_information-1-idp71423478500528" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1062" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connection_information-1" href="#connection_information-1">connection_information(SslSocket) -&gt;
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connection_information-1-idp47156668386320').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connection_information-1-idp47156668386320').style.visibility = 'hidden';"><span id="ghlink-connection_information-1-idp47156668386320" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1073" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connection_information-1" href="#connection_information-1">connection_information(SslSocket) -&gt;
         {ok, Result} |  {error, Reason} </a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
@@ -1264,7 +1279,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
       connection will only be returned if explicitly requested by connection_information/2.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connection_information-2-idp71423478505552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connection_information-2-idp71423478505552').style.visibility = 'hidden';"><span id="ghlink-connection_information-2-idp71423478505552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1080" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connection_information-2" href="#connection_information-2">connection_information(SslSocket, Items) -&gt;
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connection_information-2-idp47156668391344').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connection_information-2-idp47156668391344').style.visibility = 'hidden';"><span id="ghlink-connection_information-2-idp47156668391344" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1091" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connection_information-2" href="#connection_information-2">connection_information(SslSocket, Items) -&gt;
         {ok, Result} |  {error, Reason} </a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
@@ -1296,7 +1311,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 </div>
       </p></div>
 
-      <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-filter_cipher_suites-2-idp71423478511632').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-filter_cipher_suites-2-idp71423478511632').style.visibility = 'hidden';"><span id="ghlink-filter_cipher_suites-2-idp71423478511632" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1102" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="filter_cipher_suites-2" href="#filter_cipher_suites-2">filter_cipher_suites(Suites, Filters) -&gt; ciphers()</a></span></div></p>
+      <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-filter_cipher_suites-2-idp47156668397424').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-filter_cipher_suites-2-idp47156668397424').style.visibility = 'hidden';"><span id="ghlink-filter_cipher_suites-2-idp47156668397424" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1113" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="filter_cipher_suites-2" href="#filter_cipher_suites-2">filter_cipher_suites(Suites, Filters) -&gt; ciphers()</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -1313,7 +1328,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
       part the default behaviour is fun(Algorithm) -&gt; true.</p>
     </p></div>
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-format_error-1-idp71423478344864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-format_error-1-idp71423478344864').style.visibility = 'hidden';"><span id="ghlink-format_error-1-idp71423478344864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1117" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="format_error-1" href="#format_error-1">format_error(Reason) -&gt; string()</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-format_error-1-idp47156668401152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-format_error-1-idp47156668401152').style.visibility = 'hidden';"><span id="ghlink-format_error-1-idp47156668401152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1128" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="format_error-1" href="#format_error-1">format_error(Reason) -&gt; string()</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1324,7 +1339,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
         <p>Presents the error returned by an SSL function as a printable string.</p>
       </p></div>
    
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-getopts-2-idp71423478348176').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-getopts-2-idp71423478348176').style.visibility = 'hidden';"><span id="ghlink-getopts-2-idp71423478348176" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1128" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="getopts-2" href="#getopts-2">getopts(SslSocket, OptionNames) -&gt;
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-getopts-2-idp47156668404464').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-getopts-2-idp47156668404464').style.visibility = 'hidden';"><span id="ghlink-getopts-2-idp47156668404464" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1139" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="getopts-2" href="#getopts-2">getopts(SslSocket, OptionNames) -&gt;
 	{ok, [socketoption()]} | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
@@ -1340,8 +1355,8 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-getstat-1-idp71423478351840').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-getstat-1-idp71423478351840').style.visibility = 'hidden';"><span id="ghlink-getstat-1-idp71423478351840" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1142" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="getstat-1" href="#getstat-1">getstat(SslSocket) -&gt;
-        {ok, OptionValues} | {error, inet:posix()}</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-getstat-2-idp71423478352256').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-getstat-2-idp71423478352256').style.visibility = 'hidden';"><span id="ghlink-getstat-2-idp71423478352256" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1142" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="getstat-2" href="#getstat-2">getstat(SslSocket, OptionNames) -&gt;
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-getstat-1-idp47156668408128').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-getstat-1-idp47156668408128').style.visibility = 'hidden';"><span id="ghlink-getstat-1-idp47156668408128" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1153" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="getstat-1" href="#getstat-1">getstat(SslSocket) -&gt;
+        {ok, OptionValues} | {error, inet:posix()}</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-getstat-2-idp47156668408544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-getstat-2-idp47156668408544').style.visibility = 'hidden';"><span id="ghlink-getstat-2-idp47156668408544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1153" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="getstat-2" href="#getstat-2">getstat(SslSocket, OptionNames) -&gt;
         {ok, OptionValues} | {error, inet:posix()}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
@@ -1360,7 +1375,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
         <p>See inet:getstat/2 for statistic options description.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake-1-idp71423478356752').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake-1-idp71423478356752').style.visibility = 'hidden';"><span id="ghlink-handshake-1-idp71423478356752" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1159" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake-1" href="#handshake-1">handshake(HsSocket) -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake-2-idp71423478357200').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake-2-idp71423478357200').style.visibility = 'hidden';"><span id="ghlink-handshake-2-idp71423478357200" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1159" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake-2" href="#handshake-2">handshake(HsSocket, Timeout) -&gt; {ok, SslSocket}  | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake-1-idp47156668413040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake-1-idp47156668413040').style.visibility = 'hidden';"><span id="ghlink-handshake-1-idp47156668413040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1170" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake-1" href="#handshake-1">handshake(HsSocket) -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake-2-idp47156668413488').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake-2-idp47156668413488').style.visibility = 'hidden';"><span id="ghlink-handshake-2-idp47156668413488" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1170" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake-2" href="#handshake-2">handshake(HsSocket, Timeout) -&gt; {ok, SslSocket}  | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1378,7 +1393,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 	<p>Returns a new TLS/DTLS socket if the handshake is successful.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake-2-idp71423478361792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake-2-idp71423478361792').style.visibility = 'hidden';"><span id="ghlink-handshake-2-idp71423478361792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1174" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake-2" href="#handshake-2">handshake(Socket, SslOptions) -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake-3-idp71423478362256').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake-3-idp71423478362256').style.visibility = 'hidden';"><span id="ghlink-handshake-3-idp71423478362256" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1174" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake-3" href="#handshake-3">handshake(Socket, SslOptions, Timeout) -&gt; {ok, SslSocket} | {ok, SslSocket, Ext} | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake-2-idp47156668418080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake-2-idp47156668418080').style.visibility = 'hidden';"><span id="ghlink-handshake-2-idp47156668418080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1185" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake-2" href="#handshake-2">handshake(Socket, SslOptions) -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake-3-idp47156668418544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake-3-idp47156668418544').style.visibility = 'hidden';"><span id="ghlink-handshake-3-idp47156668418544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1185" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake-3" href="#handshake-3">handshake(Socket, SslOptions, Timeout) -&gt; {ok, SslSocket} | {ok, SslSocket, Ext} | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1427,7 +1442,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake_cancel-1-idp71423478375856').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake_cancel-1-idp71423478375856').style.visibility = 'hidden';"><span id="ghlink-handshake_cancel-1-idp71423478375856" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1213" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake_cancel-1" href="#handshake_cancel-1">handshake_cancel(SslSocket) -&gt; ok </a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake_cancel-1-idp47156668432144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake_cancel-1-idp47156668432144').style.visibility = 'hidden';"><span id="ghlink-handshake_cancel-1-idp47156668432144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1224" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake_cancel-1" href="#handshake_cancel-1">handshake_cancel(SslSocket) -&gt; ok </a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1438,7 +1453,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
         <p>Cancel the handshake with a fatal <span class="code">USER_CANCELED</span> alert.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake_continue-2-idp71423478379664').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake_continue-2-idp71423478379664').style.visibility = 'hidden';"><span id="ghlink-handshake_continue-2-idp71423478379664" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1224" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake_continue-2" href="#handshake_continue-2">handshake_continue(HsSocket, SSLOptions) -&gt; {ok, SslSocket} | {error, Reason}</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake_continue-3-idp71423478380080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake_continue-3-idp71423478380080').style.visibility = 'hidden';"><span id="ghlink-handshake_continue-3-idp71423478380080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1224" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake_continue-3" href="#handshake_continue-3">handshake_continue(HsSocket, SSLOptions, Timeout) -&gt; {ok, SslSocket} | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake_continue-2-idp47156668435952').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake_continue-2-idp47156668435952').style.visibility = 'hidden';"><span id="ghlink-handshake_continue-2-idp47156668435952" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1235" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake_continue-2" href="#handshake_continue-2">handshake_continue(HsSocket, SSLOptions) -&gt; {ok, SslSocket} | {error, Reason}</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-handshake_continue-3-idp47156668436368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handshake_continue-3-idp47156668436368').style.visibility = 'hidden';"><span id="ghlink-handshake_continue-3-idp47156668436368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1235" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handshake_continue-3" href="#handshake_continue-3">handshake_continue(HsSocket, SSLOptions, Timeout) -&gt; {ok, SslSocket} | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -1458,7 +1473,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
         <p>Continue the SSL/TLS handshake possiby with new, additional or changed options.</p>
       </p></div>
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-listen-2-idp71423478384720').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-listen-2-idp71423478384720').style.visibility = 'hidden';"><span id="ghlink-listen-2-idp71423478384720" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1239" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="listen-2" href="#listen-2">listen(Port, Options) -&gt;
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-listen-2-idp47156668441008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-listen-2-idp47156668441008').style.visibility = 'hidden';"><span id="ghlink-listen-2-idp47156668441008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1250" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="listen-2" href="#listen-2">listen(Port, Options) -&gt;
 	{ok, ListenSocket} | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
@@ -1476,7 +1491,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 	<p>Creates an SSL listen socket.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-negotiated_protocol-1-idp71423478388944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-negotiated_protocol-1-idp71423478388944').style.visibility = 'hidden';"><span id="ghlink-negotiated_protocol-1-idp71423478388944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1253" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="negotiated_protocol-1" href="#negotiated_protocol-1">negotiated_protocol(SslSocket) -&gt; {ok, Protocol} | {error, protocol_not_negotiated}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-negotiated_protocol-1-idp47156668445232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-negotiated_protocol-1-idp47156668445232').style.visibility = 'hidden';"><span id="ghlink-negotiated_protocol-1-idp47156668445232" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1264" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="negotiated_protocol-1" href="#negotiated_protocol-1">negotiated_protocol(SslSocket) -&gt; {ok, Protocol} | {error, protocol_not_negotiated}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1492,7 +1507,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
         </p>
       </p></div>
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-peercert-1-idp71423478392608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-peercert-1-idp71423478392608').style.visibility = 'hidden';"><span id="ghlink-peercert-1-idp71423478392608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1267" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="peercert-1" href="#peercert-1">peercert(SslSocket) -&gt; {ok, Cert} | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-peercert-1-idp47156668448896').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-peercert-1-idp47156668448896').style.visibility = 'hidden';"><span id="ghlink-peercert-1-idp47156668448896" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1278" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="peercert-1" href="#peercert-1">peercert(SslSocket) -&gt; {ok, Cert} | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1509,7 +1524,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-peername-1-idp71423478396912').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-peername-1-idp71423478396912').style.visibility = 'hidden';"><span id="ghlink-peername-1-idp71423478396912" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1282" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="peername-1" href="#peername-1">peername(SslSocket) -&gt; {ok, {Address, Port}} |
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-peername-1-idp47156668453200').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-peername-1-idp47156668453200').style.visibility = 'hidden';"><span id="ghlink-peername-1-idp47156668453200" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1293" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="peername-1" href="#peername-1">peername(SslSocket) -&gt; {ok, {Address, Port}} |
 	{error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
@@ -1527,7 +1542,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
         <p>Returns the address and port number of the peer.</p>
       </p></div>
     
-      <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-prepend_cipher_suites-2-idp71423478401072').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-prepend_cipher_suites-2-idp71423478401072').style.visibility = 'hidden';"><span id="ghlink-prepend_cipher_suites-2-idp71423478401072" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1296" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="prepend_cipher_suites-2" href="#prepend_cipher_suites-2">prepend_cipher_suites(Preferred, Suites) -&gt; ciphers()</a></span></div></p>
+      <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-prepend_cipher_suites-2-idp47156668457360').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-prepend_cipher_suites-2-idp47156668457360').style.visibility = 'hidden';"><span id="ghlink-prepend_cipher_suites-2-idp47156668457360" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1307" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="prepend_cipher_suites-2" href="#prepend_cipher_suites-2">prepend_cipher_suites(Preferred, Suites) -&gt; ciphers()</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1545,7 +1560,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
       extract the preferred cipher list. </p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-prf-5-idp71423478406736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-prf-5-idp71423478406736').style.visibility = 'hidden';"><span id="ghlink-prf-5-idp71423478406736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1312" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="prf-5" href="#prf-5">prf(Socket, Secret, Label, Seed, WantedLength) -&gt; {ok, binary()} | {error, reason()}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-prf-5-idp47156668463024').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-prf-5-idp47156668463024').style.visibility = 'hidden';"><span id="ghlink-prf-5-idp47156668463024" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1323" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="prf-5" href="#prf-5">prf(Socket, Secret, Label, Seed, WantedLength) -&gt; {ok, binary()} | {error, reason()}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -1573,7 +1588,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 	  is returned for SSLv3 connections.</p>
       </p></div>
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-recv-2-idp71423478413680').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-recv-2-idp71423478413680').style.visibility = 'hidden';"><span id="ghlink-recv-2-idp71423478413680" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1332" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="recv-2" href="#recv-2">recv(SslSocket, Length) -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-recv-3-idp71423478414144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-recv-3-idp71423478414144').style.visibility = 'hidden';"><span id="ghlink-recv-3-idp71423478414144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1332" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="recv-3" href="#recv-3">recv(SslSocket, Length, Timeout) -&gt; {ok, Data} | {error,
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-recv-2-idp47156668469968').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-recv-2-idp47156668469968').style.visibility = 'hidden';"><span id="ghlink-recv-2-idp47156668469968" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1343" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="recv-2" href="#recv-2">recv(SslSocket, Length) -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-recv-3-idp47156668470432').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-recv-3-idp47156668470432').style.visibility = 'hidden';"><span id="ghlink-recv-3-idp47156668470432" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1343" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="recv-3" href="#recv-3">recv(SslSocket, Length, Timeout) -&gt; {ok, Data} | {error,
 	Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
@@ -1605,7 +1620,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
           milliseconds. The default value is <span class="code">infinity</span>.</p>
       </p></div>
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-renegotiate-1-idp71423478423632').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-renegotiate-1-idp71423478423632').style.visibility = 'hidden';"><span id="ghlink-renegotiate-1-idp71423478423632" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1359" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="renegotiate-1" href="#renegotiate-1">renegotiate(SslSocket) -&gt; ok | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-renegotiate-1-idp47156668480032').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-renegotiate-1-idp47156668480032').style.visibility = 'hidden';"><span id="ghlink-renegotiate-1-idp47156668480032" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1370" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="renegotiate-1" href="#renegotiate-1">renegotiate(SslSocket) -&gt; ok | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -1618,7 +1633,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
       is still active using the previously negotiated session.</p>
       </p></div>
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-send-2-idp71423478427344').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-send-2-idp71423478427344').style.visibility = 'hidden';"><span id="ghlink-send-2-idp71423478427344" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1372" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="send-2" href="#send-2">send(SslSocket, Data) -&gt; ok | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-send-2-idp47156668483856').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-send-2-idp47156668483856').style.visibility = 'hidden';"><span id="ghlink-send-2-idp47156668483856" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1383" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="send-2" href="#send-2">send(SslSocket, Data) -&gt; ok | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1634,7 +1649,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
           the socket is closed.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-setopts-2-idp71423479010384').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-setopts-2-idp71423479010384').style.visibility = 'hidden';"><span id="ghlink-setopts-2-idp71423479010384" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1386" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="setopts-2" href="#setopts-2">setopts(SslSocket, Options) -&gt; ok | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-setopts-2-idp47156668992592').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-setopts-2-idp47156668992592').style.visibility = 'hidden';"><span id="ghlink-setopts-2-idp47156668992592" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1397" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="setopts-2" href="#setopts-2">setopts(SslSocket, Options) -&gt; ok | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1649,7 +1664,18 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
           <span class="code">Socket</span>.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-shutdown-2-idp71423479015088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-shutdown-2-idp71423479015088').style.visibility = 'hidden';"><span id="ghlink-shutdown-2-idp71423479015088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1399" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="shutdown-2" href="#shutdown-2">shutdown(SslSocket, How) -&gt; ok | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-set_log_level-1-idp47156668997136').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-set_log_level-1-idp47156668997136').style.visibility = 'hidden';"><span id="ghlink-set_log_level-1-idp47156668997136" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1410" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="set_log_level-1" href="#set_log_level-1">set_log_level(Level) -&gt; ok | {error, Reason}</a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+        <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Level = atom()</span><br>
+</div>
+      </div>
+<div class="REFBODY rb-7"><p>
+        <p>Sets log level for the SSL application.</p>
+      </p></div>
+
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-shutdown-2-idp47156669000560').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-shutdown-2-idp47156669000560').style.visibility = 'hidden';"><span id="ghlink-shutdown-2-idp47156669000560" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1421" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="shutdown-2" href="#shutdown-2">shutdown(SslSocket, How) -&gt; ok | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1671,7 +1697,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
           is useful.</p>
       </p></div>
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ssl_accept-1-idp71423478105120').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl_accept-1-idp71423478105120').style.visibility = 'hidden';"><span id="ghlink-ssl_accept-1-idp71423478105120" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1417" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl_accept-1" href="#ssl_accept-1">ssl_accept(SslSocket) -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ssl_accept-2-idp71423478163616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl_accept-2-idp71423478163616').style.visibility = 'hidden';"><span id="ghlink-ssl_accept-2-idp71423478163616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1417" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl_accept-2" href="#ssl_accept-2">ssl_accept(SslSocket, Timeout) -&gt; ok | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ssl_accept-1-idp47156669006528').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl_accept-1-idp47156669006528').style.visibility = 'hidden';"><span id="ghlink-ssl_accept-1-idp47156669006528" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1439" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl_accept-1" href="#ssl_accept-1">ssl_accept(SslSocket) -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ssl_accept-2-idp47156669006992').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl_accept-2-idp47156669006992').style.visibility = 'hidden';"><span id="ghlink-ssl_accept-2-idp47156669006992" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1439" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl_accept-2" href="#ssl_accept-2">ssl_accept(SslSocket, Timeout) -&gt; ok | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1692,7 +1718,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 </div>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ssl_accept-2-idp71423478094480').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl_accept-2-idp71423478094480').style.visibility = 'hidden';"><span id="ghlink-ssl_accept-2-idp71423478094480" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1432" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl_accept-2" href="#ssl_accept-2">ssl_accept(Socket, SslOptions) -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ssl_accept-3-idp71423478021312').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl_accept-3-idp71423478021312').style.visibility = 'hidden';"><span id="ghlink-ssl_accept-3-idp71423478021312" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1432" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl_accept-3" href="#ssl_accept-3">ssl_accept(Socket, SslOptions, Timeout) -&gt; {ok, Socket} | ok | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ssl_accept-2-idp47156669012576').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl_accept-2-idp47156669012576').style.visibility = 'hidden';"><span id="ghlink-ssl_accept-2-idp47156669012576" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1454" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl_accept-2" href="#ssl_accept-2">ssl_accept(Socket, SslOptions) -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ssl_accept-3-idp47156669013040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl_accept-3-idp47156669013040').style.visibility = 'hidden';"><span id="ghlink-ssl_accept-3-idp47156669013040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1454" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl_accept-3" href="#ssl_accept-3">ssl_accept(Socket, SslOptions, Timeout) -&gt; {ok, Socket} | ok | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1716,7 +1742,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 </div>
       </p></div>
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-sockname-1-idp71423478159792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-sockname-1-idp71423478159792').style.visibility = 'hidden';"><span id="ghlink-sockname-1-idp71423478159792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1448" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="sockname-1" href="#sockname-1">sockname(SslSocket) -&gt; {ok, {Address, Port}} |
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-sockname-1-idp47156669019056').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-sockname-1-idp47156669019056').style.visibility = 'hidden';"><span id="ghlink-sockname-1-idp47156669019056" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1470" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="sockname-1" href="#sockname-1">sockname(SslSocket) -&gt; {ok, {Address, Port}} |
 	{error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
@@ -1735,7 +1761,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
           <span class="code">Socket</span>.</p>
       </p></div>
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start-0-idp71423479020928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-0-idp71423479020928').style.visibility = 'hidden';"><span id="ghlink-start-0-idp71423479020928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1463" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start-0" href="#start-0">start() -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start-1-idp71423479021312').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-1-idp71423479021312').style.visibility = 'hidden';"><span id="ghlink-start-1-idp71423479021312" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1463" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start-1" href="#start-1">start(Type) -&gt; ok | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start-0-idp47156669023776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-0-idp47156669023776').style.visibility = 'hidden';"><span id="ghlink-start-0-idp47156669023776" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1485" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start-0" href="#start-0">start() -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start-1-idp47156669024224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-1-idp47156669024224').style.visibility = 'hidden';"><span id="ghlink-start-1-idp47156669024224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1485" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start-1" href="#start-1">start(Type) -&gt; ok | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1747,12 +1773,12 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
           is <span class="code">temporary</span>.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stop-0-idp71423479024512').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop-0-idp71423479024512').style.visibility = 'hidden';"><span id="ghlink-stop-0-idp71423479024512" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1476" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stop-0" href="#stop-0">stop() -&gt; ok </a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stop-0-idp47156669028064').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop-0-idp47156669028064').style.visibility = 'hidden';"><span id="ghlink-stop-0-idp47156669028064" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1498" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stop-0" href="#stop-0">stop() -&gt; ok </a></span></div></p>
 <div class="REFBODY rb-7"><p>
         <p>Stops the SSL application.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-suite_to_str-1-idp71423479026672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-suite_to_str-1-idp71423479026672').style.visibility = 'hidden';"><span id="ghlink-suite_to_str-1-idp71423479026672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1484" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="suite_to_str-1" href="#suite_to_str-1">suite_to_str(CipherSuite) -&gt; String</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-suite_to_str-1-idp47156669030624').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-suite_to_str-1-idp47156669030624').style.visibility = 'hidden';"><span id="ghlink-suite_to_str-1-idp47156669030624" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1506" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="suite_to_str-1" href="#suite_to_str-1">suite_to_str(CipherSuite) -&gt; String</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1766,7 +1792,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
         <p>Returns the string representation of a cipher suite.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-transport_accept-1-idp71423479029984').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-transport_accept-1-idp71423479029984').style.visibility = 'hidden';"><span id="ghlink-transport_accept-1-idp71423479029984" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1496" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="transport_accept-1" href="#transport_accept-1">transport_accept(ListenSocket) -&gt;</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-transport_accept-2-idp71423479030368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-transport_accept-2-idp71423479030368').style.visibility = 'hidden';"><span id="ghlink-transport_accept-2-idp71423479030368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1496" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="transport_accept-2" href="#transport_accept-2">transport_accept(ListenSocket, Timeout) -&gt;
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-transport_accept-1-idp47156669034464').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-transport_accept-1-idp47156669034464').style.visibility = 'hidden';"><span id="ghlink-transport_accept-1-idp47156669034464" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1518" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="transport_accept-1" href="#transport_accept-1">transport_accept(ListenSocket) -&gt;</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-transport_accept-2-idp47156669034928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-transport_accept-2-idp47156669034928').style.visibility = 'hidden';"><span id="ghlink-transport_accept-2-idp47156669034928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1518" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="transport_accept-2" href="#transport_accept-2">transport_accept(ListenSocket, Timeout) -&gt;
 	{ok, SslSocket} | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
@@ -1806,7 +1832,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
 	returned.</p>
       </p></div>
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-versions-0-idp71423479040784').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-versions-0-idp71423479040784').style.visibility = 'hidden';"><span id="ghlink-versions-0-idp71423479040784" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1531" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="versions-0" href="#versions-0">versions() -&gt; [versions_info()]</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-versions-0-idp47156669046800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-versions-0-idp47156669046800').style.visibility = 'hidden';"><span id="ghlink-versions-0-idp47156669046800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1553" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="versions-0" href="#versions-0">versions() -&gt; [versions_info()]</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -1850,7 +1876,7 @@ fun(srp, Username :: string(), UserState :: term()) -&gt;
    
   </div> 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-see-also-idp71423479054896').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-see-also-idp71423479054896').style.visibility = 'hidden';"><span id="ghlink-see-also-idp71423479054896" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1582" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="see-also" href="#see-also">SEE ALSO</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-see-also-idp47156667784128').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-see-also-idp47156667784128').style.visibility = 'hidden';"><span id="ghlink-see-also-idp47156667784128" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl.xml#L1604" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="see-also" href="#see-also">SEE ALSO</a></span></h3>
 <div class="REFBODY rb-3">
     
     <p><span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html');">inet(3)</a></span> and

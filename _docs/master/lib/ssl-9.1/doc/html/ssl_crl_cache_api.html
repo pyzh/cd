@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../doc/otp_doc.css" type="text/css">
-<title>Erlang -- ssl_crl_cache</title>
+<title>Erlang -- ssl_crl_cache_api</title>
 </head>
 <body>
 <div id="container">
@@ -48,12 +48,12 @@
 <div class="erlang-logo-wrapper"><a href="../../../../doc/index.html"><img alt="Erlang Logo" src="../../../../doc/erlang-logo.png" class="erlang-logo"></a></div>
 <p class="section-title">Secure Socket Layer </p>
 <p class="section-subtitle">Reference Manual</p>
-<p class="section-version">Version 9.0</p>
+<p class="section-version">Version 9.1</p>
 <ul class="panel-sections">
 <li><a href="users_guide.html">User's Guide</a></li>
 <li><a href="index.html">Reference Manual</a></li>
 <li><a href="release_notes.html">Release Notes</a></li>
-<li><a href="../pdf/ssl-9.0.pdf">PDF</a></li>
+<li><a href="../pdf/ssl-9.1.pdf">PDF</a></li>
 <li><a href="../../../../doc/index.html">Top</a></li>
 </ul>
 <ul class="expand-collapse-items">
@@ -106,6 +106,7 @@
     <li title="recv-3"><a href="ssl.html#recv-3">recv/3</a></li>
     <li title="renegotiate-1"><a href="ssl.html#renegotiate-1">renegotiate/1</a></li>
     <li title="send-2"><a href="ssl.html#send-2">send/2</a></li>
+    <li title="set_log_level-1"><a href="ssl.html#set_log_level-1">set_log_level/1</a></li>
     <li title="setopts-2"><a href="ssl.html#setopts-2">setopts/2</a></li>
     <li title="shutdown-2"><a href="ssl.html#shutdown-2">shutdown/2</a></li>
     <li title="sockname-1"><a href="ssl.html#sockname-1">sockname/1</a></li>
@@ -122,7 +123,7 @@
     <li title="versions-0"><a href="ssl.html#versions-0">versions/0</a></li>
     </ul>
 </li>
-<li id="loadscrollpos" title="ssl_crl_cache " expanded="true">ssl_crl_cache<ul>
+<li id="no" title="ssl_crl_cache " expanded="false">ssl_crl_cache<ul>
 <li><a href="ssl_crl_cache.html">
                   Top of manual page
                 </a></li>
@@ -131,7 +132,7 @@
     <li title="insert-2"><a href="ssl_crl_cache.html#insert-2">insert/2</a></li>
     </ul>
 </li>
-<li id="no" title="ssl_crl_cache_api " expanded="false">ssl_crl_cache_api<ul>
+<li id="loadscrollpos" title="ssl_crl_cache_api " expanded="true">ssl_crl_cache_api<ul>
 <li><a href="ssl_crl_cache_api.html">
                   Top of manual page
                 </a></li>
@@ -159,54 +160,112 @@
 </div></div>
 <div id="content">
 <div class="innertube">
-<!-- refpage --><center><h1>ssl_crl_cache</h1></center>
+<!-- refpage --><center><h1>ssl_crl_cache_api</h1></center>
   
   
-  <h3><span onMouseOver="document.getElementById('ghlink-module-idp71423479063520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp71423479063520').style.visibility = 'hidden';"><span id="ghlink-module-idp71423479063520"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
-<div class="REFBODY module-body">ssl_crl_cache</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp71423479063968').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp71423479063968').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp71423479063968"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
-<div class="REFBODY module-summary-body">CRL cache </div>
-  <h3><span onMouseOver="document.getElementById('ghlink-description-idp71423479064416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp71423479064416').style.visibility = 'hidden';"><span id="ghlink-description-idp71423479064416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl_crl_cache.xml#L29" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-idp47156669070064').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp47156669070064').style.visibility = 'hidden';"><span id="ghlink-module-idp47156669070064"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
+<div class="REFBODY module-body">ssl_crl_cache_api</div>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp47156669070448').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp47156669070448').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp47156669070448"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
+<div class="REFBODY module-summary-body">API for a SSL/TLS CRL (Certificate Revocation List) cache.</div>
+  <h3><span onMouseOver="document.getElementById('ghlink-description-idp47156669070832').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp47156669070832').style.visibility = 'hidden';"><span id="ghlink-description-idp47156669070832" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl_crl_cache_api.xml#L29" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
 <div class="REFBODY description-body"><p>
     <p>
-      Implements an internal CRL (Certificate Revocation List) cache.
-      In addition to implementing the <span class="bold_code bc-19"><a href="ssl_crl_cache_api.html">ssl_crl_cache_api</a></span> behaviour
-      the following functions are available.
+      When SSL/TLS performs certificate path validation according to
+      <span class="bold_code bc-20"><a href="http://www.ietf.org/rfc/rfc5280.txt">RFC 5280 </a></span>
+      it should also perform CRL validation checks. To enable the CRL
+      checks the application needs access to CRLs. A database of CRLs
+      can be set up in many different ways. This module provides the
+      behavior of the API needed to integrate an arbitrary CRL cache
+      with the erlang ssl application. It is also used by the
+      application itself to provide a simple default implementation of
+      a CRL cache.
     </p>
   </p></div>
   
-    <h3><span onMouseOver="document.getElementById('ghlink-exports-idp71423479066480').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp71423479066480').style.visibility = 'hidden';"><span id="ghlink-exports-idp71423479066480"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-data-types-idp47156669072912').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types-idp47156669072912').style.visibility = 'hidden';"><span id="ghlink-data-types-idp47156669072912" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl_crl_cache_api.xml#L43" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="data-types" href="#data-types">DATA TYPES</a></span></h3>
+<div class="REFBODY rb-3">
+    
+    
+    <p>The following data types are used in the functions below:
+    </p>
+    
+    <dl>
+      
+    <dt><strong><span class="code">cache_ref() =</span></strong></dt> 
+    <dd>opaque()</dd>
+    <dt><strong><span class="code">dist_point() =</span></strong></dt>
+    <dd><p>#'DistributionPoint'{} see <span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','public_key','public_key_records.html');">X509 certificates records</a></span></p></dd>
+    
+    </dl>
+    
+  </div>
+  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp47156669077312').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp47156669077312').style.visibility = 'hidden';"><span id="ghlink-exports-idp47156669077312"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
 <div class="exports-body">
-      <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-delete-1-idp71423479067360').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-delete-1-idp71423479067360').style.visibility = 'hidden';"><span id="ghlink-delete-1-idp71423479067360" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl_crl_cache.xml#L39" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="delete-1" href="#delete-1">delete(Entries) -&gt; ok |  {error, Reason} </a></span></div></p>
+      <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-fresh_crl-2-idp47156669078192').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fresh_crl-2-idp47156669078192').style.visibility = 'hidden';"><span id="ghlink-fresh_crl-2-idp47156669078192" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl_crl_cache_api.xml#L61" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fresh_crl-2" href="#fresh_crl-2">fresh_crl(DistributionPoint, CRL) -&gt; FreshCRL</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
-	  <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type"> Entries =  <span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','stdlib','uri_string.html');">uri_string:uri_string()</a></span> | {file, string()} | {der, [<span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','public_key','public_key.html');">public_key:der_encoded()</a></span>]}</span><br>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type"> DistributionPoint = dist_point() </span><br>
 </div>
-	  <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type"> Reason = term()</span><br>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type"> CRL = [<span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','public_key','public_key.html');">public_key:der_encoded()</a></span>] </span><br>
 </div>
-	</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type"> FreshCRL = [<span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','public_key','public_key.html');">public_key:der_encoded()</a></span>] </span><br>
+</div>
+      </div>
 <div class="REFBODY rb-7"><p>
-	  <p>Delete CRLs from the ssl applications local cache. </p>
-	</p></div>     
-      <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-insert-1-idp71423479072784').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-insert-1-idp71423479072784').style.visibility = 'hidden';"><span id="ghlink-insert-1-idp71423479072784" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl_crl_cache.xml#L51" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="insert-1" href="#insert-1">insert(CRLSrc) -&gt; ok | {error, Reason}</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-insert-2-idp71423479073248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-insert-2-idp71423479073248').style.visibility = 'hidden';"><span id="ghlink-insert-2-idp71423479073248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl_crl_cache.xml#L51" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="insert-2" href="#insert-2">insert(URI, CRLSrc) -&gt; ok | {error, Reason}</a></span></div></p>
+	<p> <span class="code">fun fresh_crl/2 </span> will be used as input option <span class="code">update_crl</span> to
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../../../doc/../','public_key','public_key.html#pkix_crls_validate-3');">public_key:pkix_crls_validate/3</a></span> </p>
+      </p></div>
+    
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-lookup-3-idp47156669086672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-lookup-3-idp47156669086672').style.visibility = 'hidden';"><span id="ghlink-lookup-3-idp47156669086672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl_crl_cache_api.xml#L78" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="lookup-3" href="#lookup-3">lookup(DistributionPoint, Issuer, DbHandle) -&gt; not_available | CRLs </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-lookup-2-idp47156669087168').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-lookup-2-idp47156669087168').style.visibility = 'hidden';"><span id="ghlink-lookup-2-idp47156669087168" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl_crl_cache_api.xml#L78" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="lookup-2" href="#lookup-2">lookup(DistributionPoint, DbHandle) -&gt; not_available | CRLs </a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
-	  <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type"> CRLSrc = {file, string()} | {der, [ <span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','public_key','public_key.html');">public_key:der_encoded()</a></span> ]}</span><br>
+        <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type"> DistributionPoint = dist_point() </span><br>
 </div>
-	  <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type"> URI = <span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','stdlib','uri_string.html');">uri_string:uri_string()</a></span> </span><br>
+        <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type"> Issuer = <span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','public_key','public_key.html');">public_key:issuer_name()</a></span> </span><br>
 </div>
-	  <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type"> Reason = term()</span><br>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type"> DbHandle  = cache_ref() </span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type"> CRLs = [<span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','public_key','public_key.html');">public_key:der_encoded()</a></span>] </span><br>
 </div>
 	</div>
-<div class="REFBODY rb-7"><p>
-	 <p>Insert CRLs into the ssl applications local cache. </p>
+<div class="REFBODY rb-7"><p> <p>Lookup the CRLs belonging to the distribution point <span class="code"> Distributionpoint</span>.
+	This function may choose to only look in the cache or to follow distribution point
+	links depending on how the cache is administrated. </p>
+
+	<p>The <span class="code">Issuer</span> argument contains the issuer name of the
+	certificate to be checked.  Normally the returned CRL should
+	be issued by this issuer, except if the <span class="code">cRLIssuer</span> field
+	of <span class="code">DistributionPoint</span> has a value, in which case that
+	value should be used instead.</p>
+
+	<p>In an earlier version of this API, the <span class="code">lookup</span>
+	function received two arguments, omitting <span class="code">Issuer</span>.  For
+	compatibility, this is still supported: if there is no
+	<span class="code">lookup/3</span> function in the callback module,
+	<span class="code">lookup/2</span> is called instead.</p>
 	</p></div>
-    </div>
+    
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-select-2-idp47156669098432').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-select-2-idp47156669098432').style.visibility = 'hidden';"><span id="ghlink-select-2-idp47156669098432" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/ssl_crl_cache_api.xml#L108" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="select-2" href="#select-2">select(Issuer, DbHandle) -&gt; CRLs </a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type"> Issuer = <span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','public_key','public_key.html');">public_key:issuer_name()</a></span></span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type"> DbHandle  = cache_ref() </span><br>
+</div>
+	</div>
+<div class="REFBODY rb-7"><p>
+	  <p>Select the CRLs in the cache that are issued by <span class="code">Issuer</span> </p>
+	</p></div>
+  </div>
 </div>
 <div class="footer">
 <hr>
