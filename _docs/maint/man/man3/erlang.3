@@ -172,6 +172,15 @@ Same as \fB\fInanosecond\fR\&\fR\&\&.
 .LP
 An opaque handle identifing a distribution channel\&.
 .RE
+.nf
+
+\fBnif_resource()\fR\&
+.br
+.fi
+.RS
+.LP
+An opaque handle identifing a \fBNIF resource object \fR\&\&.
+.RE
 .SH EXPORTS
 .LP
 .nf
@@ -7615,7 +7624,9 @@ InfoTuple = \fBprocess_info_result_item()\fR\&
 .br
     {max_heap_size, MaxHeapSize :: \fBmax_heap_size()\fR\&} |
 .br
-    {monitored_by, Pids :: [pid()]} |
+    {monitored_by,
+.br
+     MonitoredBy :: [pid() | port() | \fBnif_resource()\fR\&]} |
 .br
     {monitors,
 .br
@@ -7970,7 +7981,9 @@ InfoTuple = \fBprocess_info_result_item()\fR\&
 .br
     {max_heap_size, MaxHeapSize :: \fBmax_heap_size()\fR\&} |
 .br
-    {monitored_by, Pids :: [pid()]} |
+    {monitored_by,
+.br
+     MonitoredBy :: [pid() | port() | \fBnif_resource()\fR\&]} |
 .br
     {monitors,
 .br
@@ -8175,8 +8188,8 @@ The value is \fIfalse\fR\& if call saving is not active for the process (see \fB
 \fIMinBinVHeapSize\fR\& is the minimum binary virtual heap size for the process\&.
 .TP 2
 .B
-\fI{monitored_by, Pids}\fR\&:
-A list of process identifiers monitoring the process (with \fImonitor/2\fR\&)\&.
+\fI{monitored_by, MonitoredBy}\fR\&:
+A list of identifiers for all the processes, ports and NIF resources, that are monitoring the process\&.
 .TP 2
 .B
 \fI{monitors, Monitors}\fR\&:
