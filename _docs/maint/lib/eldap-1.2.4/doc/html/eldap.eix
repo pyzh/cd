@@ -1,6 +1,6 @@
 %% 
 %% Search data file for eldap 1.2.4
-%% generated July  9, 2018
+%% generated July 11, 2018
 %% 
 {"eldap.html", {function, {"eldap", "eldap"}},
 [
