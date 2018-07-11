@@ -1684,7 +1684,7 @@ Accepts an incoming connection request on a listen socket\&. \fIListenSocket\fR\
 .B
 Warning:
 .RE
-The socket returned can only be used with \fB handshake/[2,3]\fR\&\&. No traffic can be sent or received before that call\&.
+Most API functions require that the TLS/DTLS connection is established to work as expected\&.
 
 .LP
 The accepted socket inherits the options set for \fIListenSocket\fR\& in \fB listen/2\fR\&\&.
