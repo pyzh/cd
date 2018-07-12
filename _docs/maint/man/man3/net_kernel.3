@@ -81,7 +81,7 @@ Node = node()
 .RE
 .RS
 .LP
-Establishes a connection to \fINode\fR\&\&. Returns \fItrue\fR\& if successful, \fIfalse\fR\& if not, and \fIignored\fR\& if the local node is not alive\&.
+Establishes a connection to \fINode\fR\&\&. Returns \fItrue\fR\& if a connection was established or was already established or if \fINode\fR\& is the local node itself\&. Returns \fIfalse\fR\& if the connection attempt failed, and \fIignored\fR\& if the local node is not alive\&.
 .RE
 .LP
 .nf
