@@ -1,6 +1,6 @@
 %% 
 %% Search data file for kernel 6.0
-%% generated July 12, 2018
+%% generated July 13, 2018
 %% 
 {"kernel_app.html", {app, "kernel"}, ["kernel"]}.
 {"app.html", {file, "kernel"}, ["app"]}.
@@ -494,9 +494,15 @@
   {"remove_handler_filter", "remove_handler_filter(HandlerId, FilterId)", "remove_handler_filter-2"},
   {"remove_primary_filter", "remove_primary_filter(FilterId)", "remove_primary_filter-1"},
   {"set_handler_config", "set_handler_config(HandlerId, Config)", "set_handler_config-2"},
-  {"set_handler_config", "set_handler_config(HandlerId, Key, Value)", "set_handler_config-3"},
+  {"set_handler_config", "set_handler_config(HandlerId, Key :: level, Level)", "set_handler_config-3"},
+  {"set_handler_config", "set_handler_config(HandlerId,Key :: filter_default,FilterDefault)", "set_handler_config-3"},
+  {"set_handler_config", "set_handler_config(HandlerId, Key :: filters, Filters)", "set_handler_config-3"},
+  {"set_handler_config", "set_handler_config(HandlerId, Key :: formatter, Formatter)", "set_handler_config-3"},
+  {"set_handler_config", "set_handler_config(HandlerId, Key :: config, Config)", "set_handler_config-3"},
   {"set_primary_config", "set_primary_config(Config)", "set_primary_config-1"},
-  {"set_primary_config", "set_primary_config(Key, Value)", "set_primary_config-2"},
+  {"set_primary_config", "set_primary_config(Key :: level, Level)", "set_primary_config-2"},
+  {"set_primary_config", "set_primary_config(Key :: filter_default, FilterDefault)", "set_primary_config-2"},
+  {"set_primary_config", "set_primary_config(Key :: filters, Filters)", "set_primary_config-2"},
   {"set_module_level", "set_module_level(Modules, Level)", "set_module_level-2"},
   {"set_process_metadata", "set_process_metadata(Meta)", "set_process_metadata-1"},
   {"unset_module_level", "unset_module_level()", "unset_module_level-0"},

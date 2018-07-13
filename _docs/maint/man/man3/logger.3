@@ -63,33 +63,52 @@ Since Logger is new in Erlang/OTP 21\&.0, we do reserve the right to introduce c
 .SH DATA TYPES
 .nf
 
-\fBprimary_config()\fR\& = 
+\fBfilter()\fR\& = 
 .br
-    #{level => \fBlevel()\fR\& | all | none,
+    {fun((\fBlog_event()\fR\&, \fBfilter_arg()\fR\&) -> \fBfilter_return()\fR\&),
 .br
-      filter_default => log | stop,
-.br
-      filters => [{\fBfilter_id()\fR\&, \fBfilter()\fR\&}]}
+     \fBfilter_arg()\fR\&}
 .br
 .fi
 .RS
 .LP
-Primary configuration data for Logger\&. The following default values apply:
-.RS 2
-.TP 2
-*
-\fIlevel => info\fR\&
-.LP
-.TP 2
-*
-\fIfilter_default => log\fR\&
-.LP
-.TP 2
-*
-\fIfilters => []\fR\&
-.LP
+A filter which can be installed as a handler filter, or as a primary filter in Logger\&.
 .RE
+.nf
 
+\fBfilter_arg()\fR\& = term()
+.br
+.fi
+.RS
+.LP
+The second argument to the filter fun\&.
+.RE
+.nf
+
+\fBfilter_id()\fR\& = atom()
+.br
+.fi
+.RS
+.LP
+A unique identifier for a filter\&.
+.RE
+.nf
+
+\fBfilter_return()\fR\& = stop | ignore | \fBlog_event()\fR\&
+.br
+.fi
+.RS
+.LP
+The return value from the filter fun\&.
+.RE
+.nf
+
+\fBformatter_config()\fR\& = #{atom() => term()}
+.br
+.fi
+.RS
+.LP
+Configuration data for the formatter\&. See \fB\fIlogger_formatter(3)\fR\&\fR\& for an example of a formatter implementation\&.
 .RE
 .nf
 
@@ -146,58 +165,11 @@ In addition to these, the following fields are automatically inserted by Logger,
 .RE
 
 .LP
-Handler specific configuration data is inserted by the handler callback itself, in a sub structure associated with the field named \fIconfig\fR\&\&.
+These are read-only and cannot be changed in runtime\&.
+.LP
+Handler specific configuration data is inserted by the handler callback itself, in a sub structure associated with the field named \fIconfig\fR\&\&. See the \fB\fIlogger_std_h(3)\fR\&\fR\& and \fB\fIlogger_disk_log_h\fR\&\fR\& manual pages for information about the specifc configuration for these handlers\&.
 .LP
 See the \fB\fIlogger_formatter(3)\fR\&\fR\& manual page for information about the default configuration for this formatter\&.
-.RE
-.nf
-
-\fBfilter()\fR\& = 
-.br
-    {fun((\fBlog_event()\fR\&, \fBfilter_arg()\fR\&) -> \fBfilter_return()\fR\&),
-.br
-     \fBfilter_arg()\fR\&}
-.br
-.fi
-.RS
-.LP
-A filter which can be installed as a handler filter, or as a primary filter in Logger\&.
-.RE
-.nf
-
-\fBfilter_arg()\fR\& = term()
-.br
-.fi
-.RS
-.LP
-The second argument to the filter fun\&.
-.RE
-.nf
-
-\fBfilter_id()\fR\& = atom()
-.br
-.fi
-.RS
-.LP
-A unique identifier for a filter\&.
-.RE
-.nf
-
-\fBfilter_return()\fR\& = stop | ignore | \fBlog_event()\fR\&
-.br
-.fi
-.RS
-.LP
-The return value from the filter fun\&.
-.RE
-.nf
-
-\fBformatter_config()\fR\& = #{atom() => term()}
-.br
-.fi
-.RS
-.LP
-Configuration data for the formatter\&. See \fB\fIlogger_formatter(3)\fR\&\fR\& for an example of a formatter implementation\&.
 .RE
 .nf
 
@@ -272,7 +244,7 @@ The severity level for the message to be logged\&.
 .br
       domain => [atom()],
 .br
-      report_cb => fun((\fBreport()\fR\&) -> {\fBio:format()\fR\&, [term()]}),
+      report_cb => \fBreport_cb()\fR\&,
 .br
       atom() => term()}
 .br
@@ -328,7 +300,7 @@ The value associated with this key is used by filters for grouping log events or
 .TP 2
 .B
 \fIreport_cb\fR\&:
-If the log message is specified as a \fB\fIreport()\fR\&\fR\&, the \fIreport_cb\fR\& key can be associated with a fun (report callback) that converts the report to a format string and arguments\&. See section \fBLog Message\fR\& in the User\&'s Guide for more information about report callbacks\&.
+If the log message is specified as a \fB\fIreport()\fR\&\fR\&, the \fIreport_cb\fR\& key can be associated with a fun (report callback) that converts the report to a format string and arguments, or directly to a string\&. See the type definition of \fB\fIreport_cb()\fR\&\fR\&, and section \fBLog Message\fR\& in the User\&'s Guide for more information about report callbacks\&.
 .RE
 .RE
 .nf
@@ -350,7 +322,65 @@ If the log message is specified as a \fB\fIreport()\fR\&\fR\&, the \fIreport_cb\
 .RE
 .nf
 
+\fBprimary_config()\fR\& = 
+.br
+    #{level => \fBlevel()\fR\& | all | none,
+.br
+      filter_default => log | stop,
+.br
+      filters => [{\fBfilter_id()\fR\&, \fBfilter()\fR\&}]}
+.br
+.fi
+.RS
+.LP
+Primary configuration data for Logger\&. The following default values apply:
+.RS 2
+.TP 2
+*
+\fIlevel => info\fR\&
+.LP
+.TP 2
+*
+\fIfilter_default => log\fR\&
+.LP
+.TP 2
+*
+\fIfilters => []\fR\&
+.LP
+.RE
+
+.RE
+.nf
+
 \fBreport()\fR\& = map() | [{atom(), term()}]
+.br
+.fi
+.RS
+.LP
+
+.RE
+.nf
+
+\fBreport_cb()\fR\& = 
+.br
+    fun((\fBreport()\fR\&) -> {\fBio:format()\fR\&, [term()]}) |
+.br
+    fun((\fBreport()\fR\&, \fBreport_cb_config()\fR\&) -> \fBunicode:chardata()\fR\&)
+.br
+.fi
+.RS
+.LP
+A fun which converts a \fB\fIreport()\fR\&\fR\& to a format string and arguments, or directly to a string\&. See section \fBLog Message\fR\& in the User\&'s Guide for more information\&.
+.RE
+.nf
+
+\fBreport_cb_config()\fR\& = 
+.br
+    #{encoding := \fBunicode:encoding()\fR\&,
+.br
+      depth := integer() >= 1 | unlimited,
+.br
+      chars_limit := integer() >= 1 | unlimited}
 .br
 .fi
 .RS
@@ -435,10 +465,18 @@ The following macros are defined:
 *
 \fI?LOG_DEBUG(FunOrFormat,Args[,Metadata])\fR\&
 .LP
+.TP 2
+*
+\fI?LOG(Level,StringOrReport[,Metadata])\fR\&
+.LP
+.TP 2
+*
+\fI?LOG(Level,FunOrFormat,Args[,Metadata])\fR\&
+.LP
 .RE
 
 .LP
-All macros expand to a call to Logger, where \fILevel\fR\& is taken from the macro name, and location data is added to the metadata\&. See the description of the \fB\fImetadata()\fR\&\fR\& type for more information about the location data\&.
+All macros expand to a call to Logger, where \fILevel\fR\& is taken from the macro name, or from the first argument in the case of the \fI?LOG\fR\& macro\&. Location data is added to the metadata as described under the \fB\fImetadata()\fR\&\fR\& type definition\&.
 .LP
 The call is wrapped in a case statement and will be evaluated only if \fILevel\fR\& is equal to or below the configured log level\&.
 .SH "LOGGING API FUNCTIONS"
@@ -1096,7 +1134,43 @@ If a key is removed compared to the current configuration, and the key is known 
 .nf
 
 .B
-set_handler_config(HandlerId, Key, Value) -> ok | {error, term()}
+set_handler_config(HandlerId, Key :: level, Level) -> Return
+.br
+.fi
+.br
+.nf
+
+.B
+set_handler_config(HandlerId,
+.B
+                   Key :: filter_default,
+.B
+                   FilterDefault) ->
+.B
+                      Return
+.br
+.fi
+.br
+.nf
+
+.B
+set_handler_config(HandlerId, Key :: filters, Filters) -> Return
+.br
+.fi
+.br
+.nf
+
+.B
+set_handler_config(HandlerId, Key :: formatter, Formatter) ->
+.B
+                      Return
+.br
+.fi
+.br
+.nf
+
+.B
+set_handler_config(HandlerId, Key :: config, Config) -> Return
 .br
 .fi
 .br
@@ -1107,15 +1181,25 @@ Types:
 .RS 3
 HandlerId = \fBhandler_id()\fR\&
 .br
-Key = atom()
+Level = \fBlevel()\fR\& | all | none
 .br
-Value = term()
+FilterDefault = log | stop
+.br
+Filters = [{\fBfilter_id()\fR\&, \fBfilter()\fR\&}]
+.br
+Formatter = {module(), \fBformatter_config()\fR\&}
+.br
+Config = term()
+.br
+Return = ok | {error, term()}
 .br
 .RE
 .RE
 .RS
 .LP
-Add or update configuration data for the specified handler\&. If the given \fIKey\fR\& already exists, its associated value will be changed to \fIValue\fR\&\&. If it does not exist, it will be added\&.
+Add or update configuration data for the specified handler\&. If the given \fIKey\fR\& already exists, its associated value will be changed to the given value\&. If it does not exist, it will be added\&.
+.LP
+See the definition of the \fB\fIhandler_config()\fR\&\fR\& type for more information about the different parameters\&.
 .RE
 .LP
 .nf
@@ -1146,7 +1230,25 @@ If a key is removed compared to the current configuration, the default value is 
 .nf
 
 .B
-set_primary_config(Key, Value) -> ok | {error, term()}
+set_primary_config(Key :: level, Level) -> ok | {error, term()}
+.br
+.fi
+.br
+.nf
+
+.B
+set_primary_config(Key :: filter_default, FilterDefault) ->
+.B
+                      ok | {error, term()}
+.br
+.fi
+.br
+.nf
+
+.B
+set_primary_config(Key :: filters, Filters) ->
+.B
+                      ok | {error, term()}
 .br
 .fi
 .br
@@ -1155,15 +1257,17 @@ set_primary_config(Key, Value) -> ok | {error, term()}
 Types:
 
 .RS 3
-Key = atom()
+Level = \fBlevel()\fR\& | all | none
 .br
-Value = term()
+FilterDefault = log | stop
+.br
+Filters = [{\fBfilter_id()\fR\&, \fBfilter()\fR\&}]
 .br
 .RE
 .RE
 .RS
 .LP
-Add or update primary configuration data for Logger\&. If the given \fIKey\fR\& already exists, its associated value will be changed to \fIValue\fR\&\&. If it does not exist, it will be added\&.
+Add or update primary configuration data for Logger\&. If the given \fIKey\fR\& already exists, its associated value will be changed to the given value\&. If it does not exist, it will be added\&.
 .RE
 .LP
 .nf
