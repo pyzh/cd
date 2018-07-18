@@ -2754,6 +2754,10 @@ The following elements are only present in the list if \fIFun\fR\& is local:
 .B
 \fI{pid, Pid}\fR\&:
 \fIPid\fR\& is the process identifier of the process that originally created the fun\&.
+.RS 2
+.LP
+It might point to the \fIinit\fR\& process if the \fIFun\fR\& was statically allocated when module was loaded (this optimisation is performed for local functions that do not capture the enviornment)\&.
+.RE
 .TP 2
 .B
 \fI{index, Index}\fR\&:
