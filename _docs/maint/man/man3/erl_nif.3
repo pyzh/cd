@@ -1025,9 +1025,9 @@ int enif_fprintf(FILE *stream, const char *format, ...)
 .br
 .RS
 .LP
-Similar to \fIfprintf\fR\& but this format string also accepts \fI"%T"\fR\&, which formats Erlang terms\&.
+Similar to \fIfprintf\fR\& but this format string also accepts \fI"%T"\fR\&, which formats Erlang terms of type \fB\fIERL_NIF_TERM\fR\&\fR\&\&.
 .LP
-This function was originally intenden for debugging purpose\&. It is not recommended to print very large terms with \fI%T\fR\&\&. The function may change \fIerrno\fR\&, even if successful\&.
+This function is primarily intenden for debugging purpose\&. It is not recommended to print very large terms with \fI%T\fR\&\&. The function may change \fIerrno\fR\&, even if successful\&.
 .RE
 .LP
 .B
@@ -2643,9 +2643,9 @@ int enif_snprintf(char *str, size_t size, const
 .br
 .RS
 .LP
-Similar to \fIsnprintf\fR\& but this format string also accepts \fI"%T"\fR\&, which formats Erlang terms\&.
+Similar to \fIsnprintf\fR\& but this format string also accepts \fI"%T"\fR\&, which formats Erlang terms of type \fB\fIERL_NIF_TERM\fR\&\fR\&\&.
 .LP
-This function was originally intenden for debugging purpose\&. It is not recommended to print very large terms with \fI%T\fR\&\&. The function may change \fIerrno\fR\&, even if successful\&.
+This function is primarily intenden for debugging purpose\&. It is not recommended to print very large terms with \fI%T\fR\&\&. The function may change \fIerrno\fR\&, even if successful\&.
 .RE
 .LP
 .B
