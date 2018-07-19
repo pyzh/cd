@@ -149,7 +149,7 @@
 	some times necessary to use finer grained locking strategies. This will usually also increase the locking overhead and hence there is a tradeoff
 	between lock contention and overhead. In general, lock contention increases with the number of threads running concurrently. The <span class="code">lcnt</span> tool does not measure locking overhead.
     </p>
-    <h3><span onMouseOver="document.getElementById('ghlink--enabling-lock-counting--idp71564678492080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink--enabling-lock-counting--idp71564678492080').style.visibility = 'hidden';"><span id="ghlink--enabling-lock-counting--idp71564678492080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/tools/doc/src/lcnt_chapter.xml#L49" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="-enabling-lock-counting-" href="#-enabling-lock-counting-">5.1 
+    <h3><span onMouseOver="document.getElementById('ghlink--enabling-lock-counting--idp70807740569744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink--enabling-lock-counting--idp70807740569744').style.visibility = 'hidden';"><span id="ghlink--enabling-lock-counting--idp70807740569744" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/tools/doc/src/lcnt_chapter.xml#L49" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="-enabling-lock-counting-" href="#-enabling-lock-counting-">5.1 
            Enabling lock-counting </a></span></h3>
 	
 	<p>For investigation of locks in the emulator we use an internal tool called <span class="code">lcnt</span> (short for lock-count). The VM needs to be compiled with this option enabled.
@@ -166,7 +166,7 @@ $ERL_TOP/bin/erl -emu_type lcnt</pre></div>
 Erlang/OTP 20 [erts-9.0] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:10] [hipe]
  [kernel-poll:false] [lock-counting]</pre></div>
     
-    <h3><span onMouseOver="document.getElementById('ghlink-getting-started-idp71564678497296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-getting-started-idp71564678497296').style.visibility = 'hidden';"><span id="ghlink-getting-started-idp71564678497296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/tools/doc/src/lcnt_chapter.xml#L65" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="getting-started" href="#getting-started">5.2 
+    <h3><span onMouseOver="document.getElementById('ghlink-getting-started-idp70807740574960').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-getting-started-idp70807740574960').style.visibility = 'hidden';"><span id="ghlink-getting-started-idp70807740574960" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/tools/doc/src/lcnt_chapter.xml#L65" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="getting-started" href="#getting-started">5.2 
           Getting started</a></span></h3>
 	
 	<p>Once you have a lock counting enabled VM the module <span class="code">lcnt</span> can be used. The module is intended to be used from the current running nodes shell. To access remote nodes use <span class="code">lcnt:clear(Node)</span> and <span class="code">lcnt:collect(Node)</span>. </p>
@@ -177,7 +177,7 @@ Erlang/OTP 20 [erts-9.0] [64-bit] [smp:8:8] [ds:8:8:10] [async-threads:10] [hipe
 	<p>Once the data is collected to the server it can be filtered, sorted and printed in many different ways.</p>
 	<p>See the <span class="bold_code bc-19"><a href="lcnt.html">reference manual</a></span> for a description of each function.</p>
     
-    <h3><span onMouseOver="document.getElementById('ghlink--example-of-usage--idp71564678505648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink--example-of-usage--idp71564678505648').style.visibility = 'hidden';"><span id="ghlink--example-of-usage--idp71564678505648" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/tools/doc/src/lcnt_chapter.xml#L75" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="-example-of-usage-" href="#-example-of-usage-">5.3 
+    <h3><span onMouseOver="document.getElementById('ghlink--example-of-usage--idp70807740583312').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink--example-of-usage--idp70807740583312').style.visibility = 'hidden';"><span id="ghlink--example-of-usage--idp70807740583312" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/tools/doc/src/lcnt_chapter.xml#L75" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="-example-of-usage-" href="#-example-of-usage-">5.3 
            Example of usage </a></span></h3>
 	
 	<p>From the Erlang shell:</p>
@@ -258,7 +258,7 @@ ok
 ok
 </pre></div>
       
-      <h3><span onMouseOver="document.getElementById('ghlink--example-with-mnesia-transaction-benchmark--idp71564678516880').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink--example-with-mnesia-transaction-benchmark--idp71564678516880').style.visibility = 'hidden';"><span id="ghlink--example-with-mnesia-transaction-benchmark--idp71564678516880" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/tools/doc/src/lcnt_chapter.xml#L155" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="-example-with-mnesia-transaction-benchmark-" href="#-example-with-mnesia-transaction-benchmark-">5.4 
+      <h3><span onMouseOver="document.getElementById('ghlink--example-with-mnesia-transaction-benchmark--idp70807740594544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink--example-with-mnesia-transaction-benchmark--idp70807740594544').style.visibility = 'hidden';"><span id="ghlink--example-with-mnesia-transaction-benchmark--idp70807740594544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/tools/doc/src/lcnt_chapter.xml#L155" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="-example-with-mnesia-transaction-benchmark-" href="#-example-with-mnesia-transaction-benchmark-">5.4 
            Example with Mnesia Transaction Benchmark </a></span></h3>
 	
 	<p>From the Erlang shell:</p>
@@ -390,13 +390,13 @@ ok
 </pre></div>
 
     
-    <h3><span onMouseOver="document.getElementById('ghlink--deciphering-the-output--idp71564678533632').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink--deciphering-the-output--idp71564678533632').style.visibility = 'hidden';"><span id="ghlink--deciphering-the-output--idp71564678533632" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/tools/doc/src/lcnt_chapter.xml#L286" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="-deciphering-the-output-" href="#-deciphering-the-output-">5.5 
+    <h3><span onMouseOver="document.getElementById('ghlink--deciphering-the-output--idp70807740611296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink--deciphering-the-output--idp70807740611296').style.visibility = 'hidden';"><span id="ghlink--deciphering-the-output--idp70807740611296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/tools/doc/src/lcnt_chapter.xml#L286" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="-deciphering-the-output-" href="#-deciphering-the-output-">5.5 
            Deciphering the output </a></span></h3>
 	
 	<p> Typically high <span class="code">time</span> values are bad and this is often the thing to look for. However, one should also look for high lock acquisition frequencies (#tries) since locks generate overhead and because high frequency could become problematic if they begin to have conflicts even if it is not shown in a particular test.  </p>
     
 
-    <h3><span onMouseOver="document.getElementById('ghlink-see-also-idp71564678536016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-see-also-idp71564678536016').style.visibility = 'hidden';"><span id="ghlink-see-also-idp71564678536016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/tools/doc/src/lcnt_chapter.xml#L291" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="see-also" href="#see-also">5.6 
+    <h3><span onMouseOver="document.getElementById('ghlink-see-also-idp70807740613680').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-see-also-idp70807740613680').style.visibility = 'hidden';"><span id="ghlink-see-also-idp70807740613680" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/tools/doc/src/lcnt_chapter.xml#L291" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="see-also" href="#see-also">5.6 
           See Also</a></span></h3>
 	
 	<p> <span class="bold_code bc-19"><a href="lcnt.html">LCNT Reference Manual</a></span></p>
