@@ -1,6 +1,6 @@
 %% 
 %% Search data file for stdlib 3.5.1
-%% generated July 20, 2018
+%% generated July 23, 2018
 %% 
 {"STDLIB_app.html", {app, "stdlib"}, ["STDLIB"]}.
 {"array.html", {function, {"stdlib", "array"}},
