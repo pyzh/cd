@@ -7,17 +7,22 @@ This module contains functions for maps processing\&.
 .SH DATA TYPES
 .nf
 
-\fBiterator()\fR\&
+\fBiterator(Key, Value)\fR\&
 .br
 .fi
 .RS
 .LP
-An iterator representing the key value associations in a map\&.
+An iterator representing the associations in a map with keys of type \fIKey\fR\& and values of type \fIValue\fR\&\&.
 .LP
 Created using \fB\fImaps:iterator/1\fR\&\fR\&\&.
 .LP
 Consumed by \fB\fImaps:next/1\fR\&\fR\&, \fB\fImaps:filter/2\fR\&\fR\&, \fB\fImaps:fold/3\fR\&\fR\& and \fB\fImaps:map/2\fR\&\fR\&\&.
 .RE
+.nf
+
+\fBiterator()\fR\& = \fBiterator\fR\&(term(), term())
+.br
+.fi
 .SH EXPORTS
 .LP
 .nf
@@ -34,11 +39,9 @@ Types:
 .RS 3
 Pred = fun((Key, Value) -> boolean())
 .br
-Key = Value = term()
+MapOrIter = #{Key => Value} | \fBiterator\fR\&(Key, Value)
 .br
-MapOrIter = map() | \fBiterator()\fR\&
-.br
-Map = map()
+Map = #{Key => Value}
 .br
 .RE
 .RE
@@ -71,11 +74,7 @@ find(Key, Map) -> {ok, Value} | error
 Types:
 
 .RS 3
-Key = term()
-.br
-Map = map()
-.br
-Value = term()
+Map = #{Key => Value, term() => term()}
 .br
 .RE
 .RE
@@ -108,19 +107,21 @@ fold(Fun, Init, MapOrIter) -> Acc
 Types:
 
 .RS 3
-Fun = fun((K, V, AccIn) -> AccOut)
+Fun = fun((Key, Value, AccIn) -> AccOut)
 .br
-Init = Acc = AccIn = AccOut = term()
+Init = term()
 .br
-MapOrIter = map() | \fBiterator()\fR\&
+Acc = AccOut
 .br
-K = V = term()
+AccIn = Init | AccOut
+.br
+MapOrIter = #{Key => Value} | \fBiterator\fR\&(Key, Value)
 .br
 .RE
 .RE
 .RS
 .LP
-Calls \fIF(K, V, AccIn)\fR\& for every \fIK\fR\& to value \fIV\fR\& association in \fIMapOrIter\fR\& in any order\&. Function \fIfun F/3\fR\& must return a new accumulator, which is passed to the next successive call\&. This function returns the final value of the accumulator\&. The initial accumulator value \fIInit\fR\& is returned if the map is empty\&.
+Calls \fIF(Key, Value, AccIn)\fR\& for every \fIKey\fR\& to value \fIValue\fR\& association in \fIMapOrIter\fR\& in any order\&. Function \fIfun F/3\fR\& must return a new accumulator, which is passed to the next successive call\&. This function returns the final value of the accumulator\&. The initial accumulator value \fIInit\fR\& is returned if the map is empty\&.
 .LP
 The call fails with a \fI{badmap,Map}\fR\& exception if \fIMapOrIter\fR\& is not a map or valid iterator, or with \fIbadarg\fR\& if \fIFun\fR\& is not a function of arity 3\&.
 .LP
@@ -218,11 +219,7 @@ get(Key, Map, Default) -> Value | Default
 Types:
 
 .RS 3
-Key = term()
-.br
-Map = map()
-.br
-Value = Default = term()
+Map = #{Key => Value, term() => term()}
 .br
 .RE
 .RE
@@ -294,9 +291,9 @@ iterator(Map) -> Iterator
 Types:
 
 .RS 3
-Map = map()
+Map = #{Key => Value}
 .br
-Iterator = \fBiterator()\fR\&
+Iterator = \fBiterator\fR\&(Key, Value)
 .br
 .RE
 .RE
@@ -335,11 +332,9 @@ keys(Map) -> Keys
 Types:
 
 .RS 3
-Map = map()
+Map = #{Key => term()}
 .br
 Keys = [Key]
-.br
-Key = term()
 .br
 .RE
 .RE
@@ -371,19 +366,17 @@ map(Fun, MapOrIter) -> Map
 Types:
 
 .RS 3
-Fun = fun((K, V1) -> V2)
+Fun = fun((Key, Value1) -> Value2)
 .br
-MapOrIter = map() | \fBiterator()\fR\&
+MapOrIter = #{Key => Value1} | \fBiterator\fR\&(Key, Value1)
 .br
-Map = map()
-.br
-K = V1 = V2 = term()
+Map = #{Key => Value2}
 .br
 .RE
 .RE
 .RS
 .LP
-Produces a new map \fIMap\fR\& by calling function \fIfun F(K, V1)\fR\& for every \fIK\fR\& to value \fIV1\fR\& association in \fIMapOrIter\fR\& in any order\&. Function \fIfun F/2\fR\& must return value \fIV2\fR\& to be associated with key \fIK\fR\& for the new map \fIMap\fR\&\&.
+Produces a new map \fIMap\fR\& by calling function \fIfun F(Key, Value1)\fR\& for every \fIKey\fR\& to value \fIValue1\fR\& association in \fIMapOrIter\fR\& in any order\&. Function \fIfun Fun/2\fR\& must return value \fIValue2\fR\& to be associated with key \fIKey\fR\& for the new map \fIMap\fR\&\&.
 .LP
 The call fails with a \fI{badmap,Map}\fR\& exception if \fIMapOrIter\fR\& is not a map or valid iterator, or with \fIbadarg\fR\& if \fIFun\fR\& is not a function of arity 2\&.
 .LP
@@ -472,11 +465,7 @@ next(Iterator) -> {Key, Value, NextIterator} | none
 Types:
 
 .RS 3
-Iterator = \fBiterator()\fR\&
-.br
-Key = Value = term()
-.br
-NextIterator = \fBiterator()\fR\&
+Iterator = NextIterator = \fBiterator\fR\&(Key, Value)
 .br
 .RE
 .RE
@@ -621,13 +610,9 @@ take(Key, Map1) -> {Value, Map2} | error
 Types:
 
 .RS 3
-Key = term()
+Map1 = #{Key => Value, term() => term()}
 .br
-Map1 = map()
-.br
-Value = term()
-.br
-Map2 = map()
+Map2 = #{term() => term()}
 .br
 .RE
 .RE
@@ -662,9 +647,7 @@ to_list(Map) -> [{Key, Value}]
 Types:
 
 .RS 3
-Map = map()
-.br
-Key = Value = term()
+Map = #{Key => Value}
 .br
 .RE
 .RE
@@ -696,9 +679,9 @@ update(Key, Value, Map1) -> Map2
 Types:
 
 .RS 3
-Key = Value = term()
+Map1 = #{Key := term(), term() => term()}
 .br
-Map1 = Map2 = map()
+Map2 = #{Key := Value, term() => term()}
 .br
 .RE
 .RE
@@ -731,11 +714,11 @@ update_with(Key, Fun, Map1) -> Map2
 Types:
 
 .RS 3
-Key = term()
+Map1 = #{Key := Value1, term() => term()}
 .br
-Map1 = Map2 = map()
+Map2 = #{Key := Value2, term() => term()}
 .br
-Fun = fun((Value1 :: term()) -> Value2 :: term())
+Fun = fun((Value1) -> Value2)
 .br
 .RE
 .RE
@@ -766,15 +749,11 @@ update_with(Key, Fun, Init, Map1) -> Map2
 Types:
 
 .RS 3
-Key = term()
+Map1 = #{Key => Value1, term() => term()}
 .br
-Map1 = Map1
+Map2 = #{Key := Value2 | Init, term() => term()}
 .br
-Map2 = Map2
-.br
-Fun = fun((Value1 :: term()) -> Value2 :: term())
-.br
-Init = term()
+Fun = fun((Value1) -> Value2)
 .br
 .RE
 .RE
@@ -805,11 +784,9 @@ values(Map) -> Values
 Types:
 
 .RS 3
-Map = map()
+Map = #{term() => Value}
 .br
 Values = [Value]
-.br
-Value = term()
 .br
 .RE
 .RE
@@ -843,9 +820,9 @@ Types:
 .RS 3
 Ks = [K]
 .br
-Map1 = Map2 = map()
+Map1 = #{K => V, term() => term()}
 .br
-K = term()
+Map2 = #{K => V}
 .br
 .RE
 .RE

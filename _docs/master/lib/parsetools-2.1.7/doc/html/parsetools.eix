@@ -1,6 +1,6 @@
 %% 
 %% Search data file for parsetools 2.1.7
-%% generated July 24, 2018
+%% generated July 25, 2018
 %% 
 {"yecc.html", {function, {"parsetools", "yecc"}},
 [
