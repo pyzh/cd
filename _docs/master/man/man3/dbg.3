@@ -67,7 +67,7 @@ Variables from the environment can be imported, so that this works:
 [{['$1','$2'],[{'>','$2',{const,3}}],[{return_trace}]}]
 .fi
 .LP
-The imported variables will be replaced by match_spec \fIconst\fR\& expressions, which is consistent with the static scoping for Erlang \fIfun()\fR\&s\&. Local or global function calls can not be in the guard or body of the fun however\&. Calls to builtin match_spec functions of course is allowed:
+The imported variables will be replaced by match_spec \fIconst\fR\& expressions, which is consistent with the static scoping for Erlang \fIfun()\fR\&s\&. Local or global function calls cannot be in the guard or body of the fun however\&. Calls to builtin match_spec functions of course is allowed:
 .LP
 .nf
 
@@ -708,7 +708,7 @@ This function adds a remote node (\fINodename\fR\&) to the list of nodes where t
 .LP
 If \fINodename\fR\& is the local node, the error reason \fIcant_add_local_node\fR\& is returned\&.
 .LP
-If a trace port (see \fB\fItrace_port/2\fR\&\fR\&) is running on the local node, remote nodes can not be traced with a tracer process\&. The error reason \fIcant_trace_remote_pid_to_local_port\fR\& is returned\&. A trace port can however be started on the remote node with the \fB\fItracer/3\fR\&\fR\& function\&.
+If a trace port (see \fB\fItrace_port/2\fR\&\fR\&) is running on the local node, remote nodes cannot be traced with a tracer process\&. The error reason \fIcant_trace_remote_pid_to_local_port\fR\& is returned\&. A trace port can however be started on the remote node with the \fB\fItracer/3\fR\&\fR\& function\&.
 .LP
 The function will also return an error if the node \fINodename\fR\& is not reachable\&.
 .RE

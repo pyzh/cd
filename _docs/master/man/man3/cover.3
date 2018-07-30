@@ -229,7 +229,7 @@ Note that the existing \fI\&.beam\fR\& file must contain \fIabstract code\fR\&, 
 .LP
 If only the module name (i\&.e\&. not the full name of the \fI\&.beam\fR\& file) is given to this function, the \fI\&.beam\fR\& file is found by calling \fIcode:which(Module)\fR\&\&. If no \fI\&.beam\fR\& file is found, the error reason \fInon_existing\fR\& is returned\&. If the module is already cover compiled with \fIcompile_beam/1\fR\&, the \fI\&.beam\fR\& file will be picked from the same location as the first time it was compiled\&. If the module is already cover compiled with \fIcompile/1,2\fR\&, there is no way to find the correct \fI\&.beam\fR\& file, so the error reason \fI{already_cover_compiled,no_beam_found,Module}\fR\& is returned\&.
 .LP
-\fI{error,BeamFile}\fR\& is returned if the compiled code can not be loaded on the node\&.
+\fI{error,BeamFile}\fR\& is returned if the compiled code cannot be loaded on the node\&.
 .LP
 If a list of \fIModFiles\fR\& is given as input, a list of \fIResult\fR\& will be returned\&. The order of the returned list is undefined\&.
 .RE
@@ -564,7 +564,7 @@ Reason = {not_cover_compiled,Module} | {cant_open_file,ExportFile,Reason} | not_
 .RE
 .RS
 .LP
-Exports the current coverage data for \fIModule\fR\& to the file \fIExportFile\fR\&\&. It is recommended to name the \fIExportFile\fR\& with the extension \fI\&.coverdata\fR\&, since other filenames can not be read by the web based interface to cover\&.
+Exports the current coverage data for \fIModule\fR\& to the file \fIExportFile\fR\&\&. It is recommended to name the \fIExportFile\fR\& with the extension \fI\&.coverdata\fR\&, since other filenames cannot be read by the web based interface to cover\&.
 .LP
 If \fIModule\fR\& is not given, data for all Cover compiled or earlier imported modules is exported\&.
 .LP
@@ -595,7 +595,7 @@ Note that when compiling a module \fIall existing coverage data is removed\fR\&,
 .LP
 Coverage data from several export files can be imported into one system\&. The coverage data is then added up when analysing\&.
 .LP
-Coverage data for a module can not be imported from the same file twice unless the module is first reset or compiled\&. The check is based on the filename, so you can easily fool the system by renaming your export file\&.
+Coverage data for a module cannot be imported from the same file twice unless the module is first reset or compiled\&. The check is based on the filename, so you can easily fool the system by renaming your export file\&.
 .LP
 See also \fIcover:export/1,2\fR\&
 .RE

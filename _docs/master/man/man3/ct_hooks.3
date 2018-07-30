@@ -348,7 +348,7 @@ OPTIONAL
 .LP
 This function is called before \fB\fIend_per_testcase\fR\&\fR\& if it exists\&. It behaves the same way as \fB\fIpre_end_per_suite\fR\&\fR\&, but for function \fB\fIend_per_testcase\fR\&\fR\& instead\&.
 .LP
-This function can not change the result of the test case by returning skip or fail tuples, but it may insert items in \fIConfig\fR\& that can be read in \fIend_per_testcase/2\fR\& or in \fIpost_end_per_testcase/5\fR\&\&.
+This function cannot change the result of the test case by returning skip or fail tuples, but it may insert items in \fIConfig\fR\& that can be read in \fIend_per_testcase/2\fR\& or in \fIpost_end_per_testcase/5\fR\&\&.
 .LP
 If \fIModule:pre_end_per_testcase/4\fR\& is not exported, common_test will attempt to call \fIModule:pre_end_per_testcase(TestcaseName, EndData, CTHState)\fR\& instead\&. This is for backwards compatibility\&.
 .RE
