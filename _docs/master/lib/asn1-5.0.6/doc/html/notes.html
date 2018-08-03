@@ -66,6 +66,7 @@
               Top of chapter
             </a></li>
 <li title="Asn1 5.0.6"><a href="notes.html#asn1-5.0.6">Asn1 5.0.6</a></li>
+<li title="Asn1 5.0.5.1"><a href="notes.html#asn1-5.0.5.1">Asn1 5.0.5.1</a></li>
 <li title="Asn1 5.0.5"><a href="notes.html#asn1-5.0.5">Asn1 5.0.5</a></li>
 <li title="Asn1 5.0.4"><a href="notes.html#asn1-5.0.4">Asn1 5.0.4</a></li>
 <li title="Asn1 5.0.3"><a href="notes.html#asn1-5.0.3">Asn1 5.0.3</a></li>
@@ -129,10 +130,10 @@
   <p>This document describes the changes made to the asn1 application.</p>
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0.6-idp47221737353264').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0.6-idp47221737353264').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0.6-idp47221737353264" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L35" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0.6" href="#asn1-5.0.6">1.1 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0.6-idp46573397438144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0.6-idp46573397438144').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0.6-idp46573397438144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L35" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0.6" href="#asn1-5.0.6">1.1 
           Asn1 5.0.6</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221737353968').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221737353968').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221737353968" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L37" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573397438848').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573397438848').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573397438848" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L37" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -145,10 +146,33 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0.5-idp47221737356880').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0.5-idp47221737356880').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0.5-idp47221737356880" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L50" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0.5" href="#asn1-5.0.5">1.2 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0.5.1-idp46573397441760').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0.5.1-idp46573397441760').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0.5.1-idp46573397441760" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L50" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0.5.1" href="#asn1-5.0.5.1">1.2 
+          Asn1 5.0.5.1</a></span></h3>
+
+    <h4><span onMouseOver="document.getElementById('ghlink-known-bugs-and-problems-idp46573397442512').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-known-bugs-and-problems-idp46573397442512').style.visibility = 'hidden';"><span id="ghlink-known-bugs-and-problems-idp46573397442512" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L52" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="known-bugs-and-problems" href="#known-bugs-and-problems">Known Bugs and Problems</a></span></h4>
+      <ul>
+        <li>
+	    <p>A bug in ASN.1 BER decoding has been fixed. When
+	    decoding a recursively enclosed term the length was not
+	    propagated to that term decoding, so if the length of the
+	    enclosed term was longer than the enclosing that error
+	    was not dectected</p> <p>A hard coded C stack limitation
+	    for decoding recursive ASN.1 terms has been introduced.
+	    This is currently set to 8 kWords giving a nesting depth
+	    of about 1000 levels. Deeper terms can not be decoded,
+	    which should not be much of a real world limitation.</p>
+          <p>
+	    Own Id: OTP-14440 Aux Id: ERIERL-220 </p>
+        </li>
+      </ul>
+    
+
+
+
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0.5-idp46573397447776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0.5-idp46573397447776').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0.5-idp46573397447776" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L72" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0.5" href="#asn1-5.0.5">1.3 
           Asn1 5.0.5</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221737357696').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221737357696').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221737357696" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L52" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573397448640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573397448640').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573397448640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L74" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -163,10 +187,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0.4-idp47221737073040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0.4-idp47221737073040').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0.4-idp47221737073040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L67" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0.4" href="#asn1-5.0.4">1.3 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0.4-idp46573397402288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0.4-idp46573397402288').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0.4-idp46573397402288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L89" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0.4" href="#asn1-5.0.4">1.4 
           Asn1 5.0.4</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221737073904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221737073904').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221737073904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L69" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573397403152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573397403152').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573397403152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L91" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -189,10 +213,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0.3-idp47221737301248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0.3-idp47221737301248').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0.3-idp47221737301248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L92" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0.3" href="#asn1-5.0.3">1.4 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0.3-idp46573397409072').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0.3-idp46573397409072').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0.3-idp46573397409072" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L114" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0.3" href="#asn1-5.0.3">1.5 
           Asn1 5.0.3</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221737302112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221737302112').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221737302112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L94" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573397409936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573397409936').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573397409936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L116" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -208,10 +232,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0.2-idp47221737305568').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0.2-idp47221737305568').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0.2-idp47221737305568" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L110" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0.2" href="#asn1-5.0.2">1.5 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0.2-idp46573397418448').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0.2-idp46573397418448').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0.2-idp46573397418448" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L132" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0.2" href="#asn1-5.0.2">1.6 
           Asn1 5.0.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221737306432').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221737306432').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221737306432" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L112" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573397419312').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573397419312').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573397419312" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L134" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -226,10 +250,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0.1-idp47221737390016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0.1-idp47221737390016').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0.1-idp47221737390016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L127" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0.1" href="#asn1-5.0.1">1.6 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0.1-idp46573397422992').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0.1-idp46573397422992').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0.1-idp46573397422992" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L149" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0.1" href="#asn1-5.0.1">1.7 
           Asn1 5.0.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221737390880').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221737390880').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221737390880" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L129" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573397423856').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573397423856').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573397423856" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L151" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -244,10 +268,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0-idp47221737394304').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0-idp47221737394304').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0-idp47221737394304" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L144" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0" href="#asn1-5.0">1.7 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-5.0-idp46573397427280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-5.0-idp46573397427280').style.visibility = 'hidden';"><span id="ghlink-asn1-5.0-idp46573397427280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L166" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-5.0" href="#asn1-5.0">1.8 
           Asn1 5.0</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221737395168').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221737395168').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221737395168" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L146" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573397428144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573397428144').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573397428144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L168" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -261,7 +285,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221737399248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221737399248').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221737399248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L160" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398153408').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398153408').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398153408" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L182" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
 	    <p>The <span class="code">error</span> tuple returned from the <span class="code">encode</span>
@@ -294,10 +318,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-4.0.4-idp47221738048320').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-4.0.4-idp47221738048320').style.visibility = 'hidden';"><span id="ghlink-asn1-4.0.4-idp47221738048320" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L193" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-4.0.4" href="#asn1-4.0.4">1.8 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-4.0.4-idp46573398164528').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-4.0.4-idp46573398164528').style.visibility = 'hidden';"><span id="ghlink-asn1-4.0.4-idp46573398164528" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L215" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-4.0.4" href="#asn1-4.0.4">1.9 
           Asn1 4.0.4</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738049184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738049184').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738049184" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L195" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398165392').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398165392').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398165392" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L217" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -311,10 +335,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-4.0.3-idp47221738052544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-4.0.3-idp47221738052544').style.visibility = 'hidden';"><span id="ghlink-asn1-4.0.3-idp47221738052544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L209" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-4.0.3" href="#asn1-4.0.3">1.9 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-4.0.3-idp46573398168752').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-4.0.3-idp46573398168752').style.visibility = 'hidden';"><span id="ghlink-asn1-4.0.3-idp46573398168752" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L231" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-4.0.3" href="#asn1-4.0.3">1.10 
           Asn1 4.0.3</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738053408').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738053408').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738053408" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L211" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398169616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398169616').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398169616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L233" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -327,10 +351,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-4.0.2-idp47221738056672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-4.0.2-idp47221738056672').style.visibility = 'hidden';"><span id="ghlink-asn1-4.0.2-idp47221738056672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L224" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-4.0.2" href="#asn1-4.0.2">1.10 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-4.0.2-idp46573398172880').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-4.0.2-idp46573398172880').style.visibility = 'hidden';"><span id="ghlink-asn1-4.0.2-idp46573398172880" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L246" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-4.0.2" href="#asn1-4.0.2">1.11 
           Asn1 4.0.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738057536').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738057536').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738057536" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L226" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398173744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398173744').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398173744" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L248" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -355,10 +379,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-4.0.1-idp47221738062912').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-4.0.1-idp47221738062912').style.visibility = 'hidden';"><span id="ghlink-asn1-4.0.1-idp47221738062912" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L251" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-4.0.1" href="#asn1-4.0.1">1.11 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-4.0.1-idp46573398179200').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-4.0.1-idp46573398179200').style.visibility = 'hidden';"><span id="ghlink-asn1-4.0.1-idp46573398179200" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L273" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-4.0.1" href="#asn1-4.0.1">1.12 
           Asn1 4.0.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738063776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738063776').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738063776" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L253" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398180064').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398180064').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398180064" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L275" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -373,10 +397,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-4.0-idp47221738067504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-4.0-idp47221738067504').style.visibility = 'hidden';"><span id="ghlink-asn1-4.0-idp47221738067504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L268" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-4.0" href="#asn1-4.0">1.12 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-4.0-idp46573398183792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-4.0-idp46573398183792').style.visibility = 'hidden';"><span id="ghlink-asn1-4.0-idp46573398183792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L290" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-4.0" href="#asn1-4.0">1.13 
           Asn1 4.0</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738068368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738068368').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738068368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L270" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398184656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398184656').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398184656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L292" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -390,7 +414,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738071648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738071648').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738071648" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L284" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398591216').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398591216').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398591216" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L306" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
 	    <p>The documentation for <span class="code">asn1ct:test/1,2,3</span> and
@@ -404,10 +428,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-3.0.4-idp47221738075808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-3.0.4-idp47221738075808').style.visibility = 'hidden';"><span id="ghlink-asn1-3.0.4-idp47221738075808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L298" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-3.0.4" href="#asn1-3.0.4">1.13 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-3.0.4-idp46573398595088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-3.0.4-idp46573398595088').style.visibility = 'hidden';"><span id="ghlink-asn1-3.0.4-idp46573398595088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L320" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-3.0.4" href="#asn1-3.0.4">1.14 
           Asn1 3.0.4</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738076672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738076672').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738076672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L300" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398595952').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398595952').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398595952" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L322" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
 	    <p>The ASN.1 compiler would crash if a SEQUENCE ended
@@ -420,10 +444,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-3.0.3-idp47221738080384').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-3.0.3-idp47221738080384').style.visibility = 'hidden';"><span id="ghlink-asn1-3.0.3-idp47221738080384" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L313" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-3.0.3" href="#asn1-3.0.3">1.14 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-3.0.3-idp46573398599664').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-3.0.3-idp46573398599664').style.visibility = 'hidden';"><span id="ghlink-asn1-3.0.3-idp46573398599664" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L335" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-3.0.3" href="#asn1-3.0.3">1.15 
           Asn1 3.0.3</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738484896').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738484896').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738484896" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L315" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398600528').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398600528').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398600528" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L337" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -453,10 +477,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-3.0.2-idp47221738490944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-3.0.2-idp47221738490944').style.visibility = 'hidden';"><span id="ghlink-asn1-3.0.2-idp47221738490944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L345" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-3.0.2" href="#asn1-3.0.2">1.15 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-3.0.2-idp46573398607232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-3.0.2-idp46573398607232').style.visibility = 'hidden';"><span id="ghlink-asn1-3.0.2-idp46573398607232" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L367" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-3.0.2" href="#asn1-3.0.2">1.16 
           Asn1 3.0.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738491808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738491808').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738491808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L347" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398608096').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398608096').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398608096" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L369" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -478,10 +502,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-3.0.1-idp47221738496512').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-3.0.1-idp47221738496512').style.visibility = 'hidden';"><span id="ghlink-asn1-3.0.1-idp47221738496512" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L369" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-3.0.1" href="#asn1-3.0.1">1.16 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-3.0.1-idp46573398612816').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-3.0.1-idp46573398612816').style.visibility = 'hidden';"><span id="ghlink-asn1-3.0.1-idp46573398612816" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L391" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-3.0.1" href="#asn1-3.0.1">1.17 
           Asn1 3.0.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738497376').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738497376').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738497376" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L371" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398613680').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398613680').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398613680" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L393" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -496,10 +520,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-3.0-idp47221738500784').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-3.0-idp47221738500784').style.visibility = 'hidden';"><span id="ghlink-asn1-3.0-idp47221738500784" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L386" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-3.0" href="#asn1-3.0">1.17 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-3.0-idp46573398617088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-3.0-idp46573398617088').style.visibility = 'hidden';"><span id="ghlink-asn1-3.0-idp46573398617088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L408" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-3.0" href="#asn1-3.0">1.18 
           Asn1 3.0</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738501648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738501648').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738501648" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L388" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398617952').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398617952').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398617952" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L410" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -547,7 +571,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738511520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738511520').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738511520" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L436" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398627824').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398627824').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398627824" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L458" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -603,10 +627,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0.4-idp47221738525216').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0.4-idp47221738525216').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0.4-idp47221738525216" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L492" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0.4" href="#asn1-2.0.4">1.18 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0.4-idp46573398641520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0.4-idp46573398641520').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0.4-idp46573398641520" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L514" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0.4" href="#asn1-2.0.4">1.19 
           Asn1 2.0.4</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738526080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738526080').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738526080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L494" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398642384').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398642384').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398642384" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L516" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -649,7 +673,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738536880').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738536880').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738536880" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L537" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398653184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398653184').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398653184" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L559" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -664,10 +688,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0.3-idp47221738540688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0.3-idp47221738540688').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0.3-idp47221738540688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L552" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0.3" href="#asn1-2.0.3">1.19 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0.3-idp46573398656992').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0.3-idp46573398656992').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0.3-idp46573398656992" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L574" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0.3" href="#asn1-2.0.3">1.20 
           Asn1 2.0.3</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738541552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738541552').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738541552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L554" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398657856').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398657856').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398657856" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L576" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -680,7 +704,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738544768').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738544768').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738544768" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L567" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398661072').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398661072').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398661072" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L589" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
 	    <p>For the PER and UPER formats, code generation
@@ -703,10 +727,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0.2-idp47221738549920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0.2-idp47221738549920').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0.2-idp47221738549920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L590" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0.2" href="#asn1-2.0.2">1.20 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0.2-idp46573398666224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0.2-idp46573398666224').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0.2-idp46573398666224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L612" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0.2" href="#asn1-2.0.2">1.21 
           Asn1 2.0.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738550784').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738550784').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738550784" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L592" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398667088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398667088').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398667088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L614" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -757,7 +781,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738562576').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738562576').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738562576" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L643" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398678880').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398678880').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398678880" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L665" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
 	    <p> Postscript files no longer needed for the generation
@@ -770,10 +794,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0.1.2-idp47221738565920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0.1.2-idp47221738565920').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0.1.2-idp47221738565920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L656" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0.1.2" href="#asn1-2.0.1.2">1.21 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0.1.2-idp46573398682224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0.1.2-idp46573398682224').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0.1.2-idp46573398682224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L678" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0.1.2" href="#asn1-2.0.1.2">1.22 
           Asn1 2.0.1.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738566784').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738566784').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738566784" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L658" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398683088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398683088').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398683088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L680" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -788,10 +812,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0.1.1-idp47221738570240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0.1.1-idp47221738570240').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0.1.1-idp47221738570240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L673" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0.1.1" href="#asn1-2.0.1.1">1.22 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0.1.1-idp46573398686544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0.1.1-idp46573398686544').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0.1.1-idp46573398686544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L695" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0.1.1" href="#asn1-2.0.1.1">1.23 
           Asn1 2.0.1.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738571104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738571104').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738571104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L675" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398687408').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398687408').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398687408" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L697" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
 	    <p>The generated decoder for the 'per' and 'uper'
@@ -810,10 +834,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0.1-idp47221738575200').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0.1-idp47221738575200').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0.1-idp47221738575200" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L694" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0.1" href="#asn1-2.0.1">1.23 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0.1-idp46573398691504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0.1-idp46573398691504').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0.1-idp46573398691504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L716" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0.1" href="#asn1-2.0.1">1.24 
           Asn1 2.0.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738576064').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738576064').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738576064" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L696" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398692368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398692368').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398692368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L718" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -827,10 +851,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0-idp47221738579440').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0-idp47221738579440').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0-idp47221738579440" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L710" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0" href="#asn1-2.0">1.24 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-2.0-idp46573398695744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-2.0-idp46573398695744').style.visibility = 'hidden';"><span id="ghlink-asn1-2.0-idp46573398695744" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L732" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-2.0" href="#asn1-2.0">1.25 
           Asn1 2.0</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738580304').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738580304').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738580304" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L712" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398696608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398696608').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398696608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L734" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -844,7 +868,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738583568').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738583568').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738583568" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L726" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398699872').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398699872').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398699872" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L748" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
 	    <p>The options for the ASN.1 compiler has been
@@ -895,10 +919,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.8.1-idp47221738599120').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.8.1-idp47221738599120').style.visibility = 'hidden';"><span id="ghlink-asn1-1.8.1-idp47221738599120" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L777" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.8.1" href="#asn1-1.8.1">1.25 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.8.1-idp46573398715424').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.8.1-idp46573398715424').style.visibility = 'hidden';"><span id="ghlink-asn1-1.8.1-idp46573398715424" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L799" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.8.1" href="#asn1-1.8.1">1.26 
           Asn1 1.8.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738599984').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738599984').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738599984" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L779" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398716288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398716288').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398716288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L801" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -925,10 +949,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.8-idp47221738606416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.8-idp47221738606416').style.visibility = 'hidden';"><span id="ghlink-asn1-1.8-idp47221738606416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L806" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.8" href="#asn1-1.8">1.26 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.8-idp46573398722720').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.8-idp46573398722720').style.visibility = 'hidden';"><span id="ghlink-asn1-1.8-idp46573398722720" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L828" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.8" href="#asn1-1.8">1.27 
           Asn1 1.8</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738607280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738607280').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738607280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L808" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398723584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398723584').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398723584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L830" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -975,7 +999,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738616512').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738616512').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738616512" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L855" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398732816').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398732816').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398732816" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L877" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -995,10 +1019,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.7-idp47221738621216').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.7-idp47221738621216').style.visibility = 'hidden';"><span id="ghlink-asn1-1.7-idp47221738621216" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L875" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.7" href="#asn1-1.7">1.27 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.7-idp46573398737520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.7-idp46573398737520').style.visibility = 'hidden';"><span id="ghlink-asn1-1.7-idp46573398737520" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L897" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.7" href="#asn1-1.7">1.28 
           Asn1 1.7</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738622080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738622080').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738622080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L877" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398738384').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398738384').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398738384" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L899" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1022,10 +1046,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.19-idp47221738627008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.19-idp47221738627008').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.19-idp47221738627008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L901" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.19" href="#asn1-1.6.19">1.28 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.19-idp46573398743312').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.19-idp46573398743312').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.19-idp46573398743312" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L923" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.19" href="#asn1-1.6.19">1.29 
           Asn1 1.6.19</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738627872').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738627872').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738627872" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L903" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398744176').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398744176').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398744176" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L925" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1074,10 +1098,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.18-idp47221738637056').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.18-idp47221738637056').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.18-idp47221738637056" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L952" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.18" href="#asn1-1.6.18">1.29 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.18-idp46573398753360').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.18-idp46573398753360').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.18-idp46573398753360" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L974" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.18" href="#asn1-1.6.18">1.30 
           Asn1 1.6.18</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738637920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738637920').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738637920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L954" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398754224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398754224').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398754224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L976" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1094,10 +1118,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.17-idp47221738641808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.17-idp47221738641808').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.17-idp47221738641808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L971" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.17" href="#asn1-1.6.17">1.30 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.17-idp46573398758112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.17-idp46573398758112').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.17-idp46573398758112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L993" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.17" href="#asn1-1.6.17">1.31 
           Asn1 1.6.17</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738642672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738642672').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738642672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L973" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398758976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398758976').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398758976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L995" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1119,10 +1143,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.16-idp47221738647504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.16-idp47221738647504').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.16-idp47221738647504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L995" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.16" href="#asn1-1.6.16">1.31 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.16-idp46573398763808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.16-idp46573398763808').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.16-idp46573398763808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1017" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.16" href="#asn1-1.6.16">1.32 
           Asn1 1.6.16</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738648368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738648368').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738648368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L997" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398764672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398764672').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398764672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1019" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1144,7 +1168,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738653456').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738653456').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738653456" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1019" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398769760').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398769760').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398769760" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1041" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1158,10 +1182,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.15-idp47221738656832').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.15-idp47221738656832').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.15-idp47221738656832" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1033" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.15" href="#asn1-1.6.15">1.32 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.15-idp46573398773136').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.15-idp46573398773136').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.15-idp46573398773136" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1055" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.15" href="#asn1-1.6.15">1.33 
           Asn1 1.6.15</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738657696').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738657696').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738657696" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1035" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398774000').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398774000').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398774000" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1057" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1184,10 +1208,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.14.1-idp47221738662624').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.14.1-idp47221738662624').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.14.1-idp47221738662624" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1058" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.14.1" href="#asn1-1.6.14.1">1.33 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.14.1-idp46573398778928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.14.1-idp46573398778928').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.14.1-idp46573398778928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1080" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.14.1" href="#asn1-1.6.14.1">1.34 
           Asn1 1.6.14.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738663488').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738663488').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738663488" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1060" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398779792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398779792').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398779792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1082" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1208,7 +1232,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738668208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738668208').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738668208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1081" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398784512').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398784512').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398784512" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1103" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1229,10 +1253,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.14-idp47221738672976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.14-idp47221738672976').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.14-idp47221738672976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1102" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.14" href="#asn1-1.6.14">1.34 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.14-idp46573398789280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.14-idp46573398789280').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.14-idp46573398789280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1124" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.14" href="#asn1-1.6.14">1.35 
           Asn1 1.6.14</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738673840').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738673840').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738673840" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1104" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398790144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398790144').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398790144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1126" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1249,10 +1273,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.13-idp47221738678640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.13-idp47221738678640').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.13-idp47221738678640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1121" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.13" href="#asn1-1.6.13">1.35 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.13-idp46573398794944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.13-idp46573398794944').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.13-idp46573398794944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1143" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.13" href="#asn1-1.6.13">1.36 
           Asn1 1.6.13</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738679504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738679504').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738679504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1123" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398795808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398795808').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398795808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1145" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1265,7 +1289,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738682672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738682672').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738682672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1136" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398798976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398798976').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398798976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1158" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
 	    <p>Cross compilation improvements and other build system
@@ -1365,10 +1389,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.12-idp47221738713520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.12-idp47221738713520').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.12-idp47221738713520" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1225" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.12" href="#asn1-1.6.12">1.36 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.12-idp46573398829824').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.12-idp46573398829824').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.12-idp46573398829824" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1247" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.12" href="#asn1-1.6.12">1.37 
           Asn1 1.6.12</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738714384').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738714384').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738714384" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1227" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398830688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398830688').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398830688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1249" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1384,10 +1408,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.11-idp47221738717840').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.11-idp47221738717840').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.11-idp47221738717840" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1243" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.11" href="#asn1-1.6.11">1.37 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.11-idp46573398834144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.11-idp46573398834144').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.11-idp46573398834144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1265" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.11" href="#asn1-1.6.11">1.38 
           Asn1 1.6.11</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738718704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738718704').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738718704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1245" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398835008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398835008').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398835008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1267" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1441,10 +1465,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.10-idp47221738732384').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.10-idp47221738732384').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.10-idp47221738732384" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1299" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.10" href="#asn1-1.6.10">1.38 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.10-idp46573398848688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.10-idp46573398848688').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.10-idp46573398848688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1321" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.10" href="#asn1-1.6.10">1.39 
           Asn1 1.6.10</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738733248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738733248').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738733248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1301" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398849552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398849552').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398849552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1323" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1458,7 +1482,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738736544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738736544').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738736544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1315" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398852848').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398852848').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398852848" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1337" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1472,10 +1496,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.9-idp47221738739936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.9-idp47221738739936').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.9-idp47221738739936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1329" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.9" href="#asn1-1.6.9">1.39 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.9-idp46573398856240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.9-idp46573398856240').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.9-idp46573398856240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1351" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.9" href="#asn1-1.6.9">1.40 
           Asn1 1.6.9</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738740800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738740800').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738740800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1331" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398857104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398857104').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398857104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1353" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1488,7 +1512,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738744048').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738744048').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738744048" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1344" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398860352').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398860352').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398860352" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1366" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1501,10 +1525,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.8.1-idp47221738747376').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.8.1-idp47221738747376').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.8.1-idp47221738747376" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1357" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.8.1" href="#asn1-1.6.8.1">1.40 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.8.1-idp46573398863680').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.8.1-idp46573398863680').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.8.1-idp46573398863680" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1379" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.8.1" href="#asn1-1.6.8.1">1.41 
           Asn1 1.6.8.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738748240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738748240').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738748240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1359" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398864544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398864544').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398864544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1381" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1517,7 +1541,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738751456').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738751456').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738751456" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1372" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398867760').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398867760').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398867760" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1394" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1532,10 +1556,10 @@
 
 
  
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.8-idp47221738755696').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.8-idp47221738755696').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.8-idp47221738755696" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1387" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.8" href="#asn1-1.6.8">1.41 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.8-idp46573398872000').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.8-idp46573398872000').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.8-idp46573398872000" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1409" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.8" href="#asn1-1.6.8">1.42 
           Asn1 1.6.8</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738756560').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738756560').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738756560" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1389" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398872864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398872864').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398872864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1411" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1550,10 +1574,10 @@
     
 
 
- <h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.7-idp47221738760496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.7-idp47221738760496').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.7-idp47221738760496" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1404" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.7" href="#asn1-1.6.7">1.42 
+ <h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.7-idp46573398876800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.7-idp46573398876800').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.7-idp46573398876800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1426" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.7" href="#asn1-1.6.7">1.43 
           Asn1 1.6.7</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738761360').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738761360').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738761360" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1406" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398877664').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398877664').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398877664" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1428" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1568,10 +1592,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.6-idp47221738764800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.6-idp47221738764800').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.6-idp47221738764800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1421" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.6" href="#asn1-1.6.6">1.43 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.6-idp46573398881104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.6-idp46573398881104').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.6-idp46573398881104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1443" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.6" href="#asn1-1.6.6">1.44 
           Asn1 1.6.6</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738765664').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738765664').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738765664" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1423" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398881968').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398881968').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398881968" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1445" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1594,10 +1618,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.5-idp47221738770624').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.5-idp47221738770624').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.5-idp47221738770624" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1446" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.5" href="#asn1-1.6.5">1.44 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.5-idp46573398886928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.5-idp46573398886928').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.5-idp46573398886928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1468" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.5" href="#asn1-1.6.5">1.45 
           Asn1 1.6.5</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738771488').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738771488').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738771488" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1448" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398887792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398887792').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398887792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1470" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1614,10 +1638,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.4-idp47221738775456').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.4-idp47221738775456').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.4-idp47221738775456" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1465" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.4" href="#asn1-1.6.4">1.45 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.4-idp46573398891760').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.4-idp46573398891760').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.4-idp46573398891760" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1487" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.4" href="#asn1-1.6.4">1.46 
           Asn1 1.6.4</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738776320').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738776320').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738776320" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1467" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398892624').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398892624').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398892624" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1489" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1632,10 +1656,10 @@
 
 
  
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.3-idp47221738779776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.3-idp47221738779776').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.3-idp47221738779776" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1482" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.3" href="#asn1-1.6.3">1.46 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.3-idp46573398896080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.3-idp46573398896080').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.3-idp46573398896080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1504" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.3" href="#asn1-1.6.3">1.47 
           Asn1 1.6.3</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738780640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738780640').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738780640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1484" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398896944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398896944').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398896944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1506" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1651,7 +1675,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738784496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738784496').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738784496" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1500" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398900800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398900800').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398900800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1522" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1666,10 +1690,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.2-idp47221738787920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.2-idp47221738787920').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.2-idp47221738787920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1515" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.2" href="#asn1-1.6.2">1.47 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.2-idp46573398904224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.2-idp46573398904224').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.2-idp46573398904224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1537" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.2" href="#asn1-1.6.2">1.48 
           Asn1 1.6.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738788784').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738788784').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738788784" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1517" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398905088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398905088').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398905088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1539" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1684,10 +1708,10 @@
 
 
  
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.1-idp47221738792192').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.1-idp47221738792192').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.1-idp47221738792192" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1532" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.1" href="#asn1-1.6.1">1.48 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6.1-idp46573398908496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6.1-idp46573398908496').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6.1-idp46573398908496" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1554" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6.1" href="#asn1-1.6.1">1.49 
           Asn1 1.6.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738793056').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738793056').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738793056" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1534" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398909360').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398909360').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398909360" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1556" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1750,7 +1774,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738807312').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738807312').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738807312" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1597" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398923616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398923616').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398923616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1619" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1793,10 +1817,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6-idp47221738817024').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6-idp47221738817024').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6-idp47221738817024" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1640" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6" href="#asn1-1.6">1.49 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.6-idp46573398933328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.6-idp46573398933328').style.visibility = 'hidden';"><span id="ghlink-asn1-1.6-idp46573398933328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1662" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.6" href="#asn1-1.6">1.50 
           Asn1 1.6</a></span></h3>
  
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738817888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738817888').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738817888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1642" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398934192').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398934192').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398934192" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1664" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1829,7 +1853,7 @@
     
  
  
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738824432').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738824432').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738824432" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1675" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398940736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398940736').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398940736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1697" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1860,10 +1884,10 @@
  
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.5.2-idp47221738831728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.5.2-idp47221738831728').style.visibility = 'hidden';"><span id="ghlink-asn1-1.5.2-idp47221738831728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1706" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.5.2" href="#asn1-1.5.2">1.50 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.5.2-idp46573398948032').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.5.2-idp46573398948032').style.visibility = 'hidden';"><span id="ghlink-asn1-1.5.2-idp46573398948032" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1728" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.5.2" href="#asn1-1.5.2">1.51 
           Asn1 1.5.2</a></span></h3>
  
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738832592').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738832592').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738832592" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1708" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398948896').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398948896').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398948896" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1730" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1893,7 +1917,7 @@
     
  
  
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738838976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738838976').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738838976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1738" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398955280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398955280').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398955280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1760" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1907,10 +1931,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.5.1-idp47221738842320').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.5.1-idp47221738842320').style.visibility = 'hidden';"><span id="ghlink-asn1-1.5.1-idp47221738842320" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1752" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.5.1" href="#asn1-1.5.1">1.51 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.5.1-idp46573398958624').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.5.1-idp46573398958624').style.visibility = 'hidden';"><span id="ghlink-asn1-1.5.1-idp46573398958624" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1774" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.5.1" href="#asn1-1.5.1">1.52 
           Asn1 1.5.1</a></span></h3>
  
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738843184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738843184').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738843184" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1754" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398959488').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398959488').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398959488" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1776" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1955,7 +1979,7 @@
       </ul>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738854112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738854112').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738854112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1799" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398970416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398970416').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398970416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1821" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1971,10 +1995,10 @@
  
 
                                                                                 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.5-idp47221738857552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.5-idp47221738857552').style.visibility = 'hidden';"><span id="ghlink-asn1-1.5-idp47221738857552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1815" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.5" href="#asn1-1.5">1.52 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.5-idp46573398973856').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.5-idp46573398973856').style.visibility = 'hidden';"><span id="ghlink-asn1-1.5-idp46573398973856" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1837" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.5" href="#asn1-1.5">1.53 
           Asn1 1.5</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738858416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738858416').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738858416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1817" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398974720').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398974720').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398974720" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1839" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1997,10 +2021,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.4.6-idp47221738864160').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.4.6-idp47221738864160').style.visibility = 'hidden';"><span id="ghlink-asn1-1.4.6-idp47221738864160" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1840" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.4.6" href="#asn1-1.4.6">1.53 
+<h3><span onMouseOver="document.getElementById('ghlink-asn1-1.4.6-idp46573398980464').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.4.6-idp46573398980464').style.visibility = 'hidden';"><span id="ghlink-asn1-1.4.6-idp46573398980464" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1862" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.4.6" href="#asn1-1.4.6">1.54 
           Asn1 1.4.6</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738865024').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738865024').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738865024" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1842" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398981328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398981328').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398981328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1864" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2036,7 +2060,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738873584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738873584').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738873584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1878" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398989888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398989888').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398989888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1900" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2052,11 +2076,11 @@
 
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-asn1-1.4.5-idp47221738877104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.4.5-idp47221738877104').style.visibility = 'hidden';"><span id="ghlink-asn1-1.4.5-idp47221738877104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1894" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.4.5" href="#asn1-1.4.5">1.54 
+  <h3><span onMouseOver="document.getElementById('ghlink-asn1-1.4.5-idp46573398993408').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-asn1-1.4.5-idp46573398993408').style.visibility = 'hidden';"><span id="ghlink-asn1-1.4.5-idp46573398993408" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1916" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="asn1-1.4.5" href="#asn1-1.4.5">1.55 
           Asn1 1.4.5</a></span></h3>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738878128').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp47221738878128').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp47221738878128" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1897" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398994432').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46573398994432').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46573398994432" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1919" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
       <ul>
         <li>
@@ -2074,7 +2098,7 @@
       </ul>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp47221738883392').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp47221738883392').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp47221738883392" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1915" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46573398999696').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46573398999696').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46573398999696" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/asn1/doc/src/notes.xml#L1937" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       
       <ul>
         <li>
