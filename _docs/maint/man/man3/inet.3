@@ -1132,7 +1132,7 @@ Enables/disables permission to send broadcasts\&.
 .TP 2
 .B
 \fI{buffer, Size}\fR\&:
-The size of the user-level software buffer used by the driver\&. Not to be confused with options \fIsndbuf\fR\& and \fIrecbuf\fR\&, which correspond to the Kernel socket buffers\&. It is recommended to have \fIval(buffer) >= max(val(sndbuf),val(recbuf))\fR\& to avoid performance issues because of unnecessary copying\&. \fIval(buffer)\fR\& is automatically set to the above maximum when values \fIsndbuf\fR\& or \fIrecbuf\fR\& are set\&. However, as the sizes set for \fIsndbuf\fR\& and \fIrecbuf\fR\& usually become larger, you are encouraged to use \fB\fIgetopts/2\fR\&\fR\& to analyze the behavior of your operating system\&.
+The size of the user-level buffer used by the driver\&. Not to be confused with options \fIsndbuf\fR\& and \fIrecbuf\fR\&, which correspond to the Kernel socket buffers\&. For TCP it is recommended to have \fIval(buffer) >= val(recbuf)\fR\& to avoid performance issues because of unnecessary copying\&. For UDP the same recommendation applies, but the max should not be larger than the MTU of the network path\&. \fIval(buffer)\fR\& is automatically set to the above maximum when \fIrecbuf\fR\& is set\&. However, as the size set for \fIrecbuf\fR\& usually become larger, you are encouraged to use \fB\fIgetopts/2\fR\&\fR\& to analyze the behavior of your operating system\&.
 .RS 2
 .LP
 Note that this is also the maximum amount of data that can be received from a single recv call\&. If you are using higher than normal MTU consider setting buffer higher\&.
