@@ -1,6 +1,6 @@
 %% 
 %% Search data file for kernel 6.0
-%% generated August 11, 2018
+%% generated August 13, 2018
 %% 
 {"kernel_app.html", {app, "kernel"}, ["kernel"]}.
 {"app.html", {file, "kernel"}, ["app"]}.
