@@ -87,7 +87,7 @@ If this configuration parameter is set, it replaces both the default report call
 .TP 2
 .B
 \fIsingle_line = boolean()\fR\&:
-If set to \fItrue\fR\&, all newlines in the message are replaced with \fI", "\fR\&, and white spaces following directly after newlines are removed\&. Notice that newlines added by the \fItemplate\fR\& parameter are not replaced\&.
+If set to \fItrue\fR\&, each log event is printed as a single line\&. To achieve this, \fIlogger_formatter\fR\& sets the field width to \fI0\fR\& for all \fI~p\fR\& and \fI~P\fR\& control sequences in the format a string (see \fB\fIio:format/2\fR\&\fR\&), and replaces all newlines in the message with \fI", "\fR\&\&. White spaces following directly after newlines are removed\&. Notice that newlines added by the \fItemplate\fR\& parameter are not replaced\&.
 .RS 2
 .LP
 Defaults to \fItrue\fR\&\&.
