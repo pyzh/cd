@@ -9,7 +9,7 @@ With the SSH application it is possible to start \fIclients\fR\&  and to start \
 .LP
 Clients are started with \fBconnect/2\fR\&, \fBconnect/3\fR\& or \fBconnect/4\fR\&\&. They open an encrypted connection on top of TCP/IP\&. In that encrypted connection one or more channels could be opened with \fBssh_connection:session_channel/2,4\fR\&\&.
 .LP
-Each channel is an isolated "pipe" between a client-side process and a server-side process\&. Thoose process pairs could handle for example file transfers (sftp) or remote command execution (shell, exec and/or cli)\&. If a custom shell is implemented, the user of the client could execute the special commands remotely\&. Note that the user is not necessarily a human but probably a system interfacing the SSH app\&.
+Each channel is an isolated "pipe" between a client-side process and a server-side process\&. Those process pairs could handle for example file transfers (sftp) or remote command execution (shell, exec and/or cli)\&. If a custom shell is implemented, the user of the client could execute the special commands remotely\&. Note that the user is not necessarily a human but probably a system interfacing the SSH app\&.
 .LP
 A server-side subssystem (channel) server is requested by the client with \fBssh_connection:subsystem/4\fR\&\&.
 .LP
