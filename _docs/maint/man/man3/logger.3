@@ -1107,6 +1107,33 @@ Remove the primary filter identified by \fIFilterId\fR\& from Logger\&.
 .nf
 
 .B
+set_application_level(Application, Level) ->
+.B
+                         ok | {error, not_loaded}
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Application = atom()
+.br
+Level = \fBlevel()\fR\& | all | none
+.br
+.RE
+.RE
+.RS
+.LP
+Set the log level for all the modules of the specified application\&.
+.LP
+This function is a convenience function that calls \fBlogger:set_module_level/2\fR\& for each module associated with an application\&.
+.RE
+.LP
+.nf
+
+.B
 set_handler_config(HandlerId, Config) -> ok | {error, term()}
 .br
 .fi
@@ -1338,6 +1365,29 @@ Set metadata which Logger shall automatically insert in all log events produced 
 Location data produced by the log macros, and/or metadata given as argument to the log call (API function or macro), are merged with the process metadata\&. If the same keys occur, values from the metadata argument to the log call overwrite values from the process metadata, which in turn overwrite values from the location data\&.
 .LP
 Subsequent calls to this function overwrites previous data set\&. To update existing data instead of overwriting it, see \fB\fIupdate_process_metadata/1\fR\&\fR\&\&.
+.RE
+.LP
+.nf
+
+.B
+unset_application_level(Application) -> ok | {error, not_loaded}
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Application = atom()
+.br
+.RE
+.RE
+.RS
+.LP
+Unset the log level for all the modules of the specified application\&.
+.LP
+This function is a convinience function that calls \fBlogger:unset_module_level/2\fR\& for each module associated with an application\&.
 .RE
 .LP
 .nf
