@@ -74,7 +74,11 @@ parse_event(Mod, ValidTraceData) -> false | true | {true, Event}
 Types:
 
 .RS 3
-Mod = module_name() | undefined <v>module_name() = atom() <v>ValidTraceData = erlang_trace_data() | record(event)
+Mod = module_name() | undefined
+.br
+module_name() = atom()
+.br
+ValidTraceData = erlang_trace_data() | record(event)
 .br
 erlang_trace_data() = {trace, Pid, Label, Info} | {trace, Pid, Label, Info, Extra} | {trace_ts, Pid, Label, Info, ReportedTS} | {trace_ts, Pid, Label, Info, Extra, ReportedTS} | {seq_trace, Label, Info} | {seq_trace, Label, Info, ReportedTS} | {drop, NumberOfDroppedItems}
 .br

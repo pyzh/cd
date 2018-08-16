@@ -22,7 +22,9 @@ event_order() = trace_ts | event_ts
 .br
 trace_pattern() = {report_module(), extended_dbg_match_spec()} | undefined
 .br
-report_module() = atom() | undefined <v>extended_dbg_match_spec()() = detail_level() | dbg_match_spec()
+report_module() = atom() | undefined
+.br
+extended_dbg_match_spec() = detail_level() | dbg_match_spec()
 .br
 detail_level() = min | max | integer(X) when X =< 0, X >= 100
 .br
@@ -293,7 +295,7 @@ RawPattern = {report_module(), extended_dbg_match_spec()}
 .br
 report_module() = atom() | undefined
 .br
-extended_dbg_match_spec()() = detail_level() | dbg_match_spec()
+extended_dbg_match_spec() = detail_level() | dbg_match_spec()
 .br
 RawPattern = detail_level()
 .br
@@ -496,7 +498,9 @@ forward() = infinity | integer(X) where X > 0
 .br
 backward() = \&'-infinity\&' | integer(X) where X < 0
 .br
-Fun = fun(Event, Acc) -> NewAcc <v>Acc = NewAcc = term()
+Fun = fun(Event, Acc) -> NewAcc
+.br
+Acc = NewAcc = term()
 .br
 .RE
 .RE
