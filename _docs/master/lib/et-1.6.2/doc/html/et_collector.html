@@ -129,17 +129,17 @@
 <div class="innertube">
 <!-- refpage --><center><h1>et_collector</h1></center>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-module-idp46677091124480').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp46677091124480').style.visibility = 'hidden';"><span id="ghlink-module-idp46677091124480"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-idp47110851394752').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp47110851394752').style.visibility = 'hidden';"><span id="ghlink-module-idp47110851394752"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
 <div class="REFBODY module-body">et_collector</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp46677091124096').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp46677091124096').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp46677091124096"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp47110851394240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp47110851394240').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp47110851394240"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
 <div class="REFBODY module-summary-body">Collect trace events and provide a backing storage appropriate for iteration </div>
-  <h3><span onMouseOver="document.getElementById('ghlink-description-idp46677091122816').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp46677091122816').style.visibility = 'hidden';"><span id="ghlink-description-idp46677091122816" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L37" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-description-idp47110851393472').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp47110851393472').style.visibility = 'hidden';"><span id="ghlink-description-idp47110851393472" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L37" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
 <div class="REFBODY description-body"><p>
     <p>Interface module for the Event Trace (ET) application</p>
   </p></div>
-  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp46677091122560').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp46677091122560').style.visibility = 'hidden';"><span id="ghlink-exports-idp46677091122560"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp47110851392832').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp47110851392832').style.visibility = 'hidden';"><span id="ghlink-exports-idp47110851392832"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
 <div class="exports-body">
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start_link-1-idp46677090974800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start_link-1-idp46677090974800').style.visibility = 'hidden';"><span id="ghlink-start_link-1-idp46677090974800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L41" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start_link-1" href="#start_link-1">start_link(Options) -&gt; {ok, CollectorPid} | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start_link-1-idp47110851690576').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start_link-1-idp47110851690576').style.visibility = 'hidden';"><span id="ghlink-start_link-1-idp47110851690576" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L41" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start_link-1" href="#start_link-1">start_link(Options) -&gt; {ok, CollectorPid} | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -155,7 +155,10 @@
 <span class="bold_code fun-param-type">trace_pattern() = {report_module(), extended_dbg_match_spec()} | undefined</span><br>
 </div>
         <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">report_module() = atom() | undefined &lt;v&gt;extended_dbg_match_spec()() = detail_level() | dbg_match_spec()</span><br>
+<span class="bold_code fun-param-type">report_module() = atom() | undefined</span><br>
+</div>
+        <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">extended_dbg_match_spec() = detail_level() | dbg_match_spec()</span><br>
 </div>
         <div class="REFTYPES rt-4">
 <span class="bold_code fun-param-type">detail_level() = min | max | integer(X) when X =&lt; 0, X &gt;= 100</span><br>
@@ -238,7 +241,7 @@
           <li>trace_max_queue - 50.</li>
         </ul>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stop-1-idp46677091161056').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop-1-idp46677091161056').style.visibility = 'hidden';"><span id="ghlink-stop-1-idp46677091161056" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L106" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stop-1" href="#stop-1">stop(CollectorPid) -&gt; ok</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stop-1-idp47110851596640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop-1-idp47110851596640').style.visibility = 'hidden';"><span id="ghlink-stop-1-idp47110851596640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L107" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stop-1" href="#stop-1">stop(CollectorPid) -&gt; ok</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -248,7 +251,7 @@
 <div class="REFBODY rb-7"><p>
         <p>Stop a collector process.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-save_event_file-3-idp46677090642080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-save_event_file-3-idp46677090642080').style.visibility = 'hidden';"><span id="ghlink-save_event_file-3-idp46677090642080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L116" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="save_event_file-3" href="#save_event_file-3">save_event_file(CollectorPid, FileName, Options) -&gt; ok | {error, Reason}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-save_event_file-3-idp47110851423824').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-save_event_file-3-idp47110851423824').style.visibility = 'hidden';"><span id="ghlink-save_event_file-3-idp47110851423824" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L117" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="save_event_file-3" href="#save_event_file-3">save_event_file(CollectorPid, FileName, Options) -&gt; ok | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -286,7 +289,7 @@
           have successfully written to file (clear).</p>
         <p>The options defaults to existing, write and keep.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-load_event_file-2-idp46677090972944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-load_event_file-2-idp46677090972944').style.visibility = 'hidden';"><span id="ghlink-load_event_file-2-idp46677090972944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L140" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="load_event_file-2" href="#load_event_file-2">load_event_file(CollectorPid, FileName) -&gt; {ok, BadBytes} | exit(Reason)</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-load_event_file-2-idp47110851104464').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-load_event_file-2-idp47110851104464').style.visibility = 'hidden';"><span id="ghlink-load_event_file-2-idp47110851104464" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L141" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="load_event_file-2" href="#load_event_file-2">load_event_file(CollectorPid, FileName) -&gt; {ok, BadBytes} | exit(Reason)</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -305,7 +308,7 @@
 <div class="REFBODY rb-7"><p>
         <p>Load the event table from a file.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-report-2-idp46677091140976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-report-2-idp46677091140976').style.visibility = 'hidden';"><span id="ghlink-report-2-idp46677091140976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L153" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="report-2" href="#report-2">report(Handle, TraceOrEvent) -&gt; {ok, Continuation} | exit(Reason)</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-report_event-5-idp46677091141392').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-report_event-5-idp46677091141392').style.visibility = 'hidden';"><span id="ghlink-report_event-5-idp46677091141392" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L153" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="report_event-5" href="#report_event-5">report_event(Handle, DetailLevel, FromTo, Label, Contents) -&gt; {ok, Continuation} | exit(Reason)</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-report_event-6-idp46677091141920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-report_event-6-idp46677091141920').style.visibility = 'hidden';"><span id="ghlink-report_event-6-idp46677091141920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L153" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="report_event-6" href="#report_event-6">report_event(Handle, DetailLevel, From, To, Label, Contents) -&gt; {ok, Continuation} | exit(Reason)</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-report-2-idp47110851697040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-report-2-idp47110851697040').style.visibility = 'hidden';"><span id="ghlink-report-2-idp47110851697040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L154" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="report-2" href="#report-2">report(Handle, TraceOrEvent) -&gt; {ok, Continuation} | exit(Reason)</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-report_event-5-idp47110851697456').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-report_event-5-idp47110851697456').style.visibility = 'hidden';"><span id="ghlink-report_event-5-idp47110851697456" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L154" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="report_event-5" href="#report_event-5">report_event(Handle, DetailLevel, FromTo, Label, Contents) -&gt; {ok, Continuation} | exit(Reason)</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-report_event-6-idp47110851697872').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-report_event-6-idp47110851697872').style.visibility = 'hidden';"><span id="ghlink-report_event-6-idp47110851697872" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L154" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="report_event-6" href="#report_event-6">report_event(Handle, DetailLevel, From, To, Label, Contents) -&gt; {ok, Continuation} | exit(Reason)</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -356,7 +359,7 @@
           report handle, while subsequent calls should use the
           table handle.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-make_key-2-idp46677090919008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-make_key-2-idp46677090919008').style.visibility = 'hidden';"><span id="ghlink-make_key-2-idp46677090919008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L182" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="make_key-2" href="#make_key-2">make_key(Type, Stuff) -&gt; Key</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-make_key-2-idp47110851599616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-make_key-2-idp47110851599616').style.visibility = 'hidden';"><span id="ghlink-make_key-2-idp47110851599616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L183" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="make_key-2" href="#make_key-2">make_key(Type, Stuff) -&gt; Key</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -372,7 +375,7 @@
 <div class="REFBODY rb-7"><p>
         <p>Make a key out of an event record or an old key.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-get_table_handle-1-idp46677091146992').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-get_table_handle-1-idp46677091146992').style.visibility = 'hidden';"><span id="ghlink-get_table_handle-1-idp46677091146992" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L194" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="get_table_handle-1" href="#get_table_handle-1">get_table_handle(CollectorPid) -&gt; Handle</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-get_table_handle-1-idp47110851341520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-get_table_handle-1-idp47110851341520').style.visibility = 'hidden';"><span id="ghlink-get_table_handle-1-idp47110851341520" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L195" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="get_table_handle-1" href="#get_table_handle-1">get_table_handle(CollectorPid) -&gt; Handle</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -385,7 +388,7 @@
 <div class="REFBODY rb-7"><p>
         <p>Return a table handle.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-get_global_pid-0-idp46677090683424').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-get_global_pid-0-idp46677090683424').style.visibility = 'hidden';"><span id="ghlink-get_global_pid-0-idp46677090683424" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L205" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="get_global_pid-0" href="#get_global_pid-0">get_global_pid() -&gt; CollectorPid | exit(Reason)</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-get_global_pid-0-idp47110851402336').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-get_global_pid-0-idp47110851402336').style.visibility = 'hidden';"><span id="ghlink-get_global_pid-0-idp47110851402336" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L206" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="get_global_pid-0" href="#get_global_pid-0">get_global_pid() -&gt; CollectorPid | exit(Reason)</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -399,7 +402,7 @@
         <p>Return a the identity of the globally registered
           collector if there is any.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-change_pattern-2-idp46677090806032').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-change_pattern-2-idp46677090806032').style.visibility = 'hidden';"><span id="ghlink-change_pattern-2-idp46677090806032" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L217" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="change_pattern-2" href="#change_pattern-2">change_pattern(CollectorPid, RawPattern) -&gt; {old_pattern, TracePattern}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-change_pattern-2-idp47110851180512').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-change_pattern-2-idp47110851180512').style.visibility = 'hidden';"><span id="ghlink-change_pattern-2-idp47110851180512" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L218" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="change_pattern-2" href="#change_pattern-2">change_pattern(CollectorPid, RawPattern) -&gt; {old_pattern, TracePattern}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -412,7 +415,7 @@
 <span class="bold_code fun-param-type">report_module() = atom() | undefined</span><br>
 </div>
         <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">extended_dbg_match_spec()() = detail_level() | dbg_match_spec()</span><br>
+<span class="bold_code fun-param-type">extended_dbg_match_spec() = detail_level() | dbg_match_spec()</span><br>
 </div>
         <div class="REFTYPES rt-4">
 <span class="bold_code fun-param-type">RawPattern = detail_level()</span><br>
@@ -427,7 +430,7 @@
 <div class="REFBODY rb-7"><p>
         <p>Change active trace pattern globally on all trace nodes.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-dict_insert-3-idp46677091111296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dict_insert-3-idp46677091111296').style.visibility = 'hidden';"><span id="ghlink-dict_insert-3-idp46677091111296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L233" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dict_insert-3" href="#dict_insert-3">dict_insert(CollectorPid, {filter, collector}, FilterFun) -&gt; ok</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-dict_insert-3-idp46677091111792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dict_insert-3-idp46677091111792').style.visibility = 'hidden';"><span id="ghlink-dict_insert-3-idp46677091111792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L233" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dict_insert-3" href="#dict_insert-3">dict_insert(CollectorPid, {subscriber, SubscriberPid}, Void) -&gt; ok</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-dict_insert-3-idp46677091112288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dict_insert-3-idp46677091112288').style.visibility = 'hidden';"><span id="ghlink-dict_insert-3-idp46677091112288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L233" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dict_insert-3" href="#dict_insert-3">dict_insert(CollectorPid, Key, Val) -&gt; ok</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-dict_insert-3-idp47110851258112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dict_insert-3-idp47110851258112').style.visibility = 'hidden';"><span id="ghlink-dict_insert-3-idp47110851258112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L234" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dict_insert-3" href="#dict_insert-3">dict_insert(CollectorPid, {filter, collector}, FilterFun) -&gt; ok</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-dict_insert-3-idp47110851258608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dict_insert-3-idp47110851258608').style.visibility = 'hidden';"><span id="ghlink-dict_insert-3-idp47110851258608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L234" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dict_insert-3" href="#dict_insert-3">dict_insert(CollectorPid, {subscriber, SubscriberPid}, Void) -&gt; ok</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-dict_insert-3-idp47110851259104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dict_insert-3-idp47110851259104').style.visibility = 'hidden';"><span id="ghlink-dict_insert-3-idp47110851259104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L234" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dict_insert-3" href="#dict_insert-3">dict_insert(CollectorPid, Key, Val) -&gt; ok</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -462,7 +465,7 @@
           will imply that it gets unregistered as with a normal
           dict_delete/2.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-dict_lookup-2-idp46677090932944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dict_lookup-2-idp46677090932944').style.visibility = 'hidden';"><span id="ghlink-dict_lookup-2-idp46677090932944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L260" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dict_lookup-2" href="#dict_lookup-2">dict_lookup(CollectorPid, Key) -&gt; [Val]</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-dict_lookup-2-idp47110851434256').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dict_lookup-2-idp47110851434256').style.visibility = 'hidden';"><span id="ghlink-dict_lookup-2-idp47110851434256" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L261" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dict_lookup-2" href="#dict_lookup-2">dict_lookup(CollectorPid, Key) -&gt; [Val]</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -484,7 +487,7 @@
 <div class="REFBODY rb-7"><p>
         <p>Lookup a dictionary entry and return zero or one value.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-dict_delete-2-idp46677090802928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dict_delete-2-idp46677090802928').style.visibility = 'hidden';"><span id="ghlink-dict_delete-2-idp46677090802928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L274" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dict_delete-2" href="#dict_delete-2">dict_delete(CollectorPid, Key) -&gt; ok</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-dict_delete-2-idp47110851425984').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dict_delete-2-idp47110851425984').style.visibility = 'hidden';"><span id="ghlink-dict_delete-2-idp47110851425984" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L275" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dict_delete-2" href="#dict_delete-2">dict_delete(CollectorPid, Key) -&gt; ok</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -505,7 +508,7 @@
           imply that the subscriber process gets is unregistered as
           subscriber as well as it gets it final message.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-dict_match-2-idp46677090287440').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dict_match-2-idp46677090287440').style.visibility = 'hidden';"><span id="ghlink-dict_match-2-idp46677090287440" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L291" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dict_match-2" href="#dict_match-2">dict_match(CollectorPid, Pattern) -&gt; [Match]</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-dict_match-2-idp47110851205280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dict_match-2-idp47110851205280').style.visibility = 'hidden';"><span id="ghlink-dict_match-2-idp47110851205280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L292" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dict_match-2" href="#dict_match-2">dict_match(CollectorPid, Pattern) -&gt; [Match]</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -533,7 +536,7 @@
 <div class="REFBODY rb-7"><p>
         <p>Match some dictionary entries</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-multicast-2-idp46677090645232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-multicast-2-idp46677090645232').style.visibility = 'hidden';"><span id="ghlink-multicast-2-idp46677090645232" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L307" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="multicast-2" href="#multicast-2">multicast(_CollectorPid, Msg) -&gt; ok</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-multicast-2-idp47110851945648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-multicast-2-idp47110851945648').style.visibility = 'hidden';"><span id="ghlink-multicast-2-idp47110851945648" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L308" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="multicast-2" href="#multicast-2">multicast(_CollectorPid, Msg) -&gt; ok</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -549,7 +552,7 @@
 <div class="REFBODY rb-7"><p>
         <p>Sends a message to all registered subscribers.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start_trace_client-3-idp46677091158224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start_trace_client-3-idp46677091158224').style.visibility = 'hidden';"><span id="ghlink-start_trace_client-3-idp46677091158224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L319" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start_trace_client-3" href="#start_trace_client-3">start_trace_client(CollectorPid, Type, Parameters) -&gt; file_loaded | {trace_client_pid, pid()} | exit(Reason)</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start_trace_client-3-idp47110851336848').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start_trace_client-3-idp47110851336848').style.visibility = 'hidden';"><span id="ghlink-start_trace_client-3-idp47110851336848" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L320" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start_trace_client-3" href="#start_trace_client-3">start_trace_client(CollectorPid, Type, Parameters) -&gt; file_loaded | {trace_client_pid, pid()} | exit(Reason)</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -565,11 +568,11 @@
 <div class="REFBODY rb-7"><p>
         <p>Load raw Erlang trace from a file, port or process.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-iterate-3-idp46677091127504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-iterate-3-idp46677091127504').style.visibility = 'hidden';"><span id="ghlink-iterate-3-idp46677091127504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L331" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="iterate-3" href="#iterate-3">iterate(Handle, Prev, Limit) -&gt; NewAcc</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-iterate-3-idp47110850772016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-iterate-3-idp47110850772016').style.visibility = 'hidden';"><span id="ghlink-iterate-3-idp47110850772016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L332" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="iterate-3" href="#iterate-3">iterate(Handle, Prev, Limit) -&gt; NewAcc</a></span></div></p>
 <div class="REFBODY rb-7"><p>
         <p>Short for iterate(Handle, Prev, Limit, undefined, Prev) -&gt; NewAcc</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-iterate-5-idp46677090959376').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-iterate-5-idp46677090959376').style.visibility = 'hidden';"><span id="ghlink-iterate-5-idp46677090959376" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L338" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="iterate-5" href="#iterate-5">iterate(Handle, Prev, Limit, Fun, Acc) -&gt; NewAcc</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-iterate-5-idp47110850774656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-iterate-5-idp47110850774656').style.visibility = 'hidden';"><span id="ghlink-iterate-5-idp47110850774656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L339" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="iterate-5" href="#iterate-5">iterate(Handle, Prev, Limit, Fun, Acc) -&gt; NewAcc</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -600,7 +603,10 @@
 <span class="bold_code fun-param-type">backward() = '-infinity' | integer(X) where X &lt; 0</span><br>
 </div>
         <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Fun = fun(Event, Acc) -&gt; NewAcc &lt;v&gt;Acc = NewAcc = term()</span><br>
+<span class="bold_code fun-param-type">Fun = fun(Event, Acc) -&gt; NewAcc</span><br>
+</div>
+        <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Acc = NewAcc = term()</span><br>
 </div>
       </div>
 <div class="REFBODY rb-7"><p>
@@ -610,7 +616,7 @@
           forwards or backwards and may be limited to a maximum
           number of events (abs(Limit)).</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-clear_table-1-idp46677090967760').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-clear_table-1-idp46677090967760').style.visibility = 'hidden';"><span id="ghlink-clear_table-1-idp46677090967760" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L361" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="clear_table-1" href="#clear_table-1">clear_table(Handle) -&gt; ok</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-clear_table-1-idp47110851680208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-clear_table-1-idp47110851680208').style.visibility = 'hidden';"><span id="ghlink-clear_table-1-idp47110851680208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/et/doc/src/et_collector.xml#L363" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="clear_table-1" href="#clear_table-1">clear_table(Handle) -&gt; ok</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
