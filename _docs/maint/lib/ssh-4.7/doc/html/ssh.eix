@@ -1,6 +1,6 @@
 %% 
 %% Search data file for ssh 4.7
-%% generated August 17, 2018
+%% generated August 20, 2018
 %% 
 {"SSH_app.html", {app, "ssh"}, ["SSH"]}.
 {"ssh.html", {function, {"ssh", "ssh"}},
