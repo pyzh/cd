@@ -1,6 +1,6 @@
 %% 
 %% Search data file for erts 10.0.5
-%% generated August 20, 2018
+%% generated August 21, 2018
 %% 
 {"erl_prim_loader.html", {function, {"erts", "erl_prim_loader"}},
 [
