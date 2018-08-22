@@ -1,6 +1,6 @@
 %% 
 %% Search data file for dialyzer 3.3
-%% generated August 21, 2018
+%% generated August 22, 2018
 %% 
 {"dialyzer.html", {function, {"dialyzer", "dialyzer"}},
 [
