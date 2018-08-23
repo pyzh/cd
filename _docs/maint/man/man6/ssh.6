@@ -122,6 +122,18 @@ diffie-hellman-group14-sha256
 .LP
 .TP 2
 *
+curve25519-sha256
+.LP
+.TP 2
+*
+curve25519-sha256@libssh\&.org
+.LP
+.TP 2
+*
+curve448-sha512
+.LP
+.TP 2
+*
 diffie-hellman-group14-sha1
 .LP
 .TP 2
@@ -193,6 +205,10 @@ hmac-sha1
 Encryption algorithms (ciphers):
 
 .RS 2
+.TP 2
+*
+chacha20-poly1305@openssh\&.com
+.LP
 .TP 2
 *
 aes256-gcm@openssh\&.com
@@ -532,6 +548,10 @@ The extension \fIserver-sig-algs\fR\&
 .LP
 
 .RE
+.LP
+.TP 2
+*
+Secure Shell (SSH) Key Exchange Method using Curve25519 and Curve448 (work in progress)
 .LP
 .RE
 

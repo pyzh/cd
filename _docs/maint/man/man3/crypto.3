@@ -111,6 +111,12 @@ ecdh_params() = ec_named_curve() | ec_explicit_curve()
 .fi
 .LP
 .nf
+ed_named_curves_ecdh() -> x448 | x25519
+.fi
+.LP
+Note that the curves are only supported if the underlying OpenSSL has support for them\&.
+.LP
+.nf
 ec_explicit_curve() =
     {ec_field(), Prime :: key_value(), Point :: key_value(), Order :: integer(),
      CoFactor :: none | integer()} 
@@ -167,7 +173,7 @@ password() = string() | binary()
 The key\&'s password
 .LP
 .nf
-stream_cipher() = rc4 | aes_ctr 
+stream_cipher() = rc4 | aes_ctr | chacha20 
 .fi
 .LP
 .nf
@@ -178,6 +184,8 @@ block_cipher() = aes_cbc | aes_cfb8 | aes_cfb128 | aes_ige256 | blowfish_cbc |
 .nf
 aead_cipher() = aes_gcm | chacha20_poly1305 
 .fi
+.LP
+Note that the actual supported algorithms depends on the underlying crypto library\&.
 .LP
 .nf
 stream_key() = aes_key() | rc4_key() 
@@ -244,19 +252,20 @@ rsa_sign_padding() = rsa_pkcs1_padding | rsa_pkcs1_pss_padding
 .fi
 .LP
 .nf
- hash_algorithms() =  md5 | ripemd160 | sha | sha224 | sha256 | sha384 | sha512 
+ hash_algorithms() =  md5 | ripemd160 | sha | sha224 | sha256 | sha384 | sha512 |
+     sha3_224 | sha3_256 | sha3_384 | sha3_512 
 .fi
 .LP
-md4 is also supported for hash_init/1 and hash/2\&. Note that both md4 and md5 are recommended only for compatibility with existing applications\&.
+md4 is also supported for hash_init/1 and hash/2\&. Note that both md4 and md5 are recommended only for compatibility with existing applications\&. Note that the actual supported hash_algorithms depends on the underlying crypto library\&.
 .LP
 .nf
  cipher_algorithms() = aes_cbc | aes_cfb8 | aes_cfb128 | aes_ctr | aes_gcm |
-     aes_ige256 | blowfish_cbc | blowfish_cfb64 | chacha20_poly1305 | des_cbc |
+     aes_ige256 | blowfish_cbc | blowfish_cfb64 | chacha20 | chacha20_poly1305 | des_cbc |
      des_cfb | des3_cbc | des3_cfb | des_ede3 | rc2_cbc | rc4 
 .fi
 .LP
 .nf
- mac_algorithms() = hmac | cmac
+ mac_algorithms() = hmac | cmac | poly1305
 .fi
 .LP
 .nf
@@ -421,7 +430,7 @@ OthersPublicKey = dh_public() | ecdh_public() | srp_public()
 .br
 MyKey = dh_private() | ecdh_private() | {srp_public(),srp_private()}
 .br
-Params = dh_params() | ecdh_params() | SrpUserParams | SrpHostParams
+Params = dh_params() | ecdh_params() | ed_named_curves_ecdh() | SrpUserParams | SrpHostParams
 .br
 SrpUserParams = {user, [DerivedKey::binary(), Prime::binary(), Generator::binary(), Version::atom() | [Scrambler:binary()]]} 
 .br
@@ -468,7 +477,7 @@ Types:
 .RS 3
  Type = dh | ecdh | rsa | srp 
 .br
-Params = dh_params() | ecdh_params() | RsaParams | SrpUserParams | SrpHostParams 
+Params = dh_params() | ecdh_params() | ed_named_curves_ecdh()| RsaParams | SrpUserParams | SrpHostParams 
 .br
 RsaParams = {ModulusSizeInBits::integer(), PublicExponent::key_value()}
 .br
@@ -839,6 +848,27 @@ Returns the initialization vector to be used in the next iteration of encrypt/de
 .RE
 .LP
 .B
+poly1305(Key, Data) -> Mac
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Key = iodata()
+.br
+Data = iodata()
+.br
+Mac = binary()
+.br
+.RE
+.RE
+.RS
+.LP
+Computes a POLY1305 message authentication code (\fIMac\fR\&) from \fIData\fR\& using \fIKey\fR\& as the authentication key\&.
+.RE
+.LP
+.B
 private_decrypt(Type, CipherText, PrivateKey, Padding) -> PlainText
 .br
 .RS
@@ -1204,7 +1234,7 @@ stream_init(Type, Key, IVec) -> State
 Types:
 
 .RS 3
-Type = aes_ctr 
+Type = aes_ctr | chacha20
 .br
 State = opaque() 
 .br
