@@ -34,6 +34,7 @@
   {"mod_pow", "mod_pow(N, P, M)", "mod_pow-3"},
   {"next_iv", "next_iv(Type, Data)", "next_iv-2"},
   {"next_iv", "next_iv(Type, Data, IVec)", "next_iv-3"},
+  {"poly1305", "poly1305(Key, Data)", "poly1305-2"},
   {"private_decrypt", "private_decrypt(Type, CipherText, PrivateKey, Padding)", "private_decrypt-4"},
   {"privkey_to_pubkey", "privkey_to_pubkey(Type, EnginePrivateKeyRef)", "privkey_to_pubkey-2"},
   {"private_encrypt", "private_encrypt(Type, PlainText, PrivateKey, Padding)", "private_encrypt-4"},

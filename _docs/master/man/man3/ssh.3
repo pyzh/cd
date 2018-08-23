@@ -1155,6 +1155,12 @@ The value \fI{random, Nmin, Nmax}\fR\& will make a random string with at least \
 .br
     \&'diffie-hellman-group18-sha512\&' |
 .br
+    \&'curve25519-sha256\&' |
+.br
+    \&'curve25519-sha256@libssh\&.org\&' |
+.br
+    \&'curve448-sha512\&' |
+.br
     \&'ecdh-sha2-nistp256\&' |
 .br
     \&'ecdh-sha2-nistp384\&' |
@@ -1201,7 +1207,9 @@ The value \fI{random, Nmin, Nmax}\fR\& will make a random string with at least \
 .br
     \&'aes256-ctr\&' |
 .br
-    \&'aes256-gcm@openssh\&.com\&'
+    \&'aes256-gcm@openssh\&.com\&' |
+.br
+    \&'chacha20-poly1305@openssh\&.com\&'
 .br
 .fi
 .nf
