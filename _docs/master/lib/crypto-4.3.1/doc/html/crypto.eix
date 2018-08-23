@@ -63,9 +63,18 @@
   {"engine_load", "engine_load(EngineId, PreCmds, PostCmds)", "engine_load-3"},
   {"engine_load", "engine_load(EngineId, PreCmds, PostCmds, EngineMethods)", "engine_load-4"},
   {"engine_unload", "engine_unload(Engine)", "engine_unload-1"},
-  {"engine_list", "engine_list()", "engine_list-0"},
+  {"engine_by_id", "engine_by_id(EngineId)", "engine_by_id-1"},
   {"engine_ctrl_cmd_string", "engine_ctrl_cmd_string(Engine, CmdName, CmdArg)", "engine_ctrl_cmd_string-3"},
-  {"engine_ctrl_cmd_string", "engine_ctrl_cmd_string(Engine, CmdName, CmdArg, Optional)", "engine_ctrl_cmd_string-4"}
+  {"engine_ctrl_cmd_string", "engine_ctrl_cmd_string(Engine, CmdName, CmdArg, Optional)", "engine_ctrl_cmd_string-4"},
+  {"engine_add", "engine_add(Engine)", "engine_add-1"},
+  {"engine_remove", "engine_remove(Engine)", "engine_remove-1"},
+  {"engine_get_id", "engine_get_id(Engine)", "engine_get_id-1"},
+  {"engine_get_name", "engine_get_name(Engine)", "engine_get_name-1"},
+  {"engine_list", "engine_list()", "engine_list-0"},
+  {"ensure_engine_loaded", "ensure_engine_loaded(EngineId, LibPath)", "ensure_engine_loaded-2"},
+  {"ensure_engine_loaded", "ensure_engine_loaded(EngineId, LibPath, EngineMethods)", "ensure_engine_loaded-3"},
+  {"ensure_engine_unloaded", "ensure_engine_unloaded(Engine)", "ensure_engine_unloaded-1"},
+  {"ensure_engine_unloaded", "ensure_engine_unloaded(Engine, EngineMethods)", "ensure_engine_unloaded-2"}
 ]}.
 {"crypto.html", {module, "crypto"}, ["crypto"]}.
 {notused, application, ["crypto"]}.

@@ -81,13 +81,22 @@
     <li title="compute_key-4"><a href="crypto.html#compute_key-4">compute_key/4</a></li>
     <li title="ec_curve-1"><a href="crypto.html#ec_curve-1">ec_curve/1</a></li>
     <li title="ec_curves-0"><a href="crypto.html#ec_curves-0">ec_curves/0</a></li>
+    <li title="engine_add-1"><a href="crypto.html#engine_add-1">engine_add/1</a></li>
+    <li title="engine_by_id-1"><a href="crypto.html#engine_by_id-1">engine_by_id/1</a></li>
     <li title="engine_ctrl_cmd_string-3"><a href="crypto.html#engine_ctrl_cmd_string-3">engine_ctrl_cmd_string/3</a></li>
     <li title="engine_ctrl_cmd_string-4"><a href="crypto.html#engine_ctrl_cmd_string-4">engine_ctrl_cmd_string/4</a></li>
     <li title="engine_get_all_methods-0"><a href="crypto.html#engine_get_all_methods-0">engine_get_all_methods/0</a></li>
+    <li title="engine_get_id-1"><a href="crypto.html#engine_get_id-1">engine_get_id/1</a></li>
+    <li title="engine_get_name-1"><a href="crypto.html#engine_get_name-1">engine_get_name/1</a></li>
     <li title="engine_list-0"><a href="crypto.html#engine_list-0">engine_list/0</a></li>
     <li title="engine_load-3"><a href="crypto.html#engine_load-3">engine_load/3</a></li>
     <li title="engine_load-4"><a href="crypto.html#engine_load-4">engine_load/4</a></li>
+    <li title="engine_remove-1"><a href="crypto.html#engine_remove-1">engine_remove/1</a></li>
     <li title="engine_unload-1"><a href="crypto.html#engine_unload-1">engine_unload/1</a></li>
+    <li title="ensure_engine_loaded-2"><a href="crypto.html#ensure_engine_loaded-2">ensure_engine_loaded/2</a></li>
+    <li title="ensure_engine_loaded-3"><a href="crypto.html#ensure_engine_loaded-3">ensure_engine_loaded/3</a></li>
+    <li title="ensure_engine_unloaded-1"><a href="crypto.html#ensure_engine_unloaded-1">ensure_engine_unloaded/1</a></li>
+    <li title="ensure_engine_unloaded-2"><a href="crypto.html#ensure_engine_unloaded-2">ensure_engine_unloaded/2</a></li>
     <li title="exor-2"><a href="crypto.html#exor-2">exor/2</a></li>
     <li title="generate_key-2"><a href="crypto.html#generate_key-2">generate_key/2</a></li>
     <li title="generate_key-3"><a href="crypto.html#generate_key-3">generate_key/3</a></li>
@@ -137,11 +146,11 @@
 <div class="innertube">
 <!-- refpage --><center><h1>crypto</h1></center>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-module-idp46696108440240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp46696108440240').style.visibility = 'hidden';"><span id="ghlink-module-idp46696108440240"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-idp46920916119648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp46920916119648').style.visibility = 'hidden';"><span id="ghlink-module-idp46920916119648"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
 <div class="REFBODY module-body">crypto</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp46696108439808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp46696108439808').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp46696108439808"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp46920916118816').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp46920916118816').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp46920916118816"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
 <div class="REFBODY module-summary-body">Crypto Functions</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-description-idp46696108439376').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp46696108439376').style.visibility = 'hidden';"><span id="ghlink-description-idp46696108439376" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L28" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-description-idp46920916118368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp46920916118368').style.visibility = 'hidden';"><span id="ghlink-description-idp46920916118368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L28" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
 <div class="REFBODY description-body"><p>
     <p>This module provides a set of cryptographic functions.
       </p>
@@ -182,7 +191,7 @@
     </ul>
   </p></div>
 
- <h3><span onMouseOver="document.getElementById('ghlink-data-types--idp46696108424144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types--idp46696108424144').style.visibility = 'hidden';"><span id="ghlink-data-types--idp46696108424144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L68" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="data-types-" href="#data-types-">DATA TYPES </a></span></h3>
+ <h3><span onMouseOver="document.getElementById('ghlink-data-types--idp46920916098064').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types--idp46920916098064').style.visibility = 'hidden';"><span id="ghlink-data-types--idp46920916098064" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L68" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="data-types-" href="#data-types-">DATA TYPES </a></span></h3>
 <div class="REFBODY rb-3">
     
 
@@ -260,7 +269,7 @@
                                password =&gt; password()}</pre></div>
 
     <div class="example"><pre>engine_ref() = term()</pre></div>
-    <p>The result of a call to <span class="bold_code bc-17"><a href="#engine_load-3">engine_load/3</a></span>.
+    <p>The result of a call to for example <span class="bold_code bc-17"><a href="#engine_load-3">engine_load/3</a></span>.
     </p>
 
     <div class="example"><pre>key_id() = string() | binary()</pre></div>
@@ -324,9 +333,9 @@
 
  </div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp46696108378752').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp46696108378752').style.visibility = 'hidden';"><span id="ghlink-exports-idp46696108378752"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp46920916057040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp46920916057040').style.visibility = 'hidden';"><span id="ghlink-exports-idp46920916057040"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
 <div class="exports-body">
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_encrypt-3-idp46696108378416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_encrypt-3-idp46696108378416').style.visibility = 'hidden';"><span id="ghlink-block_encrypt-3-idp46696108378416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L211" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_encrypt-3" href="#block_encrypt-3">block_encrypt(Type, Key, PlainText) -&gt; CipherText</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_encrypt-3-idp46920916056480').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_encrypt-3-idp46920916056480').style.visibility = 'hidden';"><span id="ghlink-block_encrypt-3-idp46920916056480" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L211" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_encrypt-3" href="#block_encrypt-3">block_encrypt(Type, Key, PlainText) -&gt; CipherText</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
   <div class="REFTYPES rt-4">
@@ -345,7 +354,7 @@
   is not supported by the underlying OpenSSL implementation.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_decrypt-3-idp46696108370800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_decrypt-3-idp46696108370800').style.visibility = 'hidden';"><span id="ghlink-block_decrypt-3-idp46696108370800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L226" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_decrypt-3" href="#block_decrypt-3">block_decrypt(Type, Key, CipherText) -&gt; PlainText</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_decrypt-3-idp46920916048624').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_decrypt-3-idp46920916048624').style.visibility = 'hidden';"><span id="ghlink-block_decrypt-3-idp46920916048624" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L226" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_decrypt-3" href="#block_decrypt-3">block_decrypt(Type, Key, CipherText) -&gt; PlainText</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
   <div class="REFTYPES rt-4">
@@ -364,7 +373,7 @@
   is not supported by the underlying OpenSSL implementation.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_encrypt-4-idp46696108363616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_encrypt-4-idp46696108363616').style.visibility = 'hidden';"><span id="ghlink-block_encrypt-4-idp46696108363616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L241" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_encrypt-4" href="#block_encrypt-4">block_encrypt(Type, Key, Ivec, PlainText) -&gt; CipherText</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_encrypt-4-idp46696108362976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_encrypt-4-idp46696108362976').style.visibility = 'hidden';"><span id="ghlink-block_encrypt-4-idp46696108362976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L241" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_encrypt-4" href="#block_encrypt-4">block_encrypt(AeadType, Key, Ivec, {AAD, PlainText}) -&gt; {CipherText, CipherTag}</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_encrypt-4-idp46696108362672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_encrypt-4-idp46696108362672').style.visibility = 'hidden';"><span id="ghlink-block_encrypt-4-idp46696108362672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L241" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_encrypt-4" href="#block_encrypt-4">block_encrypt(aes_gcm, Key, Ivec, {AAD, PlainText, TagLength}) -&gt; {CipherText, CipherTag}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_encrypt-4-idp46920916041312').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_encrypt-4-idp46920916041312').style.visibility = 'hidden';"><span id="ghlink-block_encrypt-4-idp46920916041312" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L241" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_encrypt-4" href="#block_encrypt-4">block_encrypt(Type, Key, Ivec, PlainText) -&gt; CipherText</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_encrypt-4-idp46920916040864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_encrypt-4-idp46920916040864').style.visibility = 'hidden';"><span id="ghlink-block_encrypt-4-idp46920916040864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L241" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_encrypt-4" href="#block_encrypt-4">block_encrypt(AeadType, Key, Ivec, {AAD, PlainText}) -&gt; {CipherText, CipherTag}</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_encrypt-4-idp46920916035296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_encrypt-4-idp46920916035296').style.visibility = 'hidden';"><span id="ghlink-block_encrypt-4-idp46920916035296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L241" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_encrypt-4" href="#block_encrypt-4">block_encrypt(aes_gcm, Key, Ivec, {AAD, PlainText, TagLength}) -&gt; {CipherText, CipherTag}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -396,7 +405,7 @@
 	is not supported by the underlying OpenSSL implementation.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_decrypt-4-idp46696108350112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_decrypt-4-idp46696108350112').style.visibility = 'hidden';"><span id="ghlink-block_decrypt-4-idp46696108350112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L265" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_decrypt-4" href="#block_decrypt-4">block_decrypt(Type, Key, Ivec, CipherText) -&gt; PlainText</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_decrypt-4-idp46696108349936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_decrypt-4-idp46696108349936').style.visibility = 'hidden';"><span id="ghlink-block_decrypt-4-idp46696108349936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L265" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_decrypt-4" href="#block_decrypt-4">block_decrypt(AeadType, Key, Ivec, {AAD, CipherText, CipherTag}) -&gt; PlainText | error</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_decrypt-4-idp46920916028992').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_decrypt-4-idp46920916028992').style.visibility = 'hidden';"><span id="ghlink-block_decrypt-4-idp46920916028992" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L265" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_decrypt-4" href="#block_decrypt-4">block_decrypt(Type, Key, Ivec, CipherText) -&gt; PlainText</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-block_decrypt-4-idp46920916028560').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block_decrypt-4-idp46920916028560').style.visibility = 'hidden';"><span id="ghlink-block_decrypt-4-idp46920916028560" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L265" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block_decrypt-4" href="#block_decrypt-4">block_decrypt(AeadType, Key, Ivec, {AAD, CipherText, CipherTag}) -&gt; PlainText | error</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -426,7 +435,7 @@
 	is not supported by the underlying OpenSSL implementation.</p>
       </p></div>
 
-     <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-bytes_to_integer-1-idp46696108336960').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-bytes_to_integer-1-idp46696108336960').style.visibility = 'hidden';"><span id="ghlink-bytes_to_integer-1-idp46696108336960" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L288" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="bytes_to_integer-1" href="#bytes_to_integer-1">bytes_to_integer(Bin) -&gt; Integer </a></span></div></p>
+     <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-bytes_to_integer-1-idp46920916016608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-bytes_to_integer-1-idp46920916016608').style.visibility = 'hidden';"><span id="ghlink-bytes_to_integer-1-idp46920916016608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L288" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="bytes_to_integer-1" href="#bytes_to_integer-1">bytes_to_integer(Bin) -&gt; Integer </a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -442,7 +451,7 @@
          </p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-compute_key-4-idp46696108333296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-compute_key-4-idp46696108333296').style.visibility = 'hidden';"><span id="ghlink-compute_key-4-idp46696108333296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L302" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="compute_key-4" href="#compute_key-4">compute_key(Type, OthersPublicKey, MyKey, Params) -&gt; SharedSecret</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-compute_key-4-idp46920916012848').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-compute_key-4-idp46920916012848').style.visibility = 'hidden';"><span id="ghlink-compute_key-4-idp46920916012848" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L302" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="compute_key-4" href="#compute_key-4">compute_key(Type, OthersPublicKey, MyKey, Params) -&gt; SharedSecret</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -473,7 +482,7 @@
 	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-exor-2-idp46696108325056').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exor-2-idp46696108325056').style.visibility = 'hidden';"><span id="ghlink-exor-2-idp46696108325056" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L321" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="exor-2" href="#exor-2">exor(Data1, Data2) -&gt; Result</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-exor-2-idp46920916006592').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exor-2-idp46920916006592').style.visibility = 'hidden';"><span id="ghlink-exor-2-idp46920916006592" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L321" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="exor-2" href="#exor-2">exor(Data1, Data2) -&gt; Result</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -487,7 +496,7 @@
 	<p>Performs bit-wise XOR (exclusive or) on the data supplied.</p>
       </p></div>
 
-   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-generate_key-2-idp46696108322576').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-generate_key-2-idp46696108322576').style.visibility = 'hidden';"><span id="ghlink-generate_key-2-idp46696108322576" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L333" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="generate_key-2" href="#generate_key-2">generate_key(Type, Params) -&gt; {PublicKey, PrivKeyOut} </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-generate_key-3-idp46696108321488').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-generate_key-3-idp46696108321488').style.visibility = 'hidden';"><span id="ghlink-generate_key-3-idp46696108321488" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L333" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="generate_key-3" href="#generate_key-3">generate_key(Type, Params, PrivKeyIn) -&gt; {PublicKey, PrivKeyOut} </a></span></div></p>
+   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-generate_key-2-idp46920916002704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-generate_key-2-idp46920916002704').style.visibility = 'hidden';"><span id="ghlink-generate_key-2-idp46920916002704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L333" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="generate_key-2" href="#generate_key-2">generate_key(Type, Params) -&gt; {PublicKey, PrivKeyOut} </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-generate_key-3-idp46920915995296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-generate_key-3-idp46920915995296').style.visibility = 'hidden';"><span id="ghlink-generate_key-3-idp46920915995296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L333" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="generate_key-3" href="#generate_key-3">generate_key(Type, Params, PrivKeyIn) -&gt; {PublicKey, PrivKeyOut} </a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -538,7 +547,7 @@
 </div>
       </p></div>
 
-     <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hash-2-idp46696108308896').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hash-2-idp46696108308896').style.visibility = 'hidden';"><span id="ghlink-hash-2-idp46696108308896" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L365" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hash-2" href="#hash-2">hash(Type, Data) -&gt; Digest</a></span></div></p>
+     <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hash-2-idp46920915989264').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hash-2-idp46920915989264').style.visibility = 'hidden';"><span id="ghlink-hash-2-idp46920915989264" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L365" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hash-2" href="#hash-2">hash(Type, Data) -&gt; Digest</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -557,7 +566,7 @@
 	is not supported by the underlying OpenSSL implementation.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hash_init-1-idp46696108297568').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hash_init-1-idp46696108297568').style.visibility = 'hidden';"><span id="ghlink-hash_init-1-idp46696108297568" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L380" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hash_init-1" href="#hash_init-1">hash_init(Type) -&gt; Context</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hash_init-1-idp46920915982496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hash_init-1-idp46920915982496').style.visibility = 'hidden';"><span id="ghlink-hash_init-1-idp46920915982496" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L380" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hash_init-1" href="#hash_init-1">hash_init(Type) -&gt; Context</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -572,7 +581,7 @@
 	is not supported by the underlying OpenSSL implementation.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hash_update-2-idp46696108296944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hash_update-2-idp46696108296944').style.visibility = 'hidden';"><span id="ghlink-hash_update-2-idp46696108296944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L395" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hash_update-2" href="#hash_update-2">hash_update(Context, Data) -&gt; NewContext</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hash_update-2-idp46920915976512').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hash_update-2-idp46920915976512').style.visibility = 'hidden';"><span id="ghlink-hash_update-2-idp46920915976512" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L395" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hash_update-2" href="#hash_update-2">hash_update(Context, Data) -&gt; NewContext</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -586,7 +595,7 @@
         must be passed into the next call to <span class="code">hash_update</span>
 	or <span class="bold_code bc-17"><a href="#hash_final-1">hash_final</a></span>.</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hash_final-1-idp46696108284608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hash_final-1-idp46696108284608').style.visibility = 'hidden';"><span id="ghlink-hash_final-1-idp46696108284608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L409" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hash_final-1" href="#hash_final-1">hash_final(Context) -&gt; Digest</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hash_final-1-idp46920915968736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hash_final-1-idp46920915968736').style.visibility = 'hidden';"><span id="ghlink-hash_final-1-idp46920915968736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L409" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hash_final-1" href="#hash_final-1">hash_final(Context) -&gt; Digest</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -600,7 +609,7 @@
 	function used to generate it.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hmac-3-idp46696108285152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac-3-idp46696108285152').style.visibility = 'hidden';"><span id="ghlink-hmac-3-idp46696108285152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L423" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac-3" href="#hmac-3">hmac(Type, Key, Data) -&gt; Mac</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hmac-4-idp46696108284736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac-4-idp46696108284736').style.visibility = 'hidden';"><span id="ghlink-hmac-4-idp46696108284736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L423" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac-4" href="#hmac-4">hmac(Type, Key, Data, MacLength) -&gt; Mac</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hmac-3-idp46920915962112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac-3-idp46920915962112').style.visibility = 'hidden';"><span id="ghlink-hmac-3-idp46920915962112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L423" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac-3" href="#hmac-3">hmac(Type, Key, Data) -&gt; Mac</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hmac-4-idp46920915963808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac-4-idp46920915963808').style.visibility = 'hidden';"><span id="ghlink-hmac-4-idp46920915963808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L423" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac-4" href="#hmac-4">hmac(Type, Key, Data, MacLength) -&gt; Mac</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -625,7 +634,7 @@
         will limit the size of the resultant <span class="code">Mac</span>.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hmac_init-2-idp46696108276720').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac_init-2-idp46696108276720').style.visibility = 'hidden';"><span id="ghlink-hmac_init-2-idp46696108276720" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L441" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac_init-2" href="#hmac_init-2">hmac_init(Type, Key) -&gt; Context</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hmac_init-2-idp46920915955632').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac_init-2-idp46920915955632').style.visibility = 'hidden';"><span id="ghlink-hmac_init-2-idp46920915955632" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L441" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac_init-2" href="#hmac_init-2">hmac_init(Type, Key) -&gt; Context</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -644,7 +653,7 @@
         key. The key can be any length.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hmac_update-2-idp46696108271904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac_update-2-idp46696108271904').style.visibility = 'hidden';"><span id="ghlink-hmac_update-2-idp46696108271904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L456" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac_update-2" href="#hmac_update-2">hmac_update(Context, Data) -&gt; NewContext</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hmac_update-2-idp46920915950176').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac_update-2-idp46920915950176').style.visibility = 'hidden';"><span id="ghlink-hmac_update-2-idp46920915950176" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L456" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac_update-2" href="#hmac_update-2">hmac_update(Context, Data) -&gt; NewContext</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -672,7 +681,7 @@
 </div>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hmac_final-1-idp46696108262816').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac_final-1-idp46696108262816').style.visibility = 'hidden';"><span id="ghlink-hmac_final-1-idp46696108262816" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L479" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac_final-1" href="#hmac_final-1">hmac_final(Context) -&gt; Mac</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hmac_final-1-idp46920915940832').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac_final-1-idp46920915940832').style.visibility = 'hidden';"><span id="ghlink-hmac_final-1-idp46920915940832" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L479" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac_final-1" href="#hmac_final-1">hmac_final(Context) -&gt; Mac</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -684,7 +693,7 @@
         determined by the type of hash function used to generate it.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hmac_final_n-2-idp46696108258816').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac_final_n-2-idp46696108258816').style.visibility = 'hidden';"><span id="ghlink-hmac_final_n-2-idp46696108258816" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L491" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac_final_n-2" href="#hmac_final_n-2">hmac_final_n(Context, HashLen) -&gt; Mac</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-hmac_final_n-2-idp46920915936160').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac_final_n-2-idp46920915936160').style.visibility = 'hidden';"><span id="ghlink-hmac_final_n-2-idp46920915936160" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L491" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac_final_n-2" href="#hmac_final_n-2">hmac_final_n(Context, HashLen) -&gt; Mac</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -699,7 +708,7 @@
         zero. <span class="code">Mac</span> will be a binary with at most <span class="code">HashLen</span> bytes. Note that if HashLen is greater than the actual number of bytes returned from the underlying hash, the returned hash will have fewer than <span class="code">HashLen</span> bytes.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-cmac-3-idp46696108253120').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-cmac-3-idp46696108253120').style.visibility = 'hidden';"><span id="ghlink-cmac-3-idp46696108253120" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L504" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="cmac-3" href="#cmac-3">cmac(Type, Key, Data) -&gt; Mac</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-cmac-4-idp46696108252704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-cmac-4-idp46696108252704').style.visibility = 'hidden';"><span id="ghlink-cmac-4-idp46696108252704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L504" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="cmac-4" href="#cmac-4">cmac(Type, Key, Data, MacLength) -&gt; Mac</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-cmac-3-idp46920915931280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-cmac-3-idp46920915931280').style.visibility = 'hidden';"><span id="ghlink-cmac-3-idp46920915931280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L504" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="cmac-3" href="#cmac-3">cmac(Type, Key, Data) -&gt; Mac</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-cmac-4-idp46920915930832').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-cmac-4-idp46920915930832').style.visibility = 'hidden';"><span id="ghlink-cmac-4-idp46920915930832" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L504" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="cmac-4" href="#cmac-4">cmac(Type, Key, Data, MacLength) -&gt; Mac</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -724,7 +733,7 @@
         will limit the size of the resultant <span class="code">Mac</span>.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-info_fips-0-idp46696108244928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-info_fips-0-idp46696108244928').style.visibility = 'hidden';"><span id="ghlink-info_fips-0-idp46696108244928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L522" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="info_fips-0" href="#info_fips-0">info_fips() -&gt; Status</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-info_fips-0-idp46920915922496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-info_fips-0-idp46920915922496').style.visibility = 'hidden';"><span id="ghlink-info_fips-0-idp46920915922496" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L522" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="info_fips-0" href="#info_fips-0">info_fips() -&gt; Status</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -749,7 +758,7 @@
 </div>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-info_lib-0-idp46696108238368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-info_lib-0-idp46696108238368').style.visibility = 'hidden';"><span id="ghlink-info_lib-0-idp46696108238368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L544" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="info_lib-0" href="#info_lib-0">info_lib() -&gt; [{Name,VerNum,VerStr}]</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-info_lib-0-idp46920915916512').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-info_lib-0-idp46920915916512').style.visibility = 'hidden';"><span id="ghlink-info_lib-0-idp46920915916512" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L544" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="info_lib-0" href="#info_lib-0">info_lib() -&gt; [{Name,VerNum,VerStr}]</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -782,7 +791,7 @@
 </div>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-mod_pow-3-idp46696108229408').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-mod_pow-3-idp46696108229408').style.visibility = 'hidden';"><span id="ghlink-mod_pow-3-idp46696108229408" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L570" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="mod_pow-3" href="#mod_pow-3">mod_pow(N, P, M) -&gt; Result</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-mod_pow-3-idp46920915905296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-mod_pow-3-idp46920915905296').style.visibility = 'hidden';"><span id="ghlink-mod_pow-3-idp46920915905296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L570" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="mod_pow-3" href="#mod_pow-3">mod_pow(N, P, M) -&gt; Result</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -796,7 +805,7 @@
 	<p>Computes the function <span class="code">N^P mod M</span>.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-next_iv-2-idp46696108225792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-next_iv-2-idp46696108225792').style.visibility = 'hidden';"><span id="ghlink-next_iv-2-idp46696108225792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L582" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="next_iv-2" href="#next_iv-2">next_iv(Type, Data) -&gt; NextIVec</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-next_iv-3-idp46696108225408').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-next_iv-3-idp46696108225408').style.visibility = 'hidden';"><span id="ghlink-next_iv-3-idp46696108225408" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L582" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="next_iv-3" href="#next_iv-3">next_iv(Type, Data, IVec) -&gt; NextIVec</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-next_iv-2-idp46920915901152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-next_iv-2-idp46920915901152').style.visibility = 'hidden';"><span id="ghlink-next_iv-2-idp46920915901152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L582" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="next_iv-2" href="#next_iv-2">next_iv(Type, Data) -&gt; NextIVec</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-next_iv-3-idp46920915903312').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-next_iv-3-idp46920915903312').style.visibility = 'hidden';"><span id="ghlink-next_iv-3-idp46920915903312" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L582" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="next_iv-3" href="#next_iv-3">next_iv(Type, Data, IVec) -&gt; NextIVec</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
      <div class="REFTYPES rt-4">
@@ -817,7 +826,7 @@
      in the previous iteration step.</p>
    </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-private_decrypt-4-idp46696108219728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-private_decrypt-4-idp46696108219728').style.visibility = 'hidden';"><span id="ghlink-private_decrypt-4-idp46696108219728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L600" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="private_decrypt-4" href="#private_decrypt-4">private_decrypt(Type, CipherText, PrivateKey, Padding) -&gt; PlainText</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-private_decrypt-4-idp46920915897440').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-private_decrypt-4-idp46920915897440').style.visibility = 'hidden';"><span id="ghlink-private_decrypt-4-idp46920915897440" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L600" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="private_decrypt-4" href="#private_decrypt-4">private_decrypt(Type, CipherText, PrivateKey, Padding) -&gt; PlainText</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -846,7 +855,7 @@
 	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-privkey_to_pubkey-2-idp46696108212656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-privkey_to_pubkey-2-idp46696108212656').style.visibility = 'hidden';"><span id="ghlink-privkey_to_pubkey-2-idp46696108212656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L621" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="privkey_to_pubkey-2" href="#privkey_to_pubkey-2">privkey_to_pubkey(Type, EnginePrivateKeyRef) -&gt; PublicKey</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-privkey_to_pubkey-2-idp46920915886816').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-privkey_to_pubkey-2-idp46920915886816').style.visibility = 'hidden';"><span id="ghlink-privkey_to_pubkey-2-idp46920915886816" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L621" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="privkey_to_pubkey-2" href="#privkey_to_pubkey-2">privkey_to_pubkey(Type, EnginePrivateKeyRef) -&gt; PublicKey</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -862,10 +871,10 @@
 <div class="REFBODY rb-7"><p>
 	<p>Fetches the corresponding public key from a private key stored in an Engine.
 	The key must be of the type indicated by the Type parameter.
-	</p>	
+	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-private_encrypt-4-idp46696108208000').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-private_encrypt-4-idp46696108208000').style.visibility = 'hidden';"><span id="ghlink-private_encrypt-4-idp46696108208000" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L636" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="private_encrypt-4" href="#private_encrypt-4">private_encrypt(Type, PlainText, PrivateKey, Padding) -&gt; CipherText</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-private_encrypt-4-idp46920915885360').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-private_encrypt-4-idp46920915885360').style.visibility = 'hidden';"><span id="ghlink-private_encrypt-4-idp46920915885360" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L636" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="private_encrypt-4" href="#private_encrypt-4">private_encrypt(Type, PlainText, PrivateKey, Padding) -&gt; CipherText</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -895,7 +904,7 @@
 	also <span class="bold_code bc-13"><a href="javascript:erlhref('../../../../doc/../','public_key','public_key.html#encrypt_private-2');">public_key:encrypt_private/[2,3]</a></span>
 	</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-public_decrypt-4-idp46696108198816').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-public_decrypt-4-idp46696108198816').style.visibility = 'hidden';"><span id="ghlink-public_decrypt-4-idp46696108198816" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L659" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="public_decrypt-4" href="#public_decrypt-4">public_decrypt(Type, CipherText, PublicKey, Padding) -&gt; PlainText</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-public_decrypt-4-idp46920915875776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-public_decrypt-4-idp46920915875776').style.visibility = 'hidden';"><span id="ghlink-public_decrypt-4-idp46920915875776" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L659" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="public_decrypt-4" href="#public_decrypt-4">public_decrypt(Type, CipherText, PublicKey, Padding) -&gt; PlainText</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -924,7 +933,7 @@
 	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-public_encrypt-4-idp46696108192192').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-public_encrypt-4-idp46696108192192').style.visibility = 'hidden';"><span id="ghlink-public_encrypt-4-idp46696108192192" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L680" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="public_encrypt-4" href="#public_encrypt-4">public_encrypt(Type, PlainText, PublicKey, Padding) -&gt; CipherText</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-public_encrypt-4-idp46920915869728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-public_encrypt-4-idp46920915869728').style.visibility = 'hidden';"><span id="ghlink-public_encrypt-4-idp46920915869728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L680" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="public_encrypt-4" href="#public_encrypt-4">public_encrypt(Type, PlainText, PublicKey, Padding) -&gt; CipherText</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -954,7 +963,7 @@
 	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-rand_seed-1-idp46696108182064').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rand_seed-1-idp46696108182064').style.visibility = 'hidden';"><span id="ghlink-rand_seed-1-idp46696108182064" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L703" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rand_seed-1" href="#rand_seed-1">rand_seed(Seed) -&gt; ok</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-rand_seed-1-idp46920915858896').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rand_seed-1-idp46920915858896').style.visibility = 'hidden';"><span id="ghlink-rand_seed-1-idp46920915858896" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L703" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rand_seed-1" href="#rand_seed-1">rand_seed(Seed) -&gt; ok</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -970,7 +979,7 @@
         throws <span class="code">low_entropy</span></p>
       </p></div>
 
-     <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-rand_uniform-2-idp46696108177904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rand_uniform-2-idp46696108177904').style.visibility = 'hidden';"><span id="ghlink-rand_uniform-2-idp46696108177904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L719" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rand_uniform-2" href="#rand_uniform-2">rand_uniform(Lo, Hi) -&gt; N</a></span></div></p>
+     <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-rand_uniform-2-idp46920915855536').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rand_uniform-2-idp46920915855536').style.visibility = 'hidden';"><span id="ghlink-rand_uniform-2-idp46920915855536" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L719" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rand_uniform-2" href="#rand_uniform-2">rand_uniform(Lo, Hi) -&gt; N</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -983,7 +992,7 @@
 	<span class="code">Hi</span> must be larger than <span class="code">Lo</span>.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-sign-4-idp46696108166864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-sign-4-idp46696108166864').style.visibility = 'hidden';"><span id="ghlink-sign-4-idp46696108166864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L732" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="sign-4" href="#sign-4">sign(Algorithm, DigestType, Msg, Key) -&gt; binary()</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-sign-5-idp46696108172304').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-sign-5-idp46696108172304').style.visibility = 'hidden';"><span id="ghlink-sign-5-idp46696108172304" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L732" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="sign-5" href="#sign-5">sign(Algorithm, DigestType, Msg, Key, Options) -&gt; binary()</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-sign-4-idp46920915850592').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-sign-4-idp46920915850592').style.visibility = 'hidden';"><span id="ghlink-sign-4-idp46920915850592" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L732" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="sign-4" href="#sign-4">sign(Algorithm, DigestType, Msg, Key) -&gt; binary()</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-sign-5-idp46920915850160').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-sign-5-idp46920915850160').style.visibility = 'hidden';"><span id="ghlink-sign-5-idp46920915850160" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L732" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="sign-5" href="#sign-5">sign(Algorithm, DigestType, Msg, Key, Options) -&gt; binary()</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -1012,16 +1021,16 @@
 	<p>See also <span class="bold_code bc-13"><a href="javascript:erlhref('../../../../doc/../','public_key','public_key.html#sign-3');">public_key:sign/3</a></span>.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start-0-idp46696108162112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-0-idp46696108162112').style.visibility = 'hidden';"><span id="ghlink-start-0-idp46696108162112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L754" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start-0" href="#start-0">start() -&gt; ok</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start-0-idp46920915841632').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-0-idp46920915841632').style.visibility = 'hidden';"><span id="ghlink-start-0-idp46920915841632" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L754" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start-0" href="#start-0">start() -&gt; ok</a></span></div></p>
 <div class="REFBODY rb-7"><p>
         <p> Equivalent to application:start(crypto).</p>
       </p></div>
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stop-0-idp46696108162752').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop-0-idp46696108162752').style.visibility = 'hidden';"><span id="ghlink-stop-0-idp46696108162752" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L761" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stop-0" href="#stop-0">stop() -&gt; ok</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stop-0-idp46920915840000').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop-0-idp46920915840000').style.visibility = 'hidden';"><span id="ghlink-stop-0-idp46920915840000" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L761" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stop-0" href="#stop-0">stop() -&gt; ok</a></span></div></p>
 <div class="REFBODY rb-7"><p>
         <p> Equivalent to application:stop(crypto).</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-strong_rand_bytes-1-idp46696108036608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-strong_rand_bytes-1-idp46696108036608').style.visibility = 'hidden';"><span id="ghlink-strong_rand_bytes-1-idp46696108036608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L769" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="strong_rand_bytes-1" href="#strong_rand_bytes-1">strong_rand_bytes(N) -&gt; binary()</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-strong_rand_bytes-1-idp46920915837760').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-strong_rand_bytes-1-idp46920915837760').style.visibility = 'hidden';"><span id="ghlink-strong_rand_bytes-1-idp46920915837760" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L769" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="strong_rand_bytes-1" href="#strong_rand_bytes-1">strong_rand_bytes(N) -&gt; binary()</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1037,7 +1046,7 @@
 	failed due to lack of secure "randomness".</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-rand_seed-0-idp46696108031952').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rand_seed-0-idp46696108031952').style.visibility = 'hidden';"><span id="ghlink-rand_seed-0-idp46696108031952" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L785" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rand_seed-0" href="#rand_seed-0">rand_seed() -&gt; rand:state()</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-rand_seed-0-idp46920915832464').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rand_seed-0-idp46920915832464').style.visibility = 'hidden';"><span id="ghlink-rand_seed-0-idp46920915832464" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L785" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rand_seed-0" href="#rand_seed-0">rand_seed() -&gt; rand:state()</a></span></div></p>
 <div class="REFBODY rb-7"><p>
 	<p>
           Creates state object for
@@ -1062,7 +1071,7 @@ _IntegerValue = rand:uniform(42), % [1; 42]
 _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-rand_seed_s-0-idp46696108021152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rand_seed_s-0-idp46696108021152').style.visibility = 'hidden';"><span id="ghlink-rand_seed_s-0-idp46696108021152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L813" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rand_seed_s-0" href="#rand_seed_s-0">rand_seed_s() -&gt; rand:state()</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-rand_seed_s-0-idp46920915825600').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rand_seed_s-0-idp46920915825600').style.visibility = 'hidden';"><span id="ghlink-rand_seed_s-0-idp46920915825600" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L813" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rand_seed_s-0" href="#rand_seed_s-0">rand_seed_s() -&gt; rand:state()</a></span></div></p>
 <div class="REFBODY rb-7"><p>
 	<p>
           Creates state object for
@@ -1097,7 +1106,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 </div>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-rand_seed_alg-1-idp46696108016608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rand_seed_alg-1-idp46696108016608').style.visibility = 'hidden';"><span id="ghlink-rand_seed_alg-1-idp46696108016608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L848" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rand_seed_alg-1" href="#rand_seed_alg-1">rand_seed_alg(Alg) -&gt; rand:state()</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-rand_seed_alg-1-idp46920915816112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rand_seed_alg-1-idp46920915816112').style.visibility = 'hidden';"><span id="ghlink-rand_seed_alg-1-idp46920915816112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L848" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rand_seed_alg-1" href="#rand_seed_alg-1">rand_seed_alg(Alg) -&gt; rand:state()</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1131,7 +1140,7 @@ _IntegerValue = rand:uniform(42), % [1; 42]
 _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-rand_seed_alg_s-1-idp46696108007488').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rand_seed_alg_s-1-idp46696108007488').style.visibility = 'hidden';"><span id="ghlink-rand_seed_alg_s-1-idp46696108007488" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L884" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rand_seed_alg_s-1" href="#rand_seed_alg_s-1">rand_seed_alg_s(Alg) -&gt; rand:state()</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-rand_seed_alg_s-1-idp46920915808256').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rand_seed_alg_s-1-idp46920915808256').style.visibility = 'hidden';"><span id="ghlink-rand_seed_alg_s-1-idp46920915808256" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L884" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rand_seed_alg_s-1" href="#rand_seed_alg_s-1">rand_seed_alg_s(Alg) -&gt; rand:state()</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1190,7 +1199,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 </div>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stream_init-2-idp46696108105024').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stream_init-2-idp46696108105024').style.visibility = 'hidden';"><span id="ghlink-stream_init-2-idp46696108105024" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L942" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stream_init-2" href="#stream_init-2">stream_init(Type, Key) -&gt; State</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stream_init-2-idp46920915793584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stream_init-2-idp46920915793584').style.visibility = 'hidden';"><span id="ghlink-stream_init-2-idp46920915793584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L942" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stream_init-2" href="#stream_init-2">stream_init(Type, Key) -&gt; State</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -1209,7 +1218,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
         <span class="bold_code bc-17"><a href="#stream_decrypt-2">stream_decrypt</a></span></p>
       </p></div>
 
-   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stream_init-3-idp46696108100064').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stream_init-3-idp46696108100064').style.visibility = 'hidden';"><span id="ghlink-stream_init-3-idp46696108100064" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L957" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stream_init-3" href="#stream_init-3">stream_init(Type, Key, IVec) -&gt; State</a></span></div></p>
+   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stream_init-3-idp46920915746352').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stream_init-3-idp46920915746352').style.visibility = 'hidden';"><span id="ghlink-stream_init-3-idp46920915746352" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L957" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stream_init-3" href="#stream_init-3">stream_init(Type, Key, IVec) -&gt; State</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -1233,7 +1242,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
         <span class="bold_code bc-17"><a href="#stream_decrypt-2">stream_decrypt</a></span>.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stream_encrypt-2-idp46696108093600').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stream_encrypt-2-idp46696108093600').style.visibility = 'hidden';"><span id="ghlink-stream_encrypt-2-idp46696108093600" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L975" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stream_encrypt-2" href="#stream_encrypt-2">stream_encrypt(State, PlainText) -&gt; { NewState, CipherText}</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stream_encrypt-2-idp46920915739984').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stream_encrypt-2-idp46920915739984').style.visibility = 'hidden';"><span id="ghlink-stream_encrypt-2-idp46920915739984" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L975" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stream_encrypt-2" href="#stream_encrypt-2">stream_encrypt(State, PlainText) -&gt; { NewState, CipherText}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1250,7 +1259,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 	<span class="code">NewState</span> must be passed into the next call to <span class="code">stream_encrypt</span>.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stream_decrypt-2-idp46696108085968').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stream_decrypt-2-idp46696108085968').style.visibility = 'hidden';"><span id="ghlink-stream_decrypt-2-idp46696108085968" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L990" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stream_decrypt-2" href="#stream_decrypt-2">stream_decrypt(State, CipherText) -&gt; { NewState, PlainText }</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stream_decrypt-2-idp46920915732928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stream_decrypt-2-idp46920915732928').style.visibility = 'hidden';"><span id="ghlink-stream_decrypt-2-idp46920915732928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L990" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stream_decrypt-2" href="#stream_decrypt-2">stream_decrypt(State, CipherText) -&gt; { NewState, PlainText }</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
@@ -1267,7 +1276,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 	<span class="code">NewState</span> must be passed into the next call to <span class="code">stream_decrypt</span>.</p>
       </p></div>
 
-   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-supports-0-idp46696107792976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-supports-0-idp46696107792976').style.visibility = 'hidden';"><span id="ghlink-supports-0-idp46696107792976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1005" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="supports-0" href="#supports-0">supports() -&gt; AlgorithmList </a></span></div></p>
+   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-supports-0-idp46920915726080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-supports-0-idp46920915726080').style.visibility = 'hidden';"><span id="ghlink-supports-0-idp46920915726080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1005" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="supports-0" href="#supports-0">supports() -&gt; AlgorithmList </a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
       <div class="REFTYPES rt-4">
@@ -1283,7 +1292,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 	by the underlying OpenSSL library</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ec_curves-0-idp46696107789824').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ec_curves-0-idp46696107789824').style.visibility = 'hidden';"><span id="ghlink-ec_curves-0-idp46696107789824" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1021" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ec_curves-0" href="#ec_curves-0">ec_curves() -&gt; EllipticCurveList </a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ec_curves-0-idp46920915723136').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ec_curves-0-idp46920915723136').style.visibility = 'hidden';"><span id="ghlink-ec_curves-0-idp46920915723136" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1021" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ec_curves-0" href="#ec_curves-0">ec_curves() -&gt; EllipticCurveList </a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
       <div class="REFTYPES rt-4">
@@ -1294,7 +1303,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
         <p>Can be used to determine which named elliptic curves are supported.</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ec_curve-1-idp46696107785376').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ec_curve-1-idp46696107785376').style.visibility = 'hidden';"><span id="ghlink-ec_curve-1-idp46696107785376" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1032" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ec_curve-1" href="#ec_curve-1">ec_curve(NamedCurve) -&gt; EllipticCurve </a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ec_curve-1-idp46920915719728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ec_curve-1-idp46920915719728').style.visibility = 'hidden';"><span id="ghlink-ec_curve-1-idp46920915719728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1032" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ec_curve-1" href="#ec_curve-1">ec_curve(NamedCurve) -&gt; EllipticCurve </a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
       <div class="REFTYPES rt-4">
@@ -1308,7 +1317,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
         <p>Return the defining parameters of a elliptic curve.</p>
       </p></div>
 
-  <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-verify-5-idp46696107782128').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-verify-5-idp46696107782128').style.visibility = 'hidden';"><span id="ghlink-verify-5-idp46696107782128" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1044" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="verify-5" href="#verify-5">verify(Algorithm, DigestType, Msg, Signature, Key) -&gt; boolean()</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-verify-6-idp46696107780736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-verify-6-idp46696107780736').style.visibility = 'hidden';"><span id="ghlink-verify-6-idp46696107780736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1044" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="verify-6" href="#verify-6">verify(Algorithm, DigestType, Msg, Signature, Key, Options) -&gt; boolean()</a></span></div></p>
+  <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-verify-5-idp46920915716064').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-verify-5-idp46920915716064').style.visibility = 'hidden';"><span id="ghlink-verify-5-idp46920915716064" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1044" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="verify-5" href="#verify-5">verify(Algorithm, DigestType, Msg, Signature, Key) -&gt; boolean()</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-verify-6-idp46920915715648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-verify-6-idp46920915715648').style.visibility = 'hidden';"><span id="ghlink-verify-6-idp46920915715648" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1044" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="verify-6" href="#verify-6">verify(Algorithm, DigestType, Msg, Signature, Key, Options) -&gt; boolean()</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -1341,7 +1350,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
       </p></div>
 
     
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_get_all_methods-0-idp46696107693536').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_get_all_methods-0-idp46696107693536').style.visibility = 'hidden';"><span id="ghlink-engine_get_all_methods-0-idp46696107693536" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1068" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_get_all_methods-0" href="#engine_get_all_methods-0">engine_get_all_methods() -&gt; Result</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_get_all_methods-0-idp46920915421104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_get_all_methods-0-idp46920915421104').style.visibility = 'hidden';"><span id="ghlink-engine_get_all_methods-0-idp46920915421104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1068" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_get_all_methods-0" href="#engine_get_all_methods-0">engine_get_all_methods() -&gt; Result</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -1352,8 +1361,8 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 	<p>
 	  Returns a list of all possible engine methods.
 	</p>
-	<p>	  
-	  May throw exception notsup in case there is 
+	<p>
+	  May throw exception notsup in case there is
 	  no engine support in the underlying OpenSSL implementation.
 	</p>
 	<p>
@@ -1362,7 +1371,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_load-3-idp46696107689280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_load-3-idp46696107689280').style.visibility = 'hidden';"><span id="ghlink-engine_load-3-idp46696107689280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1089" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_load-3" href="#engine_load-3">engine_load(EngineId, PreCmds, PostCmds) -&gt; Result</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_load-3-idp46920915416416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_load-3-idp46920915416416').style.visibility = 'hidden';"><span id="ghlink-engine_load-3-idp46920915416416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1089" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_load-3" href="#engine_load-3">engine_load(EngineId, PreCmds, PostCmds) -&gt; Result</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -1372,19 +1381,19 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 <span class="bold_code fun-param-type">PreCmds, PostCmds = [{unicode:chardata(), unicode:chardata()}]</span><br>
 </div>
 	<div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Result = {ok, Engine::term()} | {error, Reason::term()}</span><br>
+<span class="bold_code fun-param-type">Result = {ok, Engine::engine_ref()} | {error, Reason::term()}</span><br>
 </div>
       </div>
 <div class="REFBODY rb-7"><p>
 	<p>
 	  Loads the OpenSSL engine given by <span class="code">EngineId</span> if it is available and then returns ok and
-	  an engine handle. This function is the same as calling <span class="code">engine_load/4</span> with 
-	  <span class="code">EngineMethods</span> set to a list of all the possible methods.  An error tuple is 
+	  an engine handle. This function is the same as calling <span class="code">engine_load/4</span> with
+	  <span class="code">EngineMethods</span> set to a list of all the possible methods.  An error tuple is
 	  returned if the engine can't be loaded.
 	</p>
 	<p>
 	  The function throws a badarg if the parameters are in wrong format.
-	  It may also throw the exception notsup in case there is 
+	  It may also throw the exception notsup in case there is
 	  no engine support in the underlying OpenSSL implementation.
 	</p>
 	<p>
@@ -1393,7 +1402,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_load-4-idp46696108063648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_load-4-idp46696108063648').style.visibility = 'hidden';"><span id="ghlink-engine_load-4-idp46696108063648" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1116" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_load-4" href="#engine_load-4">engine_load(EngineId, PreCmds, PostCmds, EngineMethods) -&gt; Result</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_load-4-idp46920915409664').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_load-4-idp46920915409664').style.visibility = 'hidden';"><span id="ghlink-engine_load-4-idp46920915409664" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1116" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_load-4" href="#engine_load-4">engine_load(EngineId, PreCmds, PostCmds, EngineMethods) -&gt; Result</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -1406,7 +1415,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 <span class="bold_code fun-param-type">EngineMethods = [engine_method_type()]</span><br>
 </div>
 	<div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Result = {ok, Engine::term()} | {error, Reason::term()}</span><br>
+<span class="bold_code fun-param-type">Result = {ok, Engine::engine_ref()} | {error, Reason::term()}</span><br>
 </div>
       </div>
 <div class="REFBODY rb-7"><p>
@@ -1416,7 +1425,7 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 	</p>
 	<p>
 	  The function throws a badarg if the parameters are in wrong format.
-	  It may also throw the exception notsup in case there is 
+	  It may also throw the exception notsup in case there is
 	  no engine support in the underlying OpenSSL implementation.
 	</p>
 	<p>
@@ -1425,11 +1434,11 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_unload-1-idp46696107732544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_unload-1-idp46696107732544').style.visibility = 'hidden';"><span id="ghlink-engine_unload-1-idp46696107732544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1142" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_unload-1" href="#engine_unload-1">engine_unload(Engine) -&gt; Result</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_unload-1-idp46920915683616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_unload-1-idp46920915683616').style.visibility = 'hidden';"><span id="ghlink-engine_unload-1-idp46920915683616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1142" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_unload-1" href="#engine_unload-1">engine_unload(Engine) -&gt; Result</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Engine = term()</span><br>
+<span class="bold_code fun-param-type">Engine = engine_ref()</span><br>
 </div>
 	<div class="REFTYPES rt-4">
 <span class="bold_code fun-param-type">Result = ok | {error, Reason::term()}</span><br>
@@ -1437,12 +1446,12 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
       </div>
 <div class="REFBODY rb-7"><p>
 	<p>
-	  Unloads the OpenSSL engine given by <span class="code">EngineId</span>.
+	  Unloads the OpenSSL engine given by <span class="code">Engine</span>.
 	  An error tuple is returned if the engine can't be unloaded.
 	</p>
 	<p>
 	  The function throws a badarg if the parameter is in wrong format.
-	  It may also throw the exception notsup in case there is 
+	  It may also throw the exception notsup in case there is
 	  no engine support in the underlying OpenSSL implementation.
 	</p>
 	<p>
@@ -1451,30 +1460,37 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_list-0-idp46696107386880').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_list-0-idp46696107386880').style.visibility = 'hidden';"><span id="ghlink-engine_list-0-idp46696107386880" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1166" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_list-0" href="#engine_list-0">engine_list() -&gt; Result</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_by_id-1-idp46920915676272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_by_id-1-idp46920915676272').style.visibility = 'hidden';"><span id="ghlink-engine_by_id-1-idp46920915676272" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1166" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_by_id-1" href="#engine_by_id-1">engine_by_id(EngineId) -&gt; Result</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Result = [EngineId::unicode:chardata()]</span><br>
+<span class="bold_code fun-param-type">EngineID = unicode:chardata()engine_ref()</span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Result = {ok, Engine::engine_ref()} | {error, Reason::term()}</span><br>
 </div>
       </div>
 <div class="REFBODY rb-7"><p>
-	<p>List the id's of all engines in OpenSSL's internal list.</p>
 	<p>
-	  It may also throw the exception notsup in case there is 
+	  Get a reference to an already loaded engine with <span class="code">EngineId</span>.
+	  An error tuple is returned if the engine can't be unloaded.
+	</p>
+	<p>
+	  The function throws a badarg if the parameter is in wrong format.
+	  It may also throw the exception notsup in case there is
 	  no engine support in the underlying OpenSSL implementation.
 	</p>
 	<p>
-	  See also the chapter <span class="bold_code bc-13"><a href="javascript:erlhref('../../../../doc/../','crypto','engine_load.html#engine_load');">Engine Load</a></span> 
+	  See also the chapter <span class="bold_code bc-13"><a href="javascript:erlhref('../../../../doc/../','crypto','engine_load.html#engine_load');">Engine Load</a></span>
 	  in the User's Guide.
 	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_ctrl_cmd_string-3-idp46696107382224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_ctrl_cmd_string-3-idp46696107382224').style.visibility = 'hidden';"><span id="ghlink-engine_ctrl_cmd_string-3-idp46696107382224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1185" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_ctrl_cmd_string-3" href="#engine_ctrl_cmd_string-3">engine_ctrl_cmd_string(Engine, CmdName, CmdArg) -&gt; Result</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_ctrl_cmd_string-3-idp46920915669776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_ctrl_cmd_string-3-idp46920915669776').style.visibility = 'hidden';"><span id="ghlink-engine_ctrl_cmd_string-3-idp46920915669776" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1190" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_ctrl_cmd_string-3" href="#engine_ctrl_cmd_string-3">engine_ctrl_cmd_string(Engine, CmdName, CmdArg) -&gt; Result</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Engine = term()</span><br>
+<span class="bold_code fun-param-type">Engine = engine_ref()</span><br>
 </div>
 	<div class="REFTYPES rt-4">
 <span class="bold_code fun-param-type">CmdName = unicode:chardata()</span><br>
@@ -1489,21 +1505,21 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 <div class="REFBODY rb-7"><p>
 	<p>
 	  Sends ctrl commands to the OpenSSL engine given by <span class="code">Engine</span>.
-	  This function is the same as calling <span class="code">engine_ctrl_cmd_string/4</span> with 
+	  This function is the same as calling <span class="code">engine_ctrl_cmd_string/4</span> with
 	  <span class="code">Optional</span> set to <span class="code">false</span>.
 	</p>
 	<p>
 	  The function throws a badarg if the parameters are in wrong format.
-	  It may also throw the exception notsup in case there is 
+	  It may also throw the exception notsup in case there is
 	  no engine support in the underlying OpenSSL implementation.
 	</p>
       </p></div>
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_ctrl_cmd_string-4-idp46696107754688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_ctrl_cmd_string-4-idp46696107754688').style.visibility = 'hidden';"><span id="ghlink-engine_ctrl_cmd_string-4-idp46696107754688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1208" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_ctrl_cmd_string-4" href="#engine_ctrl_cmd_string-4">engine_ctrl_cmd_string(Engine, CmdName, CmdArg, Optional) -&gt; Result</a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_ctrl_cmd_string-4-idp46920915096224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_ctrl_cmd_string-4-idp46920915096224').style.visibility = 'hidden';"><span id="ghlink-engine_ctrl_cmd_string-4-idp46920915096224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1213" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_ctrl_cmd_string-4" href="#engine_ctrl_cmd_string-4">engine_ctrl_cmd_string(Engine, CmdName, CmdArg, Optional) -&gt; Result</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Engine = term()</span><br>
+<span class="bold_code fun-param-type">Engine = engine_ref()</span><br>
 </div>
 	<div class="REFTYPES rt-4">
 <span class="bold_code fun-param-type">CmdName = unicode:chardata()</span><br>
@@ -1521,17 +1537,241 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[</pre></div>
 <div class="REFBODY rb-7"><p>
 	<p>
 	  Sends ctrl commands to the OpenSSL engine given by <span class="code">Engine</span>.
-	  <span class="code">Optional</span> is a boolean argument that can relax the semantics of the function. 
-	  If set to <span class="code">true</span> it will only return failure if the ENGINE supported the given 
-	  command name but failed while executing it, if the ENGINE doesn't support the command 
-	  name it will simply return success without doing anything. In this case we assume 
+	  <span class="code">Optional</span> is a boolean argument that can relax the semantics of the function.
+	  If set to <span class="code">true</span> it will only return failure if the ENGINE supported the given
+	  command name but failed while executing it, if the ENGINE doesn't support the command
+	  name it will simply return success without doing anything. In this case we assume
 	  the user is only supplying commands specific to the given ENGINE so we set this to
 	  <span class="code">false</span>.
 	</p>
 	<p>
 	  The function throws a badarg if the parameters are in wrong format.
-	  It may also throw the exception notsup in case there is 
+	  It may also throw the exception notsup in case there is
 	  no engine support in the underlying OpenSSL implementation.
+	</p>
+      </p></div>
+
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_add-1-idp46920915087456').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_add-1-idp46920915087456').style.visibility = 'hidden';"><span id="ghlink-engine_add-1-idp46920915087456" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1241" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_add-1" href="#engine_add-1">engine_add(Engine) -&gt; Result</a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Engine = engine_ref()</span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Result = ok | {error, Reason::term()}</span><br>
+</div>
+      </div>
+<div class="REFBODY rb-7"><p>
+	<p>Add the engine to OpenSSL's internal list.</p>
+	<p>
+	  The function throws a badarg if the parameters are in wrong format.
+	  It may also throw the exception notsup in case there is
+	  no engine support in the underlying OpenSSL implementation.
+	</p>
+      </p></div>
+
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_remove-1-idp46920915626128').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_remove-1-idp46920915626128').style.visibility = 'hidden';"><span id="ghlink-engine_remove-1-idp46920915626128" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1258" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_remove-1" href="#engine_remove-1">engine_remove(Engine) -&gt; Result</a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Engine = engine_ref()</span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Result = ok | {error, Reason::term()}</span><br>
+</div>
+      </div>
+<div class="REFBODY rb-7"><p>
+	<p>Remove the engine from OpenSSL's internal list.</p>
+	<p>
+	  The function throws a badarg if the parameters are in wrong format.
+	  It may also throw the exception notsup in case there is
+	  no engine support in the underlying OpenSSL implementation.
+	</p>
+      </p></div>
+
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_get_id-1-idp46920915621328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_get_id-1-idp46920915621328').style.visibility = 'hidden';"><span id="ghlink-engine_get_id-1-idp46920915621328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1275" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_get_id-1" href="#engine_get_id-1">engine_get_id(Engine) -&gt; EngineId</a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Engine = engine_ref()</span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">EngineId = unicode:chardata()</span><br>
+</div>
+      </div>
+<div class="REFBODY rb-7"><p>
+	<p>Return the ID for the engine, or an empty binary if there is no id set.</p>
+	<p>
+	  The function throws a badarg if the parameters are in wrong format.
+	  It may also throw the exception notsup in case there is
+	  no engine support in the underlying OpenSSL implementation.
+	</p>
+      </p></div>
+
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_get_name-1-idp46920915616928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_get_name-1-idp46920915616928').style.visibility = 'hidden';"><span id="ghlink-engine_get_name-1-idp46920915616928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1292" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_get_name-1" href="#engine_get_name-1">engine_get_name(Engine) -&gt; EngineName</a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Engine = engine_ref()</span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">EngineName = unicode:chardata()</span><br>
+</div>
+      </div>
+<div class="REFBODY rb-7"><p>
+	<p>Return the name (eg a description) for the engine, or an empty binary if there is no name set.</p>
+	<p>
+	  The function throws a badarg if the parameters are in wrong format.
+	  It may also throw the exception notsup in case there is
+	  no engine support in the underlying OpenSSL implementation.
+	</p>
+      </p></div>
+
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-engine_list-0-idp46920915661024').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-engine_list-0-idp46920915661024').style.visibility = 'hidden';"><span id="ghlink-engine_list-0-idp46920915661024" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1309" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="engine_list-0" href="#engine_list-0">engine_list() -&gt; Result</a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Result = [EngineId::unicode:chardata()]</span><br>
+</div>
+      </div>
+<div class="REFBODY rb-7"><p>
+	<p>List the id's of all engines in OpenSSL's internal list.</p>
+	<p>
+	  It may also throw the exception notsup in case there is
+	  no engine support in the underlying OpenSSL implementation.
+	</p>
+	<p>
+	  See also the chapter <span class="bold_code bc-13"><a href="javascript:erlhref('../../../../doc/../','crypto','engine_load.html#engine_load');">Engine Load</a></span>
+	  in the User's Guide.
+	</p>
+	<p>
+	  May throw exception notsup in case engine functionality is not supported by the underlying
+	  OpenSSL implementation.
+	</p>
+      </p></div>
+
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ensure_engine_loaded-2-idp46920915655680').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ensure_engine_loaded-2-idp46920915655680').style.visibility = 'hidden';"><span id="ghlink-ensure_engine_loaded-2-idp46920915655680" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1332" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ensure_engine_loaded-2" href="#ensure_engine_loaded-2">ensure_engine_loaded(EngineId, LibPath) -&gt; Result</a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">EngineId = unicode:chardata()</span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">LibPath = unicode:chardata()</span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Result = {ok, Engine::engine_ref()} | {error, Reason::term()}</span><br>
+</div>
+      </div>
+<div class="REFBODY rb-7"><p>
+	<p>
+	  Loads the OpenSSL engine given by <span class="code">EngineId</span> and the path to the dynamic library
+	  implementing the engine. This function is the same as calling <span class="code">ensure_engine_loaded/3</span> with
+	  <span class="code">EngineMethods</span> set to a list of all the possible methods. An error tuple is
+	  returned if the engine can't be loaded.
+	</p>
+	<p>
+	  The function throws a badarg if the parameters are in wrong format.
+	  It may also throw the exception notsup in case there is
+	  no engine support in the underlying OpenSSL implementation.
+	</p>
+	<p>
+	  See also the chapter <span class="bold_code bc-13"><a href="javascript:erlhref('../../../../doc/../','crypto','engine_load.html#engine_load');">Engine Load</a></span>
+	  in the User's Guide.
+	</p>
+      </p></div>
+
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ensure_engine_loaded-3-idp46920915754320').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ensure_engine_loaded-3-idp46920915754320').style.visibility = 'hidden';"><span id="ghlink-ensure_engine_loaded-3-idp46920915754320" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1359" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ensure_engine_loaded-3" href="#ensure_engine_loaded-3">ensure_engine_loaded(EngineId, LibPath, EngineMethods) -&gt; Result</a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">EngineId = unicode:chardata()</span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">LibPath = unicode:chardata()</span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">EngineMethods = [engine_method_type()]</span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Result = {ok, Engine::engine_ref()} | {error, Reason::term()}</span><br>
+</div>
+      </div>
+<div class="REFBODY rb-7"><p>
+	<p>
+	  Loads the OpenSSL engine given by <span class="code">EngineId</span> and the path to the dynamic library
+	  implementing the engine. This function differs from the normal engine_load in that sense it
+	  also add the engine id to the internal list in OpenSSL. Then in the following calls to the function
+	  it just fetch the reference to the engine instead of loading it again.
+	  An error tuple is returned if the engine can't be loaded.
+	</p>
+	<p>
+	  The function throws a badarg if the parameters are in wrong format.
+	  It may also throw the exception notsup in case there is
+	  no engine support in the underlying OpenSSL implementation.
+	</p>
+	<p>
+	  See also the chapter <span class="bold_code bc-13"><a href="javascript:erlhref('../../../../doc/../','crypto','engine_load.html#engine_load');">Engine Load</a></span>
+	  in the User's Guide.
+	</p>
+      </p></div>
+
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ensure_engine_unloaded-1-idp46920915688704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ensure_engine_unloaded-1-idp46920915688704').style.visibility = 'hidden';"><span id="ghlink-ensure_engine_unloaded-1-idp46920915688704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1388" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ensure_engine_unloaded-1" href="#ensure_engine_unloaded-1">ensure_engine_unloaded(Engine) -&gt; Result</a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Engine = engine_ref()</span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Result = ok | {error, Reason::term()}</span><br>
+</div>
+      </div>
+<div class="REFBODY rb-7"><p>
+	<p>
+	  Unloads an engine loaded with the <span class="code">ensure_engine_loaded</span> function.
+	  It both removes the label from the OpenSSL internal engine list and unloads the engine.
+	  This function is the same as calling <span class="code">ensure_engine_unloaded/2</span> with
+	  <span class="code">EngineMethods</span> set to a list of all the possible methods. An error tuple is
+	  returned if the engine can't be unloaded.
+	</p>
+	<p>
+	  The function throws a badarg if the parameters are in wrong format.
+	  It may also throw the exception notsup in case there is
+	  no engine support in the underlying OpenSSL implementation.
+	</p>
+	<p>
+	  See also the chapter <span class="bold_code bc-13"><a href="javascript:erlhref('../../../../doc/../','crypto','engine_load.html#engine_load');">Engine Load</a></span>
+	  in the User's Guide.
+	</p>
+      </p></div>
+
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-ensure_engine_unloaded-2-idp46920915384800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ensure_engine_unloaded-2-idp46920915384800').style.visibility = 'hidden';"><span id="ghlink-ensure_engine_unloaded-2-idp46920915384800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto.xml#L1415" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ensure_engine_unloaded-2" href="#ensure_engine_unloaded-2">ensure_engine_unloaded(Engine, EngineMethods) -&gt; Result</a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Engine = engine_ref()</span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">EngineMethods = [engine_method_type()]</span><br>
+</div>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Result = ok | {error, Reason::term()}</span><br>
+</div>
+      </div>
+<div class="REFBODY rb-7"><p>
+	<p>
+	  Unloads an engine loaded with the <span class="code">ensure_engine_loaded</span> function.
+	  It both removes the label from the OpenSSL internal engine list and unloads the engine.
+	  An error tuple is returned if the engine can't be unloaded.
+	</p>
+	<p>
+	  The function throws a badarg if the parameters are in wrong format.
+	  It may also throw the exception notsup in case there is
+	  no engine support in the underlying OpenSSL implementation.
+	</p>
+	<p>
+	  See also the chapter <span class="bold_code bc-13"><a href="javascript:erlhref('../../../../doc/../','crypto','engine_load.html#engine_load');">Engine Load</a></span>
+	  in the User's Guide.
 	</p>
       </p></div>
 

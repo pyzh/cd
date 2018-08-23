@@ -81,13 +81,22 @@
     <li title="compute_key-4"><a href="crypto.html#compute_key-4">compute_key/4</a></li>
     <li title="ec_curve-1"><a href="crypto.html#ec_curve-1">ec_curve/1</a></li>
     <li title="ec_curves-0"><a href="crypto.html#ec_curves-0">ec_curves/0</a></li>
+    <li title="engine_add-1"><a href="crypto.html#engine_add-1">engine_add/1</a></li>
+    <li title="engine_by_id-1"><a href="crypto.html#engine_by_id-1">engine_by_id/1</a></li>
     <li title="engine_ctrl_cmd_string-3"><a href="crypto.html#engine_ctrl_cmd_string-3">engine_ctrl_cmd_string/3</a></li>
     <li title="engine_ctrl_cmd_string-4"><a href="crypto.html#engine_ctrl_cmd_string-4">engine_ctrl_cmd_string/4</a></li>
     <li title="engine_get_all_methods-0"><a href="crypto.html#engine_get_all_methods-0">engine_get_all_methods/0</a></li>
+    <li title="engine_get_id-1"><a href="crypto.html#engine_get_id-1">engine_get_id/1</a></li>
+    <li title="engine_get_name-1"><a href="crypto.html#engine_get_name-1">engine_get_name/1</a></li>
     <li title="engine_list-0"><a href="crypto.html#engine_list-0">engine_list/0</a></li>
     <li title="engine_load-3"><a href="crypto.html#engine_load-3">engine_load/3</a></li>
     <li title="engine_load-4"><a href="crypto.html#engine_load-4">engine_load/4</a></li>
+    <li title="engine_remove-1"><a href="crypto.html#engine_remove-1">engine_remove/1</a></li>
     <li title="engine_unload-1"><a href="crypto.html#engine_unload-1">engine_unload/1</a></li>
+    <li title="ensure_engine_loaded-2"><a href="crypto.html#ensure_engine_loaded-2">ensure_engine_loaded/2</a></li>
+    <li title="ensure_engine_loaded-3"><a href="crypto.html#ensure_engine_loaded-3">ensure_engine_loaded/3</a></li>
+    <li title="ensure_engine_unloaded-1"><a href="crypto.html#ensure_engine_unloaded-1">ensure_engine_unloaded/1</a></li>
+    <li title="ensure_engine_unloaded-2"><a href="crypto.html#ensure_engine_unloaded-2">ensure_engine_unloaded/2</a></li>
     <li title="exor-2"><a href="crypto.html#exor-2">exor/2</a></li>
     <li title="generate_key-2"><a href="crypto.html#generate_key-2">generate_key/2</a></li>
     <li title="generate_key-3"><a href="crypto.html#generate_key-3">generate_key/3</a></li>
@@ -137,11 +146,11 @@
 <div class="innertube">
 <!-- refpage --><center><h1>crypto</h1></center>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-application-idp46696108460720').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-application-idp46696108460720').style.visibility = 'hidden';"><span id="ghlink-application-idp46696108460720"></span><a class="title_link" name="application" href="#application">Application</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-application-idp46920916140240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-application-idp46920916140240').style.visibility = 'hidden';"><span id="ghlink-application-idp46920916140240"></span><a class="title_link" name="application" href="#application">Application</a></span></h3>
 <div class="REFBODY application-body">crypto</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-application-summary-idp46696108460080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-application-summary-idp46696108460080').style.visibility = 'hidden';"><span id="ghlink-application-summary-idp46696108460080"></span><a class="title_link" name="application-summary" href="#application-summary">Application Summary</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-application-summary-idp46920916139600').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-application-summary-idp46920916139600').style.visibility = 'hidden';"><span id="ghlink-application-summary-idp46920916139600"></span><a class="title_link" name="application-summary" href="#application-summary">Application Summary</a></span></h3>
 <div class="REFBODY application-summary-body">The Crypto Application</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-description-idp46696108459600').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp46696108459600').style.visibility = 'hidden';"><span id="ghlink-description-idp46696108459600" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto_app.xml#L32" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-description-idp46920916139120').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp46920916139120').style.visibility = 'hidden';"><span id="ghlink-description-idp46920916139120" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto_app.xml#L32" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
 <div class="REFBODY description-body"><p>
     <p>The purpose of the Crypto application is to provide an Erlang API
     to cryptographic functions, see <span class="bold_code bc-19"><a href="crypto.html">crypto(3)</a></span>.
@@ -151,7 +160,7 @@
     </p>
   </p></div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-dependencies-idp46696108456720').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dependencies-idp46696108456720').style.visibility = 'hidden';"><span id="ghlink-dependencies-idp46696108456720" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto_app.xml#L41" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dependencies" href="#dependencies">DEPENDENCIES</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-dependencies-idp46920916136240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dependencies-idp46920916136240').style.visibility = 'hidden';"><span id="ghlink-dependencies-idp46920916136240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto_app.xml#L41" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dependencies" href="#dependencies">DEPENDENCIES</a></span></h3>
 <div class="REFBODY rb-3">
     
 
@@ -168,7 +177,7 @@
     </p>
     </div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-configuration-idp46696108453040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-configuration-idp46696108453040').style.visibility = 'hidden';"><span id="ghlink-configuration-idp46696108453040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto_app.xml#L57" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="configuration" href="#configuration">CONFIGURATION</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-configuration-idp46920916132560').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-configuration-idp46920916132560').style.visibility = 'hidden';"><span id="ghlink-configuration-idp46920916132560" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto_app.xml#L57" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="configuration" href="#configuration">CONFIGURATION</a></span></h3>
 <div class="REFBODY rb-3">
     
     <p>The following configuration parameters are defined for the
@@ -200,7 +209,7 @@
     </dl>
   </div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-see-also-idp46696108445632').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-see-also-idp46696108445632').style.visibility = 'hidden';"><span id="ghlink-see-also-idp46696108445632" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto_app.xml#L92" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="see-also" href="#see-also">SEE ALSO</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-see-also-idp46920916124672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-see-also-idp46920916124672').style.visibility = 'hidden';"><span id="ghlink-see-also-idp46920916124672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/crypto_app.xml#L92" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="see-also" href="#see-also">SEE ALSO</a></span></h3>
 <div class="REFBODY rb-3">
     
     <p>application(3)</p>
