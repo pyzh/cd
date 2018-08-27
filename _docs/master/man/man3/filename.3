@@ -26,24 +26,6 @@ Warning:
 .RE
 Currently null characters at the end of the filename will be accepted by primitive file operations\&. Such filenames are however still documented as invalid\&. The implementation will also change in the future and reject such filenames\&.
 
-.SH DATA TYPES
-.nf
-
-\fBbasedir_type()\fR\& = 
-.br
-    user_cache |
-.br
-    user_config |
-.br
-    user_data |
-.br
-    user_log |
-.br
-    site_config |
-.br
-    site_data
-.br
-.fi
 .SH EXPORTS
 .LP
 .nf
@@ -140,7 +122,14 @@ Joins an absolute directory with a relative filename\&. Similar to \fB\fIjoin/2\
 .nf
 
 .B
-basedir(Type, Application) -> file:filename_all()
+basedir(PathType, Application) -> file:filename_all()
+.br
+.fi
+.br
+.nf
+
+.B
+basedir(PathsType, Application) -> [file:filename_all()]
 .br
 .fi
 .br
@@ -149,21 +138,40 @@ basedir(Type, Application) -> file:filename_all()
 Types:
 
 .RS 3
-Type = \fBbasedir_type()\fR\&
+PathType = \fBbasedir_path_type()\fR\&
+.br
+PathsType = \fBbasedir_paths_type()\fR\&
 .br
 Application = string() | binary()
+.br
+.nf
+\fBbasedir_path_type()\fR\& = 
+.br
+    user_cache | user_config | user_data | user_log
+.fi
+.br
+.nf
+\fBbasedir_paths_type()\fR\& = site_config | site_data
+.fi
 .br
 .RE
 .RE
 .RS
 .LP
-Equivalent to \fB basedir(Type, Application, #{})\fR\&\&.
+Equivalent to \fB basedir(PathType, Application, #{})\fR\& or \fB basedir(PathsType, Application, #{})\fR\&\&.
 .RE
 .LP
 .nf
 
 .B
-basedir(Type, Application, Opts) -> file:filename_all()
+basedir(PathType, Application, Opts) -> file:filename_all()
+.br
+.fi
+.br
+.nf
+
+.B
+basedir(PathsType, Application, Opts) -> [file:filename_all()]
 .br
 .fi
 .br
@@ -172,17 +180,33 @@ basedir(Type, Application, Opts) -> file:filename_all()
 Types:
 
 .RS 3
-Type = \fBbasedir_type()\fR\&
+PathType = \fBbasedir_path_type()\fR\&
+.br
+PathsType = \fBbasedir_paths_type()\fR\&
 .br
 Application = string() | binary()
 .br
-Opts = 
+Opts = \fBbasedir_opts()\fR\&
+.br
+.nf
+\fBbasedir_path_type()\fR\& = 
+.br
+    user_cache | user_config | user_data | user_log
+.fi
+.br
+.nf
+\fBbasedir_paths_type()\fR\& = site_config | site_data
+.fi
+.br
+.nf
+\fBbasedir_opts()\fR\& = 
 .br
     #{author => string() | binary(),
 .br
       os => windows | darwin | linux,
 .br
       version => string() | binary()}
+.fi
 .br
 .RE
 .RE

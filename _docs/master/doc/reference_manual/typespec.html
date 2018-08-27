@@ -265,7 +265,7 @@
 <h1>7 Types and Function Specifications</h1>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-the-erlang-type-language-idp70614011090624').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-the-erlang-type-language-idp70614011090624').style.visibility = 'hidden';"><span id="ghlink-the-erlang-type-language-idp70614011090624" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/reference_manual/typespec.xml#L33" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="the-erlang-type-language" href="#the-erlang-type-language">7.1 
+  <h3><span onMouseOver="document.getElementById('ghlink-the-erlang-type-language-idp46904478066976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-the-erlang-type-language-idp46904478066976').style.visibility = 'hidden';"><span id="ghlink-the-erlang-type-language-idp46904478066976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/reference_manual/typespec.xml#L33" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="the-erlang-type-language" href="#the-erlang-type-language">7.1 
           The Erlang Type Language</a></span></h3>
     
     <p>
@@ -292,7 +292,7 @@
       <span class="code">@spec</span> declarations used by EDoc.</p>
   
   <h3>
-<a name="syntax"></a><span onMouseOver="document.getElementById('ghlink-types-and-their-syntax-idp70614011097264').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-types-and-their-syntax-idp70614011097264').style.visibility = 'hidden';"><span id="ghlink-types-and-their-syntax-idp70614011097264" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/reference_manual/typespec.xml#L58" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="types-and-their-syntax" href="#types-and-their-syntax">7.2 
+<a name="syntax"></a><span onMouseOver="document.getElementById('ghlink-types-and-their-syntax-idp46904478073616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-types-and-their-syntax-idp46904478073616').style.visibility = 'hidden';"><span id="ghlink-types-and-their-syntax-idp46904478073616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/reference_manual/typespec.xml#L58" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="types-and-their-syntax" href="#types-and-their-syntax">7.2 
           Types and their Syntax</a></span>
 </h3>
     
@@ -352,8 +352,8 @@
         | Erlang_Atom           %% 'foo', 'bar', ...
 
   Bitstring :: &lt;&lt;&gt;&gt;
-             | &lt;&lt;_:M&gt;&gt;          %% M is a positive integer
-             | &lt;&lt;_:_*N&gt;&gt;        %% N is a positive integer
+             | &lt;&lt;_:M&gt;&gt;          %% M is an Integer_Value that evaluates to a positive integer
+             | &lt;&lt;_:_*N&gt;&gt;        %% N is an Integer_Value that evaluates to a positive integer
              | &lt;&lt;_:M, _:_*N&gt;&gt;
 
   Fun :: fun()                  %% any function
@@ -362,8 +362,17 @@
        | fun((TList) -&gt; Type)
 
   Integer :: integer()
-           | Erlang_Integer                    %% ..., -1, 0, 1, ... 42 ...
-           | Erlang_Integer..Erlang_Integer    %% specifies an integer range
+           | Integer_Value
+           | Integer_Value..Integer_Value      %% specifies an integer range
+
+  Integer_Value :: Erlang_Integer              %% ..., -1, 0, 1, ... 42 ...
+                 | Erlang_Character            %% $a, $b ...
+                 | Integer_Value BinaryOp Integer_Value
+                 | UnaryOp Integer_Value
+
+  BinaryOp :: '*' | 'div' | 'rem' | 'band' | '+' | '-' | 'bor' | 'bxor' | 'bsl' | 'bsr'
+
+  UnaryOp :: '+' | '-' | 'bnot'
 
   List :: list(Type)                           %% Proper list ([]-terminated)
         | maybe_improper_list(Type1, Type2)    %% Type1=contents, Type2=termination
@@ -390,8 +399,13 @@
   Union :: Type1 | Type2
 </pre></div>
   <p>
+    Integer values are either integer or character literals or expressions
+    consisting of possibily nested unary or binary operations that evaluate to
+    an integer. Such expressions can also be used in bit strings and ranges.
+  </p>
+  <p>
     The general form of bit strings is <span class="code">&lt;&lt;_:M, _:_*N&gt;&gt;</span>,
-    where <span class="code">M</span> and <span class="code">N</span> are positive integers. It denotes a
+    where <span class="code">M</span> and <span class="code">N</span> must evaluate to positive integers. It denotes a
     bit string that is <span class="code">M + (k*N)</span> bits long (that is, a bit string that
     starts with <span class="code">M</span> bits and continues with <span class="code">k</span> segments of
     <span class="code">N</span> bits each, where <span class="code">k</span> is also a positive integer).
@@ -604,7 +618,7 @@
   </p>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-type-declarations-of-user-defined-types-idp70614011207584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-declarations-of-user-defined-types-idp70614011207584').style.visibility = 'hidden';"><span id="ghlink-type-declarations-of-user-defined-types-idp70614011207584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/reference_manual/typespec.xml#L328" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-declarations-of-user-defined-types" href="#type-declarations-of-user-defined-types">7.3 
+  <h3><span onMouseOver="document.getElementById('ghlink-type-declarations-of-user-defined-types-idp46904478185008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-declarations-of-user-defined-types-idp46904478185008').style.visibility = 'hidden';"><span id="ghlink-type-declarations-of-user-defined-types-idp46904478185008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/reference_manual/typespec.xml#L342" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-declarations-of-user-defined-types" href="#type-declarations-of-user-defined-types">7.3 
           Type Declarations of User-Defined Types</a></span></h3>
     
     <p>
@@ -672,7 +686,7 @@
   
 
   <h3>
-<a name="typeinrecords"></a><span onMouseOver="document.getElementById('ghlink-type-information-in-record-declarations-idp70614011222848').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-information-in-record-declarations-idp70614011222848').style.visibility = 'hidden';"><span id="ghlink-type-information-in-record-declarations-idp70614011222848" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/reference_manual/typespec.xml#L394" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-information-in-record-declarations" href="#type-information-in-record-declarations">7.4 
+<a name="typeinrecords"></a><span onMouseOver="document.getElementById('ghlink-type-information-in-record-declarations-idp46904478200272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-information-in-record-declarations-idp46904478200272').style.visibility = 'hidden';"><span id="ghlink-type-information-in-record-declarations-idp46904478200272" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/reference_manual/typespec.xml#L408" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-information-in-record-declarations" href="#type-information-in-record-declarations">7.4 
           Type Information in Record Declarations</a></span>
 </h3>
     
@@ -739,7 +753,7 @@
     </p>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-specifications-for-functions-idp70614011234304').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-specifications-for-functions-idp70614011234304').style.visibility = 'hidden';"><span id="ghlink-specifications-for-functions-idp70614011234304" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/reference_manual/typespec.xml#L456" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="specifications-for-functions" href="#specifications-for-functions">7.5 
+  <h3><span onMouseOver="document.getElementById('ghlink-specifications-for-functions-idp46904478211728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-specifications-for-functions-idp46904478211728').style.visibility = 'hidden';"><span id="ghlink-specifications-for-functions-idp46904478211728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/reference_manual/typespec.xml#L470" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="specifications-for-functions" href="#specifications-for-functions">7.5 
           Specifications for Functions</a></span></h3>
     
     <p>
