@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../doc/otp_doc.css" type="text/css">
-<title>Erlang -- Inets</title>
+<title>Erlang -- Introduction</title>
 </head>
 <body>
 <div id="container">
@@ -48,12 +48,12 @@
 <div class="erlang-logo-wrapper"><a href="../../../../doc/index.html"><img alt="Erlang Logo" src="../../../../doc/erlang-logo.png" class="erlang-logo"></a></div>
 <p class="section-title">inets</p>
 <p class="section-subtitle">User's Guide</p>
-<p class="section-version">Version 7.0.1</p>
+<p class="section-version">Version 7.0.2</p>
 <ul class="panel-sections">
 <li><a href="users_guide.html">User's Guide</a></li>
 <li><a href="index.html">Reference Manual</a></li>
 <li><a href="release_notes.html">Release Notes</a></li>
-<li><a href="../pdf/inets-7.0.1.pdf">PDF</a></li>
+<li><a href="../pdf/inets-7.0.2.pdf">PDF</a></li>
 <li><a href="../../../../doc/index.html">Top</a></li>
 </ul>
 <ul class="expand-collapse-items">
@@ -62,7 +62,7 @@
 </ul>
 <h3>Chapters</h3>
 <ul class="flipMenu" imagepath="../../../../doc/js/flipmenu">
-<li id="no" title="Introduction" expanded="false">Introduction<ul>
+<li id="loadscrollpos" title="Introduction" expanded="true">Introduction<ul>
 <li><a href="introduction.html">
               Top of chapter
             </a></li>
@@ -70,7 +70,7 @@
 <li title="Prerequisites"><a href="introduction.html#prerequisites">Prerequisites</a></li>
 </ul>
 </li>
-<li id="loadscrollpos" title="Inets" expanded="true">Inets<ul>
+<li id="no" title="Inets" expanded="false">Inets<ul>
 <li><a href="inets_services.html">
               Top of chapter
             </a></li>
@@ -102,31 +102,28 @@
 </div></div>
 <div id="content">
 <div class="innertube">
-<h1>2 Inets</h1>
+<h1>1 Introduction</h1>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-service-concept-idp72279324730368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-service-concept-idp72279324730368').style.visibility = 'hidden';"><span id="ghlink-service-concept-idp72279324730368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/inets_services.xml#L36" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="service-concept" href="#service-concept">2.1 
-          Service Concept</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-purpose-idp45949658390304').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-purpose-idp45949658390304').style.visibility = 'hidden';"><span id="ghlink-purpose-idp45949658390304" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/introduction.xml#L35" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="purpose" href="#purpose">1.1 
+          Purpose</a></span></h3>
     
-    <p>Each client and server in <span class="code">Inets</span> is viewed as a service.
-      Services can be configured to be started at application startup or
-      dynamically in runtime. To run <span class="code">Inets</span> as a distributed 
-      application that handles application failover and takeover, 
-      configure the services to be started at application startup. 
-      When starting the <span class="code">Inets</span> application, the <span class="code">Inets</span> 
-      top supervisor starts a number of subsupervisors and worker 
-      processes for handling the provided services.
-      When starting services dynamically, new children are added to the 
-      supervision tree, unless the service is started with the standalone 
-      option. In this case the service is linked to the calling process 
-      and all OTP application features, such as soft upgrade, are lost.</p>
-    <p>Services to be configured for startup at application startup are to 
-      be put into the Erlang node configuration file
-      on the following form:</p>
-    <div class="example"><pre>
-      [{inets, [{services, ListofConfiguredServices}]}].</pre></div>
-    <p>For details of what to put in the list of configured services, 
-    see the documentation for the services to be configured.</p>
+    <p><span class="code">Inets</span> is a container for Internet clients and servers
+      including the following:</p>
+      <ul>
+       <li>An HTTP client and server</li>
+     </ul>
+     <p>The HTTP client and server are HTTP 1.1 compliant as
+      defined in 
+     <span class="bold_code bc-20"><a href="http://www.ietf.org/rfc/rfc2616.txt">RFC 2616</a></span>.</p>
+  
+
+  <h3><span onMouseOver="document.getElementById('ghlink-prerequisites-idp45949658385104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-prerequisites-idp45949658385104').style.visibility = 'hidden';"><span id="ghlink-prerequisites-idp45949658385104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/introduction.xml#L47" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="prerequisites" href="#prerequisites">1.2 
+          Prerequisites</a></span></h3>
+    
+    <p>It is assumed that the reader is familiar with the Erlang
+      programming language, concepts of OTP, and has a basic
+      understanding of and HTTP protocol.</p>
   
 </div>
 <div class="footer">
