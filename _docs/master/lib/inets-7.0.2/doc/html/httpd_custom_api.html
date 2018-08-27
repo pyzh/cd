@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../doc/otp_doc.css" type="text/css">
-<title>Erlang -- mod_esi</title>
+<title>Erlang -- httpd_custom_api</title>
 </head>
 <body>
 <div id="container">
@@ -48,12 +48,12 @@
 <div class="erlang-logo-wrapper"><a href="../../../../doc/index.html"><img alt="Erlang Logo" src="../../../../doc/erlang-logo.png" class="erlang-logo"></a></div>
 <p class="section-title">inets</p>
 <p class="section-subtitle">Reference Manual</p>
-<p class="section-version">Version 7.0.1</p>
+<p class="section-version">Version 7.0.2</p>
 <ul class="panel-sections">
 <li><a href="users_guide.html">User's Guide</a></li>
 <li><a href="index.html">Reference Manual</a></li>
 <li><a href="release_notes.html">Release Notes</a></li>
-<li><a href="../pdf/inets-7.0.1.pdf">PDF</a></li>
+<li><a href="../pdf/inets-7.0.2.pdf">PDF</a></li>
 <li><a href="../../../../doc/index.html">Top</a></li>
 </ul>
 <ul class="expand-collapse-items">
@@ -125,7 +125,7 @@
     <li title="Module:store-2"><a href="httpd.html#Module:store-2">Module:store/2</a></li>
     </ul>
 </li>
-<li id="no" title="httpd_custom_api " expanded="false">httpd_custom_api<ul>
+<li id="loadscrollpos" title="httpd_custom_api " expanded="true">httpd_custom_api<ul>
 <li><a href="httpd_custom_api.html">
                   Top of manual page
                 </a></li>
@@ -217,7 +217,7 @@
     <li title="update_password-6"><a href="mod_auth.html#update_password-6">update_password/6</a></li>
     </ul>
 </li>
-<li id="loadscrollpos" title="mod_esi " expanded="true">mod_esi<ul>
+<li id="no" title="mod_esi " expanded="false">mod_esi<ul>
 <li><a href="mod_esi.html">
                   Top of manual page
                 </a></li>
@@ -263,206 +263,60 @@
 </div></div>
 <div id="content">
 <div class="innertube">
-<!-- refpage --><center><h1>mod_esi</h1></center>
+<!-- refpage --><center><h1>httpd_custom_api</h1></center>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-module-idp46973001665808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp46973001665808').style.visibility = 'hidden';"><span id="ghlink-module-idp46973001665808"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
-<div class="REFBODY module-body">mod_esi</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp46973001666256').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp46973001666256').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp46973001666256"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
-<div class="REFBODY module-summary-body">Erlang Server Interface</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-description-idp46973001666704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp46973001666704').style.visibility = 'hidden';"><span id="ghlink-description-idp46973001666704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/mod_esi.xml#L30" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-idp47535144234912').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp47535144234912').style.visibility = 'hidden';"><span id="ghlink-module-idp47535144234912"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
+<div class="REFBODY module-body">httpd_custom_api</div>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp47535144235360').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp47535144235360').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp47535144235360"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
+<div class="REFBODY module-summary-body">Behaviour with optional callbacks to customize the inets HTTP server.</div>
+  <h3><span onMouseOver="document.getElementById('ghlink-description-idp47535144235856').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp47535144235856').style.visibility = 'hidden';"><span id="ghlink-description-idp47535144235856" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/httpd_custom_api.xml#L30" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
 <div class="REFBODY description-body"><p>
-    <p>This module defines the Erlang Server Interface (ESI) API.
-    It is a more efficient way of writing Erlang scripts
-    for your <span class="code">Inets</span> web server than writing them as common CGI scripts.</p>
-
-    <a name="deliver"></a>
-  </p></div>
-
- <h3><span onMouseOver="document.getElementById('ghlink-data-types-idp46973001669040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types-idp46973001669040').style.visibility = 'hidden';"><span id="ghlink-data-types-idp46973001669040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/mod_esi.xml#L38" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="data-types" href="#data-types">DATA TYPES</a></span></h3>
-<div class="REFBODY rb-3">
+    <p> The module implementing this behaviour shall be supplied to to the servers
+    configuration with the option <span class="bold_code bc-15"><a href="httpd.html#prop_customize">customize</a></span></p>
     
-    <p>The following data types are used in the functions for mod_esi:</p>
-
-    <dl>
-      <dt><strong><span class="code">env() = </span></strong></dt>
-      <dd> <p><span class="code">{EnvKey()::atom(), Value::term()}</span></p>
-
-      <p>Currently supported key value pairs</p>
-      <dl>		
-	
-	<dt><strong><span class="code">{server_software, string()}</span></strong></dt>
-	<dd><p>Indicates the inets version.</p></dd>
-	
-	<dt><strong><span class="code">{server_name, string()}</span></strong></dt>
-	<dd><p>The local hostname. </p></dd>
-
-	<dt><strong><span class="code">{gateway_interface, string()}</span></strong></dt>
-	<dd>
-<p>Legacy string used in CGI, just ignore.</p> </dd>
-	
-	<dt><strong><span class="code">{server_protocol, string()}</span></strong></dt>
-	<dd><p> HTTP version, currently "HTTP/1.1"</p></dd>
-	
-	<dt><strong><span class="code">{server_port, integer()}</span></strong></dt>
-	<dd><p>Servers port number.</p></dd>
-	
-	<dt><strong><span class="code">{request_method, "GET | "PUT" | "DELETE" | "POST" | "PATCH"}</span></strong></dt>
-	<dd><p>HTTP request method.</p></dd>
-		
-	<dt><strong><span class="code">{remote_adress, inet:ip_address()} </span></strong></dt>
-	<dd><p>The clients ip address.</p></dd>
-
-	<dt><strong><span class="code">{peer_cert, undefined | no_peercert | DER:binary()}</span></strong></dt>
-	<dd>
-	  <p>For TLS connections where client certificates are used this will
-	  be an ASN.1 DER-encoded X509-certificate as an Erlang binary.
-	  If client certificates are not used the value will be <span class="code">no_peercert</span>,
-	  and if TLS is not used (HTTP or connection is lost due to network failure)
-	  the value will be <span class="code">undefined</span>.
-	</p>
-</dd>
-	
-	<dt><strong><span class="code">{script_name, string()}</span></strong></dt>
-	<dd><p>Request URI</p></dd>
-
-	<dt><strong><span class="code">{http_LowerCaseHTTPHeaderName, string()}</span></strong></dt>
-	<dd><p>example: {http_content_type, "text/html"}</p></dd>
-      </dl>    
-      </dd>
-    </dl>
- </div>
-
- <h3><span onMouseOver="document.getElementById('ghlink-exports-idp46973001686960').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp46973001686960').style.visibility = 'hidden';"><span id="ghlink-exports-idp46973001686960"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
+  </p></div>  
+  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp47535144237712').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp47535144237712').style.visibility = 'hidden';"><span id="ghlink-exports-idp47535144237712"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
 <div class="exports-body">
-   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-deliver-2-idp46973001687824').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-deliver-2-idp46973001687824').style.visibility = 'hidden';"><span id="ghlink-deliver-2-idp46973001687824" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/mod_esi.xml#L90" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="deliver-2" href="#deliver-2">deliver(SessionID, Data) -&gt; ok | {error, Reason}</a></span></div></p>
+     <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-response_default_headers-0-idp47535144238592').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-response_default_headers-0-idp47535144238592').style.visibility = 'hidden';"><span id="ghlink-response_default_headers-0-idp47535144238592" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/httpd_custom_api.xml#L36" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="response_default_headers-0" href="#response_default_headers-0">response_default_headers() -&gt; [Header] </a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">SessionID = term()</span><br>
+<span class="bold_code fun-param-type">Header = {HeaderName :: string(), HeaderValue::string()}</span><br>
 </div>
-        <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Data = string() | io_list() | binary()</span><br>
-</div>
-        <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Reason = term()</span><br>
-</div>
-     </div>
+	<div class="REFBODY rb-6">string:to_lower/1 will be performed on the HeaderName</div>
+      </div>
 <div class="REFBODY rb-7"><p>
-       <a name="deliver"></a>
-       <p>This function is <strong>only</strong> intended to be used from
-       functions called by the Erl Scheme interface to deliver
-       parts of the content to the user.</p>
-       <p>Sends data from an Erl Scheme script back to the client.</p>
-	
-       <div class="note">
-<div class="label">Note</div>
-<div class="content"><p>
-	 <p>If any HTTP header fields are added by the
-	 script, they must be in the first call to <span class="code">deliver/2</span>, 
-	 and the data in the call must be a string. Calls after the headers
-	 are complete can contain binary data to reduce copying
-	 overhead. Do not assume anything about the data type of 
-	 <span class="code">SessionID</span>. <span class="code">SessionID</span> must be the value given 
-	 as input to the ESI callback function that you implemented.</p>
-       </p></div>
+        <p>Provide default headers for the HTTP servers responses. Note that this
+	option may override built-in defaults. 
+	</p>
+      </p></div>
+    
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-response_header-1-idp47535144242704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-response_header-1-idp47535144242704').style.visibility = 'hidden';"><span id="ghlink-response_header-1-idp47535144242704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/httpd_custom_api.xml#L50" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="response_header-1" href="#response_header-1">response_header({HeaderName, HeaderValue}) -&gt;  {true, Header} | false </a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+        <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Header = {HeaderName :: string(), HeaderValue::string()}</span><br>
 </div>
-     </p></div>
- </div>
-  
- <h3><span onMouseOver="document.getElementById('ghlink-esi-callback-functions-idp46973001696384').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-esi-callback-functions-idp46973001696384').style.visibility = 'hidden';"><span id="ghlink-esi-callback-functions-idp46973001696384" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/mod_esi.xml#L118" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="esi-callback-functions" href="#esi-callback-functions">ESI Callback Functions</a></span></h3>
-<div class="REFBODY rb-3">
+	<div class="REFBODY rb-6">The header name will be in lower case and should not be altered.</div>
+      </div>
+<div class="REFBODY rb-7"><p>
+        <p> Filter and possible alter HTTP response headers before they are sent to the client.
+	</p>
+      </p></div>
    
- </div>
-
- <h3><span onMouseOver="document.getElementById('ghlink-exports-idp46973001697584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp46973001697584').style.visibility = 'hidden';"><span id="ghlink-exports-idp46973001697584"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
-<div class="exports-body">
-   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-Module:Function-3-idp46973001698464').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-Module:Function-3-idp46973001698464').style.visibility = 'hidden';"><span id="ghlink-Module:Function-3-idp46973001698464" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/mod_esi.xml#L123" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="Module:Function-3" href="#Module:Function-3">Module:Function(SessionID, Env, Input)-&gt; {continue, State} | _ </a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-request_header-1-idp47535144246832').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-request_header-1-idp47535144246832').style.visibility = 'hidden';"><span id="ghlink-request_header-1-idp47535144246832" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/httpd_custom_api.xml#L63" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="request_header-1" href="#request_header-1">request_header({HeaderName, HeaderValue}) -&gt;   {true, Header} | false </a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
-       <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">SessionID = term()</span><br>
+	<div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Header = {HeaderName :: string(), HeaderValue::string()}</span><br>
 </div>
-       <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Env = env()</span><br>
-</div>
-       <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Input = string() | chunked_data()</span><br>
-</div>
-       <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">chunked_data() = {first, Data::binary()} |
-       {continue, Data::binary(), State::term()} |
-       {last, Data::binary(), State::term()} </span><br>
-</div>
-       <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">State = term()</span><br>
-</div>
-     </div>
+	<div class="REFBODY rb-6">The header name will be in lower case and should not be altered.</div>
+	</div>
 <div class="REFBODY rb-7"><p>
-        <p><span class="code">Module</span> must be found in the code path and export
-        <span class="code">Function</span> with an arity of three. An <span class="code">erlScriptAlias</span> must
-        also be set up in the configuration file for the web server.</p>
-
-	<p><span class="code">mod_esi:deliver/2</span> shall be used to generate the response
-	to the client and <span class="code">SessionID</span> is an identifier that shall by used when
-	calling this function, do not assume anything about
-	the datatype. This function may be called
-	several times to chunk the response data. Notice that the
-	first chunk of data sent to the client must at least contain
-	all HTTP header fields that the response will generate. If the
-	first chunk does not contain the <strong>end of HTTP header</strong>,
-	that is, <span class="code">"\r\n\r\n",</span> the server assumes that no HTTP
-	header fields will be generated.</p>
-
-	<p><span class="code">Env</span> environment data of the request see description above.</p>
-		
-	<p><span class="code">Input</span> is query data of a GET request or the body of
-	a PUT or POST request. The default behavior (legacy reasons)
-	for delivering the body, is that the whole body is gathered and
-	converted to a string. But if the httpd config parameter
-	<span class="bold_code bc-15"><a href="httpd.html#max_client_body_chunk">max_client_body_chunk</a></span>
-	is set, the body will be delivered as binary chunks
-	instead. The maximum size of the chunks is either <span class="bold_code bc-15"><a href="httpd.html#max_client_body_chunk">max_client_body_chunk</a></span>
-	or decide by the client if it uses HTTP chunked encoding
-	to send the body. When using the chunking
-	mechanism this callback must return {continue, State::term()}
-	for all calls where <span class="code">Input</span> is <span class="code">{first,
-	Data::binary()}</span> or <span class="code">{continue, Data::binary(),
-	State::term()}</span>. When <span class="code">Input</span> is <span class="code">{last,
-	Data::binary(), State::term()}</span> the return value will be ignored.</p>
-	<div class="note">
-<div class="label">Note</div>
-<div class="content"><p><p>Note that if the body is
-	small all data may be delivered in only one chunk and then the
-	callback will be called with {last, Data::binary(), undefined}
-	without getting called with <span class="code">{first,
-	Data::binary()}</span>.</p></p></div>
-</div><p>The input <span class="code">State</span> is
-	the last returned <span class="code">State</span>, in it the callback can include
-	any data that it needs to keep track of when handling the chunks.
-	</p>
-      </p></div>
-
-   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-Module:Function-2-idp46973001716480').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-Module:Function-2-idp46973001716480').style.visibility = 'hidden';"><span id="ghlink-Module:Function-2-idp46973001716480" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/mod_esi.xml#L181" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="Module:Function-2" href="#Module:Function-2">Module:Function(Env, Input)-&gt; Response </a></span></div></p>
-<div class="REFBODY rb-5">
-<h3 class="func-types-title">Types</h3>
-       <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Env = env()</span><br>
-</div>
-       <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Input = string() </span><br>
-</div>
-       <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Response = string()</span><br>
-</div>
-     </div>
-<div class="REFBODY rb-7"><p>
-        <p>This callback format consumes much memory, as the
-        whole response must be generated before it is sent to the
-        user. This callback format is deprecated. 
-        For new development, use <span class="code">Module:Function/3</span>.</p>
-      </p></div>
- </div>
- 
+	  <p> Filter and possible alter HTTP request headers before they are processed by the server.
+	  </p>
+	</p></div>
+  </div>
 </div>
 <div class="footer">
 <hr>

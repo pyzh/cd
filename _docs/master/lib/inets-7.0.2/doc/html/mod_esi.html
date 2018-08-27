@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../../doc/otp_doc.css" type="text/css">
-<title>Erlang -- inets</title>
+<title>Erlang -- mod_esi</title>
 </head>
 <body>
 <div id="container">
@@ -48,12 +48,12 @@
 <div class="erlang-logo-wrapper"><a href="../../../../doc/index.html"><img alt="Erlang Logo" src="../../../../doc/erlang-logo.png" class="erlang-logo"></a></div>
 <p class="section-title">inets</p>
 <p class="section-subtitle">Reference Manual</p>
-<p class="section-version">Version 7.0.1</p>
+<p class="section-version">Version 7.0.2</p>
 <ul class="panel-sections">
 <li><a href="users_guide.html">User's Guide</a></li>
 <li><a href="index.html">Reference Manual</a></li>
 <li><a href="release_notes.html">Release Notes</a></li>
-<li><a href="../pdf/inets-7.0.1.pdf">PDF</a></li>
+<li><a href="../pdf/inets-7.0.2.pdf">PDF</a></li>
 <li><a href="../../../../doc/index.html">Top</a></li>
 </ul>
 <ul class="expand-collapse-items">
@@ -62,7 +62,7 @@
 </ul>
 <h3>Table of Contents</h3>
 <ul class="flipMenu">
-<li id="loadscrollpos" title="inets " expanded="true">inets<ul>
+<li id="no" title="inets " expanded="false">inets<ul>
 <li><a href="inets.html">
                   Top of manual page
                 </a></li>
@@ -217,7 +217,7 @@
     <li title="update_password-6"><a href="mod_auth.html#update_password-6">update_password/6</a></li>
     </ul>
 </li>
-<li id="no" title="mod_esi " expanded="false">mod_esi<ul>
+<li id="loadscrollpos" title="mod_esi " expanded="true">mod_esi<ul>
 <li><a href="mod_esi.html">
                   Top of manual page
                 </a></li>
@@ -263,197 +263,206 @@
 </div></div>
 <div id="content">
 <div class="innertube">
-<!-- refpage --><center><h1>inets</h1></center>
+<!-- refpage --><center><h1>mod_esi</h1></center>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-module-idp46972999550272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp46972999550272').style.visibility = 'hidden';"><span id="ghlink-module-idp46972999550272"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
-<div class="REFBODY module-body">inets</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp46972999549856').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp46972999549856').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp46972999549856"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
-<div class="REFBODY module-summary-body">The Inets services API.</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-description-idp46972999549440').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp46972999549440').style.visibility = 'hidden';"><span id="ghlink-description-idp46972999549440" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/inets.xml#L34" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-idp47535144624720').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp47535144624720').style.visibility = 'hidden';"><span id="ghlink-module-idp47535144624720"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
+<div class="REFBODY module-body">mod_esi</div>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp47535144625168').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp47535144625168').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp47535144625168"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
+<div class="REFBODY module-summary-body">Erlang Server Interface</div>
+  <h3><span onMouseOver="document.getElementById('ghlink-description-idp47535144625616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp47535144625616').style.visibility = 'hidden';"><span id="ghlink-description-idp47535144625616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/mod_esi.xml#L30" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
 <div class="REFBODY description-body"><p>
-    <p>This module provides the most basic API to the 
-    clients and servers that are part of the <span class="code">Inets</span> application,
-    such as start and stop.</p>
+    <p>This module defines the Erlang Server Interface (ESI) API.
+    It is a more efficient way of writing Erlang scripts
+    for your <span class="code">Inets</span> web server than writing them as common CGI scripts.</p>
 
-    <a name="common_data_types"></a>
+    <a name="deliver"></a>
   </p></div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-data-types-idp46972999708080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types-idp46972999708080').style.visibility = 'hidden';"><span id="ghlink-data-types-idp46972999708080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/inets.xml#L42" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="data-types" href="#data-types">DATA TYPES</a></span></h3>
+ <h3><span onMouseOver="document.getElementById('ghlink-data-types-idp47535144627952').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types-idp47535144627952').style.visibility = 'hidden';"><span id="ghlink-data-types-idp47535144627952" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/mod_esi.xml#L38" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="data-types" href="#data-types">DATA TYPES</a></span></h3>
 <div class="REFBODY rb-3">
     
-    <p>Type definitions that are used more than once in
-      this module:</p>
-    <p><span class="code">service() = ftpc | tftp | httpc | httpd</span></p>
-    <p><span class="code">property() = atom()</span></p>
-    <a name="functions"></a>
-    <a name="services"></a>
-  </div>
+    <p>The following data types are used in the functions for mod_esi:</p>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp46972999510304').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp46972999510304').style.visibility = 'hidden';"><span id="ghlink-exports-idp46972999510304"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
+    <dl>
+      <dt><strong><span class="code">env() = </span></strong></dt>
+      <dd> <p><span class="code">{EnvKey()::atom(), Value::term()}</span></p>
+
+      <p>Currently supported key value pairs</p>
+      <dl>		
+	
+	<dt><strong><span class="code">{server_software, string()}</span></strong></dt>
+	<dd><p>Indicates the inets version.</p></dd>
+	
+	<dt><strong><span class="code">{server_name, string()}</span></strong></dt>
+	<dd><p>The local hostname. </p></dd>
+
+	<dt><strong><span class="code">{gateway_interface, string()}</span></strong></dt>
+	<dd>
+<p>Legacy string used in CGI, just ignore.</p> </dd>
+	
+	<dt><strong><span class="code">{server_protocol, string()}</span></strong></dt>
+	<dd><p> HTTP version, currently "HTTP/1.1"</p></dd>
+	
+	<dt><strong><span class="code">{server_port, integer()}</span></strong></dt>
+	<dd><p>Servers port number.</p></dd>
+	
+	<dt><strong><span class="code">{request_method, "GET | "PUT" | "DELETE" | "POST" | "PATCH"}</span></strong></dt>
+	<dd><p>HTTP request method.</p></dd>
+		
+	<dt><strong><span class="code">{remote_adress, inet:ip_address()} </span></strong></dt>
+	<dd><p>The clients ip address.</p></dd>
+
+	<dt><strong><span class="code">{peer_cert, undefined | no_peercert | DER:binary()}</span></strong></dt>
+	<dd>
+	  <p>For TLS connections where client certificates are used this will
+	  be an ASN.1 DER-encoded X509-certificate as an Erlang binary.
+	  If client certificates are not used the value will be <span class="code">no_peercert</span>,
+	  and if TLS is not used (HTTP or connection is lost due to network failure)
+	  the value will be <span class="code">undefined</span>.
+	</p>
+</dd>
+	
+	<dt><strong><span class="code">{script_name, string()}</span></strong></dt>
+	<dd><p>Request URI</p></dd>
+
+	<dt><strong><span class="code">{http_LowerCaseHTTPHeaderName, string()}</span></strong></dt>
+	<dd><p>example: {http_content_type, "text/html"}</p></dd>
+      </dl>    
+      </dd>
+    </dl>
+ </div>
+
+ <h3><span onMouseOver="document.getElementById('ghlink-exports-idp47535144645872').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp47535144645872').style.visibility = 'hidden';"><span id="ghlink-exports-idp47535144645872"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
 <div class="exports-body">
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-services-0-idp46972999509792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-services-0-idp46972999509792').style.visibility = 'hidden';"><span id="ghlink-services-0-idp46972999509792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/inets.xml#L53" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="services-0" href="#services-0">services() -&gt; [{Service, Pid}]</a></span></div></p>
+   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-deliver-2-idp47535144646736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-deliver-2-idp47535144646736').style.visibility = 'hidden';"><span id="ghlink-deliver-2-idp47535144646736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/mod_esi.xml#L90" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="deliver-2" href="#deliver-2">deliver(SessionID, Data) -&gt; ok | {error, Reason}</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
         <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Service = service()</span><br>
+<span class="bold_code fun-param-type">SessionID = term()</span><br>
 </div>
         <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Pid = pid()</span><br>
-</div>
-      </div>
-<div class="REFBODY rb-7"><p>
-        <p>Returns a list of currently running services.</p>
-        <div class="note">
-<div class="label">Note</div>
-<div class="content"><p>
-	  <p>Services started as <span class="code">stand_alone</span> are not listed.</p>
-        </p></div>
-</div>
-
-	<a name="services_info"></a>
-      </p></div>
-
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-services_info-0-idp46973000054784').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-services_info-0-idp46973000054784').style.visibility = 'hidden';"><span id="ghlink-services_info-0-idp46973000054784" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/inets.xml#L70" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="services_info-0" href="#services_info-0">services_info() -&gt; [{Service, Pid, Info}]</a></span></div></p>
-<div class="REFBODY rb-5">
-<h3 class="func-types-title">Types</h3>
-        <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Service = service()</span><br>
+<span class="bold_code fun-param-type">Data = string() | io_list() | binary()</span><br>
 </div>
         <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Pid = pid()</span><br>
-</div>
-        <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Info = [{Option, Value}]</span><br>
-</div>
-        <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Option = property()</span><br>
-</div>
-        <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Value = term()</span><br>
-</div>
-      </div>
-<div class="REFBODY rb-7"><p>
-        <p>Returns a list of currently running services where each
-	service is described by an <span class="code">[{Option, Value}]</span> list. The
-	information in the list is specific for each service
-	and each service has probably its own info
-	function that gives more details about the service.</p>
-
-	<a name="service_names"></a>
-      </p></div>
-    
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-service_names-0-idp46972999623744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-service_names-0-idp46972999623744').style.visibility = 'hidden';"><span id="ghlink-service_names-0-idp46972999623744" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/inets.xml#L93" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="service_names-0" href="#service_names-0">service_names() -&gt; [Service] </a></span></div></p>
-<div class="REFBODY rb-5">
-<h3 class="func-types-title">Types</h3>
-	<div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Service = service()</span><br>
-</div>
-      </div>
-<div class="REFBODY rb-7"><p>
-        <p>Returns a list of available service names.</p>
-
-	<a name="start"></a>
-      </p></div>
-    
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start-0-idp46973000099648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-0-idp46973000099648').style.visibility = 'hidden';"><span id="ghlink-start-0-idp46973000099648" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/inets.xml#L106" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start-0" href="#start-0">start() -&gt; </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start-1-idp46973000099520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-1-idp46973000099520').style.visibility = 'hidden';"><span id="ghlink-start-1-idp46973000099520" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/inets.xml#L106" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start-1" href="#start-1">start(Type) -&gt; ok | {error, Reason}</a></span></div></p>
-<div class="REFBODY rb-5">
-<h3 class="func-types-title">Types</h3>
-        <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Type = permanent | transient | temporary</span><br>
-</div>
-      </div>
-<div class="REFBODY rb-7"><p>
-        <p>Starts the <span class="code">Inets</span> application. Default type
-	is <span class="code">temporary</span>. See also
-	<span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','kernel','application.html');">application(3)</a></span>.</p>
-
-	<a name="stop"></a>
-      </p></div>
-
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start-2-idp46972999701632').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-2-idp46972999701632').style.visibility = 'hidden';"><span id="ghlink-start-2-idp46972999701632" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/inets.xml#L122" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start-2" href="#start-2">start(Service, ServiceConfig) -&gt; {ok, Pid} | {error, Reason}</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-start-3-idp46972999701008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-3-idp46972999701008').style.visibility = 'hidden';"><span id="ghlink-start-3-idp46972999701008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/inets.xml#L122" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="start-3" href="#start-3">start(Service, ServiceConfig, How) -&gt; {ok, Pid} | {error, Reason}</a></span></div></p>
-<div class="REFBODY rb-5">
-<h3 class="func-types-title">Types</h3>
-        <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Service = service()</span><br>
-</div>
-        <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">ServiceConfig = [{Option, Value}]</span><br>
-</div>
-	<div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Option = property()</span><br>
-</div>
-	<div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Value = term()</span><br>
-</div>
-        <div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">How = inets | stand_alone - default is inets.</span><br>
-</div>
-      </div>
-<div class="REFBODY rb-7"><p>
-        <p>Dynamically starts an <span class="code">Inets</span> service after the <span class="code">Inets</span>
-          application has been started.</p>
-        <div class="note">
-<div class="label">Note</div>
-<div class="content"><p>
-          <p>Dynamically started services are not handled by
-            application takeover and failover behavior when <span class="code">Inets</span> is
-            run as a distributed application. Nor are they
-            automatically restarted when the <span class="code">Inets</span> application is
-            restarted. As long as the <span class="code">Inets</span> application is operational,
-	    they are supervised and can be soft code upgraded.</p>
-	    <p>A service started as <span class="code">stand_alone</span>, that is, the service 
-	    is not started as part of the <span class="code">Inets</span> application, 
-	    lose all OTP application benefits, such as soft upgrade. 
-	    The <span class="code">stand_alone</span>-service is linked to
-            the process that started it. Usually some
-            supervision functionality is still in place and in
-            some sense the calling process becomes the top
-            supervisor.</p>
-        </p></div>
-</div>
-	
-	<a name="stop2"></a>
-      </p></div>
-
-     <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stop-0-idp46973000105584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop-0-idp46973000105584').style.visibility = 'hidden';"><span id="ghlink-stop-0-idp46973000105584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/inets.xml#L158" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stop-0" href="#stop-0">stop() -&gt; ok </a></span></div></p>
-<div class="REFBODY rb-7"><p>
-        <p>Stops the <span class="code">Inets</span> application. See also
-	<span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','kernel','application.html');">application(3)</a></span>.</p>
-	
-	<a name="start2"></a>
-      </p></div>
-    
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-stop-2-idp46972999673152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop-2-idp46972999673152').style.visibility = 'hidden';"><span id="ghlink-stop-2-idp46972999673152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/inets.xml#L169" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stop-2" href="#stop-2">stop(Service, Reference) -&gt; ok | {error, Reason} </a></span></div></p>
-<div class="REFBODY rb-5">
-<h3 class="func-types-title">Types</h3>
-	<div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Service = service() | stand_alone</span><br>
-</div>
-	<div class="REFTYPES rt-4">
-<span class="bold_code fun-param-type">Reference = pid() | term() - service-specified reference</span><br>
-</div>
-	<div class="REFTYPES rt-4">
 <span class="bold_code fun-param-type">Reason = term()</span><br>
 </div>
-      </div>
+     </div>
 <div class="REFBODY rb-7"><p>
-        <p>Stops a started service of the <span class="code">Inets</span> application or takes
-	down a <span class="code">stand_alone</span>-service gracefully. When option
-	<span class="code">stand_alone</span> is used in start,
-	only the pid is a valid argument to stop.</p>
+       <a name="deliver"></a>
+       <p>This function is <strong>only</strong> intended to be used from
+       functions called by the Erl Scheme interface to deliver
+       parts of the content to the user.</p>
+       <p>Sends data from an Erl Scheme script back to the client.</p>
 	
-	<a name="see_also"></a>
-      </p></div>
-  </div>
-
-  <h3><span onMouseOver="document.getElementById('ghlink-see-also-idp46972999247504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-see-also-idp46972999247504').style.visibility = 'hidden';"><span id="ghlink-see-also-idp46972999247504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/inets.xml#L189" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="see-also" href="#see-also">SEE ALSO</a></span></h3>
-<div class="REFBODY rb-3">
-    
-    <p><span class="bold_code bc-19"><a href="httpc.html">httpc(3)</a></span>,
-    <span class="bold_code bc-19"><a href="httpd.html">httpd(3)</a></span>
-    </p>
-  </div>
+       <div class="note">
+<div class="label">Note</div>
+<div class="content"><p>
+	 <p>If any HTTP header fields are added by the
+	 script, they must be in the first call to <span class="code">deliver/2</span>, 
+	 and the data in the call must be a string. Calls after the headers
+	 are complete can contain binary data to reduce copying
+	 overhead. Do not assume anything about the data type of 
+	 <span class="code">SessionID</span>. <span class="code">SessionID</span> must be the value given 
+	 as input to the ESI callback function that you implemented.</p>
+       </p></div>
+</div>
+     </p></div>
+ </div>
   
+ <h3><span onMouseOver="document.getElementById('ghlink-esi-callback-functions-idp47535144655296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-esi-callback-functions-idp47535144655296').style.visibility = 'hidden';"><span id="ghlink-esi-callback-functions-idp47535144655296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/mod_esi.xml#L118" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="esi-callback-functions" href="#esi-callback-functions">ESI Callback Functions</a></span></h3>
+<div class="REFBODY rb-3">
+   
+ </div>
+
+ <h3><span onMouseOver="document.getElementById('ghlink-exports-idp47535144656496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp47535144656496').style.visibility = 'hidden';"><span id="ghlink-exports-idp47535144656496"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
+<div class="exports-body">
+   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-Module:Function-3-idp47535144657376').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-Module:Function-3-idp47535144657376').style.visibility = 'hidden';"><span id="ghlink-Module:Function-3-idp47535144657376" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/mod_esi.xml#L123" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="Module:Function-3" href="#Module:Function-3">Module:Function(SessionID, Env, Input)-&gt; {continue, State} | _ </a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+       <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">SessionID = term()</span><br>
+</div>
+       <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Env = env()</span><br>
+</div>
+       <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Input = string() | chunked_data()</span><br>
+</div>
+       <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">chunked_data() = {first, Data::binary()} |
+       {continue, Data::binary(), State::term()} |
+       {last, Data::binary(), State::term()} </span><br>
+</div>
+       <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">State = term()</span><br>
+</div>
+     </div>
+<div class="REFBODY rb-7"><p>
+        <p><span class="code">Module</span> must be found in the code path and export
+        <span class="code">Function</span> with an arity of three. An <span class="code">erlScriptAlias</span> must
+        also be set up in the configuration file for the web server.</p>
+
+	<p><span class="code">mod_esi:deliver/2</span> shall be used to generate the response
+	to the client and <span class="code">SessionID</span> is an identifier that shall by used when
+	calling this function, do not assume anything about
+	the datatype. This function may be called
+	several times to chunk the response data. Notice that the
+	first chunk of data sent to the client must at least contain
+	all HTTP header fields that the response will generate. If the
+	first chunk does not contain the <strong>end of HTTP header</strong>,
+	that is, <span class="code">"\r\n\r\n",</span> the server assumes that no HTTP
+	header fields will be generated.</p>
+
+	<p><span class="code">Env</span> environment data of the request see description above.</p>
+		
+	<p><span class="code">Input</span> is query data of a GET request or the body of
+	a PUT or POST request. The default behavior (legacy reasons)
+	for delivering the body, is that the whole body is gathered and
+	converted to a string. But if the httpd config parameter
+	<span class="bold_code bc-15"><a href="httpd.html#max_client_body_chunk">max_client_body_chunk</a></span>
+	is set, the body will be delivered as binary chunks
+	instead. The maximum size of the chunks is either <span class="bold_code bc-15"><a href="httpd.html#max_client_body_chunk">max_client_body_chunk</a></span>
+	or decide by the client if it uses HTTP chunked encoding
+	to send the body. When using the chunking
+	mechanism this callback must return {continue, State::term()}
+	for all calls where <span class="code">Input</span> is <span class="code">{first,
+	Data::binary()}</span> or <span class="code">{continue, Data::binary(),
+	State::term()}</span>. When <span class="code">Input</span> is <span class="code">{last,
+	Data::binary(), State::term()}</span> the return value will be ignored.</p>
+	<div class="note">
+<div class="label">Note</div>
+<div class="content"><p><p>Note that if the body is
+	small all data may be delivered in only one chunk and then the
+	callback will be called with {last, Data::binary(), undefined}
+	without getting called with <span class="code">{first,
+	Data::binary()}</span>.</p></p></div>
+</div><p>The input <span class="code">State</span> is
+	the last returned <span class="code">State</span>, in it the callback can include
+	any data that it needs to keep track of when handling the chunks.
+	</p>
+      </p></div>
+
+   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-Module:Function-2-idp47535144675392').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-Module:Function-2-idp47535144675392').style.visibility = 'hidden';"><span id="ghlink-Module:Function-2-idp47535144675392" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/inets/doc/src/mod_esi.xml#L181" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="Module:Function-2" href="#Module:Function-2">Module:Function(Env, Input)-&gt; Response </a></span></div></p>
+<div class="REFBODY rb-5">
+<h3 class="func-types-title">Types</h3>
+       <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Env = env()</span><br>
+</div>
+       <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Input = string() </span><br>
+</div>
+       <div class="REFTYPES rt-4">
+<span class="bold_code fun-param-type">Response = string()</span><br>
+</div>
+     </div>
+<div class="REFBODY rb-7"><p>
+        <p>This callback format consumes much memory, as the
+        whole response must be generated before it is sent to the
+        user. This callback format is deprecated. 
+        For new development, use <span class="code">Module:Function/3</span>.</p>
+      </p></div>
+ </div>
+ 
 </div>
 <div class="footer">
 <hr>
