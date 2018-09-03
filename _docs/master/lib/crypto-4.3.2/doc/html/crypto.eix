@@ -1,6 +1,6 @@
 %% 
 %% Search data file for crypto 4.3.2
-%% generated August 31, 2018
+%% generated September  3, 2018
 %% 
 {"crypto_app.html", {app, "crypto"}, ["crypto"]}.
 {"crypto.html", {function, {"crypto", "crypto"}},
