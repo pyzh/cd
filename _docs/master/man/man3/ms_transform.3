@@ -555,7 +555,7 @@ Takes an error code returned by one of the other functions in the module and cre
 .nf
 
 .B
-parse_transform(Forms, Options) -> Forms2
+parse_transform(Forms, Options) -> Forms2 | Errors | Warnings
 .br
 .fi
 .br
@@ -571,6 +571,10 @@ Options = term()
 .RS 2
 Option list, required but not used\&. 
 .RE
+Errors = {error, ErrInfo :: [tuple()], WarnInfo :: []}
+.br
+Warnings = {warning, Forms2, WarnInfo :: [tuple()]}
+.br
 .RE
 .RE
 .RS
