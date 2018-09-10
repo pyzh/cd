@@ -122,7 +122,19 @@ The \fIrestart\fR\& key is optional\&. If it is not specified, it defaults to \f
 \fIshutdown\fR\& defines how a child process must be terminated\&. \fIbrutal_kill\fR\& means that the child process is unconditionally terminated using \fIexit(Child,kill)\fR\&\&. An integer time-out value means that the supervisor tells the child process to terminate by calling \fIexit(Child,shutdown)\fR\& and then wait for an exit signal with reason \fIshutdown\fR\& back from the child process\&. If no exit signal is received within the specified number of milliseconds, the child process is unconditionally terminated using \fIexit(Child,kill)\fR\&\&.
 .RS 2
 .LP
-If the child process is another supervisor, the shutdown time is to be set to \fIinfinity\fR\& to give the subtree ample time to shut down\&. It is also allowed to set it to \fIinfinity\fR\&, if the child process is a worker\&.
+If the child process is another supervisor, the shutdown time must be set to \fIinfinity\fR\& to give the subtree ample time to shut down\&.
+.RE
+.LP
+
+.RS -4
+.B
+Warning:
+.RE
+Setting the shutdown time to anything other than \fIinfinity\fR\& for a child of type \fIsupervisor\fR\& can cause a race condition where the child in question unlinks its own children, but fails to terminate them before it is killed\&.
+
+.RS 2
+.LP
+It is also allowed to set it to \fIinfinity\fR\&, if the child process is a worker\&.
 .RE
 .LP
 
