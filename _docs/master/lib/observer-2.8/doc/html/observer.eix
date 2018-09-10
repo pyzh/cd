@@ -16,10 +16,10 @@
   {"tracer", "tracer(Nodes)", "tracer-1"},
   {"tracer", "tracer(Nodes,Opts)", "tracer-2"},
   {"p", "p(Item,Flags)", "p-2"},
-  {"", "(", "-0"},
+  {"", "tp, tpl, tpe, ctp, ctpl, ctpg, ctpe", ""},
   {"list_history", "list_history()", "list_history-0"},
   {"run_history", "run_history(N)", "run_history-1"},
-  {"write_config", "write_config(", "write_config-2"},
+  {"write_config", "write_config(ConfigFile,Config)", "write_config"},
   {"write_config", "write_config(ConfigFile,Config,Opts)", "write_config-3"},
   {"run_config", "run_config(ConfigFile)", "run_config-1"},
   {"run_config", "run_config(ConfigFile,NumList)", "run_config-2"},
@@ -27,10 +27,10 @@
   {"write_trace_info", "write_trace_info(Key,Info)", "write_trace_info-2"},
   {"seq_trigger_ms", "seq_trigger_ms()", "seq_trigger_ms-0"},
   {"seq_trigger_ms", "seq_trigger_ms(Flags)", "seq_trigger_ms-1"},
-  {"stop", "stop(", "stop-0"},
+  {"stop", "stop()", "stop"},
   {"stop", "stop(Opts)", "stop-1"},
-  {"get_et_handler", "get_et_handler(", "get_et_handler-0"},
-  {"format", "format(", "format-1"},
+  {"get_et_handler", "get_et_handler()", "get_et_handler"},
+  {"format", "format(File)", "format"},
   {"format", "format(File,Options)", "format-2"}
 ]}.
 {"ttb.html", {module, "observer"}, ["ttb"]}.

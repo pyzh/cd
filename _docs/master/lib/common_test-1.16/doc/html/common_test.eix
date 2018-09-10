@@ -354,7 +354,7 @@
   {"Module:post_end_per_suite", "Module:post_end_per_suite(SuiteName, Config, Return, CTHState)", "Module:post_end_per_suite-4"},
   {"Module:on_tc_fail", "Module:on_tc_fail(SuiteName, TestName, Reason, CTHState)", "Module:on_tc_fail-4"},
   {"Module:on_tc_skip", "Module:on_tc_skip(SuiteName, TestName, Reason, CTHState)", "Module:on_tc_skip-4"},
-  {"Module:terminate", "Module:terminate(", "Module:terminate-1"},
+  {"Module:terminate", "Module:terminate(CTHState)", "Module:terminate"},
   {"Module:id", "Module:id(Opts)", "Module:id-1"}
 ]}.
 {"ct_hooks.html", {module, "common_test"}, ["ct_hooks"]}.

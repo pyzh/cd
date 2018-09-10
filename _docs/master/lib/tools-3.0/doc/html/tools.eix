@@ -39,7 +39,7 @@
   {"is_compiled", "is_compiled(Module)", "is_compiled-1"},
   {"reset", "reset(Module)", "reset-1"},
   {"reset", "reset()", "reset-0"},
-  {"export", "export(", "export-1"},
+  {"export", "export(ExportFile)", "export"},
   {"export", "export(ExportFile,Module)", "export-2"},
   {"import", "import(ExportFile)", "import-1"},
   {"stop", "stop()", "stop-0"},
@@ -180,13 +180,13 @@
 {"make.html", {module, "tools"}, ["make"]}.
 {"tags.html", {function, {"tools", "tags"}},
 [
-  {"file", "file(", "file-1"},
-  {"files", "files(", "files-1"},
-  {"dir", "dir(", "dir-1"},
-  {"dirs", "dirs(", "dirs-1"},
-  {"subdir", "subdir(", "subdir-1"},
-  {"subdirs", "subdirs(", "subdirs-1"},
-  {"root", "root(", "root-1"}
+  {"file", "file(File [, Options])", "file"},
+  {"files", "files(FileList [, Options])", "files"},
+  {"dir", "dir(Dir [, Options])", "dir"},
+  {"dirs", "dirs(DirList [, Options])", "dirs"},
+  {"subdir", "subdir(Dir [, Options])", "subdir"},
+  {"subdirs", "subdirs(DirList [, Options])", "subdirs"},
+  {"root", "root([Options])", "root"}
 ]}.
 {"tags.html", {module, "tools"}, ["tags"]}.
 {"xref.html", {function, {"tools", "xref"}},
@@ -219,7 +219,7 @@
   {"set_library_path", "set_library_path(Xref, LibraryPath [, Options])", "set_library_path-2"},
   {"start", "start(NameOrOptions)", "start-1"},
   {"start", "start(Name, Options)", "start-2"},
-  {"stop", "stop(", "stop-1"},
+  {"stop", "stop(Xref)", "stop"},
   {"update", "update(Xref [, Options])", "update-1"},
   {"variables", "variables(Xref [, Options])", "variables-1"}
 ]}.

@@ -4,10 +4,10 @@
 %% 
 {"compile.html", {function, {"compiler", "compile"}},
 [
-  {"env_compiler_options", "env_compiler_options(", "env_compiler_options-0"},
-  {"file", "file(", "file-1"},
+  {"env_compiler_options", "env_compiler_options()", "env_compiler_options"},
+  {"file", "file(File)", "file"},
   {"file", "file(File, Options)", "file-2"},
-  {"forms", "forms(", "forms-1"},
+  {"forms", "forms(Forms)", "forms"},
   {"forms", "forms(Forms, Options)", "forms-2"},
   {"format_error", "format_error(ErrorDescriptor)", "format_error-1"},
   {"output_generated", "output_generated(Options)", "output_generated-1"},
