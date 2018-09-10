@@ -455,18 +455,18 @@
 [
   {"add", "add(TarDescriptor, Filename, Options)", "add-3"},
   {"add", "add(TarDescriptor, FilenameOrBin, NameInArchive, Options)", "add-4"},
-  {"close", "close(", "close-1"},
+  {"close", "close(TarDescriptor)", "close"},
   {"create", "create(Name, FileList)", "create-2"},
-  {"create", "create(", "create-3"},
+  {"create", "create(Name, FileList, OptionList)", "create"},
   {"extract", "extract(Name)", "extract-1"},
-  {"extract", "extract(", "extract-2"},
+  {"extract", "extract(Name, OptionList)", "extract"},
   {"format_error", "format_error(Reason)", "format_error-1"},
   {"init", "init(UserPrivate, AccessMode, Fun)", "init-3"},
   {"open", "open(Name, OpenModeList)", "open-2"},
   {"table", "table(Name)", "table-1"},
-  {"table", "table(", "table-2"},
-  {"t", "t(", "t-1"},
-  {"tt", "tt(", "tt-1"}
+  {"table", "table(Name, Options)", "table"},
+  {"t", "t(Name)", "t"},
+  {"tt", "tt(Name)", "tt"}
 ]}.
 {"erl_tar.html", {module, "stdlib"}, ["erl_tar"]}.
 {"ets.html", {function, {"stdlib", "ets"}},
@@ -713,10 +713,10 @@
   {"call", "call(ServerRef, Request)", "call-2"},
   {"call", "call(ServerRef, Request, Timeout)", "call-3"},
   {"cast", "cast(ServerRef, Request)", "cast-2"},
-  {"enter_loop", "enter_loop(", "enter_loop-3"},
-  {"enter_loop", "enter_loop(", "enter_loop-4"},
-  {"enter_loop", "enter_loop(", "enter_loop-4"},
-  {"enter_loop", "enter_loop(", "enter_loop-5"},
+  {"enter_loop", "enter_loop(Module, Options, State)", "enter_loop"},
+  {"enter_loop", "enter_loop(Module, Options, State, ServerName)", "enter_loop"},
+  {"enter_loop", "enter_loop(Module, Options, State, Timeout)", "enter_loop"},
+  {"enter_loop", "enter_loop(Module, Options, State, ServerName, Timeout)", "enter_loop"},
   {"multi_call", "multi_call(Name, Request)", "multi_call-2"},
   {"multi_call", "multi_call(Nodes, Name, Request)", "multi_call-3"},
   {"multi_call", "multi_call(Nodes, Name, Request, Timeout)", "multi_call-4"},
@@ -734,7 +734,7 @@
   {"Module:handle_continue", "Module:handle_continue(Continue, State)", "Module:handle_continue-2"},
   {"Module:handle_info", "Module:handle_info(Info, State)", "Module:handle_info-2"},
   {"Module:init", "Module:init(Args)", "Module:init-1"},
-  {"Module:terminate", "Module:terminate(", "Module:terminate-2"}
+  {"Module:terminate", "Module:terminate(Reason, State)", "Module:terminate"}
 ]}.
 {"gen_server.html", {module, "stdlib"}, ["gen_server"]}.
 {"gen_statem.html", {function, {"stdlib", "gen_statem"}},
@@ -1455,7 +1455,7 @@
   {"start_link", "start_link(Module, Args)", "start_link-2"},
   {"start_link", "start_link(SupBridgeName, Module, Args)", "start_link-3"},
   {"Module:init", "Module:init(Args)", "Module:init-1"},
-  {"Module:terminate", "Module:terminate(", "Module:terminate-2"}
+  {"Module:terminate", "Module:terminate(Reason, State)", "Module:terminate"}
 ]}.
 {"supervisor_bridge.html", {module, "stdlib"}, ["supervisor_bridge"]}.
 {"sys.html", {function, {"stdlib", "sys"}},

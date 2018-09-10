@@ -4,11 +4,11 @@
 %% 
 {"debugger.html", {function, {"debugger", "debugger"}},
 [
-  {"start", "start(", "start-0"},
-  {"start", "start(", "start-1"},
-  {"start", "start(", "start-1"},
-  {"start", "start(", "start-2"},
-  {"quick", "quick(", "quick-3"}
+  {"start", "start()", "start"},
+  {"start", "start(File)", "start"},
+  {"start", "start(Mode)", "start"},
+  {"start", "start(Mode, File)", "start"},
+  {"quick", "quick(Module, Name, Args)", "quick"}
 ]}.
 {"debugger.html", {module, "debugger"}, ["debugger"]}.
 {"i.html", {function, {"debugger", "i"}},
@@ -58,10 +58,10 @@
   {"file", "file(Module)", "file-1"},
   {"interpretable", "interpretable(AbsModule)", "interpretable-1"},
   {"auto_attach", "auto_attach()", "auto_attach-0"},
-  {"auto_attach", "auto_attach(", "auto_attach-1"},
-  {"auto_attach", "auto_attach(", "auto_attach-2"},
+  {"auto_attach", "auto_attach(false)", "auto_attach"},
+  {"auto_attach", "auto_attach(Flags, Function)", "auto_attach"},
   {"stack_trace", "stack_trace()", "stack_trace-0"},
-  {"stack_trace", "stack_trace(", "stack_trace-1"},
+  {"stack_trace", "stack_trace(Flag)", "stack_trace"},
   {"break", "break(Module, Line)", "break-2"},
   {"delete_break", "delete_break(Module, Line)", "delete_break-2"},
   {"break_in", "break_in(Module, Name, Arity)", "break_in-3"},
