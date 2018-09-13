@@ -23,6 +23,10 @@ Block ciphers - DES and AES in Block Cipher Modes -  ECB, CBC, CFB, OFB, CTR and
 .LP
 .TP 2
 *
+GCM: Dworkin, M\&., "Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) and GMAC", National Institute of Standards and Technology SP 800-38D, November 2007\&.
+.LP
+.TP 2
+*
  RSA encryption RFC 1321  
 .LP
 .TP 2
@@ -33,299 +37,836 @@ Digital signatures Digital Signature Standard (DSS) and Elliptic Curve Digital S
 *
  Secure Remote Password Protocol (SRP - RFC 2945) 
 .LP
-.TP 2
-*
-gcm: Dworkin, M\&., "Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) and GMAC", National Institute of Standards and Technology SP 800- 38D, November 2007\&.
-.LP
 .RE
 
-.SH "DATA TYPES "
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+The actual supported algorithms and features depends on their availability in the actual libcrypto used\&. See the \fBcrypto (App)\fR\& about dependencies\&.
+.LP
+Enabling FIPS mode will also disable algorithms and features\&.
 
 .LP
+The \fBCRYPTO User\&'s Guide\fR\& has more information on FIPS, Engines and Algorithm Details like key lengths\&.
+.SH DATA TYPES
+.SS Ciphers
 .nf
-key_value() = integer() | binary() 
+
+\fBstream_cipher()\fR\& = rc4 | aes_ctr | chacha20
+.br
 .fi
+.RS
+.LP
+Stream ciphers for \fBstream_encrypt/2\fR\& and \fBstream_decrypt/2\fR\& \&.
+.RE
+.nf
+
+\fBblock_cipher_with_iv()\fR\& = 
+.br
+    \fBcbc_cipher()\fR\& |
+.br
+    \fBcfb_cipher()\fR\& |
+.br
+    aes_cbc128 |
+.br
+    aes_cbc256 |
+.br
+    aes_ige256 |
+.br
+    blowfish_ofb64 |
+.br
+    des3_cbf |
+.br
+    des_ede3 |
+.br
+    rc2_cbc
+.br
+.fi
+.nf
+
+\fBcbc_cipher()\fR\& = des_cbc | des3_cbc | aes_cbc | blowfish_cbc
+.br
+.fi
+.nf
+
+\fBcfb_cipher()\fR\& = 
+.br
+    aes_cfb128 | aes_cfb8 | blowfish_cfb64 | des3_cfb | des_cfb
+.br
+.fi
+.RS
+.LP
+Block ciphers with initialization vector for \fBblock_encrypt/4\fR\& and \fBblock_decrypt/4\fR\& \&.
+.RE
+.nf
+
+\fBblock_cipher_without_iv()\fR\& = \fBecb_cipher()\fR\&
+.br
+.fi
+.nf
+
+\fBecb_cipher()\fR\& = des_ecb | blowfish_ecb | aes_ecb
+.br
+.fi
+.RS
+.LP
+Block ciphers without initialization vector for \fBblock_encrypt/3\fR\& and \fBblock_decrypt/3\fR\& \&.
+.RE
+.nf
+
+\fBaead_cipher()\fR\& = aes_gcm | chacha20_poly1305
+.br
+.fi
+.RS
+.LP
+Ciphers with simultaneous MAC-calculation or MAC-checking\&. \fBblock_encrypt/4\fR\& and \fBblock_decrypt/4\fR\& \&.
+.RE
+.SS Digests
+.nf
+
+\fBsha1()\fR\& = sha
+.br
+.fi
+.nf
+
+\fBsha2()\fR\& = sha224 | sha256 | sha384 | sha512
+.br
+.fi
+.nf
+
+\fBsha3()\fR\& = sha3_224 | sha3_256 | sha3_384 | sha3_512
+.br
+.fi
+.RS
+.RE
+.nf
+
+\fBcompatibility_only_hash()\fR\& = md5 | md4
+.br
+.fi
+.RS
+.LP
+The \fIcompatibility_only_hash()\fR\& algorithms are recommended only for compatibility with existing applications\&.
+.RE
+.nf
+
+\fBrsa_digest_type()\fR\& = \fBsha1()\fR\& | \fBsha2()\fR\& | md5 | ripemd160
+.br
+.fi
+.RS
+.RE
+.nf
+
+\fBdss_digest_type()\fR\& = \fBsha1()\fR\& | \fBsha2()\fR\&
+.br
+.fi
+.RS
+.RE
+.nf
+
+\fBecdsa_digest_type()\fR\& = \fBsha1()\fR\& | \fBsha2()\fR\&
+.br
+.fi
+.RS
+.RE
+.SS Elliptic Curves
+.nf
+
+\fBec_named_curve()\fR\& = 
+.br
+    brainpoolP160r1 |
+.br
+    brainpoolP160t1 |
+.br
+    brainpoolP192r1 |
+.br
+    brainpoolP192t1 |
+.br
+    brainpoolP224r1 |
+.br
+    brainpoolP224t1 |
+.br
+    brainpoolP256r1 |
+.br
+    brainpoolP256t1 |
+.br
+    brainpoolP320r1 |
+.br
+    brainpoolP320t1 |
+.br
+    brainpoolP384r1 |
+.br
+    brainpoolP384t1 |
+.br
+    brainpoolP512r1 |
+.br
+    brainpoolP512t1 |
+.br
+    c2pnb163v1 |
+.br
+    c2pnb163v2 |
+.br
+    c2pnb163v3 |
+.br
+    c2pnb176v1 |
+.br
+    c2pnb208w1 |
+.br
+    c2pnb272w1 |
+.br
+    c2pnb304w1 |
+.br
+    c2pnb368w1 |
+.br
+    c2tnb191v1 |
+.br
+    c2tnb191v2 |
+.br
+    c2tnb191v3 |
+.br
+    c2tnb239v1 |
+.br
+    c2tnb239v2 |
+.br
+    c2tnb239v3 |
+.br
+    c2tnb359v1 |
+.br
+    c2tnb431r1 |
+.br
+    ipsec3 |
+.br
+    ipsec4 |
+.br
+    prime192v1 |
+.br
+    prime192v2 |
+.br
+    prime192v3 |
+.br
+    prime239v1 |
+.br
+    prime239v2 |
+.br
+    prime239v3 |
+.br
+    prime256v1 |
+.br
+    secp112r1 |
+.br
+    secp112r2 |
+.br
+    secp128r1 |
+.br
+    secp128r2 |
+.br
+    secp160k1 |
+.br
+    secp160r1 |
+.br
+    secp160r2 |
+.br
+    secp192k1 |
+.br
+    secp192r1 |
+.br
+    secp224k1 |
+.br
+    secp224r1 |
+.br
+    secp256k1 |
+.br
+    secp256r1 |
+.br
+    secp384r1 |
+.br
+    secp521r1 |
+.br
+    sect113r1 |
+.br
+    sect113r2 |
+.br
+    sect131r1 |
+.br
+    sect131r2 |
+.br
+    sect163k1 |
+.br
+    sect163r1 |
+.br
+    sect163r2 |
+.br
+    sect193r1 |
+.br
+    sect193r2 |
+.br
+    sect233k1 |
+.br
+    sect233r1 |
+.br
+    sect239k1 |
+.br
+    sect283k1 |
+.br
+    sect283r1 |
+.br
+    sect409k1 |
+.br
+    sect409r1 |
+.br
+    sect571k1 |
+.br
+    sect571r1 |
+.br
+    wtls1 |
+.br
+    wtls10 |
+.br
+    wtls11 |
+.br
+    wtls12 |
+.br
+    wtls3 |
+.br
+    wtls4 |
+.br
+    wtls5 |
+.br
+    wtls6 |
+.br
+    wtls7 |
+.br
+    wtls8 |
+.br
+    wtls9
+.br
+.fi
+.nf
+
+\fBedwards_curve()\fR\& = x25519 | x448
+.br
+.fi
+.RS
+.LP
+Note that some curves are disabled if FIPS is enabled\&.
+.RE
+.nf
+
+\fBec_explicit_curve()\fR\& = 
+.br
+    {Field :: \fBec_field()\fR\&,
+.br
+     Curve :: \fBec_curve()\fR\&,
+.br
+     BasePoint :: binary(),
+.br
+     Order :: binary(),
+.br
+     CoFactor :: none | binary()}
+.br
+.fi
+.nf
+
+\fBec_field()\fR\& = \fBec_prime_field()\fR\& | \fBec_characteristic_two_field()\fR\&
+.br
+.fi
+.nf
+
+\fBec_curve()\fR\& = 
+.br
+    {A :: binary(), B :: binary(), Seed :: none | binary()}
+.br
+.fi
+.RS
+.LP
+Parametric curve definition\&.
+.RE
+.nf
+
+\fBec_prime_field()\fR\& = {prime_field, Prime :: integer()}
+.br
+.fi
+.nf
+
+\fBec_characteristic_two_field()\fR\& = 
+.br
+    {characteristic_two_field,
+.br
+     M :: integer(),
+.br
+     Basis :: \fBec_basis()\fR\&}
+.br
+.fi
+.nf
+
+\fBec_basis()\fR\& = 
+.br
+    {tpbasis, K :: integer() >= 0} |
+.br
+    {ppbasis,
+.br
+     K1 :: integer() >= 0,
+.br
+     K2 :: integer() >= 0,
+.br
+     K3 :: integer() >= 0} |
+.br
+    onbasis
+.br
+.fi
+.RS
+.LP
+Curve definition details\&.
+.RE
+.SS Keys
+.nf
+
+\fBkey()\fR\& = iodata()
+.br
+.fi
+.nf
+
+\fBdes3_key()\fR\& = [\fBkey()\fR\&]
+.br
+.fi
+.RS
+.LP
+For keylengths, iv-sizes and blocksizes see the \fBUser\&'s Guide\fR\&\&.
+.LP
+A key for des3 is a list of three iolists
+.RE
+.nf
+
+\fBkey_integer()\fR\& = integer() | binary()
+.br
+.fi
+.RS
 .LP
 Always \fIbinary()\fR\& when used as return value
+.RE
+.SS Public/Private Keys
+.nf
+
+\fBrsa_public()\fR\& = [\fBkey_integer()\fR\&]
+.br
+.fi
+.nf
+
+\fBrsa_private()\fR\& = [\fBkey_integer()\fR\&]
+.br
+.fi
+.nf
+
+\fBrsa_params()\fR\& = 
+.br
+    {ModulusSizeInBits :: integer(),
+.br
+     PublicExponent :: \fBkey_integer()\fR\&}
+.br
+.fi
+.RS
 .LP
 .nf
-rsa_public() = [key_value()] = [E, N]  
+rsa_public() = [E, N]
 .fi
 .LP
-Where E is the public exponent and N is public modulus\&.
-.LP
 .nf
-rsa_private() = [key_value()] = [E, N, D] | [E, N, D, P1, P2, E1, E2, C] 
+rsa_private() = [E, N, D] | [E, N, D, P1, P2, E1, E2, C]
 .fi
 .LP
 Where E is the public exponent, N is public modulus and D is the private exponent\&. The longer key format contains redundant information that will make the calculation faster\&. P1,P2 are first and second prime factors\&. E1,E2 are first and second exponents\&. C is the CRT coefficient\&. Terminology is taken from  RFC 3447\&.
+.RE
+.nf
+
+\fBdss_public()\fR\& = [\fBkey_integer()\fR\&]
+.br
+.fi
+.nf
+
+\fBdss_private()\fR\& = [\fBkey_integer()\fR\&]
+.br
+.fi
+.RS
 .LP
 .nf
-dss_public() = [key_value()] = [P, Q, G, Y] 
+dss_public() = [P, Q, G, Y] 
 .fi
 .LP
 Where P, Q and G are the dss parameters and Y is the public key\&.
 .LP
 .nf
-dss_private() = [key_value()] = [P, Q, G, X] 
+dss_private() = [P, Q, G, X] 
 .fi
 .LP
 Where P, Q and G are the dss parameters and X is the private key\&.
+.RE
+.nf
+
+\fBecdsa_public()\fR\& = \fBkey_integer()\fR\&
+.br
+.fi
+.nf
+
+\fBecdsa_private()\fR\& = \fBkey_integer()\fR\&
+.br
+.fi
+.nf
+
+\fBecdsa_params()\fR\& = 
+.br
+    \fBec_named_curve()\fR\& | \fBedwards_curve()\fR\& | \fBec_explicit_curve()\fR\&
+.br
+.fi
+.RS
+.RE
+.nf
+
+\fBsrp_public()\fR\& = \fBkey_integer()\fR\&
+.br
+.fi
+.nf
+
+\fBsrp_private()\fR\& = \fBkey_integer()\fR\&
+.br
+.fi
+.RS
 .LP
 .nf
-srp_public() = key_value() 
+srp_public() = key_integer() 
 .fi
 .LP
 Where is \fIA\fR\& or \fIB\fR\& from SRP design
 .LP
 .nf
-srp_private() = key_value() 
+srp_private() = key_integer() 
 .fi
 .LP
 Where is \fIa\fR\& or \fIb\fR\& from SRP design
-.LP
-Where Verifier is \fIv\fR\&, Generator is \fIg\fR\& and Prime is\fI N\fR\&, DerivedKey is \fIX\fR\&, and Scrambler is \fIu\fR\& (optional will be generated if not provided) from SRP design Version = \&'3\&' | \&'6\&' | \&'6a\&'
-.LP
+.RE
 .nf
-dh_public() = key_value() 
-.fi
-.LP
-.nf
-dh_private() = key_value() 
-.fi
-.LP
-.nf
-dh_params() = [key_value()] = [P, G] | [P, G, PrivateKeyBitLength]
-.fi
-.LP
-.nf
-ecdh_public() = key_value() 
-.fi
-.LP
-.nf
-ecdh_private() = key_value() 
-.fi
-.LP
-.nf
-ecdh_params() = ec_named_curve() | ec_explicit_curve()
-.fi
-.LP
-.nf
-ed_named_curves_ecdh() -> x448 | x25519
-.fi
-.LP
-Note that the curves are only supported if the underlying OpenSSL has support for them\&.
-.LP
-.nf
-ec_explicit_curve() =
-    {ec_field(), Prime :: key_value(), Point :: key_value(), Order :: integer(),
-     CoFactor :: none | integer()} 
-.fi
-.LP
-.nf
-ec_field() = {prime_field, Prime :: integer()} |
-    {characteristic_two_field, M :: integer(), Basis :: ec_basis()}
-.fi
-.LP
-.nf
-ec_basis() = {tpbasis, K :: non_neg_integer()} |
-    {ppbasis, K1 :: non_neg_integer(), K2 :: non_neg_integer(), K3 :: non_neg_integer()} |
-    onbasis
-.fi
-.LP
-.nf
-ec_named_curve() ->
-      sect571r1| sect571k1| sect409r1| sect409k1| secp521r1| secp384r1| secp224r1| secp224k1|
-      secp192k1| secp160r2| secp128r2| secp128r1| sect233r1| sect233k1| sect193r2| sect193r1|
-      sect131r2| sect131r1| sect283r1| sect283k1| sect163r2| secp256k1| secp160k1| secp160r1|
-      secp112r2| secp112r1| sect113r2| sect113r1| sect239k1| sect163r1| sect163k1| secp256r1|
-      secp192r1|
-      brainpoolP160r1| brainpoolP160t1| brainpoolP192r1| brainpoolP192t1| brainpoolP224r1|
-      brainpoolP224t1| brainpoolP256r1| brainpoolP256t1| brainpoolP320r1| brainpoolP320t1|
-      brainpoolP384r1| brainpoolP384t1| brainpoolP512r1| brainpoolP512t1
-    
-.fi
-.LP
-Note that the \fIsect\fR\& curves are GF2m (characteristic two) curves and are only supported if the underlying OpenSSL has support for them\&. See also \fBcrypto:supports/0\fR\& 
-.LP
-.nf
-engine_key_ref() = #{engine   := engine_ref(),
-                               key_id   := key_id(),
-                               password => password()}
-.fi
-.LP
-.nf
-engine_ref() = term()
-.fi
-.LP
-The result of a call to for example \fBengine_load/3\fR\&\&.
-.LP
-.nf
-key_id() = string() | binary()
-.fi
-.LP
-Identifies the key to be used\&. The format depends on the loaded engine\&. It is passed to the \fIENGINE_load_(private|public)_key\fR\& functions in libcrypto\&.
-.LP
-.nf
-password() = string() | binary()
-.fi
-.LP
-The key\&'s password
-.LP
-.nf
-stream_cipher() = rc4 | aes_ctr | chacha20 
-.fi
-.LP
-.nf
-block_cipher() = aes_cbc | aes_cfb8 | aes_cfb128 | aes_ige256 | blowfish_cbc |
-     blowfish_cfb64 | des_cbc | des_cfb | des3_cbc | des3_cfb | des_ede3 | rc2_cbc 
-.fi
-.LP
-.nf
-aead_cipher() = aes_gcm | chacha20_poly1305 
-.fi
-.LP
-Note that the actual supported algorithms depends on the underlying crypto library\&.
-.LP
-.nf
-stream_key() = aes_key() | rc4_key() 
-.fi
-.LP
-.nf
-block_key() = aes_key() |  blowfish_key() | des_key()| des3_key() 
-.fi
-.LP
-.nf
-aes_key() = iodata() 
-.fi
-.LP
-Key length is 128, 192 or 256 bits
-.LP
-.nf
-rc4_key() = iodata() 
-.fi
-.LP
-Variable key length from 8 bits up to 2048 bits (usually between 40 and 256)
-.LP
-.nf
-blowfish_key() = iodata() 
-.fi
-.LP
-Variable key length from 32 bits up to 448 bits
-.LP
-.nf
-des_key() = iodata() 
-.fi
-.LP
-Key length is 64 bits (in CBC mode only 8 bits are used)
-.LP
-.nf
-des3_key() = [binary(), binary(), binary()] 
-.fi
-.LP
-Each key part is 64 bits (in CBC mode only 8 bits are used)
-.LP
-.nf
-digest_type() =  md5 | sha | sha224 | sha256 | sha384 | sha512
-.fi
-.LP
-.nf
-rsa_digest_type() = md5 | ripemd160 | sha | sha224 | sha256 | sha384 | sha512
-.fi
-.LP
-.nf
-dss_digest_type() = sha | sha224 | sha256 | sha384 | sha512
-.fi
-.LP
-Note that the actual supported dss_digest_type depends on the underlying crypto library\&. In OpenSSL version >= 1\&.0\&.1 the listed digest are supported, while in 1\&.0\&.0 only sha, sha224 and sha256 are supported\&. In version 0\&.9\&.8 only sha is supported\&.
-.LP
-.nf
-ecdsa_digest_type() = sha | sha224 | sha256 | sha384 | sha512
-.fi
-.LP
-.nf
-sign_options() = [{rsa_pad, rsa_sign_padding()} | {rsa_pss_saltlen, integer()}]
-.fi
-.LP
-.nf
-rsa_sign_padding() = rsa_pkcs1_padding | rsa_pkcs1_pss_padding
-.fi
-.LP
-.nf
- hash_algorithms() =  md5 | ripemd160 | sha | sha224 | sha256 | sha384 | sha512 |
-     sha3_224 | sha3_256 | sha3_384 | sha3_512 
-.fi
-.LP
-md4 is also supported for hash_init/1 and hash/2\&. Note that both md4 and md5 are recommended only for compatibility with existing applications\&. Note that the actual supported hash_algorithms depends on the underlying crypto library\&.
-.LP
-.nf
- cipher_algorithms() = aes_cbc | aes_cfb8 | aes_cfb128 | aes_ctr | aes_gcm |
-     aes_ige256 | blowfish_cbc | blowfish_cfb64 | chacha20 | chacha20_poly1305 | des_cbc |
-     des_cfb | des3_cbc | des3_cfb | des_ede3 | rc2_cbc | rc4 
-.fi
-.LP
-.nf
- mac_algorithms() = hmac | cmac | poly1305
-.fi
-.LP
-.nf
- public_key_algorithms() = rsa |dss | ecdsa | dh | ecdh | ec_gf2m
-.fi
-.LP
-Note that ec_gf2m is not strictly a public key algorithm, but a restriction on what curves are supported with ecdsa and ecdh\&.
-.LP
-.nf
-engine_method_type() = engine_method_rsa | engine_method_dsa | engine_method_dh |
-     engine_method_rand | engine_method_ecdh | engine_method_ecdsa |
-     engine_method_ciphers | engine_method_digests | engine_method_store |
-     engine_method_pkey_meths | engine_method_pkey_asn1_meths
-.fi
-.SH EXPORTS
-.LP
-.B
-block_encrypt(Type, Key, PlainText) -> CipherText
+
+\fBsrp_gen_params()\fR\& = 
 .br
+    {user, \fBsrp_user_gen_params()\fR\&} | {host, \fBsrp_host_gen_params()\fR\&}
+.br
+.fi
+.nf
+
+\fBsrp_comp_params()\fR\& = 
+.br
+    {user, \fBsrp_user_comp_params()\fR\&} |
+.br
+    {host, \fBsrp_host_comp_params()\fR\&}
+.br
+.fi
 .RS
 .LP
-Types:
+.nf
+srp_user_gen_params() = [DerivedKey::binary(), Prime::binary(), Generator::binary(), Version::atom()]
+.fi
+.LP
+.nf
+srp_host_gen_params() = [Verifier::binary(), Prime::binary(), Version::atom() ]
+.fi
+.LP
+.nf
+srp_user_comp_params() = [DerivedKey::binary(), Prime::binary(), Generator::binary(), Version::atom() | ScramblerArg::list()]
+.fi
+.LP
+.nf
+srp_host_comp_params() = [Verifier::binary(), Prime::binary(), Version::atom() | ScramblerArg::list()]
+.fi
+.LP
+Where Verifier is \fIv\fR\&, Generator is \fIg\fR\& and Prime is\fI N\fR\&, DerivedKey is \fIX\fR\&, and Scrambler is \fIu\fR\& (optional will be generated if not provided) from SRP design Version = \&'3\&' | \&'6\&' | \&'6a\&'
+.RE
+.SS Public Key Ciphers
+.nf
 
-.RS 3
-Type = des_ecb | blowfish_ecb | aes_ecb 
+\fBpk_encrypt_decrypt_algs()\fR\& = rsa
 .br
-Key = block_key() 
-.br
-PlainText = iodata() 
-.br
+.fi
+.RS
+.LP
+Algorithms for public key encrypt/decrypt\&. Only RSA is supported\&.
 .RE
+.nf
+
+\fBpk_encrypt_decrypt_opts()\fR\& = [\fBrsa_opt()\fR\&] | \fBrsa_compat_opts()\fR\&
+.br
+.fi
+.nf
+
+\fBrsa_opt()\fR\& = 
+.br
+    {rsa_padding, \fBrsa_padding()\fR\&} |
+.br
+    {signature_md, atom()} |
+.br
+    {rsa_mgf1_md, sha} |
+.br
+    {rsa_oaep_label, binary()} |
+.br
+    {rsa_oaep_md, sha}
+.br
+.fi
+.nf
+
+\fBrsa_padding()\fR\& = 
+.br
+    rsa_pkcs1_padding |
+.br
+    rsa_pkcs1_oaep_padding |
+.br
+    rsa_sslv23_padding |
+.br
+    rsa_x931_padding |
+.br
+    rsa_no_padding
+.br
+.fi
+.RS
+.LP
+Options for public key encrypt/decrypt\&. Only RSA is supported\&.
 .RE
+.nf
+
+\fBrsa_compat_opts()\fR\& = [{rsa_pad, \fBrsa_padding()\fR\&}] | \fBrsa_padding()\fR\&
+.br
+.fi
+.RS
+.LP
+Those option forms are kept only for compatibility and should not be used in new code\&.
+.RE
+.SS Public Key Sign and Verify
+.nf
+
+\fBpk_sign_verify_algs()\fR\& = rsa | dss | ecdsa
+.br
+.fi
+.RS
+.LP
+Algorithms for sign and verify\&.
+.RE
+.nf
+
+\fBpk_sign_verify_opts()\fR\& = [\fBrsa_sign_verify_opt()\fR\&]
+.br
+.fi
+.nf
+
+\fBrsa_sign_verify_opt()\fR\& = 
+.br
+    {rsa_padding, \fBrsa_sign_verify_padding()\fR\&} |
+.br
+    {rsa_pss_saltlen, integer()}
+.br
+.fi
+.nf
+
+\fBrsa_sign_verify_padding()\fR\& = 
+.br
+    rsa_pkcs1_padding |
+.br
+    rsa_pkcs1_pss_padding |
+.br
+    rsa_x931_padding |
+.br
+    rsa_no_padding
+.br
+.fi
+.RS
+.LP
+Options for sign and verify\&.
+.RE
+.SS Diffie-Hellman Keys and parameters
+.nf
+
+\fBdh_public()\fR\& = \fBkey_integer()\fR\&
+.br
+.fi
+.nf
+
+\fBdh_private()\fR\& = \fBkey_integer()\fR\&
+.br
+.fi
+.RS
+.RE
+.nf
+
+\fBdh_params()\fR\& = [\fBkey_integer()\fR\&]
+.br
+.fi
+.RS
+.LP
+.nf
+dh_params() = [P, G] | [P, G, PrivateKeyBitLength]
+.fi
+.RE
+.nf
+
+\fBecdh_public()\fR\& = \fBkey_integer()\fR\&
+.br
+.fi
+.nf
+
+\fBecdh_private()\fR\& = \fBkey_integer()\fR\&
+.br
+.fi
+.nf
+
+\fBecdh_params()\fR\& = 
+.br
+    \fBec_named_curve()\fR\& | \fBedwards_curve()\fR\& | \fBec_explicit_curve()\fR\&
+.br
+.fi
+.RS
+.RE
+.SS Types for Engines
+.nf
+
+\fBengine_key_ref()\fR\& = 
+.br
+    #{engine := \fBengine_ref()\fR\&,
+.br
+      key_id := \fBkey_id()\fR\&,
+.br
+      password => \fBpassword()\fR\&,
+.br
+      term() => term()}
+.br
+.fi
+.nf
+
+\fBengine_ref()\fR\& = term()
+.br
+.fi
+.RS
+.LP
+The result of a call to \fBengine_load/3\fR\&\&.
+.RE
+.nf
+
+\fBkey_id()\fR\& = string() | binary()
+.br
+.fi
+.RS
+.LP
+Identifies the key to be used\&. The format depends on the loaded engine\&. It is passed to the \fIENGINE_load_(private|public)_key\fR\& functions in libcrypto\&.
+.RE
+.nf
+
+\fBpassword()\fR\& = string() | binary()
+.br
+.fi
+.RS
+.LP
+The password of the key stored in an engine\&.
+.RE
+.nf
+
+\fBengine_method_type()\fR\& = 
+.br
+    engine_method_rsa |
+.br
+    engine_method_dsa |
+.br
+    engine_method_dh |
+.br
+    engine_method_rand |
+.br
+    engine_method_ecdh |
+.br
+    engine_method_ecdsa |
+.br
+    engine_method_ciphers |
+.br
+    engine_method_digests |
+.br
+    engine_method_store |
+.br
+    engine_method_pkey_meths |
+.br
+    engine_method_pkey_asn1_meths |
+.br
+    engine_method_ec
+.br
+.fi
+.nf
+
+\fBengine_cmnd()\fR\& = {\fBunicode:chardata()\fR\&, \fBunicode:chardata()\fR\&}
+.br
+.fi
+.RS
+.LP
+Pre and Post commands for \fBengine_load/3 and /4\fR\&\&.
+.RE
+.SS Internal data types
+.nf
+
+\fBstream_state()\fR\&
+.br
+.fi
+.nf
+
+\fBhmac_state()\fR\&
+.br
+.fi
+.nf
+
+\fBhash_state()\fR\&
+.br
+.fi
+.RS
+.LP
+Contexts with an internal state that should not be manipulated but passed between function calls\&.
+.RE
+.SH EXPORTS
+.LP
+.nf
+
+.B
+block_encrypt(Type :: block_cipher_without_iv(),
+.B
+              Key :: key(),
+.B
+              PlainText :: iodata()) ->
+.B
+                 binary()
+.br
+.fi
+.br
 .RS
 .LP
 Encrypt \fIPlainText\fR\& according to \fIType\fR\& block cipher\&.
 .LP
-May throw exception \fInotsup\fR\& in case the chosen \fIType\fR\& is not supported by the underlying OpenSSL implementation\&.
+May raise exception \fIerror:notsup\fR\& in case the chosen \fIType\fR\& is not supported by the underlying libcrypto implementation\&.
+.LP
+For keylengths and blocksizes see the \fBUser\&'s Guide\fR\&\&.
 .RE
 .LP
-.B
-block_decrypt(Type, Key, CipherText) -> PlainText
-.br
-.RS
-.LP
-Types:
+.nf
 
-.RS 3
-Type = des_ecb | blowfish_ecb | aes_ecb 
+.B
+block_decrypt(Type :: block_cipher_without_iv(),
+.B
+              Key :: key(),
+.B
+              Data :: iodata()) ->
+.B
+                 binary()
 .br
-Key = block_key() 
+.fi
 .br
-PlainText = iodata() 
-.br
-.RE
-.RE
 .RS
 .LP
 Decrypt \fICipherText\fR\& according to \fIType\fR\& block cipher\&.
 .LP
-May throw exception \fInotsup\fR\& in case the chosen \fIType\fR\& is not supported by the underlying OpenSSL implementation\&.
+May raise exception \fIerror:notsup\fR\& in case the chosen \fIType\fR\& is not supported by the underlying libcrypto implementation\&.
+.LP
+For keylengths and blocksizes see the \fBUser\&'s Guide\fR\&\&.
 .RE
 .LP
 .B
@@ -342,13 +883,13 @@ block_encrypt(aes_gcm, Key, Ivec, {AAD, PlainText, TagLength}) -> {CipherText, C
 Types:
 
 .RS 3
-Type = block_cipher() 
+Type = \fBblock_cipher_with_iv()\fR\&
 .br
-AeadType = aead_cipher() 
+AeadType = \fBaead_cipher()\fR\&
 .br
-Key = block_key() 
+Key = \fBkey()\fR\& | \fBdes3_key()\fR\&
 .br
-PlainText = iodata() 
+PlainText = iodata()
 .br
 AAD = IVec = CipherText = CipherTag = binary()
 .br
@@ -362,7 +903,9 @@ Encrypt \fIPlainText\fR\& according to \fIType\fR\& block cipher\&. \fIIVec\fR\&
 .LP
 In AEAD (Authenticated Encryption with Associated Data) mode, encrypt \fIPlainText\fR\&according to \fIType\fR\& block cipher and calculate \fICipherTag\fR\& that also authenticates the \fIAAD\fR\& (Associated Authenticated Data)\&.
 .LP
-May throw exception \fInotsup\fR\& in case the chosen \fIType\fR\& is not supported by the underlying OpenSSL implementation\&.
+May raise exception \fIerror:notsup\fR\& in case the chosen \fIType\fR\& is not supported by the underlying libcrypto implementation\&.
+.LP
+For keylengths, iv-sizes and blocksizes see the \fBUser\&'s Guide\fR\&\&.
 .RE
 .LP
 .B
@@ -376,13 +919,13 @@ block_decrypt(AeadType, Key, Ivec, {AAD, CipherText, CipherTag}) -> PlainText | 
 Types:
 
 .RS 3
-Type = block_cipher() 
+Type = \fBblock_cipher_with_iv()\fR\&
 .br
-AeadType = aead_cipher() 
+AeadType = \fBaead_cipher()\fR\&
 .br
-Key = block_key() 
+Key = \fBkey()\fR\& | \fBdes3_key()\fR\&
 .br
-PlainText = iodata() 
+PlainText = iodata()
 .br
 AAD = IVec = CipherText = CipherTag = binary()
 .br
@@ -394,49 +937,48 @@ Decrypt \fICipherText\fR\& according to \fIType\fR\& block cipher\&. \fIIVec\fR\
 .LP
 In AEAD (Authenticated Encryption with Associated Data) mode, decrypt \fICipherText\fR\&according to \fIType\fR\& block cipher and check the authenticity the \fIPlainText\fR\& and \fIAAD\fR\& (Associated Authenticated Data) using the \fICipherTag\fR\&\&. May return \fIerror\fR\& if the decryption or validation fail\&'s
 .LP
-May throw exception \fInotsup\fR\& in case the chosen \fIType\fR\& is not supported by the underlying OpenSSL implementation\&.
+May raise exception \fIerror:notsup\fR\& in case the chosen \fIType\fR\& is not supported by the underlying libcrypto implementation\&.
+.LP
+For keylengths, iv-sizes and blocksizes see the \fBUser\&'s Guide\fR\&\&.
 .RE
 .LP
-.B
-bytes_to_integer(Bin) -> Integer 
-.br
-.RS
-.LP
-Types:
+.nf
 
-.RS 3
-Bin = binary() - as returned by crypto functions
+.B
+bytes_to_integer(Bin :: binary()) -> integer()
 .br
-Integer = integer() 
+.fi
 .br
-.RE
-.RE
 .RS
 .LP
 Convert binary representation, of an integer, to an Erlang integer\&.
 .RE
 .LP
+.nf
+
 .B
-compute_key(Type, OthersPublicKey, MyKey, Params) -> SharedSecret
+compute_key(Type, OthersPublicKey, MyPrivateKey, Params) ->
+.B
+               SharedSecret
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
- Type = dh | ecdh | srp 
-.br
-OthersPublicKey = dh_public() | ecdh_public() | srp_public() 
-.br
-MyKey = dh_private() | ecdh_private() | {srp_public(),srp_private()}
-.br
-Params = dh_params() | ecdh_params() | ed_named_curves_ecdh() | SrpUserParams | SrpHostParams
-.br
-SrpUserParams = {user, [DerivedKey::binary(), Prime::binary(), Generator::binary(), Version::atom() | [Scrambler:binary()]]} 
-.br
-SrpHostParams = {host, [Verifier::binary(), Prime::binary(), Version::atom() | [Scrambler::binary]]} 
+Type = dh | ecdh | srp
 .br
 SharedSecret = binary()
+.br
+OthersPublicKey = \fBdh_public()\fR\& | \fBecdh_public()\fR\& | \fBsrp_public()\fR\&
+.br
+MyPrivateKey = 
+.br
+    \fBdh_private()\fR\& | \fBecdh_private()\fR\& | {\fBsrp_public()\fR\&, \fBsrp_private()\fR\&}
+.br
+Params = \fBdh_params()\fR\& | \fBecdh_params()\fR\& | \fBsrp_comp_params()\fR\&
 .br
 .RE
 .RE
@@ -445,69 +987,86 @@ SharedSecret = binary()
 Computes the shared secret from the private key and the other party\&'s public key\&. See also \fBpublic_key:compute_key/2\fR\& 
 .RE
 .LP
-.B
-exor(Data1, Data2) -> Result
-.br
-.RS
-.LP
-Types:
+.nf
 
-.RS 3
-Data1, Data2 = iodata()
+.B
+exor(Bin1 :: iodata(), Bin2 :: iodata()) -> binary()
 .br
-Result = binary()
+.fi
 .br
-.RE
-.RE
 .RS
 .LP
 Performs bit-wise XOR (exclusive or) on the data supplied\&.
 .RE
 .LP
+.nf
+
 .B
-generate_key(Type, Params) -> {PublicKey, PrivKeyOut} 
+generate_key(Type, Params) -> {PublicKey, PrivKeyOut}
 .br
+.fi
+.br
+.nf
+
 .B
-generate_key(Type, Params, PrivKeyIn) -> {PublicKey, PrivKeyOut} 
+generate_key(Type, Params, PrivKeyIn) -> {PublicKey, PrivKeyOut}
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
- Type = dh | ecdh | rsa | srp 
+Type = dh | ecdh | rsa | srp
 .br
-Params = dh_params() | ecdh_params() | ed_named_curves_ecdh()| RsaParams | SrpUserParams | SrpHostParams 
+PublicKey = 
 .br
-RsaParams = {ModulusSizeInBits::integer(), PublicExponent::key_value()}
+    \fBdh_public()\fR\& | \fBecdh_public()\fR\& | \fBrsa_public()\fR\& | \fBsrp_public()\fR\&
 .br
-SrpUserParams = {user, [Generator::binary(), Prime::binary(), Version::atom()]}
+PrivKeyIn = 
 .br
-SrpHostParams = {host, [Verifier::binary(), Generator::binary(), Prime::binary(), Version::atom()]}
+    undefined |
 .br
-PublicKey = dh_public() | ecdh_public() | rsa_public() | srp_public() 
+    \fBdh_private()\fR\& |
 .br
-PrivKeyIn = undefined | dh_private() | ecdh_private() | srp_private() 
+    \fBecdh_private()\fR\& |
 .br
-PrivKeyOut = dh_private() | ecdh_private() | rsa_private() | srp_private() 
+    \fBrsa_private()\fR\& |
+.br
+    {\fBsrp_public()\fR\&, \fBsrp_private()\fR\&}
+.br
+PrivKeyOut = 
+.br
+    \fBdh_private()\fR\& |
+.br
+    \fBecdh_private()\fR\& |
+.br
+    \fBrsa_private()\fR\& |
+.br
+    {\fBsrp_public()\fR\&, \fBsrp_private()\fR\&}
+.br
+Params = 
+.br
+    \fBdh_params()\fR\& | \fBecdh_params()\fR\& | \fBrsa_params()\fR\& | \fBsrp_comp_params()\fR\&
 .br
 .RE
 .RE
 .RS
 .LP
-Generates a public key of type \fIType\fR\&\&. See also \fBpublic_key:generate_key/1\fR\&\&. May throw exception an exception of class \fIerror\fR\&:
+Generates a public key of type \fIType\fR\&\&. See also \fBpublic_key:generate_key/1\fR\&\&. May raise exception:
 .RS 2
 .TP 2
 *
-\fIbadarg\fR\&: an argument is of wrong type or has an illegal value,
+\fIerror:badarg\fR\&: an argument is of wrong type or has an illegal value,
 .LP
 .TP 2
 *
-\fIlow_entropy\fR\&: the random generator failed due to lack of secure "randomness",
+\fIerror:low_entropy\fR\&: the random generator failed due to lack of secure "randomness",
 .LP
 .TP 2
 *
-\fIcomputation_failed\fR\&: the computation fails of another reason than \fIlow_entropy\fR\&\&.
+\fIerror:computation_failed\fR\&: the computation fails of another reason than \fIlow_entropy\fR\&\&.
 .LP
 .RE
 
@@ -517,19 +1076,33 @@ Generates a public key of type \fIType\fR\&\&. See also \fBpublic_key:generate_k
 .B
 Note:
 .RE
-RSA key generation is only available if the runtime was built with dirty scheduler support\&. Otherwise, attempting to generate an RSA key will throw exception \fIerror:notsup\fR\&\&.
+RSA key generation is only available if the runtime was built with dirty scheduler support\&. Otherwise, attempting to generate an RSA key will raise exception \fIerror:notsup\fR\&\&.
 
 .RE
 .LP
+.nf
+
 .B
 hash(Type, Data) -> Digest
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Type = md4 | hash_algorithms()
+Type = 
+.br
+    \fBsha1()\fR\& |
+.br
+    \fBsha2()\fR\& |
+.br
+    \fBsha3()\fR\& |
+.br
+    ripemd160 |
+.br
+    \fBcompatibility_only_hash()\fR\&
 .br
 Data = iodata()
 .br
@@ -541,18 +1114,34 @@ Digest = binary()
 .LP
 Computes a message digest of type \fIType\fR\& from \fIData\fR\&\&.
 .LP
-May throw exception \fInotsup\fR\& in case the chosen \fIType\fR\& is not supported by the underlying OpenSSL implementation\&.
+May raise exception \fIerror:notsup\fR\& in case the chosen \fIType\fR\& is not supported by the underlying libcrypto implementation\&.
 .RE
 .LP
+.nf
+
 .B
-hash_init(Type) -> Context
+hash_init(Type) -> State
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Type = md4 | hash_algorithms()
+Type = 
+.br
+    \fBsha1()\fR\& |
+.br
+    \fBsha2()\fR\& |
+.br
+    \fBsha3()\fR\& |
+.br
+    ripemd160 |
+.br
+    \fBcompatibility_only_hash()\fR\&
+.br
+State = \fBhash_state()\fR\&
 .br
 .RE
 .RE
@@ -560,17 +1149,23 @@ Type = md4 | hash_algorithms()
 .LP
 Initializes the context for streaming hash operations\&. \fIType\fR\& determines which digest to use\&. The returned context should be used as argument to \fBhash_update\fR\&\&.
 .LP
-May throw exception \fInotsup\fR\& in case the chosen \fIType\fR\& is not supported by the underlying OpenSSL implementation\&.
+May raise exception \fIerror:notsup\fR\& in case the chosen \fIType\fR\& is not supported by the underlying libcrypto implementation\&.
 .RE
 .LP
+.nf
+
 .B
-hash_update(Context, Data) -> NewContext
+hash_update(State, Data) -> NewState
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
+State = NewState = \fBhash_state()\fR\&
+.br
 Data = iodata()
 .br
 .RE
@@ -580,14 +1175,20 @@ Data = iodata()
 Updates the digest represented by \fIContext\fR\& using the given \fIData\fR\&\&. \fIContext\fR\& must have been generated using \fBhash_init\fR\& or a previous call to this function\&. \fIData\fR\& can be any length\&. \fINewContext\fR\& must be passed into the next call to \fIhash_update\fR\& or \fBhash_final\fR\&\&.
 .RE
 .LP
+.nf
+
 .B
-hash_final(Context) -> Digest
+hash_final(State) -> Digest
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
+State = \fBhash_state()\fR\&
+.br
 Digest = binary()
 .br
 .RE
@@ -597,22 +1198,28 @@ Digest = binary()
 Finalizes the hash operation referenced by \fIContext\fR\& returned from a previous call to \fBhash_update\fR\&\&. The size of \fIDigest\fR\& is determined by the type of hash function used to generate it\&.
 .RE
 .LP
+.nf
+
 .B
 hmac(Type, Key, Data) -> Mac
 .br
+.fi
+.br
+.nf
+
 .B
 hmac(Type, Key, Data, MacLength) -> Mac
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Type = hash_algorithms() - except ripemd160
+Type = \fBsha1()\fR\& | \fBsha2()\fR\& | \fBsha3()\fR\& | \fBcompatibility_only_hash()\fR\&
 .br
-Key = iodata()
-.br
-Data = iodata()
+Key = Data = iodata()
 .br
 MacLength = integer()
 .br
@@ -627,19 +1234,23 @@ Computes a HMAC of type \fIType\fR\& from \fIData\fR\& using \fIKey\fR\& as the 
 \fIMacLength\fR\& will limit the size of the resultant \fIMac\fR\&\&.
 .RE
 .LP
+.nf
+
 .B
-hmac_init(Type, Key) -> Context
+hmac_init(Type, Key) -> State
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Type = hash_algorithms() - except ripemd160
+Type = \fBsha1()\fR\& | \fBsha2()\fR\& | \fBsha3()\fR\& | \fBcompatibility_only_hash()\fR\&
 .br
 Key = iodata()
 .br
-Context = binary()
+State = \fBhmac_state()\fR\&
 .br
 .RE
 .RE
@@ -648,17 +1259,21 @@ Context = binary()
 Initializes the context for streaming HMAC operations\&. \fIType\fR\& determines which hash function to use in the HMAC operation\&. \fIKey\fR\& is the authentication key\&. The key can be any length\&.
 .RE
 .LP
+.nf
+
 .B
-hmac_update(Context, Data) -> NewContext
+hmac_update(State, Data) -> NewState
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Context = NewContext = binary()
-.br
 Data = iodata()
+.br
+State = NewState = \fBhmac_state()\fR\&
 .br
 .RE
 .RE
@@ -671,19 +1286,25 @@ Updates the HMAC represented by \fIContext\fR\& using the given \fIData\fR\&\&. 
 .B
 Warning:
 .RE
-Do not use a \fIContext\fR\& as argument in more than one call to hmac_update or hmac_final\&. The semantics of reusing old contexts in any way is undefined and could even crash the VM in earlier releases\&. The reason for this limitation is a lack of support in the underlying OpenSSL API\&.
+Do not use a \fIContext\fR\& as argument in more than one call to hmac_update or hmac_final\&. The semantics of reusing old contexts in any way is undefined and could even crash the VM in earlier releases\&. The reason for this limitation is a lack of support in the underlying libcrypto API\&.
 
 .RE
 .LP
+.nf
+
 .B
-hmac_final(Context) -> Mac
+hmac_final(State) -> Mac
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Context = Mac = binary()
+State = \fBhmac_state()\fR\&
+.br
+Mac = binary()
 .br
 .RE
 .RE
@@ -692,17 +1313,23 @@ Context = Mac = binary()
 Finalizes the HMAC operation referenced by \fIContext\fR\&\&. The size of the resultant MAC is determined by the type of hash function used to generate it\&.
 .RE
 .LP
+.nf
+
 .B
-hmac_final_n(Context, HashLen) -> Mac
+hmac_final_n(State, HashLen) -> Mac
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Context = Mac = binary()
+State = \fBhmac_state()\fR\&
 .br
-HashLen = non_neg_integer()
+HashLen = integer()
+.br
+Mac = binary()
 .br
 .RE
 .RE
@@ -711,22 +1338,38 @@ HashLen = non_neg_integer()
 Finalizes the HMAC operation referenced by \fIContext\fR\&\&. \fIHashLen\fR\& must be greater than zero\&. \fIMac\fR\& will be a binary with at most \fIHashLen\fR\& bytes\&. Note that if HashLen is greater than the actual number of bytes returned from the underlying hash, the returned hash will have fewer than \fIHashLen\fR\& bytes\&.
 .RE
 .LP
+.nf
+
 .B
 cmac(Type, Key, Data) -> Mac
 .br
+.fi
+.br
+.nf
+
 .B
 cmac(Type, Key, Data, MacLength) -> Mac
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Type = block_cipher()
+Type = 
 .br
-Key = iodata()
+    \fBcbc_cipher()\fR\& |
 .br
-Data = iodata()
+    \fBcfb_cipher()\fR\& |
+.br
+    blowfish_cbc |
+.br
+    des_ede3 |
+.br
+    rc2_cbc
+.br
+Key = Data = iodata()
 .br
 MacLength = integer()
 .br
@@ -741,33 +1384,59 @@ Computes a CMAC of type \fIType\fR\& from \fIData\fR\& using \fIKey\fR\& as the 
 \fIMacLength\fR\& will limit the size of the resultant \fIMac\fR\&\&.
 .RE
 .LP
-.B
-info_fips() -> Status
-.br
-.RS
-.LP
-Types:
+.nf
 
-.RS 3
-Status = enabled | not_enabled | not_supported
+.B
+info_fips() -> not_supported | not_enabled | enabled
 .br
-.RE
-.RE
+.fi
+.br
 .RS
 .LP
-Provides information about the FIPS operating status of crypto and the underlying OpenSSL library\&. If crypto was built with FIPS support this can be either \fIenabled\fR\& (when running in FIPS mode) or \fInot_enabled\fR\&\&. For other builds this value is always \fInot_supported\fR\&\&.
+Provides information about the FIPS operating status of crypto and the underlying libcrypto library\&. If crypto was built with FIPS support this can be either \fIenabled\fR\& (when running in FIPS mode) or \fInot_enabled\fR\&\&. For other builds this value is always \fInot_supported\fR\&\&.
+.LP
+See \fBenable_fips_mode/1\fR\& about how to enable FIPS mode\&.
 .LP
 
 .RS -4
 .B
 Warning:
 .RE
-In FIPS mode all non-FIPS compliant algorithms are disabled and throw exception \fInot_supported\fR\&\&. Check \fBsupports\fR\& that in FIPS mode returns the restricted list of available algorithms\&.
+In FIPS mode all non-FIPS compliant algorithms are disabled and raise exception \fIerror:notsup\fR\&\&. Check \fBsupports\fR\& that in FIPS mode returns the restricted list of available algorithms\&.
 
 .RE
 .LP
+.nf
+
 .B
-info_lib() -> [{Name,VerNum,VerStr}]
+enable_fips_mode(Enable) -> Result
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Enable = Result = boolean()
+.br
+.RE
+.RE
+.RS
+.LP
+Enables (\fIEnable = true\fR\&) or disables (\fIEnable = false\fR\&) FIPS mode\&. Returns \fItrue\fR\& if the operation was successful or \fIfalse\fR\& otherwise\&.
+.LP
+Note that to enable FIPS mode succesfully, OTP must be built with the configure option \fI--enable-fips\fR\&, and the underlying libcrypto must also support FIPS\&.
+.LP
+See also \fBinfo_fips/0\fR\&\&.
+.RE
+.LP
+.nf
+
+.B
+info_lib() -> [{Name, VerNum, VerStr}]
+.br
+.fi
 .br
 .RS
 .LP
@@ -800,19 +1469,23 @@ Provides the name and version of the libraries used by crypto\&.
 .B
 Note:
 .RE
-From OTP R16 the \fInumeric version\fR\& represents the version of the OpenSSL \fIheader files\fR\& (\fIopenssl/opensslv\&.h\fR\&) used when crypto was compiled\&. The text variant represents the OpenSSL library used at runtime\&. In earlier OTP versions both numeric and text was taken from the library\&.
+From OTP R16 the \fInumeric version\fR\& represents the version of the OpenSSL \fIheader files\fR\& (\fIopenssl/opensslv\&.h\fR\&) used when crypto was compiled\&. The text variant represents the libcrypto library used at runtime\&. In earlier OTP versions both numeric and text was taken from the library\&.
 
 .RE
 .LP
+.nf
+
 .B
 mod_pow(N, P, M) -> Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-N, P, M = binary() | integer()
+N = P = M = binary() | integer()
 .br
 Result = binary() | error
 .br
@@ -823,19 +1496,25 @@ Result = binary() | error
 Computes the function \fIN^P mod M\fR\&\&.
 .RE
 .LP
+.nf
+
 .B
-next_iv(Type, Data) -> NextIVec
+next_iv(Type :: cbc_cipher(), Data) -> NextIVec
 .br
+.fi
+.br
+.nf
+
 .B
-next_iv(Type, Data, IVec) -> NextIVec
+next_iv(Type :: des_cfb, Data, IVec) -> NextIVec
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Type = des_cbc | des3_cbc | aes_cbc | des_cfb
-.br
 Data = iodata()
 .br
 IVec = NextIVec = binary()
@@ -847,18 +1526,18 @@ IVec = NextIVec = binary()
 Returns the initialization vector to be used in the next iteration of encrypt/decrypt of type \fIType\fR\&\&. \fIData\fR\& is the encrypted data from the previous iteration step\&. The \fIIVec\fR\& argument is only needed for \fIdes_cfb\fR\& as the vector used in the previous iteration step\&.
 .RE
 .LP
+.nf
+
 .B
-poly1305(Key, Data) -> Mac
+poly1305(Key :: iodata(), Data :: iodata()) -> Mac
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Key = iodata()
-.br
-Data = iodata()
-.br
 Mac = binary()
 .br
 .RE
@@ -868,21 +1547,27 @@ Mac = binary()
 Computes a POLY1305 message authentication code (\fIMac\fR\&) from \fIData\fR\& using \fIKey\fR\& as the authentication key\&.
 .RE
 .LP
+.nf
+
 .B
-private_decrypt(Type, CipherText, PrivateKey, Padding) -> PlainText
+private_decrypt(Algorithm, CipherText, PrivateKey, Options) ->
+.B
+                   PlainText
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Type = rsa
+Algorithm = \fBpk_encrypt_decrypt_algs()\fR\&
 .br
 CipherText = binary()
 .br
-PrivateKey = rsa_private() | engine_key_ref()
+PrivateKey = \fBrsa_private()\fR\& | \fBengine_key_ref()\fR\&
 .br
-Padding = rsa_pkcs1_padding | rsa_pkcs1_oaep_padding | rsa_no_padding
+Options = \fBpk_encrypt_decrypt_opts()\fR\&
 .br
 PlainText = binary()
 .br
@@ -893,45 +1578,27 @@ PlainText = binary()
 Decrypts the \fICipherText\fR\&, encrypted with \fBpublic_encrypt/4\fR\& (or equivalent function) using the \fIPrivateKey\fR\&, and returns the plaintext (message digest)\&. This is a low level signature verification operation used for instance by older versions of the SSL protocol\&. See also \fBpublic_key:decrypt_private/[2,3]\fR\& 
 .RE
 .LP
+.nf
+
 .B
-privkey_to_pubkey(Type, EnginePrivateKeyRef) -> PublicKey
+private_encrypt(Algorithm, PlainText, PrivateKey, Options) ->
+.B
+                   CipherText
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Type = rsa | dss
-.br
-EnginePrivateKeyRef = engine_key_ref()
-.br
-PublicKey = rsa_public() | dss_public()
-.br
-.RE
-.RE
-.RS
-.LP
-Fetches the corresponding public key from a private key stored in an Engine\&. The key must be of the type indicated by the Type parameter\&.
-.RE
-.LP
-.B
-private_encrypt(Type, PlainText, PrivateKey, Padding) -> CipherText
-.br
-.RS
-.LP
-Types:
-
-.RS 3
-Type = rsa
+Algorithm = \fBpk_encrypt_decrypt_algs()\fR\&
 .br
 PlainText = binary()
 .br
-.RS 2
- The size of the \fIPlainText\fR\& must be less than \fIbyte_size(N)-11\fR\& if \fIrsa_pkcs1_padding\fR\& is used, and \fIbyte_size(N)\fR\& if \fIrsa_no_padding\fR\& is used, where N is public modulus of the RSA key\&.
-.RE
-PrivateKey = rsa_private() | engine_key_ref()
+PrivateKey = \fBrsa_private()\fR\& | \fBengine_key_ref()\fR\&
 .br
-Padding = rsa_pkcs1_padding | rsa_no_padding
+Options = \fBpk_encrypt_decrypt_opts()\fR\&
 .br
 CipherText = binary()
 .br
@@ -942,21 +1609,27 @@ CipherText = binary()
 Encrypts the \fIPlainText\fR\& using the \fIPrivateKey\fR\& and returns the ciphertext\&. This is a low level signature operation used for instance by older versions of the SSL protocol\&. See also \fBpublic_key:encrypt_private/[2,3]\fR\& 
 .RE
 .LP
+.nf
+
 .B
-public_decrypt(Type, CipherText, PublicKey, Padding) -> PlainText
+public_decrypt(Algorithm, CipherText, PublicKey, Options) ->
+.B
+                  PlainText
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Type = rsa
+Algorithm = \fBpk_encrypt_decrypt_algs()\fR\&
 .br
 CipherText = binary()
 .br
-PublicKey = rsa_public() | engine_key_ref()
+PublicKey = \fBrsa_public()\fR\& | \fBengine_key_ref()\fR\&
 .br
-Padding = rsa_pkcs1_padding | rsa_no_padding
+Options = \fBpk_encrypt_decrypt_opts()\fR\&
 .br
 PlainText = binary()
 .br
@@ -967,24 +1640,27 @@ PlainText = binary()
 Decrypts the \fICipherText\fR\&, encrypted with \fBprivate_encrypt/4\fR\&(or equivalent function) using the \fIPrivateKey\fR\&, and returns the plaintext (message digest)\&. This is a low level signature verification operation used for instance by older versions of the SSL protocol\&. See also \fBpublic_key:decrypt_public/[2,3]\fR\& 
 .RE
 .LP
+.nf
+
 .B
-public_encrypt(Type, PlainText, PublicKey, Padding) -> CipherText
+public_encrypt(Algorithm, PlainText, PublicKey, Options) ->
+.B
+                  CipherText
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Type = rsa
+Algorithm = \fBpk_encrypt_decrypt_algs()\fR\&
 .br
 PlainText = binary()
 .br
-.RS 2
- The size of the \fIPlainText\fR\& must be less than \fIbyte_size(N)-11\fR\& if \fIrsa_pkcs1_padding\fR\& is used, and \fIbyte_size(N)\fR\& if \fIrsa_no_padding\fR\& is used, where N is public modulus of the RSA key\&.
-.RE
-PublicKey = rsa_public() | engine_key_ref()
+PublicKey = \fBrsa_public()\fR\& | \fBengine_key_ref()\fR\&
 .br
-Padding = rsa_pkcs1_padding | rsa_pkcs1_oaep_padding | rsa_no_padding
+Options = \fBpk_encrypt_decrypt_opts()\fR\&
 .br
 CipherText = binary()
 .br
@@ -995,21 +1671,16 @@ CipherText = binary()
 Encrypts the \fIPlainText\fR\& (message digest) using the \fIPublicKey\fR\& and returns the \fICipherText\fR\&\&. This is a low level signature operation used for instance by older versions of the SSL protocol\&. See also \fBpublic_key:encrypt_public/[2,3]\fR\& 
 .RE
 .LP
-.B
-rand_seed(Seed) -> ok
-.br
-.RS
-.LP
-Types:
+.nf
 
-.RS 3
-Seed = binary()
+.B
+rand_seed(Seed :: binary()) -> ok
 .br
-.RE
-.RE
+.fi
+.br
 .RS
 .LP
-Set the seed for PRNG to the given binary\&. This calls the RAND_seed function from openssl\&. Only use this if the system you are running on does not have enough "randomness" built in\&. Normally this is when \fBstrong_rand_bytes/1\fR\& throws \fIlow_entropy\fR\&
+Set the seed for PRNG to the given binary\&. This calls the RAND_seed function from openssl\&. Only use this if the system you are running on does not have enough "randomness" built in\&. Normally this is when \fBstrong_rand_bytes/1\fR\& raises \fIerror:low_entropy\fR\&
 .RE
 .LP
 .B
@@ -1029,84 +1700,56 @@ Lo, Hi, N = integer()
 Generate a random number \fIN, Lo =< N < Hi\&.\fR\& Uses the \fIcrypto\fR\& library pseudo-random number generator\&. \fIHi\fR\& must be larger than \fILo\fR\&\&.
 .RE
 .LP
-.B
-sign(Algorithm, DigestType, Msg, Key) -> binary()
-.br
-.B
-sign(Algorithm, DigestType, Msg, Key, Options) -> binary()
-.br
-.RS
-.LP
-Types:
+.nf
 
-.RS 3
-Algorithm = rsa | dss | ecdsa 
-.br
-Msg = binary() | {digest,binary()}
-.br
-.RS 2
-The msg is either the binary "cleartext" data to be signed or it is the hashed value of "cleartext" i\&.e\&. the digest (plaintext)\&.
-.RE
-DigestType = rsa_digest_type() | dss_digest_type() | ecdsa_digest_type()
-.br
-Key = rsa_private() | dss_private() | [ecdh_private(),ecdh_params()] | engine_key_ref()
-.br
-Options = sign_options()
-.br
-.RE
-.RE
-.RS
-.LP
-Creates a digital signature\&.
-.LP
-Algorithm \fIdss\fR\& can only be used together with digest type \fIsha\fR\&\&.
-.LP
-See also \fBpublic_key:sign/3\fR\&\&.
-.RE
-.LP
 .B
-start() -> ok
+start() -> ok | {error, Reason :: term()}
+.br
+.fi
 .br
 .RS
 .LP
 Equivalent to application:start(crypto)\&.
 .RE
 .LP
+.nf
+
 .B
-stop() -> ok
+stop() -> ok | {error, Reason :: term()}
+.br
+.fi
 .br
 .RS
 .LP
 Equivalent to application:stop(crypto)\&.
 .RE
 .LP
-.B
-strong_rand_bytes(N) -> binary()
-.br
-.RS
-.LP
-Types:
+.nf
 
-.RS 3
-N = integer()
+.B
+strong_rand_bytes(N :: integer() >= 0) -> binary()
 .br
-.RE
-.RE
+.fi
+.br
 .RS
 .LP
 Generates N bytes randomly uniform 0\&.\&.255, and returns the result in a binary\&. Uses a cryptographically secure prng seeded and periodically mixed with operating system provided entropy\&. By default this is the \fIRAND_bytes\fR\& method from OpenSSL\&.
 .LP
-May throw exception \fIlow_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
+May raise exception \fIerror:low_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
 .RE
 .LP
+.nf
+
 .B
 rand_seed() -> rand:state()
+.br
+.fi
 .br
 .RS
 .LP
 Creates state object for \fBrandom number generation\fR\&, in order to generate cryptographically strong random numbers (based on OpenSSL\&'s \fIBN_rand_range\fR\&), and saves it in the process dictionary before returning it as well\&. See also \fBrand:seed/1\fR\& and \fBrand_seed_s/0\fR\&\&.
 .LP
-When using the state object from this function the \fBrand\fR\& functions using it may throw exception \fIlow_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
+When using the state object from this function the \fBrand\fR\& functions using it may raise exception \fIerror:low_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
 .LP
 \fIExample\fR\&
 .LP
@@ -1118,14 +1761,18 @@ _FloatValue = rand:uniform().     % [0.0; 1.0[
 .fi
 .RE
 .LP
+.nf
+
 .B
 rand_seed_s() -> rand:state()
+.br
+.fi
 .br
 .RS
 .LP
 Creates state object for \fBrandom number generation\fR\&, in order to generate cryptographically strongly random numbers (based on OpenSSL\&'s \fIBN_rand_range\fR\&)\&. See also \fBrand:seed_s/1\fR\&\&.
 .LP
-When using the state object from this function the \fBrand\fR\& functions using it may throw exception \fIlow_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
+When using the state object from this function the \fBrand\fR\& functions using it may raise exception \fIerror:low_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
 .LP
 
 .RS -4
@@ -1154,7 +1801,7 @@ Alg = crypto | crypto_cache
 .LP
 Creates state object for \fBrandom number generation\fR\&, in order to generate cryptographically strong random numbers\&. See also \fBrand:seed/1\fR\& and \fBrand_seed_alg_s/1\fR\&\&.
 .LP
-When using the state object from this function the \fBrand\fR\& functions using it may throw exception \fIlow_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
+When using the state object from this function the \fBrand\fR\& functions using it may raise exception \fIerror:low_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
 .LP
 The cache size can be changed from its default value using the \fB crypto app\&'s \fR\& configuration parameter \fIrand_cache_size\fR\&\&.
 .LP
@@ -1188,7 +1835,7 @@ If \fIAlg\fR\& is \fIcrypto\fR\& this function behaves exactly like \fBrand_seed
 .LP
 If \fIAlg\fR\& is \fIcrypto_cache\fR\& this function fetches random data with OpenSSL\&'s \fIRAND_bytes\fR\& and caches it for speed using an internal word size of 56 bits that makes calculations fast on 64 bit machines\&.
 .LP
-When using the state object from this function the \fBrand\fR\& functions using it may throw exception \fIlow_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
+When using the state object from this function the \fBrand\fR\& functions using it may raise exception \fIerror:low_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
 .LP
 The cache size can be changed from its default value using the \fB crypto app\&'s \fR\& configuration parameter \fIrand_cache_size\fR\&\&.
 .LP
@@ -1205,29 +1852,39 @@ The only supported usage is to generate one distinct random sequence from this s
 
 .RE
 .LP
+.nf
+
 .B
 stream_init(Type, Key) -> State
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Type = rc4 
-.br
-State = opaque() 
+Type = rc4
 .br
 Key = iodata()
+.br
+State = \fBstream_state()\fR\&
 .br
 .RE
 .RE
 .RS
 .LP
 Initializes the state for use in RC4 stream encryption \fBstream_encrypt\fR\& and \fBstream_decrypt\fR\&
+.LP
+For keylengths see the \fBUser\&'s Guide\fR\&\&.
 .RE
 .LP
+.nf
+
 .B
 stream_init(Type, Key, IVec) -> State
+.br
+.fi
 .br
 .RS
 .LP
@@ -1236,30 +1893,40 @@ Types:
 .RS 3
 Type = aes_ctr | chacha20
 .br
-State = opaque() 
-.br
 Key = iodata()
 .br
 IVec = binary()
+.br
+State = \fBstream_state()\fR\&
 .br
 .RE
 .RE
 .RS
 .LP
 Initializes the state for use in streaming AES encryption using Counter mode (CTR)\&. \fIKey\fR\& is the AES key and must be either 128, 192, or 256 bits long\&. \fIIVec\fR\& is an arbitrary initializing vector of 128 bits (16 bytes)\&. This state is for use with \fBstream_encrypt\fR\& and \fBstream_decrypt\fR\&\&.
+.LP
+For keylengths and iv-sizes see the \fBUser\&'s Guide\fR\&\&.
 .RE
 .LP
+.nf
+
 .B
-stream_encrypt(State, PlainText) -> { NewState, CipherText}
+stream_encrypt(State, PlainText) -> {NewState, CipherText}
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Text = iodata()
+State = \fBstream_state()\fR\&
 .br
-CipherText = binary()
+PlainText = iodata()
+.br
+NewState = \fBstream_state()\fR\&
+.br
+CipherText = iodata()
 .br
 .RE
 .RE
@@ -1268,17 +1935,25 @@ CipherText = binary()
 Encrypts \fIPlainText\fR\& according to the stream cipher \fIType\fR\& specified in stream_init/3\&. \fIText\fR\& can be any number of bytes\&. The initial \fIState\fR\& is created using \fBstream_init\fR\&\&. \fINewState\fR\& must be passed into the next call to \fIstream_encrypt\fR\&\&.
 .RE
 .LP
+.nf
+
 .B
-stream_decrypt(State, CipherText) -> { NewState, PlainText }
+stream_decrypt(State, CipherText) -> {NewState, PlainText}
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
+State = \fBstream_state()\fR\&
+.br
 CipherText = iodata()
 .br
-PlainText = binary()
+NewState = \fBstream_state()\fR\&
+.br
+PlainText = iodata()
 .br
 .RE
 .RE
@@ -1287,32 +1962,78 @@ PlainText = binary()
 Decrypts \fICipherText\fR\& according to the stream cipher \fIType\fR\& specified in stream_init/3\&. \fIPlainText\fR\& can be any number of bytes\&. The initial \fIState\fR\& is created using \fBstream_init\fR\&\&. \fINewState\fR\& must be passed into the next call to \fIstream_decrypt\fR\&\&.
 .RE
 .LP
+.nf
+
 .B
-supports() -> AlgorithmList 
+supports() -> [Support]
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
- AlgorithmList = [{hashs, [hash_algorithms()]}, {ciphers, [cipher_algorithms()]}, {public_keys, [public_key_algorithms()]}, {macs, [mac_algorithms()]}] 
+Support = 
+.br
+    {hashs, Hashs} |
+.br
+    {ciphers, Ciphers} |
+.br
+    {public_keys, PKs} |
+.br
+    {macs, Macs} |
+.br
+    {curves, Curves}
+.br
+Hashs = 
+.br
+    [\fBsha1()\fR\& |
+.br
+     \fBsha2()\fR\& |
+.br
+     \fBsha3()\fR\& |
+.br
+     ripemd160 |
+.br
+     \fBcompatibility_only_hash()\fR\&]
+.br
+Ciphers = 
+.br
+    [\fBstream_cipher()\fR\& |
+.br
+     \fBblock_cipher_with_iv()\fR\& |
+.br
+     \fBblock_cipher_without_iv()\fR\& |
+.br
+     \fBaead_cipher()\fR\&]
+.br
+PKs = [rsa | dss | ecdsa | dh | ecdh | ec_gf2m]
+.br
+Macs = [hmac | cmac | poly1305]
+.br
+Curves = [\fBec_named_curve()\fR\& | \fBedwards_curve()\fR\&]
 .br
 .RE
 .RE
 .RS
 .LP
-Can be used to determine which crypto algorithms that are supported by the underlying OpenSSL library
+Can be used to determine which crypto algorithms that are supported by the underlying libcrypto library
 .RE
 .LP
+.nf
+
 .B
-ec_curves() -> EllipticCurveList 
+ec_curves() -> [EllipticCurve]
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-EllipticCurveList = [ec_named_curve()]
+EllipticCurve = \fBec_named_curve()\fR\& | \fBedwards_curve()\fR\&
 .br
 .RE
 .RE
@@ -1321,17 +2042,21 @@ EllipticCurveList = [ec_named_curve()]
 Can be used to determine which named elliptic curves are supported\&.
 .RE
 .LP
+.nf
+
 .B
-ec_curve(NamedCurve) -> EllipticCurve 
+ec_curve(CurveName) -> ExplicitCurve
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-NamedCurve = ec_named_curve()
+CurveName = \fBec_named_curve()\fR\&
 .br
-EllipticCurve = ec_explicit_curve()
+ExplicitCurve = \fBec_explicit_curve()\fR\&
 .br
 .RE
 .RE
@@ -1340,31 +2065,110 @@ EllipticCurve = ec_explicit_curve()
 Return the defining parameters of a elliptic curve\&.
 .RE
 .LP
+.nf
+
 .B
-verify(Algorithm, DigestType, Msg, Signature, Key) -> boolean()
+sign(Algorithm, DigestType, Msg, Key) -> Signature
 .br
+.fi
+.br
+.nf
+
 .B
-verify(Algorithm, DigestType, Msg, Signature, Key, Options) -> boolean()
+sign(Algorithm, DigestType, Msg, Key, Options) -> Signature
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
- Algorithm = rsa | dss | ecdsa 
+Algorithm = \fBpk_sign_verify_algs()\fR\&
 .br
-Msg = binary() | {digest,binary()}
+DigestType = 
 .br
-.RS 2
-The msg is either the binary "cleartext" data or it is the hashed value of "cleartext" i\&.e\&. the digest (plaintext)\&.
-.RE
-DigestType = rsa_digest_type() | dss_digest_type() | ecdsa_digest_type()
+    \fBrsa_digest_type()\fR\& |
+.br
+    \fBdss_digest_type()\fR\& |
+.br
+    \fBecdsa_digest_type()\fR\& |
+.br
+    none
+.br
+Msg = binary() | {digest, binary()}
+.br
+Key = 
+.br
+    \fBrsa_private()\fR\& |
+.br
+    \fBdss_private()\fR\& |
+.br
+    [\fBecdsa_private()\fR\& | \fBecdsa_params()\fR\&] |
+.br
+    \fBengine_key_ref()\fR\&
+.br
+Options = \fBpk_sign_verify_opts()\fR\&
 .br
 Signature = binary()
 .br
-Key = rsa_public() | dss_public() | [ecdh_public(),ecdh_params()] | engine_key_ref()
+.RE
+.RE
+.RS
+.LP
+Creates a digital signature\&.
+.LP
+The msg is either the binary "cleartext" data to be signed or it is the hashed value of "cleartext" i\&.e\&. the digest (plaintext)\&.
+.LP
+Algorithm \fIdss\fR\& can only be used together with digest type \fIsha\fR\&\&.
+.LP
+See also \fBpublic_key:sign/3\fR\&\&.
+.RE
+.LP
+.nf
+
+.B
+verify(Algorithm, DigestType, Msg, Signature, Key) -> Result
 .br
-Options = sign_options()
+.fi
+.br
+.nf
+
+.B
+verify(Algorithm, DigestType, Msg, Signature, Key, Options) ->
+.B
+          Result
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Algorithm = \fBpk_sign_verify_algs()\fR\&
+.br
+DigestType = 
+.br
+    \fBrsa_digest_type()\fR\& | \fBdss_digest_type()\fR\& | \fBecdsa_digest_type()\fR\&
+.br
+Msg = binary() | {digest, binary()}
+.br
+Signature = binary()
+.br
+Key = 
+.br
+    \fBrsa_public()\fR\& |
+.br
+    \fBdss_public()\fR\& |
+.br
+    [\fBecdsa_public()\fR\& | \fBecdsa_params()\fR\&] |
+.br
+    \fBengine_key_ref()\fR\&
+.br
+Options = \fBpk_sign_verify_opts()\fR\&
+.br
+Result = boolean()
 .br
 .RE
 .RE
@@ -1372,20 +2176,51 @@ Options = sign_options()
 .LP
 Verifies a digital signature
 .LP
+The msg is either the binary "cleartext" data to be signed or it is the hashed value of "cleartext" i\&.e\&. the digest (plaintext)\&.
+.LP
 Algorithm \fIdss\fR\& can only be used together with digest type \fIsha\fR\&\&.
 .LP
 See also \fBpublic_key:verify/4\fR\&\&.
 .RE
 .LP
+.nf
+
 .B
-engine_get_all_methods() -> Result
+privkey_to_pubkey(Type, EnginePrivateKeyRef) -> PublicKey
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Result = [EngineMethod::atom()]
+Type = rsa | dss
+.br
+EnginePrivateKeyRef = \fBengine_key_ref()\fR\&
+.br
+PublicKey = \fBrsa_public()\fR\& | \fBdss_public()\fR\&
+.br
+.RE
+.RE
+.RS
+.LP
+Fetches the corresponding public key from a private key stored in an Engine\&. The key must be of the type indicated by the Type parameter\&.
+.RE
+.LP
+.nf
+
+.B
+engine_get_all_methods() -> Result
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Result = [\fBengine_method_type()\fR\&]
 .br
 .RE
 .RE
@@ -1393,24 +2228,30 @@ Result = [EngineMethod::atom()]
 .LP
 Returns a list of all possible engine methods\&.
 .LP
-May throw exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+May raise exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .LP
 See also the chapter \fBEngine Load\fR\& in the User\&'s Guide\&.
 .RE
 .LP
+.nf
+
 .B
 engine_load(EngineId, PreCmds, PostCmds) -> Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-EngineId = unicode:chardata()
+EngineId = \fBunicode:chardata()\fR\&
 .br
-PreCmds, PostCmds = [{unicode:chardata(), unicode:chardata()}]
+PreCmds = PostCmds = [\fBengine_cmnd()\fR\&]
 .br
-Result = {ok, Engine::engine_ref()} | {error, Reason::term()}
+Result = 
+.br
+    {ok, Engine :: \fBengine_ref()\fR\&} | {error, Reason :: term()}
 .br
 .RE
 .RE
@@ -1418,26 +2259,32 @@ Result = {ok, Engine::engine_ref()} | {error, Reason::term()}
 .LP
 Loads the OpenSSL engine given by \fIEngineId\fR\& if it is available and then returns ok and an engine handle\&. This function is the same as calling \fIengine_load/4\fR\& with \fIEngineMethods\fR\& set to a list of all the possible methods\&. An error tuple is returned if the engine can\&'t be loaded\&.
 .LP
-The function throws a badarg if the parameters are in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameters are in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .LP
 See also the chapter \fBEngine Load\fR\& in the User\&'s Guide\&.
 .RE
 .LP
+.nf
+
 .B
 engine_load(EngineId, PreCmds, PostCmds, EngineMethods) -> Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-EngineId = unicode:chardata()
+EngineId = \fBunicode:chardata()\fR\&
 .br
-PreCmds, PostCmds = [{unicode:chardata(), unicode:chardata()}]
+PreCmds = PostCmds = [\fBengine_cmnd()\fR\&]
 .br
-EngineMethods = [engine_method_type()]
+EngineMethods = [\fBengine_method_type()\fR\&]
 .br
-Result = {ok, Engine::engine_ref()} | {error, Reason::term()}
+Result = 
+.br
+    {ok, Engine :: \fBengine_ref()\fR\&} | {error, Reason :: term()}
 .br
 .RE
 .RE
@@ -1445,22 +2292,26 @@ Result = {ok, Engine::engine_ref()} | {error, Reason::term()}
 .LP
 Loads the OpenSSL engine given by \fIEngineId\fR\& if it is available and then returns ok and an engine handle\&. An error tuple is returned if the engine can\&'t be loaded\&.
 .LP
-The function throws a badarg if the parameters are in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameters are in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .LP
 See also the chapter \fBEngine Load\fR\& in the User\&'s Guide\&.
 .RE
 .LP
+.nf
+
 .B
 engine_unload(Engine) -> Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Engine = engine_ref()
+Engine = \fBengine_ref()\fR\&
 .br
-Result = ok | {error, Reason::term()}
+Result = ok | {error, Reason :: term()}
 .br
 .RE
 .RE
@@ -1468,22 +2319,28 @@ Result = ok | {error, Reason::term()}
 .LP
 Unloads the OpenSSL engine given by \fIEngine\fR\&\&. An error tuple is returned if the engine can\&'t be unloaded\&.
 .LP
-The function throws a badarg if the parameter is in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameter is in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .LP
 See also the chapter \fBEngine Load\fR\& in the User\&'s Guide\&.
 .RE
 .LP
+.nf
+
 .B
 engine_by_id(EngineId) -> Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-EngineID = unicode:chardata()engine_ref()
+EngineId = \fBunicode:chardata()\fR\&
 .br
-Result = {ok, Engine::engine_ref()} | {error, Reason::term()}
+Result = 
+.br
+    {ok, Engine :: \fBengine_ref()\fR\&} | {error, Reason :: term()}
 .br
 .RE
 .RE
@@ -1491,26 +2348,28 @@ Result = {ok, Engine::engine_ref()} | {error, Reason::term()}
 .LP
 Get a reference to an already loaded engine with \fIEngineId\fR\&\&. An error tuple is returned if the engine can\&'t be unloaded\&.
 .LP
-The function throws a badarg if the parameter is in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameter is in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .LP
 See also the chapter \fBEngine Load\fR\& in the User\&'s Guide\&.
 .RE
 .LP
+.nf
+
 .B
 engine_ctrl_cmd_string(Engine, CmdName, CmdArg) -> Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Engine = engine_ref()
+Engine = term()
 .br
-CmdName = unicode:chardata()
+CmdName = CmdArg = \fBunicode:chardata()\fR\&
 .br
-CmdArg = unicode:chardata()
-.br
-Result = ok | {error, Reason::term()}
+Result = ok | {error, Reason :: term()}
 .br
 .RE
 .RE
@@ -1518,26 +2377,30 @@ Result = ok | {error, Reason::term()}
 .LP
 Sends ctrl commands to the OpenSSL engine given by \fIEngine\fR\&\&. This function is the same as calling \fIengine_ctrl_cmd_string/4\fR\& with \fIOptional\fR\& set to \fIfalse\fR\&\&.
 .LP
-The function throws a badarg if the parameters are in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameters are in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .RE
 .LP
+.nf
+
 .B
-engine_ctrl_cmd_string(Engine, CmdName, CmdArg, Optional) -> Result
+engine_ctrl_cmd_string(Engine, CmdName, CmdArg, Optional) ->
+.B
+                          Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Engine = engine_ref()
+Engine = term()
 .br
-CmdName = unicode:chardata()
-.br
-CmdArg = unicode:chardata()
+CmdName = CmdArg = \fBunicode:chardata()\fR\&
 .br
 Optional = boolean()
 .br
-Result = ok | {error, Reason::term()}
+Result = ok | {error, Reason :: term()}
 .br
 .RE
 .RE
@@ -1545,20 +2408,24 @@ Result = ok | {error, Reason::term()}
 .LP
 Sends ctrl commands to the OpenSSL engine given by \fIEngine\fR\&\&. \fIOptional\fR\& is a boolean argument that can relax the semantics of the function\&. If set to \fItrue\fR\& it will only return failure if the ENGINE supported the given command name but failed while executing it, if the ENGINE doesn\&'t support the command name it will simply return success without doing anything\&. In this case we assume the user is only supplying commands specific to the given ENGINE so we set this to \fIfalse\fR\&\&.
 .LP
-The function throws a badarg if the parameters are in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameters are in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .RE
 .LP
+.nf
+
 .B
 engine_add(Engine) -> Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Engine = engine_ref()
+Engine = \fBengine_ref()\fR\&
 .br
-Result = ok | {error, Reason::term()}
+Result = ok | {error, Reason :: term()}
 .br
 .RE
 .RE
@@ -1566,20 +2433,24 @@ Result = ok | {error, Reason::term()}
 .LP
 Add the engine to OpenSSL\&'s internal list\&.
 .LP
-The function throws a badarg if the parameters are in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameters are in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .RE
 .LP
+.nf
+
 .B
 engine_remove(Engine) -> Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Engine = engine_ref()
+Engine = \fBengine_ref()\fR\&
 .br
-Result = ok | {error, Reason::term()}
+Result = ok | {error, Reason :: term()}
 .br
 .RE
 .RE
@@ -1587,20 +2458,24 @@ Result = ok | {error, Reason::term()}
 .LP
 Remove the engine from OpenSSL\&'s internal list\&.
 .LP
-The function throws a badarg if the parameters are in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameters are in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .RE
 .LP
+.nf
+
 .B
 engine_get_id(Engine) -> EngineId
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Engine = engine_ref()
+Engine = \fBengine_ref()\fR\&
 .br
-EngineId = unicode:chardata()
+EngineId = \fBunicode:chardata()\fR\&
 .br
 .RE
 .RE
@@ -1608,20 +2483,24 @@ EngineId = unicode:chardata()
 .LP
 Return the ID for the engine, or an empty binary if there is no id set\&.
 .LP
-The function throws a badarg if the parameters are in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameters are in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .RE
 .LP
+.nf
+
 .B
 engine_get_name(Engine) -> EngineName
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Engine = engine_ref()
+Engine = \fBengine_ref()\fR\&
 .br
-EngineName = unicode:chardata()
+EngineName = \fBunicode:chardata()\fR\&
 .br
 .RE
 .RE
@@ -1629,18 +2508,22 @@ EngineName = unicode:chardata()
 .LP
 Return the name (eg a description) for the engine, or an empty binary if there is no name set\&.
 .LP
-The function throws a badarg if the parameters are in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameters are in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .RE
 .LP
+.nf
+
 .B
 engine_list() -> Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Result = [EngineId::unicode:chardata()]
+Result = [EngineId :: \fBunicode:chardata()\fR\&]
 .br
 .RE
 .RE
@@ -1648,26 +2531,30 @@ Result = [EngineId::unicode:chardata()]
 .LP
 List the id\&'s of all engines in OpenSSL\&'s internal list\&.
 .LP
-It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .LP
 See also the chapter \fBEngine Load\fR\& in the User\&'s Guide\&.
 .LP
-May throw exception notsup in case engine functionality is not supported by the underlying OpenSSL implementation\&.
+May raise exception \fIerror:notsup\fR\& in case engine functionality is not supported by the underlying OpenSSL implementation\&.
 .RE
 .LP
+.nf
+
 .B
 ensure_engine_loaded(EngineId, LibPath) -> Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-EngineId = unicode:chardata()
+EngineId = LibPath = \fBunicode:chardata()\fR\&
 .br
-LibPath = unicode:chardata()
+Result = 
 .br
-Result = {ok, Engine::engine_ref()} | {error, Reason::term()}
+    {ok, Engine :: \fBengine_ref()\fR\&} | {error, Reason :: term()}
 .br
 .RE
 .RE
@@ -1675,26 +2562,30 @@ Result = {ok, Engine::engine_ref()} | {error, Reason::term()}
 .LP
 Loads the OpenSSL engine given by \fIEngineId\fR\& and the path to the dynamic library implementing the engine\&. This function is the same as calling \fIensure_engine_loaded/3\fR\& with \fIEngineMethods\fR\& set to a list of all the possible methods\&. An error tuple is returned if the engine can\&'t be loaded\&.
 .LP
-The function throws a badarg if the parameters are in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameters are in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .LP
 See also the chapter \fBEngine Load\fR\& in the User\&'s Guide\&.
 .RE
 .LP
+.nf
+
 .B
 ensure_engine_loaded(EngineId, LibPath, EngineMethods) -> Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-EngineId = unicode:chardata()
+EngineId = LibPath = \fBunicode:chardata()\fR\&
 .br
-LibPath = unicode:chardata()
+EngineMethods = [\fBengine_method_type()\fR\&]
 .br
-EngineMethods = [engine_method_type()]
+Result = 
 .br
-Result = {ok, Engine::engine_ref()} | {error, Reason::term()}
+    {ok, Engine :: \fBengine_ref()\fR\&} | {error, Reason :: term()}
 .br
 .RE
 .RE
@@ -1702,22 +2593,26 @@ Result = {ok, Engine::engine_ref()} | {error, Reason::term()}
 .LP
 Loads the OpenSSL engine given by \fIEngineId\fR\& and the path to the dynamic library implementing the engine\&. This function differs from the normal engine_load in that sense it also add the engine id to the internal list in OpenSSL\&. Then in the following calls to the function it just fetch the reference to the engine instead of loading it again\&. An error tuple is returned if the engine can\&'t be loaded\&.
 .LP
-The function throws a badarg if the parameters are in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameters are in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .LP
 See also the chapter \fBEngine Load\fR\& in the User\&'s Guide\&.
 .RE
 .LP
+.nf
+
 .B
 ensure_engine_unloaded(Engine) -> Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Engine = engine_ref()
+Engine = \fBengine_ref()\fR\&
 .br
-Result = ok | {error, Reason::term()}
+Result = ok | {error, Reason :: term()}
 .br
 .RE
 .RE
@@ -1725,24 +2620,28 @@ Result = ok | {error, Reason::term()}
 .LP
 Unloads an engine loaded with the \fIensure_engine_loaded\fR\& function\&. It both removes the label from the OpenSSL internal engine list and unloads the engine\&. This function is the same as calling \fIensure_engine_unloaded/2\fR\& with \fIEngineMethods\fR\& set to a list of all the possible methods\&. An error tuple is returned if the engine can\&'t be unloaded\&.
 .LP
-The function throws a badarg if the parameters are in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameters are in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .LP
 See also the chapter \fBEngine Load\fR\& in the User\&'s Guide\&.
 .RE
 .LP
+.nf
+
 .B
 ensure_engine_unloaded(Engine, EngineMethods) -> Result
+.br
+.fi
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Engine = engine_ref()
+Engine = \fBengine_ref()\fR\&
 .br
-EngineMethods = [engine_method_type()]
+EngineMethods = [\fBengine_method_type()\fR\&]
 .br
-Result = ok | {error, Reason::term()}
+Result = ok | {error, Reason :: term()}
 .br
 .RE
 .RE
@@ -1750,7 +2649,7 @@ Result = ok | {error, Reason::term()}
 .LP
 Unloads an engine loaded with the \fIensure_engine_loaded\fR\& function\&. It both removes the label from the OpenSSL internal engine list and unloads the engine\&. An error tuple is returned if the engine can\&'t be unloaded\&.
 .LP
-The function throws a badarg if the parameters are in wrong format\&. It may also throw the exception notsup in case there is no engine support in the underlying OpenSSL implementation\&.
+The function raises a \fIerror:badarg\fR\& if the parameters are in wrong format\&. It may also raise the exception \fIerror:notsup\fR\& in case there is no engine support in the underlying OpenSSL implementation\&.
 .LP
 See also the chapter \fBEngine Load\fR\& in the User\&'s Guide\&.
 .RE

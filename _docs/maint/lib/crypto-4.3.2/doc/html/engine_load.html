@@ -96,6 +96,16 @@
 <li title="Use Cases"><a href="engine_keys.html#use-cases">Use Cases</a></li>
 </ul>
 </li>
+<li id="no" title="Algorithm Details" expanded="false">Algorithm Details<ul>
+<li><a href="algorithm_details.html">
+              Top of chapter
+            </a></li>
+<li title="Ciphers"><a href="algorithm_details.html#ciphers">Ciphers</a></li>
+<li title="Message Authentication Codes (MACs)"><a href="algorithm_details.html#message-authentication-codes--macs-">Message Authentication Codes (MACs)</a></li>
+<li title="Hash"><a href="algorithm_details.html#hash">Hash</a></li>
+<li title="Public Key Cryptography"><a href="algorithm_details.html#public-key-cryptography">Public Key Cryptography</a></li>
+</ul>
+</li>
 </ul>
 </div></div>
 <div id="content">
@@ -107,7 +117,7 @@
     This chapter describes the support for loading encryption engines in the crypto application.
   </p>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-background-idp71892705413568').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-background-idp71892705413568').style.visibility = 'hidden';"><span id="ghlink-background-idp71892705413568" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L32" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="background" href="#background">3.1 
+  <h3><span onMouseOver="document.getElementById('ghlink-background-idp45993021667216').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-background-idp45993021667216').style.visibility = 'hidden';"><span id="ghlink-background-idp45993021667216" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L32" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="background" href="#background">3.1 
           Background</a></span></h3>
     
     <p>
@@ -129,10 +139,10 @@
 </div>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-use-cases-idp71892705381840').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-use-cases-idp71892705381840').style.visibility = 'hidden';"><span id="ghlink-use-cases-idp71892705381840" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L50" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="use-cases" href="#use-cases">3.2 
+  <h3><span onMouseOver="document.getElementById('ghlink-use-cases-idp45993022092912').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-use-cases-idp45993022092912').style.visibility = 'hidden';"><span id="ghlink-use-cases-idp45993022092912" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L50" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="use-cases" href="#use-cases">3.2 
           Use Cases</a></span></h3>
     
-    <h4><span onMouseOver="document.getElementById('ghlink-dynamically-load-an-engine-from-default-directory-idp71892705607776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dynamically-load-an-engine-from-default-directory-idp71892705607776').style.visibility = 'hidden';"><span id="ghlink-dynamically-load-an-engine-from-default-directory-idp71892705607776" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L52" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dynamically-load-an-engine-from-default-directory" href="#dynamically-load-an-engine-from-default-directory">Dynamically load an engine from default directory</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-dynamically-load-an-engine-from-default-directory-idp45993022093888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dynamically-load-an-engine-from-default-directory-idp45993022093888').style.visibility = 'hidden';"><span id="ghlink-dynamically-load-an-engine-from-default-directory-idp45993022093888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L52" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dynamically-load-an-engine-from-default-directory" href="#dynamically-load-an-engine-from-default-directory">Dynamically load an engine from default directory</a></span></h4>
       
       <p>
 	If the engine is located in the OpenSSL/LibreSSL installation <span class="code">engines</span> directory.
@@ -141,7 +151,7 @@
  {ok, #Ref}</pre></div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-load-an-engine-with-the-dynamic-engine-idp71892705595152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-load-an-engine-with-the-dynamic-engine-idp71892705595152').style.visibility = 'hidden';"><span id="ghlink-load-an-engine-with-the-dynamic-engine-idp71892705595152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L62" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="load-an-engine-with-the-dynamic-engine" href="#load-an-engine-with-the-dynamic-engine">Load an engine with the dynamic engine</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-load-an-engine-with-the-dynamic-engine-idp45993022103440').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-load-an-engine-with-the-dynamic-engine-idp45993022103440').style.visibility = 'hidden';"><span id="ghlink-load-an-engine-with-the-dynamic-engine-idp45993022103440" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L62" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="load-an-engine-with-the-dynamic-engine" href="#load-an-engine-with-the-dynamic-engine">Load an engine with the dynamic engine</a></span></h4>
       
       <p>
 	Load an engine with the help of the dynamic engine by giving the path to the library.
@@ -155,7 +165,7 @@
  {ok, #Ref}</pre></div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-load-an-engine-and-replace-some-methods-idp71892705597888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-load-an-engine-and-replace-some-methods-idp71892705597888').style.visibility = 'hidden';"><span id="ghlink-load-an-engine-and-replace-some-methods-idp71892705597888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L77" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="load-an-engine-and-replace-some-methods" href="#load-an-engine-and-replace-some-methods">Load an engine and replace some methods</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-load-an-engine-and-replace-some-methods-idp45993022208928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-load-an-engine-and-replace-some-methods-idp45993022208928').style.visibility = 'hidden';"><span id="ghlink-load-an-engine-and-replace-some-methods-idp45993022208928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L77" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="load-an-engine-and-replace-some-methods" href="#load-an-engine-and-replace-some-methods">Load an engine and replace some methods</a></span></h4>
       
       <p>
 	Load an engine with the help of the dynamic engine and just
@@ -176,7 +186,7 @@ engine_method_pkey_meths, engine_method_pkey_asn1_meths].
  {ok, #Ref}</pre></div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-load-with-the-ensure-loaded-function-idp71892705187776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-load-with-the-ensure-loaded-function-idp71892705187776').style.visibility = 'hidden';"><span id="ghlink-load-with-the-ensure-loaded-function-idp71892705187776" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L99" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="load-with-the-ensure-loaded-function" href="#load-with-the-ensure-loaded-function">Load with the ensure loaded function</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-load-with-the-ensure-loaded-function-idp45993022088240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-load-with-the-ensure-loaded-function-idp45993022088240').style.visibility = 'hidden';"><span id="ghlink-load-with-the-ensure-loaded-function-idp45993022088240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L99" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="load-with-the-ensure-loaded-function" href="#load-with-the-ensure-loaded-function">Load with the ensure loaded function</a></span></h4>
       
       <p>
 	This function makes sure the engine is loaded just once and the ID is added to the internal
@@ -196,7 +206,7 @@ engine_method_pkey_meths, engine_method_pkey_asn1_meths].
 
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-list-all-engines-currently-loaded-idp71892705620768').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-list-all-engines-currently-loaded-idp71892705620768').style.visibility = 'hidden';"><span id="ghlink-list-all-engines-currently-loaded-idp71892705620768" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L121" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="list-all-engines-currently-loaded" href="#list-all-engines-currently-loaded">List all engines currently loaded</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-list-all-engines-currently-loaded-idp45993021967408').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-list-all-engines-currently-loaded-idp45993021967408').style.visibility = 'hidden';"><span id="ghlink-list-all-engines-currently-loaded-idp45993021967408" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/engine_load.xml#L121" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="list-all-engines-currently-loaded" href="#list-all-engines-currently-loaded">List all engines currently loaded</a></span></h4>
       
       <div class="example"><pre> 5&gt; crypto:engine_list().
 [&lt;&lt;"dynamic"&gt;&gt;, &lt;&lt;"MD5"&gt;&gt;]</pre></div>
