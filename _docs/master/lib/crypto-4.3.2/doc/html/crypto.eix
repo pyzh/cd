@@ -9,7 +9,7 @@
   {"block_decrypt", "block_decrypt(Type :: block_cipher_without_iv(),Key :: key(),Data :: iodata())", "block_decrypt-3"},
   {"block_encrypt", "block_encrypt(Type, Key, Ivec, PlainText)", "block_encrypt-4"},
   {"block_encrypt", "block_encrypt(AeadType, Key, Ivec, {AAD, PlainText})", "block_encrypt-4"},
-  {"block_encrypt", "block_encrypt(aes_gcm, Key, Ivec, {AAD, PlainText, TagLength})", "block_encrypt-4"},
+  {"block_encrypt", "block_encrypt(aes_gcm | aes_ccm, Key, Ivec, {AAD, PlainText, TagLength})", "block_encrypt-4"},
   {"block_decrypt", "block_decrypt(Type, Key, Ivec, CipherText)", "block_decrypt-4"},
   {"block_decrypt", "block_decrypt(AeadType, Key, Ivec, {AAD, CipherText, CipherTag})", "block_decrypt-4"},
   {"bytes_to_integer", "bytes_to_integer(Bin :: binary())", "bytes_to_integer-1"},
