@@ -117,7 +117,7 @@ Block ciphers without initialization vector for \fBblock_encrypt/3\fR\& and \fBb
 .RE
 .nf
 
-\fBaead_cipher()\fR\& = aes_gcm | chacha20_poly1305
+\fBaead_cipher()\fR\& = aes_gcm | aes_ccm | chacha20_poly1305
 .br
 .fi
 .RS
@@ -876,7 +876,7 @@ block_encrypt(Type, Key, Ivec, PlainText) -> CipherText
 block_encrypt(AeadType, Key, Ivec, {AAD, PlainText}) -> {CipherText, CipherTag}
 .br
 .B
-block_encrypt(aes_gcm, Key, Ivec, {AAD, PlainText, TagLength}) -> {CipherText, CipherTag}
+block_encrypt(aes_gcm | aes_ccm, Key, Ivec, {AAD, PlainText, TagLength}) -> {CipherText, CipherTag}
 .br
 .RS
 .LP
@@ -1984,7 +1984,9 @@ Support =
 .br
     {macs, Macs} |
 .br
-    {curves, Curves}
+    {curves, Curves} |
+.br
+    {rsa_opts, RSAopts}
 .br
 Hashs = 
 .br
@@ -2014,11 +2016,15 @@ Macs = [hmac | cmac | poly1305]
 .br
 Curves = [\fBec_named_curve()\fR\& | \fBedwards_curve()\fR\&]
 .br
+RSAopts = [\fBrsa_sign_verify_opt()\fR\& | \fBrsa_opt()\fR\&]
+.br
 .RE
 .RE
 .RS
 .LP
 Can be used to determine which crypto algorithms that are supported by the underlying libcrypto library
+.LP
+Note: the \fIrsa_opts\fR\& entry is in an experimental state and may change or be removed without notice\&. No guarantee for the accuarcy of the rsa option\&'s value list should be assumed\&.
 .RE
 .LP
 .nf

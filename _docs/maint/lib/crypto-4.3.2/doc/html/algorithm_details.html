@@ -119,10 +119,10 @@
   on security from the supplied tables.
   </p>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-ciphers-idp46634651581264').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ciphers-idp46634651581264').style.visibility = 'hidden';"><span id="ghlink-ciphers-idp46634651581264" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L38" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ciphers" href="#ciphers">5.1 
+  <h3><span onMouseOver="document.getElementById('ghlink-ciphers-idp46363180545744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ciphers-idp46363180545744').style.visibility = 'hidden';"><span id="ghlink-ciphers-idp46363180545744" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L38" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ciphers" href="#ciphers">5.1 
           Ciphers</a></span></h3>
     
-    <h4><span onMouseOver="document.getElementById('ghlink-block-ciphers-idp46634652446512').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block-ciphers-idp46634652446512').style.visibility = 'hidden';"><span id="ghlink-block-ciphers-idp46634652446512" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L40" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block-ciphers" href="#block-ciphers">Block Ciphers</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-block-ciphers-idp46363180546720').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-block-ciphers-idp46363180546720').style.visibility = 'hidden';"><span id="ghlink-block-ciphers-idp46363180546720" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L40" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="block-ciphers" href="#block-ciphers">Block Ciphers</a></span></h4>
       
       <p>To be used in
       <span class="bold_code bc-15"><a href="crypto.html#block_encrypt-3">block_encrypt/3</a></span>,
@@ -257,7 +257,7 @@
 </div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-aead-ciphers-idp46634652391024').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-aead-ciphers-idp46634652391024').style.visibility = 'hidden';"><span id="ghlink-aead-ciphers-idp46634652391024" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L82" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="aead-ciphers" href="#aead-ciphers">AEAD Ciphers</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-aead-ciphers-idp46363180422112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-aead-ciphers-idp46363180422112').style.visibility = 'hidden';"><span id="ghlink-aead-ciphers-idp46363180422112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L82" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="aead-ciphers" href="#aead-ciphers">AEAD Ciphers</a></span></h4>
       
       <p>To be used in <span class="bold_code bc-15"><a href="crypto.html#block_encrypt-4">block_encrypt/4</a></span> and
       <span class="bold_code bc-15"><a href="crypto.html#block_decrypt-4">block_decrypt/4</a></span>.
@@ -280,6 +280,9 @@
 <strong>AAD length</strong><br><strong>[bytes]</strong>
 </td>
 <td align="left" valign="middle">
+<strong>Tag length</strong><br><strong>[bytes]</strong>
+</td>
+<td align="left" valign="middle">
 <strong>Block size</strong><br><strong>[bytes]</strong>
 </td>
 <td align="left" valign="middle">
@@ -287,12 +290,16 @@
 </td>
 </tr>
 <tr>
-<td align="left" valign="middle"><span class="code">aes_gcm</span></td> <td align="left" valign="middle">16</td> <td align="left" valign="middle">16</td> <td align="left" valign="middle">0-16</td> <td align="left" valign="middle">any</td>
-<td align="left" valign="middle">1.0.1 -</td>
+<td align="left" valign="middle"><span class="code">aes_ccm</span></td> <td align="left" valign="middle">16,24,32</td> <td align="left" valign="middle">7-13</td> <td align="left" valign="middle">any</td> <td align="left" valign="middle">even 4-16<br>default: 12</td> <td align="left" valign="middle">any</td>
+<td align="left" valign="middle">1.1.0 -</td>
+</tr>
+<tr>
+<td align="left" valign="middle"><span class="code">aes_gcm</span></td> <td align="left" valign="middle">16,24,32</td> <td align="left" valign="middle">1-</td> <td align="left" valign="middle">any</td> <td align="left" valign="middle">1-16<br>default: 16</td> <td align="left" valign="middle">any</td>
+<td align="left" valign="middle">1.1.0 -</td>
 </tr>
 <tr>
 <td align="left" valign="middle"><span class="code">chacha20_poly1305</span></td>
-<td align="left" valign="middle">32</td> <td align="left" valign="middle">1-16</td> <td align="left" valign="middle">any</td> <td align="left" valign="middle">any</td>
+<td align="left" valign="middle">32</td> <td align="left" valign="middle">1-16</td> <td align="left" valign="middle">any</td> <td align="left" valign="middle">16</td> <td align="left" valign="middle">any</td>
 <td align="left" valign="middle">1.1.0 -</td>
 </tr>
 </table>
@@ -303,7 +310,7 @@
 </div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-stream-ciphers-idp46634652417424').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stream-ciphers-idp46634652417424').style.visibility = 'hidden';"><span id="ghlink-stream-ciphers-idp46634652417424" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L99" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stream-ciphers" href="#stream-ciphers">Stream Ciphers</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-stream-ciphers-idp46363180459424').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stream-ciphers-idp46363180459424').style.visibility = 'hidden';"><span id="ghlink-stream-ciphers-idp46363180459424" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L100" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stream-ciphers" href="#stream-ciphers">Stream Ciphers</a></span></h4>
       
       <p>To be used in <span class="bold_code bc-15"><a href="crypto.html#stream_init-2">stream_init/2</a></span> and
       <span class="bold_code bc-15"><a href="crypto.html#stream_init-3">stream_init/3</a></span>.
@@ -346,11 +353,11 @@
     
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-message-authentication-codes--macs--idp46634652436960').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-message-authentication-codes--macs--idp46634652436960').style.visibility = 'hidden';"><span id="ghlink-message-authentication-codes--macs--idp46634652436960" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L117" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="message-authentication-codes--macs-" href="#message-authentication-codes--macs-">5.2 
+  <h3><span onMouseOver="document.getElementById('ghlink-message-authentication-codes--macs--idp46363180478960').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-message-authentication-codes--macs--idp46363180478960').style.visibility = 'hidden';"><span id="ghlink-message-authentication-codes--macs--idp46363180478960" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L118" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="message-authentication-codes--macs-" href="#message-authentication-codes--macs-">5.2 
           Message Authentication Codes (MACs)</a></span></h3>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-cmac-idp46634652438016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-cmac-idp46634652438016').style.visibility = 'hidden';"><span id="ghlink-cmac-idp46634652438016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L120" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="cmac" href="#cmac">CMAC</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-cmac-idp46363180480016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-cmac-idp46363180480016').style.visibility = 'hidden';"><span id="ghlink-cmac-idp46363180480016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L121" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="cmac" href="#cmac">CMAC</a></span></h4>
       
       <p>To be used in <span class="bold_code bc-15"><a href="crypto.html#cmac-3">cmac/3</a></span> and
       <span class="bold_code bc-15"><a href="crypto.html#cmac-3">cmac/4</a></span>.
@@ -449,7 +456,7 @@
 </div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-hmac-idp46634652244240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac-idp46634652244240').style.visibility = 'hidden';"><span id="ghlink-hmac-idp46634652244240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L159" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac" href="#hmac">HMAC</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-hmac-idp46363180320368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hmac-idp46363180320368').style.visibility = 'hidden';"><span id="ghlink-hmac-idp46363180320368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L160" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hmac" href="#hmac">HMAC</a></span></h4>
       
       <p>Available in all OpenSSL compatible with Erlang CRYPTO if not disabled by configuration.
       </p>
@@ -459,7 +466,7 @@
       </p>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-poly1305-idp46634652248096').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-poly1305-idp46634652248096').style.visibility = 'hidden';"><span id="ghlink-poly1305-idp46634652248096" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L169" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="poly1305" href="#poly1305">POLY1305</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-poly1305-idp46363180324224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-poly1305-idp46363180324224').style.visibility = 'hidden';"><span id="ghlink-poly1305-idp46363180324224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L170" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="poly1305" href="#poly1305">POLY1305</a></span></h4>
       
       <p>POLY1305 is available with OpenSSL 1.1.1 or later if not disabled by configuration.
       </p>
@@ -471,7 +478,7 @@
 
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-hash-idp46634652252112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hash-idp46634652252112').style.visibility = 'hidden';"><span id="ghlink-hash-idp46634652252112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L181" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hash" href="#hash">5.3 
+  <h3><span onMouseOver="document.getElementById('ghlink-hash-idp46363180328240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hash-idp46363180328240').style.visibility = 'hidden';"><span id="ghlink-hash-idp46363180328240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L182" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hash" href="#hash">5.3 
           Hash</a></span></h3>
     
 
@@ -528,11 +535,11 @@
 </div>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-public-key-cryptography-idp46634652277200').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-public-key-cryptography-idp46634652277200').style.visibility = 'hidden';"><span id="ghlink-public-key-cryptography-idp46634652277200" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L205" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="public-key-cryptography" href="#public-key-cryptography">5.4 
+  <h3><span onMouseOver="document.getElementById('ghlink-public-key-cryptography-idp46363180353328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-public-key-cryptography-idp46363180353328').style.visibility = 'hidden';"><span id="ghlink-public-key-cryptography-idp46363180353328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L206" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="public-key-cryptography" href="#public-key-cryptography">5.4 
           Public Key Cryptography</a></span></h3>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-rsa-idp46634652278240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rsa-idp46634652278240').style.visibility = 'hidden';"><span id="ghlink-rsa-idp46634652278240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L208" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rsa" href="#rsa">RSA</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-rsa-idp46363180354368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-rsa-idp46363180354368').style.visibility = 'hidden';"><span id="ghlink-rsa-idp46363180354368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L209" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="rsa" href="#rsa">RSA</a></span></h4>
       
       <p>RSA is available with all OpenSSL versions compatible with Erlang CRYPTO if not disabled by configuration.
       To dynamically check availability, check that the atom <span class="code">rsa</span> is present in the
@@ -581,7 +588,7 @@
 </div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-dss-idp46634652323888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dss-idp46634652323888').style.visibility = 'hidden';"><span id="ghlink-dss-idp46634652323888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L231" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dss" href="#dss">DSS</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-dss-idp46363180400016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-dss-idp46363180400016').style.visibility = 'hidden';"><span id="ghlink-dss-idp46363180400016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L232" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="dss" href="#dss">DSS</a></span></h4>
       
       <p>DSS is available with OpenSSL versions compatible with Erlang CRYPTO if not disabled by configuration.
       To dynamically check availability, check that the atom <span class="code">dss</span> is present in the
@@ -590,7 +597,7 @@
       </p>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-ecdsa-idp46634652327328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ecdsa-idp46634652327328').style.visibility = 'hidden';"><span id="ghlink-ecdsa-idp46634652327328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L240" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ecdsa" href="#ecdsa">ECDSA</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-ecdsa-idp46363180403456').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ecdsa-idp46363180403456').style.visibility = 'hidden';"><span id="ghlink-ecdsa-idp46363180403456" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L241" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ecdsa" href="#ecdsa">ECDSA</a></span></h4>
       
       <p>ECDSA is available with OpenSSL 0.9.8o or later if not disabled by configuration.
       To dynamically check availability, check that the atom <span class="code">ecdsa</span> is present in the
@@ -604,7 +611,7 @@
       </p>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-diffie-hellman-idp46634652332944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-diffie-hellman-idp46634652332944').style.visibility = 'hidden';"><span id="ghlink-diffie-hellman-idp46634652332944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L254" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="diffie-hellman" href="#diffie-hellman">Diffie-Hellman</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-diffie-hellman-idp46363180409072').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-diffie-hellman-idp46363180409072').style.visibility = 'hidden';"><span id="ghlink-diffie-hellman-idp46363180409072" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L255" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="diffie-hellman" href="#diffie-hellman">Diffie-Hellman</a></span></h4>
       
       <p>Diffie-Hellman computations are available with OpenSSL versions compatible with Erlang CRYPTO
       if not disabled by configuration.
@@ -614,7 +621,7 @@
       </p>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-elliptic-curve-diffie-hellman-idp46634652336416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-elliptic-curve-diffie-hellman-idp46634652336416').style.visibility = 'hidden';"><span id="ghlink-elliptic-curve-diffie-hellman-idp46634652336416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L264" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="elliptic-curve-diffie-hellman" href="#elliptic-curve-diffie-hellman">Elliptic Curve Diffie-Hellman</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-elliptic-curve-diffie-hellman-idp46363180412544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-elliptic-curve-diffie-hellman-idp46363180412544').style.visibility = 'hidden';"><span id="ghlink-elliptic-curve-diffie-hellman-idp46363180412544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/crypto/doc/src/algorithm_details.xml#L265" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="elliptic-curve-diffie-hellman" href="#elliptic-curve-diffie-hellman">Elliptic Curve Diffie-Hellman</a></span></h4>
       
       <p>Elliptic Curve Diffie-Hellman is available with OpenSSL 0.9.8o or later if not disabled by configuration.
       To dynamically check availability, check that the atom <span class="code">ecdh</span> is present in the
