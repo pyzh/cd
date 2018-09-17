@@ -1984,7 +1984,9 @@ Support =
 .br
     {macs, Macs} |
 .br
-    {curves, Curves}
+    {curves, Curves} |
+.br
+    {rsa_opts, RSAopts}
 .br
 Hashs = 
 .br
@@ -2014,11 +2016,15 @@ Macs = [hmac | cmac | poly1305]
 .br
 Curves = [\fBec_named_curve()\fR\& | \fBedwards_curve()\fR\&]
 .br
+RSAopts = [\fBrsa_sign_verify_opt()\fR\& | \fBrsa_opt()\fR\&]
+.br
 .RE
 .RE
 .RS
 .LP
 Can be used to determine which crypto algorithms that are supported by the underlying libcrypto library
+.LP
+Note: the \fIrsa_opts\fR\& entry is in an experimental state and may change or be removed without notice\&. No guarantee for the accuarcy of the rsa option\&'s value list should be assumed\&.
 .RE
 .LP
 .nf
