@@ -376,11 +376,11 @@ A fun which converts a \fB\fIreport()\fR\&\fR\& to a format string and arguments
 
 \fBreport_cb_config()\fR\& = 
 .br
-    #{encoding := \fBunicode:encoding()\fR\&,
+    #{depth := integer() >= 1 | unlimited,
 .br
-      depth := integer() >= 1 | unlimited,
+      chars_limit := integer() >= 1 | unlimited,
 .br
-      chars_limit := integer() >= 1 | unlimited}
+      single_line := boolean()}
 .br
 .fi
 .RS
@@ -801,7 +801,7 @@ start(_, []) ->
      end.
 .fi
 .LP
-This reads the \fIlogger\fR\& configuration parameter from the \fImy_all\fR\& application and starts the configured handlers\&. The contents of the configuration use the same rules as the \fBlogger handler configuration\fR\&\&.
+This reads the \fIlogger\fR\& configuration parameter from the \fImy_app\fR\& application and starts the configured handlers\&. The contents of the configuration use the same rules as the \fBlogger handler configuration\fR\&\&.
 .LP
 If the handler is meant to replace the default handler, the Kernel\&'s default handler have to be disabled before the new handler is added\&. A \fIsys\&.config\fR\& file that disables the Kernel handler and adds a custom handler could look like this:
 .LP

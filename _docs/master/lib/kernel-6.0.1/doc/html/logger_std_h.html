@@ -772,12 +772,12 @@
 <div class="innertube">
 <!-- refpage --><center><h1>logger_std_h</h1></center>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-module-idp72212741382352').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp72212741382352').style.visibility = 'hidden';"><span id="ghlink-module-idp72212741382352"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-idp72087923828832').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp72087923828832').style.visibility = 'hidden';"><span id="ghlink-module-idp72087923828832"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
 <div class="REFBODY module-body">logger_std_h</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp72212741382800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp72212741382800').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp72212741382800"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp72087923829280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp72087923829280').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp72087923829280"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
 <div class="REFBODY module-summary-body">Standard handler for Logger.</div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-description-idp72212741383264').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp72212741383264').style.visibility = 'hidden';"><span id="ghlink-description-idp72212741383264" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/logger_std_h.xml#L38" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-description-idp72087923829744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp72087923829744').style.visibility = 'hidden';"><span id="ghlink-description-idp72087923829744" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/logger_std_h.xml#L38" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
 <div class="REFBODY description-body"><p>
     <p>This is the standard handler for Logger.
       Multiple instances of this handler can be added to
@@ -799,13 +799,22 @@
       <dd>
 	<p>This has the value <span class="code">standard_io</span>, <span class="code">standard_error</span>,
 	<span class="code">{file,LogFileName}</span>, or <span class="code">{file,LogFileName,LogFileOpts}</span>.</p>
+	<p>If <span class="code">LogFileOpts</span> is specified, it replaces the default
+	  list of options used when opening the log file. The default
+	  list is <span class="code">[raw,append,delayed_write]</span>. One reason to do
+	  so can be to change <span class="code">append</span> to, for
+	  example, <span class="code">write</span>, ensuring that the old log is
+	  truncated when a node is restarted. See the reference manual
+	  for <span class="bold_code bc-15"><a href="file.html#open-2"><span class="code">file:open/2</span></a></span>
+	  for more information about file options.</p>
+	<p>Log files are always UTF-8 encoded. The encoding can not be
+	  changed by setting the option <span class="code">{encoding,Encoding}</span>
+	  in <span class="code">LogFileOpts</span>.</p>
+	<p>Notice that the standard handler does not have support for
+	  circular logging. Use the disk_log handler,
+	  <span class="bold_code bc-19"><a href="logger_disk_log_h.html"><span class="code">logger_disk_log_h</span></a></span>,
+	  for this.</p>
 	<p> Defaults to <span class="code">standard_io</span>.</p>
-	<p>It is recommended not to specify <span class="code">LogFileOpts</span> unless absolutely
-	necessary. The default options used by the handler to open a file for logging are
-	<span class="code">raw</span>, <span class="code">append</span>, and <span class="code">delayed_write</span>. Notice that the standard
-	handler does not have support for circular logging. Use the disk_log handler,
-	<span class="bold_code bc-19"><a href="logger_disk_log_h.html"><span class="code">logger_disk_log_h</span></a></span>,
-	for this.</p>
       </dd>
       <dt><strong><span class="code">filesync_repeat_interval</span></strong></dt>
       <dd>
@@ -813,12 +822,12 @@
 	a file sync operation to write buffered data to disk. The handler attempts
 	the operation repeatedly, but only performs a new sync if something has
 	actually been logged.</p>
-	<p>Defaults to <span class="code">5000</span> milliseconds.</p>
 	<p>If <span class="code">no_repeat</span> is set as value, the repeated file sync operation
 	is disabled, and it is the operating system settings that determine
 	how quickly or slowly data is written to disk. The user can also call
 	the <span class="bold_code bc-15"><a href="logger_std_h.html#filesync-1"><span class="code">filesync/1</span></a></span>
         function to perform a file sync.</p>
+	<p>Defaults to <span class="code">5000</span> milliseconds.</p>
       </dd>
     </dl>
     <p>Other configuration parameters exist, to be used for customizing
@@ -842,11 +851,11 @@
     manual.</p>
   </p></div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp72212741410528').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp72212741410528').style.visibility = 'hidden';"><span id="ghlink-exports-idp72212741410528"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp72087923859888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp72087923859888').style.visibility = 'hidden';"><span id="ghlink-exports-idp72087923859888"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
 <div class="exports-body">
 
-    <p><a name="filesync-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-filesync-1-idp72212746667488').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-filesync-1-idp72212746667488').style.visibility = 'hidden';">
-<span id="ghlink-filesync-1-idp72212746667488" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/logger_std_h.xml#L112" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>filesync(Name) -&gt; ok | {error, Reason}</div><div class="REFBODY fun-types">
+    <p><a name="filesync-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-filesync-1-idp72087927741520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-filesync-1-idp72087927741520').style.visibility = 'hidden';">
+<span id="ghlink-filesync-1-idp72087927741520" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/logger_std_h.xml#L121" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>filesync(Name) -&gt; ok | {error, Reason}</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Name = atom()</span></div>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Reason = handler_busy | {badarg, term()}</span></div>
@@ -857,7 +866,7 @@
 
   </div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-see-also-idp72212741414208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-see-also-idp72212741414208').style.visibility = 'hidden';"><span id="ghlink-see-also-idp72212741414208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/logger_std_h.xml#L122" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="see-also" href="#see-also">See Also</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-see-also-idp72087923863568').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-see-also-idp72087923863568').style.visibility = 'hidden';"><span id="ghlink-see-also-idp72087923863568" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/logger_std_h.xml#L131" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="see-also" href="#see-also">See Also</a></span></h3>
 <div class="REFBODY rb-3">
     
     <p><span class="bold_code bc-19"><a href="logger.html"><span class="code">logger(3)</span></a></span>,

@@ -15,11 +15,19 @@ To add a new instance of the standard handler, use \fB\fIlogger:add_handler/3\fR
 This has the value \fIstandard_io\fR\&, \fIstandard_error\fR\&, \fI{file,LogFileName}\fR\&, or \fI{file,LogFileName,LogFileOpts}\fR\&\&.
 .RS 2
 .LP
-Defaults to \fIstandard_io\fR\&\&.
+If \fILogFileOpts\fR\& is specified, it replaces the default list of options used when opening the log file\&. The default list is \fI[raw,append,delayed_write]\fR\&\&. One reason to do so can be to change \fIappend\fR\& to, for example, \fIwrite\fR\&, ensuring that the old log is truncated when a node is restarted\&. See the reference manual for \fB\fIfile:open/2\fR\&\fR\& for more information about file options\&.
 .RE
 .RS 2
 .LP
-It is recommended not to specify \fILogFileOpts\fR\& unless absolutely necessary\&. The default options used by the handler to open a file for logging are \fIraw\fR\&, \fIappend\fR\&, and \fIdelayed_write\fR\&\&. Notice that the standard handler does not have support for circular logging\&. Use the disk_log handler, \fB\fIlogger_disk_log_h\fR\&\fR\&, for this\&.
+Log files are always UTF-8 encoded\&. The encoding can not be changed by setting the option \fI{encoding,Encoding}\fR\& in \fILogFileOpts\fR\&\&.
+.RE
+.RS 2
+.LP
+Notice that the standard handler does not have support for circular logging\&. Use the disk_log handler, \fB\fIlogger_disk_log_h\fR\&\fR\&, for this\&.
+.RE
+.RS 2
+.LP
+Defaults to \fIstandard_io\fR\&\&.
 .RE
 .TP 2
 .B
@@ -27,11 +35,11 @@ It is recommended not to specify \fILogFileOpts\fR\& unless absolutely necessary
 This value, in milliseconds, specifies how often the handler does a file sync operation to write buffered data to disk\&. The handler attempts the operation repeatedly, but only performs a new sync if something has actually been logged\&.
 .RS 2
 .LP
-Defaults to \fI5000\fR\& milliseconds\&.
+If \fIno_repeat\fR\& is set as value, the repeated file sync operation is disabled, and it is the operating system settings that determine how quickly or slowly data is written to disk\&. The user can also call the \fB\fIfilesync/1\fR\&\fR\& function to perform a file sync\&.
 .RE
 .RS 2
 .LP
-If \fIno_repeat\fR\& is set as value, the repeated file sync operation is disabled, and it is the operating system settings that determine how quickly or slowly data is written to disk\&. The user can also call the \fB\fIfilesync/1\fR\&\fR\& function to perform a file sync\&.
+Defaults to \fI5000\fR\& milliseconds\&.
 .RE
 .RE
 .LP

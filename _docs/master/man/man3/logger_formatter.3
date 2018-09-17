@@ -15,8 +15,6 @@ Each Logger handler has a configured formatter specified as a module and a confi
 .br
       depth => integer() >= 1 | unlimited,
 .br
-      encoding => \fBunicode:encoding()\fR\&,
-.br
       legacy_header => boolean(),
 .br
       max_size => integer() >= 1 | unlimited,
@@ -51,14 +49,6 @@ A positive integer representing the maximum depth to which terms shall be printe
 .RS 2
 .LP
 Defaults to \fIunlimited\fR\&\&.
-.RE
-.TP 2
-.B
-\fIencoding = \fR\&\fB\fIunicode:encoding()\fR\&\fR\&:
-This parameter must reflect the encoding of the device that the handler prints to\&.
-.RS 2
-.LP
-Defaults to \fIutf8\fR\&
 .RE
 .TP 2
 .B
