@@ -127,7 +127,17 @@ An opaque term returned in, for example, \fI#sctp_paddr_change{}\fR\&, which ide
 .br
     {sndbuf, integer() >= 0} |
 .br
-    {tos, integer() >= 0}
+    {tos, integer() >= 0} |
+.br
+    {tclass, integer() >= 0} |
+.br
+    {ttl, integer() >= 0} |
+.br
+    {recvtos, boolean()} |
+.br
+    {recvtclass, boolean()} |
+.br
+    {recvttl, boolean()}
 .br
 .fi
 .RS
@@ -196,7 +206,17 @@ One of the \fBSCTP Socket Options\fR\&\&.
 .br
     sndbuf |
 .br
-    tos
+    tos |
+.br
+    tclass |
+.br
+    ttl |
+.br
+    recvtos |
+.br
+    recvtclass |
+.br
+    recvttl
 .br
 .fi
 .nf
@@ -632,6 +652,26 @@ Sets up the socket for IPv4\&. This is the default\&.
 .RE
 .LP
 A default set of socket \fBoptions\fR\& is used\&. In particular, the socket is opened in \fBbinary\fR\& and \fBpassive\fR\& mode, with SockType \fIseqpacket\fR\&, and with reasonably large \fBkernel\fR\& and driver \fBbuffers\fR\&\&.
+.LP
+If the socket is in \fBpassive\fR\& mode data can be received through the \fB\fIrecv/1,2\fR\&\fR\& calls\&.
+.LP
+If the socket is in \fBactive\fR\& mode data received data is delivered to the controlling process as messages:
+.LP
+.nf
+
+{sctp, Socket, FromIP, FromPort, {AncData, Data}}
+	
+.fi
+.LP
+See \fB\fIrecv/1,2\fR\&\fR\& for a description of the message fields\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+This message format unfortunately differs slightly from the \fB\fIgen_udp\fR\&\fR\& message format with ancillary data, and from the \fB\fIrecv/1,2\fR\&\fR\& return tuple format\&.
+
 .RE
 .LP
 .nf
@@ -694,7 +734,7 @@ FromIP = \fBinet:ip_address()\fR\&
 .br
 FromPort = \fBinet:port_number()\fR\&
 .br
-AncData = [#sctp_sndrcvinfo{}]
+AncData = [#sctp_sndrcvinfo{} | \fBinet:ancillary_data()\fR\&]
 .br
 Data = 
 .br
@@ -731,6 +771,8 @@ Reason =
 Receives the \fIData\fR\& message from any association of the socket\&. If the receive times out, \fI{error,timeout}\fR\& is returned\&. The default time-out is \fIinfinity\fR\&\&. \fIFromIP\fR\& and \fIFromPort\fR\& indicate the address of the sender\&.
 .LP
 \fIAncData\fR\& is a list of ancillary data items that can be received along with the main \fIData\fR\&\&. This list can be empty, or contain a single \fB\fI#sctp_sndrcvinfo{}\fR\&\fR\& record if receiving of such ancillary data is enabled (see option \fB\fIsctp_events\fR\&\fR\&)\&. It is enabled by default, as such ancillary data provides an easy way of determining the association and stream over which the message is received\&. (An alternative way is to get the association ID from \fIFromIP\fR\& and \fIFromPort\fR\& using socket option \fB\fIsctp_get_peer_addr_info\fR\&\fR\&, but this does still not produce the stream number)\&.
+.LP
+\fIAncData\fR\& may also contain \fB ancillary data \fR\& from the socket \fBoptions\fR\& \fB\fIrecvtos\fR\&\fR\&, \fB\fIrecvtclass\fR\&\fR\& or \fB\fIrecvttl\fR\&\fR\&, if that is supported by the platform for the socket\&.
 .LP
 The \fIData\fR\& received can be a \fIbinary()\fR\& or a \fIlist()\fR\& of bytes (integers in the range 0 through 255) depending on the socket mode, or an SCTP event\&.
 .LP
@@ -944,11 +986,19 @@ If \fIfalse\fR\& (passive mode, the default), the caller must do an explicit \fB
 .LP
 .TP 2
 *
-If \fItrue\fR\& (full active mode), the pending data or events are sent to the owning process\&.
-.RS 2
+If \fItrue|once|N\fR\& (active modes) received data or events are sent to the owning process\&. See \fB\fIopen/0\&.\&.2\fR\&\fR\& for the message format\&.
 .LP
-Notice that this can cause the message queue to overflow, as there is no way to throttle the sender in this case (no flow control)\&.
+.TP 2
+*
+If \fItrue\fR\& (full active mode) there is no flow control\&.
+.LP
+
+.RS -4
+.B
+Note:
 .RE
+Note that this can cause the message queue to overflow causing for example the virtual machine to run out of memory and crash\&.
+
 .LP
 .TP 2
 *

@@ -137,9 +137,28 @@ For more examples, see section \fBExamples\fR\&\&.
 .br
     {tos, integer() >= 0} |
 .br
+    {tclass, integer() >= 0} |
+.br
+    {ttl, integer() >= 0} |
+.br
+    {recvtos, boolean()} |
+.br
+    {recvtclass, boolean()} |
+.br
+    {recvttl, boolean()} |
+.br
     {ipv6_v6only, boolean()}
 .br
 .fi
+.nf
+
+\fBpktoptions_value()\fR\& = {pktoptions, \fBinet:ancillary_data()\fR\&}
+.br
+.fi
+.RS
+.LP
+If the platform implements the IPv4 option \fIIP_PKTOPTIONS\fR\& (probably Linux specific), or the IPv6 option \fIIPV6_PKTOPTIONS\fR\& or \fIIPV6_2292PKTOPTIONS\fR\& for the socket this value is returned from \fB\fIinet:getopts/2\fR\&\fR\& when called with the option name \fB\fIpktoptions\fR\&\fR\&\&.
+.RE
 .nf
 
 \fBoption_name()\fR\& = 
@@ -178,6 +197,8 @@ For more examples, see section \fBExamples\fR\&\&.
 .br
     packet_size |
 .br
+    pktoptions |
+.br
     priority |
 .br
     {raw,
@@ -203,6 +224,18 @@ For more examples, see section \fBExamples\fR\&\&.
     sndbuf |
 .br
     tos |
+.br
+    tclass |
+.br
+    ttl |
+.br
+    recvtos |
+.br
+    recvtclass |
+.br
+    recvttl |
+.br
+    pktoptions |
 .br
     ipv6_v6only
 .br
