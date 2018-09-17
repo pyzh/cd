@@ -193,6 +193,19 @@ Addresses besides \fB\fIip_address()\fR\&\fR\& ones that are returned from socke
 .RE
 .nf
 
+\fBancillary_data()\fR\& = 
+.br
+    [{tos, byte()} | {tclass, byte()} | {ttl, byte()}]
+.br
+.fi
+.RS
+.LP
+Ancillary data received with the data packet or read with the socket option \fB\fIpktoptions\fR\&\fR\& from a TCP socket\&.
+.LP
+The value(s) correspond to the currently active socket \fBoptions\fR\& \fB\fIrecvtos\fR\&\fR\&, \fB\fIrecvtclass\fR\&\fR\& and \fB\fIrecvttl\fR\&\fR\&\&.
+.RE
+.nf
+
 \fBposix()\fR\& = 
 .br
     eaddrinuse |
@@ -576,17 +589,17 @@ Socket = \fBsocket()\fR\&
 .br
 Options = [\fBsocket_getopt()\fR\&]
 .br
-OptionValues = [\fBsocket_setopt()\fR\&]
+OptionValues = [\fBsocket_setopt()\fR\& | \fBgen_tcp:pktoptions_value()\fR\&]
 .br
 .RE
 .RE
 .RS
 .LP
-Gets one or more options for a socket\&. For a list of available options, see \fB\fIsetopts/2\fR\&\fR\&\&.
+Gets one or more options for a socket\&. For a list of available options, see \fB\fIsetopts/2\fR\&\fR\&\&. See also the description for the type \fB\fIgen_tcp:pktoptions_value()\fR\&\fR\&\&.
 .LP
 The number of elements in the returned \fIOptionValues\fR\& list does not necessarily correspond to the number of options asked for\&. If the operating system fails to support an option, it is left out in the returned list\&. An error tuple is returned only when getting options for the socket is impossible (that is, the socket is closed or the buffer size in a raw request is too large)\&. This behavior is kept for backward compatibility reasons\&.
 .LP
-A raw option request \fIRawOptReq = {raw, Protocol, OptionNum, ValueSpec}\fR\& can be used to get information about socket options not (explicitly) supported by the emulator\&. The use of raw socket options makes the code non-portable, but allows the Erlang programmer to take advantage of unusual features present on the current platform\&.
+A raw option request \fIRawOptReq = {raw, Protocol, OptionNum, ValueSpec}\fR\& can be used to get information about socket options not (explicitly) supported by the emulator\&. The use of raw socket options makes the code non-portable, but allows the Erlang programmer to take advantage of unusual features present on a particular platform\&.
 .LP
 \fIRawOptReq\fR\& consists of tag \fIraw\fR\& followed by the protocol level, the option number, and either a binary or the size, in bytes, of the buffer in which the option value is to be stored\&. A binary is to be used when the underlying \fIgetsockopt\fR\& requires \fIinput\fR\& in the argument field\&. In this case, the binary size is to correspond to the required buffer size of the return value\&. The supplied values in a \fIRawOptReq\fR\& correspond to the second, third, and fourth/fifth parameters to the \fIgetsockopt\fR\& call in the C socket API\&. The value stored in the buffer is returned as a binary \fIValueBin\fR\&, where all values are coded in the native endianess\&.
 .LP
@@ -1418,6 +1431,30 @@ Sets the maximum number of UDP packets to read without intervention from the soc
 .B
 \fI{recbuf, Size}\fR\&:
 The minimum size of the receive buffer to use for the socket\&. You are encouraged to use \fB\fIgetopts/2\fR\&\fR\& to retrieve the size set by your operating system\&.
+.TP 2
+.B
+\fI{recvtclass, Boolean}\fR\&:
+If set to \fItrue\fR\& activates returning the received \fITCLASS\fR\& value on platforms that implements the protocol \fIIPPROTO_IPV6\fR\& option \fIIPV6_RECVTCLASS\fR\& or \fIIPV6_2292RECVTCLASS\fR\& for the socket\&. The value is returned as a \fI{tclass,TCLASS}\fR\& tuple regardless of if the platform returns an \fIIPV6_TCLASS\fR\& or an \fIIPV6_RECVTCLASS\fR\& CMSG value\&.
+.RS 2
+.LP
+For packet oriented sockets that supports receiving ancillary data with the payload data (\fIgen_udp\fR\& and \fIgen_sctp\fR\&), the \fITCLASS\fR\& value is returned in an extended return tuple contained in an \fB ancillary data \fR\& list\&. For stream oriented sockets (\fIgen_tcp\fR\&) the only way to get the \fITCLASS\fR\& value is if the platform supports the \fB\fIpktoptions\fR\&\fR\& option\&.
+.RE
+.TP 2
+.B
+\fI{recvtos, Boolean}\fR\&:
+If set to \fItrue\fR\& activates returning the received \fITOS\fR\& value on platforms that implements the protocol \fIIPPROTO_IP\fR\& option \fIIP_RECVTOS\fR\& for the socket\&. The value is returned as a \fI{tos,TOS}\fR\& tuple regardless of if the platform returns an \fIIP_TOS\fR\& or an \fIIP_RECVTOS\fR\& CMSG value\&.
+.RS 2
+.LP
+For packet oriented sockets that supports receiving ancillary data with the payload data (\fIgen_udp\fR\& and \fIgen_sctp\fR\&), the \fITOS\fR\& value is returned in an extended return tuple contained in an \fB ancillary data \fR\& list\&. For stream oriented sockets (\fIgen_tcp\fR\&) the only way to get the \fITOS\fR\& value is if the platform supports the \fB\fIpktoptions\fR\&\fR\& option\&.
+.RE
+.TP 2
+.B
+\fI{recvttl, Boolean}\fR\&:
+If set to \fItrue\fR\& activates returning the received \fITTL\fR\& value on platforms that implements the protocol \fIIPPROTO_IP\fR\& option \fIIP_RECVTTL\fR\& for the socket\&. The value is returned as a \fI{ttl,TTL}\fR\& tuple regardless of if the platform returns an \fIIP_TTL\fR\& or an \fIIP_RECVTTL\fR\& CMSG value\&.
+.RS 2
+.LP
+For packet oriented sockets that supports receiving ancillary data with the payload data (\fIgen_udp\fR\& and \fIgen_sctp\fR\&), the \fITTL\fR\& value is returned in an extended return tuple contained in an \fB ancillary data \fR\& list\&. For stream oriented sockets (\fIgen_tcp\fR\&) the only way to get the \fITTL\fR\& value is if the platform supports the \fB\fIpktoptions\fR\&\fR\& option\&.
+.RE
 .TP 2
 .B
 \fI{reuseaddr, Boolean}\fR\&:
