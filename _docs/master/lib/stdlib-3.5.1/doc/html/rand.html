@@ -1766,11 +1766,11 @@
 <div class="innertube">
 <!-- refpage --><center><h1>rand</h1></center>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-module-idp71259768776592').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp71259768776592').style.visibility = 'hidden';"><span id="ghlink-module-idp71259768776592"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-idp46971553866736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp46971553866736').style.visibility = 'hidden';"><span id="ghlink-module-idp46971553866736"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
 <div class="REFBODY module-body">rand</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp71259768777040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp71259768777040').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp71259768777040"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp46971553867184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp46971553867184').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp46971553867184"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
 <div class="REFBODY module-summary-body">Pseudo random number generation.</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-description-idp71259768777504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp71259768777504').style.visibility = 'hidden';"><span id="ghlink-description-idp71259768777504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L37" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-description-idp46971553867648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp46971553867648').style.visibility = 'hidden';"><span id="ghlink-description-idp46971553867648" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L37" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
 <div class="REFBODY description-body"><p>
     <p>
       This module provides a pseudo random number generator.
@@ -1803,6 +1803,26 @@
       <dd>
         <p>Xorshift1024*, 64 bits precision and a period of 2^1024-1</p>
         <p>Jump function: equivalent to 2^512 calls</p>
+      </dd>
+      <dt><strong><span class="code">exro928ss</span></strong></dt>
+      <dd>
+        <p>Xoroshiro928**, 58 bits precision and a period of 2^928-1</p>
+        <p>Jump function: equivalent to 2^512 calls</p>
+	<p>
+	  This is a 58 bit version of Xoroshiro1024**,
+	  from the 2018 paper by David Blackman and Sebastiano Vigna:
+	  <span class="bold_code bc-20"><a href="http://vigna.di.unimi.it/ftp/papers/ScrambledLinear.pdf">
+	    Scrambled Linear Pseudorandom Number Generators
+	  </a></span>
+	  that on a 64 bit Erlang system executes only about 30% slower than
+	  the default <span class="code">exrop</span> algorithm but with much longer period
+	  and better statistical properties, and on the flip side
+	  a larger state.
+	</p>
+	<p>
+	  Many thanks to Sebastiano Vigna for his help with
+	  the 58 bit adaption.
+	</p>
       </dd>
       <dt><strong><span class="code">exsp</span></strong></dt>
       <dd>
@@ -1937,8 +1957,8 @@ SND0 = math:sqrt(-2 * math:log(R5)) * math:cos(math:pi() * R6)</pre></div>
 </div>
 
     <p>
-      For all these generators the lowest bit(s) has got
-      a slightly less random behaviour than all other bits.
+      For all these generators except <span class="code">exro928ss</span> the lowest bit(s)
+      has got a slightly less random behaviour than all other bits.
       1 bit for <span class="code">exrop</span> (and <span class="code">exsp</span>),
       and 3 bits for <span class="code">exs1024s</span>.
       See for example the explanation in the
@@ -1970,45 +1990,45 @@ tests. We suggest to use a sign test to extract a random Boolean value.</pre></d
 
 
   </p></div>
-  <h3><span onMouseOver="document.getElementById('ghlink-data-types-idp71259768819312').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types-idp71259768819312').style.visibility = 'hidden';"><span id="ghlink-data-types-idp71259768819312"></span><a class="title_link" name="data-types" href="#data-types">Data Types</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-data-types-idp46971553914352').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types-idp46971553914352').style.visibility = 'hidden';"><span id="ghlink-data-types-idp46971553914352"></span><a class="title_link" name="data-types" href="#data-types">Data Types</a></span></h3>
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-builtin_alg').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-builtin_alg').style.visibility = 'hidden';">
-<span id="ghlink-type-builtin_alg" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L232" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
-      <span class="bold_code bc-4"><a name="type-builtin_alg">builtin_alg()</a> = <br>    exs64 | exsplus | exsp | exs1024 | exs1024s | exrop</span><br>
+<span id="ghlink-type-builtin_alg" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L252" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+      <span class="bold_code bc-4"><a name="type-builtin_alg">builtin_alg()</a> = <br>    exrop |<br>    exs1024s |<br>    exro928ss |<br>    exsp |<br>    exs64 |<br>    exsplus |<br>    exs1024</span><br>
 </div>
 <div class="data-type-desc"></div>
 </div>
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-alg').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-alg').style.visibility = 'hidden';">
-<span id="ghlink-type-alg" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L235" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-alg" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L255" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-alg">alg()</a> = <span class="bold_code bc-17"><a href="#type-builtin_alg">builtin_alg()</a></span> | atom()</span><br>
 </div>
 <div class="data-type-desc"></div>
 </div>
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-alg_handler').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-alg_handler').style.visibility = 'hidden';">
-<span id="ghlink-type-alg_handler" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L238" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-alg_handler" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L258" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-alg_handler">alg_handler()</a> = <br>    #{type := <span class="bold_code bc-17"><a href="#type-alg">alg()</a></span>,<br>      bits =&gt; integer() &gt;= 0,<br>      weak_low_bits =&gt; integer() &gt;= 0,<br>      max =&gt; integer() &gt;= 0,<br>      next :=<br>          fun((<span class="bold_code bc-17"><a href="#type-alg_state">alg_state()</a></span>) -&gt; {integer() &gt;= 0, <span class="bold_code bc-17"><a href="#type-alg_state">alg_state()</a></span>}),<br>      uniform =&gt; fun((<span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt; {float(), <span class="bold_code bc-17"><a href="#type-state">state()</a></span>}),<br>      uniform_n =&gt;<br>          fun((integer() &gt;= 1, <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt; {integer() &gt;= 1, <span class="bold_code bc-17"><a href="#type-state">state()</a></span>}),<br>      jump =&gt; fun((<span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt; <span class="bold_code bc-17"><a href="#type-state">state()</a></span>)}</span><br>
 </div>
 <div class="data-type-desc"></div>
 </div>
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-alg_state').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-alg_state').style.visibility = 'hidden';">
-<span id="ghlink-type-alg_state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L241" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
-      <span class="bold_code bc-4"><a name="type-alg_state">alg_state()</a> = <br>    <span class="bold_code bc-17"><a href="#type-exs64_state">exs64_state()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-exsplus_state">exsplus_state()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-exs1024_state">exs1024_state()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-exrop_state">exrop_state()</a></span> |<br>    term()</span><br>
+<span id="ghlink-type-alg_state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L261" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+      <span class="bold_code bc-4"><a name="type-alg_state">alg_state()</a> = <br>    <span class="bold_code bc-17"><a href="#type-exrop_state">exrop_state()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-exs1024_state">exs1024_state()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-exro928_state">exro928_state()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-exsplus_state">exsplus_state()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-exs64_state">exs64_state()</a></span> |<br>    term()</span><br>
 </div>
 <div class="data-type-desc"></div>
 </div>
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-state').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-state').style.visibility = 'hidden';">
-<span id="ghlink-type-state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L244" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L264" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-state">state()</a> = {<span class="bold_code bc-17"><a href="#type-alg_handler">alg_handler()</a></span>, <span class="bold_code bc-17"><a href="#type-alg_state">alg_state()</a></span>}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p><p>Algorithm-dependent state.</p></p></div></div>
 </div>
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-export_state').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-export_state').style.visibility = 'hidden';">
-<span id="ghlink-type-export_state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L248" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-export_state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L268" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-export_state">export_state()</a> = {<span class="bold_code bc-17"><a href="#type-alg">alg()</a></span>, <span class="bold_code bc-17"><a href="#type-alg_state">alg_state()</a></span>}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -2018,55 +2038,90 @@ tests. We suggest to use a sign test to extract a random Boolean value.</pre></d
       </p></div></div>
 </div>
     <div class="data-types-body">
-<div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-exs64_state').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-exs64_state').style.visibility = 'hidden';">
-<span id="ghlink-type-exs64_state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L256" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
-      <span class="bold_code bc-4"><a name="type-exs64_state">exs64_state()</a></span><br>
+<div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-seed').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-seed').style.visibility = 'hidden';">
+<span id="ghlink-type-seed" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L276" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+      <span class="bold_code bc-4"><a name="type-seed">seed()</a> = <br>    [integer()] | integer() | {integer(), integer(), integer()}</span><br>
 </div>
-<div class="data-type-desc"><div class="REFBODY rb-7"><p><p>Algorithm specific internal state</p></p></div></div>
+<div class="data-type-desc"><div class="REFBODY rb-7"><p>
+	<p>
+	  A seed value for the generator.
+	</p>
+	<p>
+	  A list of integers sets the generator's internal state directly,
+	  after algorithm-dependent checks of the value
+	  and masking to the proper word size.
+	</p>
+	<p>
+	  An integer is used as the initial state for a SplitMix64 generator.
+	  The output values of that is then used for setting
+	  the generator's internal state
+	  after masking to the proper word size
+	  and if needed avoiding zero values.
+	</p>
+	<p>
+	  A traditional 3-tuple of integers seed is passed through
+	  algorithm-dependent hashing functions to create
+	  the generator's initial state.
+	</p>
+      </p></div></div>
 </div>
     <div class="data-types-body">
-<div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-exsplus_state').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-exsplus_state').style.visibility = 'hidden';">
-<span id="ghlink-type-exsplus_state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L260" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
-      <span class="bold_code bc-4"><a name="type-exsplus_state">exsplus_state()</a></span><br>
+<div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-exrop_state').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-exrop_state').style.visibility = 'hidden';">
+<span id="ghlink-type-exrop_state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L301" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+      <span class="bold_code bc-4"><a name="type-exrop_state">exrop_state()</a></span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p><p>Algorithm specific internal state</p></p></div></div>
 </div>
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-exs1024_state').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-exs1024_state').style.visibility = 'hidden';">
-<span id="ghlink-type-exs1024_state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L264" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-exs1024_state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L305" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-exs1024_state">exs1024_state()</a></span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p><p>Algorithm specific internal state</p></p></div></div>
 </div>
     <div class="data-types-body">
-<div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-exrop_state').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-exrop_state').style.visibility = 'hidden';">
-<span id="ghlink-type-exrop_state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L268" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
-      <span class="bold_code bc-4"><a name="type-exrop_state">exrop_state()</a></span><br>
+<div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-exro928_state').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-exro928_state').style.visibility = 'hidden';">
+<span id="ghlink-type-exro928_state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L309" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+      <span class="bold_code bc-4"><a name="type-exro928_state">exro928_state()</a></span><br>
+</div>
+<div class="data-type-desc"><div class="REFBODY rb-7"><p><p>Algorithm specific internal state</p></p></div></div>
+</div>
+    <div class="data-types-body">
+<div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-exsplus_state').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-exsplus_state').style.visibility = 'hidden';">
+<span id="ghlink-type-exsplus_state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L313" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+      <span class="bold_code bc-4"><a name="type-exsplus_state">exsplus_state()</a></span><br>
+</div>
+<div class="data-type-desc"><div class="REFBODY rb-7"><p><p>Algorithm specific internal state</p></p></div></div>
+</div>
+    <div class="data-types-body">
+<div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-exs64_state').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-exs64_state').style.visibility = 'hidden';">
+<span id="ghlink-type-exs64_state" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L317" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+      <span class="bold_code bc-4"><a name="type-exs64_state">exs64_state()</a></span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p><p>Algorithm specific internal state</p></p></div></div>
 </div>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp71259768836624').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp71259768836624').style.visibility = 'hidden';"><span id="ghlink-exports-idp71259768836624"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp46971553937600').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp46971553937600').style.visibility = 'hidden';"><span id="ghlink-exports-idp46971553937600"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
 <div class="exports-body">
-    <p><a name="export_seed-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-export_seed-0-idp71259779719968').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-export_seed-0-idp71259779719968').style.visibility = 'hidden';">
-<span id="ghlink-export_seed-0-idp71259779719968" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L275" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>export_seed() -&gt; undefined | <span class="bold_code bc-17"><a href="#type-export_state">export_state()</a></span>
+    <p><a name="export_seed-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-export_seed-0-idp46971564913856').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-export_seed-0-idp46971564913856').style.visibility = 'hidden';">
+<span id="ghlink-export_seed-0-idp46971564913856" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L324" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>export_seed() -&gt; undefined | <span class="bold_code bc-17"><a href="#type-export_state">export_state()</a></span>
 </div></p>
 <div class="REFBODY rb-7"><p><a name="export_seed-0"></a>
         <p>Returns the random number state in an external format.
           To be used with <span class="bold_code bc-17"><a href="#seed-1"><span class="code">seed/1</span></a></span>.</p>
       </p></div>
 
-    <p><a name="export_seed_s-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-export_seed_s-1-idp71259780270704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-export_seed_s-1-idp71259780270704').style.visibility = 'hidden';">
-<span id="ghlink-export_seed_s-1-idp71259780270704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L284" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>export_seed_s(State :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt; <span class="bold_code bc-17"><a href="#type-export_state">export_state()</a></span>
+    <p><a name="export_seed_s-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-export_seed_s-1-idp46971564421888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-export_seed_s-1-idp46971564421888').style.visibility = 'hidden';">
+<span id="ghlink-export_seed_s-1-idp46971564421888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L333" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>export_seed_s(State :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt; <span class="bold_code bc-17"><a href="#type-export_state">export_state()</a></span>
 </div></p>
 <div class="REFBODY rb-7"><p><a name="export_seed_s-1"></a>
         <p>Returns the random number generator state in an external format.
           To be used with <span class="bold_code bc-17"><a href="#seed-1"><span class="code">seed/1</span></a></span>.</p>
       </p></div>
 
-    <p><a name="jump-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-jump-0-idp71259780803680').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-jump-0-idp71259780803680').style.visibility = 'hidden';">
-<span id="ghlink-jump-0-idp71259780803680" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L293" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>jump() -&gt; NewState :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>
+    <p><a name="jump-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-jump-0-idp46971565672992').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-jump-0-idp46971565672992').style.visibility = 'hidden';">
+<span id="ghlink-jump-0-idp46971565672992" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L342" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>jump() -&gt; NewState :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>
 </div></p>
 <div class="REFBODY rb-7"><p><a name="jump-0"></a>
           <p>Returns the state
@@ -2078,8 +2133,8 @@ tests. We suggest to use a sign test to extract a random Boolean value.</pre></d
            in the process dictionary.</p>
       </p></div>
 
-    <p><a name="jump-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-jump-1-idp71259780813008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-jump-1-idp71259780813008').style.visibility = 'hidden';">
-<span id="ghlink-jump-1-idp71259780813008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L308" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>jump(State :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt; NewState :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>
+    <p><a name="jump-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-jump-1-idp46971565614304').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-jump-1-idp46971565614304').style.visibility = 'hidden';">
+<span id="ghlink-jump-1-idp46971565614304" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L357" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>jump(State :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt; NewState :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>
 </div></p>
 <div class="REFBODY rb-7"><p><a name="jump-1"></a>
           <p>Returns the state after performing jump calculation
@@ -2089,38 +2144,38 @@ tests. We suggest to use a sign test to extract a random Boolean value.</pre></d
            the algorithm specified in the state.</p>
       </p></div>
 
-    <p><a name="normal-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-normal-0-idp71259779324688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-normal-0-idp71259779324688').style.visibility = 'hidden';">
-<span id="ghlink-normal-0-idp71259779324688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L320" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>normal() -&gt; float()</div></p>
+    <p><a name="normal-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-normal-0-idp46971564293872').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-normal-0-idp46971564293872').style.visibility = 'hidden';">
+<span id="ghlink-normal-0-idp46971564293872" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L369" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>normal() -&gt; float()</div></p>
 <div class="REFBODY rb-7"><p>
         <p>Returns a standard normal deviate float (that is, the mean
           is 0 and the standard deviation is 1) and updates the state in
           the process dictionary.</p>
       </p></div>
 
-    <p><a name="normal-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-normal-2-idp71259779672912').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-normal-2-idp71259779672912').style.visibility = 'hidden';">
-<span id="ghlink-normal-2-idp71259779672912" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L330" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>normal(Mean :: number(), Variance :: number()) -&gt; float()</div></p>
+    <p><a name="normal-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-normal-2-idp46971564025024').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-normal-2-idp46971564025024').style.visibility = 'hidden';">
+<span id="ghlink-normal-2-idp46971564025024" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L379" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>normal(Mean :: number(), Variance :: number()) -&gt; float()</div></p>
 <div class="REFBODY rb-7"><p>
         <p>Returns a normal N(Mean, Variance) deviate float
           and updates the state in the process dictionary.</p>
       </p></div>
 
-    <p><a name="normal_s-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-normal_s-1-idp71259779153552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-normal_s-1-idp71259779153552').style.visibility = 'hidden';">
-<span id="ghlink-normal_s-1-idp71259779153552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L339" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>normal_s(State :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt; {float(), NewState :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>}</div></p>
+    <p><a name="normal_s-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-normal_s-1-idp46971564618272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-normal_s-1-idp46971564618272').style.visibility = 'hidden';">
+<span id="ghlink-normal_s-1-idp46971564618272" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L388" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>normal_s(State :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt; {float(), NewState :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>}</div></p>
 <div class="REFBODY rb-7"><p>
         <p>Returns, for a specified state, a standard normal
           deviate float (that is, the mean is 0 and the standard
           deviation is 1) and a new state.</p>
       </p></div>
 
-    <p><a name="normal_s-3"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-normal_s-3-idp71259779153552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-normal_s-3-idp71259779153552').style.visibility = 'hidden';">
-<span id="ghlink-normal_s-3-idp71259779153552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L349" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>normal_s(Mean :: number(),<br>         Variance :: number(),<br>         State0 :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt;<br>            {float(), NewS :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>}</div></p>
+    <p><a name="normal_s-3"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-normal_s-3-idp46971564618272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-normal_s-3-idp46971564618272').style.visibility = 'hidden';">
+<span id="ghlink-normal_s-3-idp46971564618272" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L398" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>normal_s(Mean :: number(),<br>         Variance :: number(),<br>         State0 :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt;<br>            {float(), NewS :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>}</div></p>
 <div class="REFBODY rb-7"><p>
         <p>Returns, for a specified state, a normal N(Mean, Variance)
           deviate float and a new state.</p>
       </p></div>
 
-    <p><a name="seed-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-seed-1-idp71259780793824').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-seed-1-idp71259780793824').style.visibility = 'hidden';">
-<span id="ghlink-seed-1-idp71259780793824" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L358" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>seed(AlgOrStateOrExpState ::<br>         <span class="bold_code bc-17"><a href="#type-builtin_alg">builtin_alg()</a></span> | <span class="bold_code bc-17"><a href="#type-state">state()</a></span> | <span class="bold_code bc-17"><a href="#type-export_state">export_state()</a></span>) -&gt;<br>        <span class="bold_code bc-17"><a href="#type-state">state()</a></span>
+    <p><a name="seed-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-seed-1-idp46971564890864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-seed-1-idp46971564890864').style.visibility = 'hidden';">
+<span id="ghlink-seed-1-idp46971564890864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L407" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>seed(AlgOrStateOrExpState ::<br>         <span class="bold_code bc-17"><a href="#type-builtin_alg">builtin_alg()</a></span> | <span class="bold_code bc-17"><a href="#type-state">state()</a></span> | <span class="bold_code bc-17"><a href="#type-export_state">export_state()</a></span>) -&gt;<br>        <span class="bold_code bc-17"><a href="#type-state">state()</a></span>
 </div></p>
 <div class="REFBODY rb-7"><p>
         <a name="seed-1"></a>
@@ -2134,16 +2189,16 @@ tests. We suggest to use a sign test to extract a random Boolean value.</pre></d
           <span class="bold_code bc-17"><a href="#export_seed-0"><span class="code">export_seed/0</span></a></span>.</p>
       </p></div>
 
-    <p><a name="seed-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-seed-2-idp71259778630320').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-seed-2-idp71259778630320').style.visibility = 'hidden';">
-<span id="ghlink-seed-2-idp71259778630320" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L374" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>seed(Alg :: <span class="bold_code bc-17"><a href="#type-builtin_alg">builtin_alg()</a></span>,<br>     Seed :: {integer(), integer(), integer()}) -&gt;<br>        <span class="bold_code bc-17"><a href="#type-state">state()</a></span>
+    <p><a name="seed-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-seed-2-idp46971564324192').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-seed-2-idp46971564324192').style.visibility = 'hidden';">
+<span id="ghlink-seed-2-idp46971564324192" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L423" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>seed(Alg :: <span class="bold_code bc-17"><a href="#type-builtin_alg">builtin_alg()</a></span>, Seed :: <span class="bold_code bc-17"><a href="#type-seed">seed()</a></span>) -&gt; <span class="bold_code bc-17"><a href="#type-state">state()</a></span>
 </div></p>
 <div class="REFBODY rb-7"><p>
         <p>Seeds random number generation with the specified algorithm and
           integers in the process dictionary and returns the state.</p>
       </p></div>
 
-    <p><a name="seed_s-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-seed_s-1-idp71259778631712').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-seed_s-1-idp71259778631712').style.visibility = 'hidden';">
-<span id="ghlink-seed_s-1-idp71259778631712" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L383" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>seed_s(AlgOrStateOrExpState ::<br>           <span class="bold_code bc-17"><a href="#type-builtin_alg">builtin_alg()</a></span> | <span class="bold_code bc-17"><a href="#type-state">state()</a></span> | <span class="bold_code bc-17"><a href="#type-export_state">export_state()</a></span>) -&gt;<br>          <span class="bold_code bc-17"><a href="#type-state">state()</a></span>
+    <p><a name="seed_s-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-seed_s-1-idp46971564507040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-seed_s-1-idp46971564507040').style.visibility = 'hidden';">
+<span id="ghlink-seed_s-1-idp46971564507040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L432" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>seed_s(AlgOrStateOrExpState ::<br>           <span class="bold_code bc-17"><a href="#type-builtin_alg">builtin_alg()</a></span> | <span class="bold_code bc-17"><a href="#type-state">state()</a></span> | <span class="bold_code bc-17"><a href="#type-export_state">export_state()</a></span>) -&gt;<br>          <span class="bold_code bc-17"><a href="#type-state">state()</a></span>
 </div></p>
 <div class="REFBODY rb-7"><p>
         <p>
@@ -2155,16 +2210,16 @@ tests. We suggest to use a sign test to extract a random Boolean value.</pre></d
           See also <span class="bold_code bc-17"><a href="#export_seed-0"><span class="code">export_seed/0</span></a></span>.</p>
       </p></div>
 
-    <p><a name="seed_s-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-seed_s-2-idp71259778632128').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-seed_s-2-idp71259778632128').style.visibility = 'hidden';">
-<span id="ghlink-seed_s-2-idp71259778632128" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L398" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>seed_s(Alg :: <span class="bold_code bc-17"><a href="#type-builtin_alg">builtin_alg()</a></span>,<br>       Seed :: {integer(), integer(), integer()}) -&gt;<br>          <span class="bold_code bc-17"><a href="#type-state">state()</a></span>
+    <p><a name="seed_s-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-seed_s-2-idp46971564231136').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-seed_s-2-idp46971564231136').style.visibility = 'hidden';">
+<span id="ghlink-seed_s-2-idp46971564231136" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L447" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>seed_s(Alg :: <span class="bold_code bc-17"><a href="#type-builtin_alg">builtin_alg()</a></span>, Seed :: <span class="bold_code bc-17"><a href="#type-seed">seed()</a></span>) -&gt; <span class="bold_code bc-17"><a href="#type-state">state()</a></span>
 </div></p>
 <div class="REFBODY rb-7"><p>
         <p>Seeds random number generation with the specified algorithm and
           integers and returns the state.</p>
       </p></div>
 
-    <p><a name="uniform-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-uniform-0-idp71259779357104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-uniform-0-idp71259779357104').style.visibility = 'hidden';">
-<span id="ghlink-uniform-0-idp71259779357104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L407" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>uniform() -&gt; X :: float()</div></p>
+    <p><a name="uniform-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-uniform-0-idp46971563474176').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-uniform-0-idp46971563474176').style.visibility = 'hidden';">
+<span id="ghlink-uniform-0-idp46971563474176" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L456" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>uniform() -&gt; X :: float()</div></p>
 <div class="REFBODY rb-7"><p><a name="uniform-0"></a>
         <p>
 	  Returns a random float uniformly distributed in the value
@@ -2200,8 +2255,8 @@ end.</pre></div>
 </div>
       </p></div>
 
-    <p><a name="uniform_real-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-uniform_real-0-idp71259778721008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-uniform_real-0-idp71259778721008').style.visibility = 'hidden';">
-<span id="ghlink-uniform_real-0-idp71259778721008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L443" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>uniform_real() -&gt; X :: float()</div></p>
+    <p><a name="uniform_real-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-uniform_real-0-idp46971563946720').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-uniform_real-0-idp46971563946720').style.visibility = 'hidden';">
+<span id="ghlink-uniform_real-0-idp46971563946720" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L492" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>uniform_real() -&gt; X :: float()</div></p>
 <div class="REFBODY rb-7"><p><a name="uniform_real-0"></a>
         <p>
 	  Returns a random float
@@ -2237,8 +2292,8 @@ end.</pre></div>
 	</p>
       </p></div>
 
-    <p><a name="uniform-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-uniform-1-idp71259780095360').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-uniform-1-idp71259780095360').style.visibility = 'hidden';">
-<span id="ghlink-uniform-1-idp71259780095360" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L479" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>uniform(N :: integer() &gt;= 1) -&gt; X :: integer() &gt;= 1</div></p>
+    <p><a name="uniform-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-uniform-1-idp46971565576944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-uniform-1-idp46971565576944').style.visibility = 'hidden';">
+<span id="ghlink-uniform-1-idp46971565576944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L528" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>uniform(N :: integer() &gt;= 1) -&gt; X :: integer() &gt;= 1</div></p>
 <div class="REFBODY rb-7"><p><a name="uniform-1"></a>
         <p>Returns, for a specified integer <span class="code">N &gt;= 1</span>,
           a random integer uniformly distributed in the value range
@@ -2246,8 +2301,8 @@ end.</pre></div>
           updates the state in the process dictionary.</p>
       </p></div>
 
-    <p><a name="uniform_s-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-uniform_s-1-idp71259780278720').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-uniform_s-1-idp71259780278720').style.visibility = 'hidden';">
-<span id="ghlink-uniform_s-1-idp71259780278720" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L490" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>uniform_s(State :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt; {X :: float(), NewState :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>}</div></p>
+    <p><a name="uniform_s-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-uniform_s-1-idp46971566023952').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-uniform_s-1-idp46971566023952').style.visibility = 'hidden';">
+<span id="ghlink-uniform_s-1-idp46971566023952" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L539" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>uniform_s(State :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt; {X :: float(), NewState :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>}</div></p>
 <div class="REFBODY rb-7"><p>
         <p>
 	  Returns, for a specified state, random float
@@ -2283,8 +2338,8 @@ end.</pre></div>
 </div>
       </p></div>
 
-    <p><a name="uniform_real_s-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-uniform_real_s-1-idp71259778726208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-uniform_real_s-1-idp71259778726208').style.visibility = 'hidden';">
-<span id="ghlink-uniform_real_s-1-idp71259778726208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L526" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>uniform_real_s(State :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt;<br>                  {X :: float(), NewState :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>}</div></p>
+    <p><a name="uniform_real_s-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-uniform_real_s-1-idp46971564181952').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-uniform_real_s-1-idp46971564181952').style.visibility = 'hidden';">
+<span id="ghlink-uniform_real_s-1-idp46971564181952" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L575" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>uniform_real_s(State :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt;<br>                  {X :: float(), NewState :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>}</div></p>
 <div class="REFBODY rb-7"><p>
         <p>
 	  Returns, for a specified state, a random float
@@ -2346,8 +2401,8 @@ end.</pre></div>
 	</p>
       </p></div>
 
-    <p><a name="uniform_s-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-uniform_s-2-idp71259779910448').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-uniform_s-2-idp71259779910448').style.visibility = 'hidden';">
-<span id="ghlink-uniform_s-2-idp71259779910448" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L588" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>uniform_s(N :: integer() &gt;= 1, State :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt;<br>             {X :: integer() &gt;= 1, NewState :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>}</div></p>
+    <p><a name="uniform_s-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-uniform_s-2-idp46971565112224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-uniform_s-2-idp46971565112224').style.visibility = 'hidden';">
+<span id="ghlink-uniform_s-2-idp46971565112224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/stdlib/doc/src/rand.xml#L637" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>uniform_s(N :: integer() &gt;= 1, State :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>) -&gt;<br>             {X :: integer() &gt;= 1, NewState :: <span class="bold_code bc-17"><a href="#type-state">state()</a></span>}</div></p>
 <div class="REFBODY rb-7"><p>
         <p>Returns, for a specified integer <span class="code">N &gt;= 1</span>
           and a state, a random integer uniformly distributed in the value

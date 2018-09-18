@@ -1799,11 +1799,9 @@ Alg = crypto | crypto_cache
 .RE
 .RS
 .LP
-Creates state object for \fBrandom number generation\fR\&, in order to generate cryptographically strong random numbers\&. See also \fBrand:seed/1\fR\& and \fBrand_seed_alg_s/1\fR\&\&.
+Creates state object for \fBrandom number generation\fR\&, in order to generate cryptographically strong random numbers, and saves it in the process dictionary before returning it as well\&. See also \fBrand:seed/1\fR\& and \fBrand_seed_alg_s/1\fR\&\&.
 .LP
 When using the state object from this function the \fBrand\fR\& functions using it may raise exception \fIerror:low_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
-.LP
-The cache size can be changed from its default value using the \fB crypto app\&'s \fR\& configuration parameter \fIrand_cache_size\fR\&\&.
 .LP
 \fIExample\fR\&
 .LP
@@ -1812,6 +1810,36 @@ The cache size can be changed from its default value using the \fB crypto app\&'
 _ = crypto:rand_seed_alg(crypto_cache),
 _IntegerValue = rand:uniform(42), % [1; 42]
 _FloatValue = rand:uniform().     % [0.0; 1.0[
+.fi
+.RE
+.LP
+.B
+rand_seed_alg(Alg, Seed) -> rand:state()
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Alg = crypto_aes
+.br
+.RE
+.RE
+.RS
+.LP
+Creates a state object for \fBrandom number generation\fR\&, in order to generate cryptographically unpredictable random numbers, and saves it in the process dictionary before returning it as well\&. See also \fBrand_seed_alg_s/2\fR\&\&.
+.LP
+\fIExample\fR\&
+.LP
+.nf
+
+_ = crypto:rand_seed_alg(crypto_aes, "my seed"),
+IntegerValue = rand:uniform(42), % [1; 42]
+FloatValue = rand:uniform(),     % [0.0; 1.0[
+_ = crypto:rand_seed_alg(crypto_aes, "my seed"),
+IntegerValue = rand:uniform(42), % Same values
+FloatValue = rand:uniform().     % again
+	
 .fi
 .RE
 .LP
@@ -1839,6 +1867,8 @@ When using the state object from this function the \fBrand\fR\& functions using 
 .LP
 The cache size can be changed from its default value using the \fB crypto app\&'s \fR\& configuration parameter \fIrand_cache_size\fR\&\&.
 .LP
+When using the state object from this function the \fBrand\fR\& functions using it may throw exception \fIlow_entropy\fR\& in case the random generator failed due to lack of secure "randomness"\&.
+.LP
 
 .RS -4
 .B
@@ -1850,6 +1880,46 @@ In fact since random data is cached some numbers may get reproduced if you try, 
 .LP
 The only supported usage is to generate one distinct random sequence from this start state\&.
 
+.RE
+.LP
+.B
+rand_seed_alg_s(Alg, Seed) -> rand:state()
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Alg = crypto_aes
+.br
+.RE
+.RE
+.RS
+.LP
+Creates a state object for \fBrandom number generation\fR\&, in order to generate cryptographically unpredictable random numbers\&. See also \fBrand_seed_alg/1\fR\&\&.
+.LP
+To get a long period the Xoroshiro928 generator from the \fBrand\fR\& module is used as a counter (with period 2^928 - 1) and the generator states are scrambled through AES to create 58-bit pseudo random values\&.
+.LP
+The result should be statistically completely unpredictable random values, since the scrambling is cryptographically strong and the period is ridiculously long\&. But the generated numbers are not to be regarded as cryptographically strong since there is no re-keying schedule\&.
+.RS 2
+.TP 2
+*
+If you need cryptographically strong random numbers use \fBrand_seed_alg_s/1\fR\& with \fIAlg =:= crypto\fR\& or \fIAlg =:= crypto_cache\fR\&\&.
+.LP
+.TP 2
+*
+If you need to be able to repeat the sequence use this function\&.
+.LP
+.TP 2
+*
+If you do not need the statistical quality of this function, there are faster algorithms in the \fBrand\fR\& module\&.
+.LP
+.RE
+
+.LP
+Thanks to the used generator the state object supports the \fB\fIrand:jump/0,1\fR\&\fR\& function with distance 2^512\&.
+.LP
+Numbers are generated in batches and cached for speed reasons\&. The cache size can be changed from its default value using the \fB crypto app\&'s \fR\& configuration parameter \fIrand_cache_size\fR\&\&.
 .RE
 .LP
 .nf

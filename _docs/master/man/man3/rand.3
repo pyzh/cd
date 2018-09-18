@@ -27,6 +27,22 @@ Jump function: equivalent to 2^512 calls
 .RE
 .TP 2
 .B
+\fIexro928ss\fR\&:
+Xoroshiro928**, 58 bits precision and a period of 2^928-1
+.RS 2
+.LP
+Jump function: equivalent to 2^512 calls
+.RE
+.RS 2
+.LP
+This is a 58 bit version of Xoroshiro1024**, from the 2018 paper by David Blackman and Sebastiano Vigna:  Scrambled Linear Pseudorandom Number Generators  that on a 64 bit Erlang system executes only about 30% slower than the default \fIexrop\fR\& algorithm but with much longer period and better statistical properties, and on the flip side a larger state\&.
+.RE
+.RS 2
+.LP
+Many thanks to Sebastiano Vigna for his help with the 58 bit adaption\&.
+.RE
+.TP 2
+.B
 \fIexsp\fR\&:
 Xorshift116+, 58 bits precision and period of 2^116-1
 .RS 2
@@ -130,7 +146,7 @@ Note:
 The builtin random number generator algorithms are not cryptographically strong\&. If a cryptographically strong random number generator is needed, use something like \fB\fIcrypto:rand_seed/0\fR\&\fR\&\&.
 
 .LP
-For all these generators the lowest bit(s) has got a slightly less random behaviour than all other bits\&. 1 bit for \fIexrop\fR\& (and \fIexsp\fR\&), and 3 bits for \fIexs1024s\fR\&\&. See for example the explanation in the  Xoroshiro128+  generator source code:
+For all these generators except \fIexro928ss\fR\& the lowest bit(s) has got a slightly less random behaviour than all other bits\&. 1 bit for \fIexrop\fR\& (and \fIexsp\fR\&), and 3 bits for \fIexs1024s\fR\&\&. See for example the explanation in the  Xoroshiro128+  generator source code:
 .LP
 .nf
 
@@ -158,7 +174,19 @@ The floating point generating functions in this module waste the lowest bits whe
 
 \fBbuiltin_alg()\fR\& = 
 .br
-    exs64 | exsplus | exsp | exs1024 | exs1024s | exrop
+    exrop |
+.br
+    exs1024s |
+.br
+    exro928ss |
+.br
+    exsp |
+.br
+    exs64 |
+.br
+    exsplus |
+.br
+    exs1024
 .br
 .fi
 .nf
@@ -195,13 +223,15 @@ The floating point generating functions in this module waste the lowest bits whe
 
 \fBalg_state()\fR\& = 
 .br
-    \fBexs64_state()\fR\& |
-.br
-    \fBexsplus_state()\fR\& |
+    \fBexrop_state()\fR\& |
 .br
     \fBexs1024_state()\fR\& |
 .br
-    \fBexrop_state()\fR\& |
+    \fBexro928_state()\fR\& |
+.br
+    \fBexsplus_state()\fR\& |
+.br
+    \fBexs64_state()\fR\& |
 .br
     term()
 .br
@@ -226,16 +256,24 @@ Algorithm-dependent state that can be printed or saved to file\&.
 .RE
 .nf
 
-\fBexs64_state()\fR\&
+\fBseed()\fR\& = 
+.br
+    [integer()] | integer() | {integer(), integer(), integer()}
 .br
 .fi
 .RS
 .LP
-Algorithm specific internal state
+A seed value for the generator\&.
+.LP
+A list of integers sets the generator\&'s internal state directly, after algorithm-dependent checks of the value and masking to the proper word size\&.
+.LP
+An integer is used as the initial state for a SplitMix64 generator\&. The output values of that is then used for setting the generator\&'s internal state after masking to the proper word size and if needed avoiding zero values\&.
+.LP
+A traditional 3-tuple of integers seed is passed through algorithm-dependent hashing functions to create the generator\&'s initial state\&.
 .RE
 .nf
 
-\fBexsplus_state()\fR\&
+\fBexrop_state()\fR\&
 .br
 .fi
 .RS
@@ -253,7 +291,25 @@ Algorithm specific internal state
 .RE
 .nf
 
-\fBexrop_state()\fR\&
+\fBexro928_state()\fR\&
+.br
+.fi
+.RS
+.LP
+Algorithm specific internal state
+.RE
+.nf
+
+\fBexsplus_state()\fR\&
+.br
+.fi
+.RS
+.LP
+Algorithm specific internal state
+.RE
+.nf
+
+\fBexs64_state()\fR\&
 .br
 .fi
 .RS
@@ -389,11 +445,7 @@ Otherwise recreates the exported seed in the process dictionary, and returns the
 .nf
 
 .B
-seed(Alg :: builtin_alg(),
-.B
-     Seed :: {integer(), integer(), integer()}) ->
-.B
-        state()
+seed(Alg :: builtin_alg(), Seed :: seed()) -> state()
 .br
 .fi
 .br
@@ -423,11 +475,7 @@ Otherwise recreates the exported seed and returns the state\&. See also \fB\fIex
 .nf
 
 .B
-seed_s(Alg :: builtin_alg(),
-.B
-       Seed :: {integer(), integer(), integer()}) ->
-.B
-          state()
+seed_s(Alg :: builtin_alg(), Seed :: seed()) -> state()
 .br
 .fi
 .br
