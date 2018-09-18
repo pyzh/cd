@@ -1394,7 +1394,7 @@ HeirData = term()
 .LP
 Creates a new table and returns a table identifier that can be used in subsequent operations\&. The table identifier can be sent to other processes so that a table can be shared between different processes within a node\&.
 .LP
-Parameter \fIOptions\fR\& is a list of atoms that specifies table type, access rights, key position, and whether the table is named\&. Default values are used for omitted options\&. This means that not specifying any options (\fI[]\fR\&) is the same as specifying \fI[set, protected, {keypos,1}, {heir,none}, {write_concurrency,false}, {read_concurrency,false}]\fR\&\&.
+Parameter \fIOptions\fR\& is a list of options that specifies table type, access rights, key position, and whether the table is named\&. Default values are used for omitted options\&. This means that not specifying any options (\fI[]\fR\&) is the same as specifying \fI[set, protected, {keypos,1}, {heir,none}, {write_concurrency,false}, {read_concurrency,false}]\fR\&\&.
 .RS 2
 .TP 2
 .B
