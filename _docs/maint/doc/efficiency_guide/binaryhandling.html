@@ -210,7 +210,7 @@ my_list_to_binary([], Acc) -&gt;
     [H|my_binary_to_list(T)];
 my_binary_to_list(&lt;&lt;&gt;&gt;) -&gt; [].</pre></div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-how-binaries-are-implemented-idp70777983284576').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-how-binaries-are-implemented-idp70777983284576').style.visibility = 'hidden';"><span id="ghlink-how-binaries-are-implemented-idp70777983284576" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L55" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="how-binaries-are-implemented" href="#how-binaries-are-implemented">4.1 
+  <h3><span onMouseOver="document.getElementById('ghlink-how-binaries-are-implemented-idp46908333452736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-how-binaries-are-implemented-idp46908333452736').style.visibility = 'hidden';"><span id="ghlink-how-binaries-are-implemented-idp46908333452736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L55" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="how-binaries-are-implemented" href="#how-binaries-are-implemented">4.1 
           How Binaries are Implemented</a></span></h3>
     
 
@@ -240,7 +240,7 @@ my_binary_to_list(&lt;&lt;&gt;&gt;) -&gt; [].</pre></div>
     </ul>
 
     <h4>
-<a name="refc_binary"></a><span onMouseOver="document.getElementById('ghlink-refc-binaries-idp70777984040368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-refc-binaries-idp70777984040368').style.visibility = 'hidden';"><span id="ghlink-refc-binaries-idp70777984040368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L78" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="refc-binaries" href="#refc-binaries">Refc Binaries</a></span>
+<a name="refc_binary"></a><span onMouseOver="document.getElementById('ghlink-refc-binaries-idp46908333885712').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-refc-binaries-idp46908333885712').style.visibility = 'hidden';"><span id="ghlink-refc-binaries-idp46908333885712" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L78" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="refc-binaries" href="#refc-binaries">Refc Binaries</a></span>
 </h4>
       
       
@@ -264,7 +264,7 @@ my_binary_to_list(&lt;&lt;&gt;&gt;) -&gt; [].</pre></div>
     
 
     <h4>
-<a name="heap_binary"></a><span onMouseOver="document.getElementById('ghlink-heap-binaries-idp70777984045856').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-heap-binaries-idp70777984045856').style.visibility = 'hidden';"><span id="ghlink-heap-binaries-idp70777984045856" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L99" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="heap-binaries" href="#heap-binaries">Heap Binaries</a></span>
+<a name="heap_binary"></a><span onMouseOver="document.getElementById('ghlink-heap-binaries-idp46908333918768').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-heap-binaries-idp46908333918768').style.visibility = 'hidden';"><span id="ghlink-heap-binaries-idp46908333918768" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L99" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="heap-binaries" href="#heap-binaries">Heap Binaries</a></span>
 </h4>
       
       
@@ -274,7 +274,7 @@ my_binary_to_list(&lt;&lt;&gt;&gt;) -&gt; [].</pre></div>
     require any special handling by the garbage collector.</p>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-sub-binaries-idp70777983885040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-sub-binaries-idp70777983885040').style.visibility = 'hidden';"><span id="ghlink-sub-binaries-idp70777983885040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L108" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="sub-binaries" href="#sub-binaries">Sub Binaries</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-sub-binaries-idp46908333921248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-sub-binaries-idp46908333921248').style.visibility = 'hidden';"><span id="ghlink-sub-binaries-idp46908333921248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L108" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="sub-binaries" href="#sub-binaries">Sub Binaries</a></span></h4>
       
     <p>The reference objects <strong>sub binaries</strong> and
     <strong>match contexts</strong> can reference part of
@@ -288,7 +288,7 @@ my_binary_to_list(&lt;&lt;&gt;&gt;) -&gt; [].</pre></div>
     the actual binary data is never copied.</p>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-match-context-idp70777983889584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-match-context-idp70777983889584').style.visibility = 'hidden';"><span id="ghlink-match-context-idp70777983889584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L122" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="match-context" href="#match-context">Match Context</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-match-context-idp46908334113648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-match-context-idp46908334113648').style.visibility = 'hidden';"><span id="ghlink-match-context-idp46908334113648" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L122" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="match-context" href="#match-context">Match Context</a></span></h4>
       
       <a name="match_context"></a>
       <p>A <strong>match context</strong> is similar to a sub binary, but is
@@ -308,7 +308,7 @@ my_binary_to_list(&lt;&lt;&gt;&gt;) -&gt; [].</pre></div>
     
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-constructing-binaries-idp70777983895504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-constructing-binaries-idp70777983895504').style.visibility = 'hidden';"><span id="ghlink-constructing-binaries-idp70777983895504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L142" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="constructing-binaries" href="#constructing-binaries">4.2 
+  <h3><span onMouseOver="document.getElementById('ghlink-constructing-binaries-idp46908334118016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-constructing-binaries-idp46908334118016').style.visibility = 'hidden';"><span id="ghlink-constructing-binaries-idp46908334118016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L142" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="constructing-binaries" href="#constructing-binaries">4.2 
           Constructing Binaries</a></span></h3>
     
     <p>Appending to a binary or bitstring
@@ -374,7 +374,7 @@ Bin4 = &lt;&lt;Bin1/binary,17&gt;&gt;,       %% 5 !!!
     it is left as an exercise to the curious reader to figure out how it is
     done by reading the emulator sources, primarily <span class="code">erl_bits.c</span>.)</p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-circumstances-that-force-copying-idp70777984124448').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-circumstances-that-force-copying-idp70777984124448').style.visibility = 'hidden';"><span id="ghlink-circumstances-that-force-copying-idp70777984124448" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L209" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="circumstances-that-force-copying" href="#circumstances-that-force-copying">Circumstances That Force Copying</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-circumstances-that-force-copying-idp46908333849360').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-circumstances-that-force-copying-idp46908333849360').style.visibility = 'hidden';"><span id="ghlink-circumstances-that-force-copying-idp46908333849360" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L209" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="circumstances-that-force-copying" href="#circumstances-that-force-copying">Circumstances That Force Copying</a></span></h4>
       
 
       <p>The optimization of the binary append operation requires that
@@ -436,7 +436,7 @@ Bin = &lt;&lt;Bin1,...&gt;&gt;  %% Bin1 will be COPIED</pre></div>
     
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-matching-binaries-idp70777984138080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-matching-binaries-idp70777984138080').style.visibility = 'hidden';"><span id="ghlink-matching-binaries-idp70777984138080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L276" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="matching-binaries" href="#matching-binaries">4.3 
+  <h3><span onMouseOver="document.getElementById('ghlink-matching-binaries-idp46908333999088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-matching-binaries-idp46908333999088').style.visibility = 'hidden';"><span id="ghlink-matching-binaries-idp46908333999088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L276" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="matching-binaries" href="#matching-binaries">4.3 
           Matching Binaries</a></span></h3>
     
 
@@ -519,7 +519,7 @@ all_but_zeroes_to_list(&lt;&lt;Byte,T/binary&gt;&gt;, Acc, Remaining) -&gt;
   optimization is applied or not?</p>
 
   <h4>
-<a name="bin_opt_info"></a><span onMouseOver="document.getElementById('ghlink-option-bin_opt_info-idp70777984171968').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-option-bin_opt_info-idp70777984171968').style.visibility = 'hidden';"><span id="ghlink-option-bin_opt_info-idp70777984171968" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L363" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="option-bin_opt_info" href="#option-bin_opt_info">Option bin_opt_info</a></span>
+<a name="bin_opt_info"></a><span onMouseOver="document.getElementById('ghlink-option-bin_opt_info-idp46908334030512').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-option-bin_opt_info-idp46908334030512').style.visibility = 'hidden';"><span id="ghlink-option-bin_opt_info-idp46908334030512" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L363" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="option-bin_opt_info" href="#option-bin_opt_info">Option bin_opt_info</a></span>
 </h4>
     
     
@@ -563,7 +563,7 @@ after_zero(&lt;&lt;&gt;&gt;) -&gt;
     created (yet).</p>
   
 
-  <h4><span onMouseOver="document.getElementById('ghlink-unused-variables-idp70777983972544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-unused-variables-idp70777983972544').style.visibility = 'hidden';"><span id="ghlink-unused-variables-idp70777983972544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L410" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="unused-variables" href="#unused-variables">Unused Variables</a></span></h4>
+  <h4><span onMouseOver="document.getElementById('ghlink-unused-variables-idp46908334040704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-unused-variables-idp46908334040704').style.visibility = 'hidden';"><span id="ghlink-unused-variables-idp46908334040704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L410" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="unused-variables" href="#unused-variables">Unused Variables</a></span></h4>
     
 
     <p>The compiler figures out if a variable is unused. The same
@@ -583,7 +583,7 @@ count3(&lt;&lt;&gt;&gt;, Count) -&gt; Count.</pre></div>
   
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-historical-note-idp70777983975840').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-historical-note-idp70777983975840').style.visibility = 'hidden';"><span id="ghlink-historical-note-idp70777983975840" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L431" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="historical-note" href="#historical-note">4.4 
+  <h3><span onMouseOver="document.getElementById('ghlink-historical-note-idp46908334044000').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-historical-note-idp46908334044000').style.visibility = 'hidden';"><span id="ghlink-historical-note-idp46908334044000" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/binaryhandling.xml#L431" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="historical-note" href="#historical-note">4.4 
           Historical Note</a></span></h3>
     
 
