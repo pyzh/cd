@@ -772,11 +772,11 @@
 <div class="innertube">
 <!-- refpage --><center><h1>gen_tcp</h1></center>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-module-idp71716154812576').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp71716154812576').style.visibility = 'hidden';"><span id="ghlink-module-idp71716154812576"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-idp70441377319120').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp70441377319120').style.visibility = 'hidden';"><span id="ghlink-module-idp70441377319120"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
 <div class="REFBODY module-body">gen_tcp</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp71716154813024').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp71716154813024').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp71716154813024"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp70441377319568').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp70441377319568').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp70441377319568"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
 <div class="REFBODY module-summary-body">Interface to TCP/IP sockets.</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-description-idp71716154813488').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp71716154813488').style.visibility = 'hidden';"><span id="ghlink-description-idp71716154813488" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L32" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-description-idp70441377320032').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp70441377320032').style.visibility = 'hidden';"><span id="ghlink-description-idp70441377320032" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L32" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
 <div class="REFBODY description-body"><p>
     <p>This module provides functions for communicating
       with sockets using the TCP/IP protocol.</p>
@@ -811,7 +811,7 @@ do_recv(Sock, Bs) -&gt;
       <span class="bold_code bc-17"><a href="#examples">Examples</a></span>.</p>
   </p></div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-data-types-idp71716154819232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types-idp71716154819232').style.visibility = 'hidden';"><span id="ghlink-data-types-idp71716154819232"></span><a class="title_link" name="data-types" href="#data-types">Data Types</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-data-types-idp70441377325776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types-idp70441377325776').style.visibility = 'hidden';"><span id="ghlink-data-types-idp70441377325776"></span><a class="title_link" name="data-types" href="#data-types">Data Types</a></span></h3>
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-option').style.visibility = 'hidden';">
 <span id="ghlink-type-option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L69" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
@@ -827,39 +827,54 @@ do_recv(Sock, Bs) -&gt;
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
 	<p>
 	  If the platform implements the IPv4 option
-	  <span class="code">IP_PKTOPTIONS</span> (probably Linux specific), or the IPv6 option
+	  <span class="code">IP_PKTOPTIONS</span>, or the IPv6 option
 	  <span class="code">IPV6_PKTOPTIONS</span> or <span class="code">IPV6_2292PKTOPTIONS</span> for the socket
 	  this value is returned from
 	  <span class="bold_code bc-15"><a href="inet.html#getopts-2"><span class="code">inet:getopts/2</span></a></span>
 	  when called with the option name
 	  <span class="bold_code bc-17"><a href="#type-option_name"><span class="code">pktoptions</span></a></span>.
 	</p>
+	<div class="note">
+<div class="label">Note</div>
+<div class="content"><p>
+	  <p>
+	    This option appears to be VERY Linux specific,
+	    and its existence in future Linux kernel versions
+	    is also worrying since the option is part of RFC 2292
+	    which is since long (2003) obsoleted by RFC 3542
+	    that <strong>explicitly</strong> removes this possibility to get
+	    packet information from a stream socket.
+	    For comparision: it has existed in FreeBSD but is now removed,
+	    at least since FreeBSD 10.
+	  </p>
+	</p></div>
+</div>
       </p></div></div>
 </div>
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-option_name').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-option_name').style.visibility = 'hidden';">
-<span id="ghlink-type-option_name" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L86" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-option_name" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L98" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-option_name">option_name()</a> = <br>    active |<br>    buffer |<br>    delay_send |<br>    deliver |<br>    dontroute |<br>    exit_on_close |<br>    header |<br>    high_msgq_watermark |<br>    high_watermark |<br>    keepalive |<br>    linger |<br>    low_msgq_watermark |<br>    low_watermark |<br>    mode |<br>    nodelay |<br>    packet |<br>    packet_size |<br>    pktoptions |<br>    priority |<br>    {raw,<br>     Protocol :: integer() &gt;= 0,<br>     OptionNum :: integer() &gt;= 0,<br>     ValueSpec ::<br>         (ValueSize :: integer() &gt;= 0) | (ValueBin :: binary())} |<br>    recbuf |<br>    reuseaddr |<br>    send_timeout |<br>    send_timeout_close |<br>    show_econnreset |<br>    sndbuf |<br>    tos |<br>    tclass |<br>    ttl |<br>    recvtos |<br>    recvtclass |<br>    recvttl |<br>    pktoptions |<br>    ipv6_v6only</span><br>
 </div>
 <div class="data-type-desc"></div>
 </div>
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-connect_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-connect_option').style.visibility = 'hidden';">
-<span id="ghlink-type-connect_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L89" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-connect_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L101" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-connect_option">connect_option()</a> = <br>    {ip, <span class="bold_code bc-15"><a href="inet.html#type-socket_address">inet:socket_address()</a></span>} |<br>    {fd, Fd :: integer() &gt;= 0} |<br>    {ifaddr, <span class="bold_code bc-15"><a href="inet.html#type-socket_address">inet:socket_address()</a></span>} |<br>    <span class="bold_code bc-15"><a href="inet.html#type-address_family">inet:address_family()</a></span> |<br>    {port, <span class="bold_code bc-15"><a href="inet.html#type-port_number">inet:port_number()</a></span>} |<br>    {tcp_module, module()} |<br>    {netns, <span class="bold_code bc-15"><a href="file.html#type-filename_all">file:filename_all()</a></span>} |<br>    {bind_to_device, binary()} |<br>    <span class="bold_code bc-17"><a href="#type-option">option()</a></span></span><br>
 </div>
 <div class="data-type-desc"></div>
 </div>
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-listen_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-listen_option').style.visibility = 'hidden';">
-<span id="ghlink-type-listen_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L92" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-listen_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L104" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-listen_option">listen_option()</a> = <br>    {ip, <span class="bold_code bc-15"><a href="inet.html#type-socket_address">inet:socket_address()</a></span>} |<br>    {fd, Fd :: integer() &gt;= 0} |<br>    {ifaddr, <span class="bold_code bc-15"><a href="inet.html#type-socket_address">inet:socket_address()</a></span>} |<br>    <span class="bold_code bc-15"><a href="inet.html#type-address_family">inet:address_family()</a></span> |<br>    {port, <span class="bold_code bc-15"><a href="inet.html#type-port_number">inet:port_number()</a></span>} |<br>    {backlog, B :: integer() &gt;= 0} |<br>    {tcp_module, module()} |<br>    {netns, <span class="bold_code bc-15"><a href="file.html#type-filename_all">file:filename_all()</a></span>} |<br>    {bind_to_device, binary()} |<br>    <span class="bold_code bc-17"><a href="#type-option">option()</a></span></span><br>
 </div>
 <div class="data-type-desc"></div>
 </div>
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-').style.visibility = 'hidden';">
-<span id="ghlink-type-" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L95" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><div class="bold_code bc-8"><span onMouseOver="document.getElementById('ghlink-type-socket-idp71716154830736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-socket-idp71716154830736').style.visibility = 'hidden';"><span id="ghlink-type-socket-idp71716154830736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L95" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-socket" href="#type-socket">socket()</a></span></div>
+<span id="ghlink-type-" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L107" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><div class="bold_code bc-8"><span onMouseOver="document.getElementById('ghlink-type-socket-idp70441377338976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-socket-idp70441377338976').style.visibility = 'hidden';"><span id="ghlink-type-socket-idp70441377338976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L107" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-socket" href="#type-socket">socket()</a></span></div>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p><p>As returned by
         <span class="bold_code bc-17"><a href="#accept-1"><span class="code">accept/1,2</span></a></span> and
@@ -869,11 +884,11 @@ do_recv(Sock, Bs) -&gt;
 </div>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp71716154834496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp71716154834496').style.visibility = 'hidden';"><span id="ghlink-exports-idp71716154834496"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp70441377342736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp70441377342736').style.visibility = 'hidden';"><span id="ghlink-exports-idp70441377342736"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
 <div class="exports-body">
-    <p><a name="accept-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-accept-1-idp71716161716976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-accept-1-idp71716161716976').style.visibility = 'hidden';">
-<span id="ghlink-accept-1-idp71716161716976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L106" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>accept(ListenSocket) -&gt; {ok, Socket} | {error, Reason}</div><a name="accept-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-accept-2-idp71716161772272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-accept-2-idp71716161772272').style.visibility = 'hidden';">
-<span id="ghlink-accept-2-idp71716161772272" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L106" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>accept(ListenSocket, Timeout) -&gt; {ok, Socket} | {error, Reason}</div><div class="REFBODY fun-types">
+    <p><a name="accept-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-accept-1-idp70441384119296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-accept-1-idp70441384119296').style.visibility = 'hidden';">
+<span id="ghlink-accept-1-idp70441384119296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L118" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>accept(ListenSocket) -&gt; {ok, Socket} | {error, Reason}</div><a name="accept-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-accept-2-idp70441384457072').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-accept-2-idp70441384457072').style.visibility = 'hidden';">
+<span id="ghlink-accept-2-idp70441384457072" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L118" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>accept(ListenSocket, Timeout) -&gt; {ok, Socket} | {error, Reason}</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">ListenSocket = <span class="bold_code bc-17"><a href="#type-socket">socket()</a></span></span></div>
 <div class="REFBODY rb-1">Returned by
@@ -924,8 +939,8 @@ do_recv(Sock, Bs) -&gt;
 </div>
       </p></div>
 
-    <p><a name="close-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-close-1-idp71716161928256').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-close-1-idp71716161928256').style.visibility = 'hidden';">
-<span id="ghlink-close-1-idp71716161928256" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L153" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>close(Socket) -&gt; ok</div><div class="REFBODY fun-types">
+    <p><a name="close-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-close-1-idp70441385764032').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-close-1-idp70441385764032').style.visibility = 'hidden';">
+<span id="ghlink-close-1-idp70441385764032" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L165" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>close(Socket) -&gt; ok</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Socket = <span class="bold_code bc-17"><a href="#type-socket">socket()</a></span></span></div>
 </div></p>
@@ -950,9 +965,9 @@ do_recv(Sock, Bs) -&gt;
          </ul>
       </p></div>
 
-    <p><a name="connect-3"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-connect-3-idp71716161473680').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-3-idp71716161473680').style.visibility = 'hidden';">
-<span id="ghlink-connect-3-idp71716161473680" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L178" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>connect(Address, Port, Options) -&gt; {ok, Socket} | {error, Reason}</div><a name="connect-4"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-connect-4-idp71716162190400').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-4-idp71716162190400').style.visibility = 'hidden';">
-<span id="ghlink-connect-4-idp71716162190400" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L178" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>connect(Address, Port, Options, Timeout) -&gt;<br>           {ok, Socket} | {error, Reason}</div><div class="REFBODY fun-types">
+    <p><a name="connect-3"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-connect-3-idp70441384637008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-3-idp70441384637008').style.visibility = 'hidden';">
+<span id="ghlink-connect-3-idp70441384637008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L190" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>connect(Address, Port, Options) -&gt; {ok, Socket} | {error, Reason}</div><a name="connect-4"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-connect-4-idp70441383745248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-4-idp70441383745248').style.visibility = 'hidden';">
+<span id="ghlink-connect-4-idp70441383745248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L190" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>connect(Address, Port, Options, Timeout) -&gt;<br>           {ok, Socket} | {error, Reason}</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Address = <span class="bold_code bc-15"><a href="inet.html#type-socket_address">inet:socket_address()</a></span> | <span class="bold_code bc-15"><a href="inet.html#type-hostname">inet:hostname()</a></span></span></div>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Port = <span class="bold_code bc-15"><a href="inet.html#type-port_number">inet:port_number()</a></span></span></div>
@@ -1035,8 +1050,8 @@ do_recv(Sock, Bs) -&gt;
 </div>
       </p></div>
 
-    <p><a name="controlling_process-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-controlling_process-2-idp71716163291584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-controlling_process-2-idp71716163291584').style.visibility = 'hidden';">
-<span id="ghlink-controlling_process-2-idp71716163291584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L258" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>controlling_process(Socket, Pid) -&gt; ok | {error, Reason}</div><div class="REFBODY fun-types">
+    <p><a name="controlling_process-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-controlling_process-2-idp70441383406352').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-controlling_process-2-idp70441383406352').style.visibility = 'hidden';">
+<span id="ghlink-controlling_process-2-idp70441383406352" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L270" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>controlling_process(Socket, Pid) -&gt; ok | {error, Reason}</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Socket = <span class="bold_code bc-17"><a href="#type-socket">socket()</a></span></span></div>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Pid = pid()</span></div>
@@ -1062,8 +1077,8 @@ do_recv(Sock, Bs) -&gt;
           may cause this.</p>
       </p></div>
 
-    <p><a name="listen-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-listen-2-idp71716163293552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-listen-2-idp71716163293552').style.visibility = 'hidden';">
-<span id="ghlink-listen-2-idp71716163293552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L282" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>listen(Port, Options) -&gt; {ok, ListenSocket} | {error, Reason}</div><div class="REFBODY fun-types">
+    <p><a name="listen-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-listen-2-idp70441385731376').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-listen-2-idp70441385731376').style.visibility = 'hidden';">
+<span id="ghlink-listen-2-idp70441385731376" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L294" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>listen(Port, Options) -&gt; {ok, ListenSocket} | {error, Reason}</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Port = <span class="bold_code bc-15"><a href="inet.html#type-port_number">inet:port_number()</a></span></span></div>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Options = [<span class="bold_code bc-17"><a href="#type-listen_option">listen_option()</a></span>]</span></div>
@@ -1127,9 +1142,9 @@ do_recv(Sock, Bs) -&gt;
 </div>
       </p></div>
 
-    <p><a name="recv-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-recv-2-idp71716162664880').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-recv-2-idp71716162664880').style.visibility = 'hidden';">
-<span id="ghlink-recv-2-idp71716162664880" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L339" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>recv(Socket, Length) -&gt; {ok, Packet} | {error, Reason}</div><a name="recv-3"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-recv-3-idp71716162671888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-recv-3-idp71716162671888').style.visibility = 'hidden';">
-<span id="ghlink-recv-3-idp71716162671888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L339" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>recv(Socket, Length, Timeout) -&gt; {ok, Packet} | {error, Reason}</div><div class="REFBODY fun-types">
+    <p><a name="recv-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-recv-2-idp70441384335744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-recv-2-idp70441384335744').style.visibility = 'hidden';">
+<span id="ghlink-recv-2-idp70441384335744" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L351" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>recv(Socket, Length) -&gt; {ok, Packet} | {error, Reason}</div><a name="recv-3"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-recv-3-idp70441383547872').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-recv-3-idp70441383547872').style.visibility = 'hidden';">
+<span id="ghlink-recv-3-idp70441383547872" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L351" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>recv(Socket, Length, Timeout) -&gt; {ok, Packet} | {error, Reason}</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Socket = <span class="bold_code bc-17"><a href="#type-socket">socket()</a></span></span></div>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Length = integer() &gt;= 0</span></div>
@@ -1159,8 +1174,8 @@ do_recv(Sock, Bs) -&gt;
           time-out in milliseconds. Defaults to <span class="code">infinity</span>.</p>
       </p></div>
 
-    <p><a name="send-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-send-2-idp71716163307312').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-send-2-idp71716163307312').style.visibility = 'hidden';">
-<span id="ghlink-send-2-idp71716163307312" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L365" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>send(Socket, Packet) -&gt; ok | {error, Reason}</div><div class="REFBODY fun-types">
+    <p><a name="send-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-send-2-idp70441384493120').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-send-2-idp70441384493120').style.visibility = 'hidden';">
+<span id="ghlink-send-2-idp70441384493120" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L377" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>send(Socket, Packet) -&gt; ok | {error, Reason}</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Socket = <span class="bold_code bc-17"><a href="#type-socket">socket()</a></span></span></div>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Packet = iodata()</span></div>
@@ -1173,8 +1188,8 @@ do_recv(Sock, Bs) -&gt;
           <span class="bold_code bc-17"><a href="#examples">Examples</a></span>.</p>
       </p></div>
 
-    <p><a name="shutdown-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-shutdown-2-idp71716163311184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-shutdown-2-idp71716163311184').style.visibility = 'hidden';">
-<span id="ghlink-shutdown-2-idp71716163311184" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L376" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>shutdown(Socket, How) -&gt; ok | {error, Reason}</div><div class="REFBODY fun-types">
+    <p><a name="shutdown-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-shutdown-2-idp70441384493792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-shutdown-2-idp70441384493792').style.visibility = 'hidden';">
+<span id="ghlink-shutdown-2-idp70441384493792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L388" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>shutdown(Socket, How) -&gt; ok | {error, Reason}</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Socket = <span class="bold_code bc-17"><a href="#type-socket">socket()</a></span></span></div>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">How = read | write | read_write</span></div>
@@ -1199,7 +1214,7 @@ do_recv(Sock, Bs) -&gt;
       </p></div>
   </div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-examples-idp71716154968256').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-examples-idp71716154968256').style.visibility = 'hidden';"><span id="ghlink-examples-idp71716154968256" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L399" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="examples" href="#examples">Examples</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-examples-idp70441377476496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-examples-idp70441377476496').style.visibility = 'hidden';"><span id="ghlink-examples-idp70441377476496" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/gen_tcp.xml#L411" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="examples" href="#examples">Examples</a></span></h3>
 <div class="REFBODY rb-3">
     
     <a name="examples"></a>
