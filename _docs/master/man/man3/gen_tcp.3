@@ -157,7 +157,15 @@ For more examples, see section \fBExamples\fR\&\&.
 .fi
 .RS
 .LP
-If the platform implements the IPv4 option \fIIP_PKTOPTIONS\fR\& (probably Linux specific), or the IPv6 option \fIIPV6_PKTOPTIONS\fR\& or \fIIPV6_2292PKTOPTIONS\fR\& for the socket this value is returned from \fB\fIinet:getopts/2\fR\&\fR\& when called with the option name \fB\fIpktoptions\fR\&\fR\&\&.
+If the platform implements the IPv4 option \fIIP_PKTOPTIONS\fR\&, or the IPv6 option \fIIPV6_PKTOPTIONS\fR\& or \fIIPV6_2292PKTOPTIONS\fR\& for the socket this value is returned from \fB\fIinet:getopts/2\fR\&\fR\& when called with the option name \fB\fIpktoptions\fR\&\fR\&\&.
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+This option appears to be VERY Linux specific, and its existence in future Linux kernel versions is also worrying since the option is part of RFC 2292 which is since long (2003) obsoleted by RFC 3542 that \fIexplicitly\fR\& removes this possibility to get packet information from a stream socket\&. For comparision: it has existed in FreeBSD but is now removed, at least since FreeBSD 10\&.
+
 .RE
 .nf
 
