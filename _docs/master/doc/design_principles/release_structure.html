@@ -92,16 +92,17 @@
 <li title="When to use gen_statem"><a href="statem.html#when-to-use-gen_statem">When to use gen_statem</a></li>
 <li title="Callback Module"><a href="statem.html#callback-module">Callback Module</a></li>
 <li title="Callback Modes"><a href="statem.html#callback-modes">Callback Modes</a></li>
-<li title="Event Handler"><a href="statem.html#event-handler">Event Handler</a></li>
-<li title="State Transition Actions"><a href="statem.html#state-transition-actions">State Transition Actions</a></li>
+<li title="State Callback"><a href="statem.html#state-callback">State Callback</a></li>
+<li title="Transition Actions"><a href="statem.html#transition-actions">Transition Actions</a></li>
 <li title="Event Types"><a href="statem.html#event-types">Event Types</a></li>
 <li title="State Enter Calls"><a href="statem.html#state-enter-calls">State Enter Calls</a></li>
+<li title="Time-outs"><a href="statem.html#time-outs">Time-outs</a></li>
 <li title="Example"><a href="statem.html#example">Example</a></li>
 <li title="Starting gen_statem"><a href="statem.html#starting-gen_statem">Starting gen_statem</a></li>
 <li title="Handling Events"><a href="statem.html#handling-events">Handling Events</a></li>
 <li title="State Time-Outs"><a href="statem.html#state-time-outs">State Time-Outs</a></li>
 <li title="All State Events"><a href="statem.html#all-state-events">All State Events</a></li>
-<li title="One Event Handler"><a href="statem.html#one-event-handler">One Event Handler</a></li>
+<li title="One State Callback"><a href="statem.html#one-state-callback">One State Callback</a></li>
 <li title="Stopping"><a href="statem.html#stopping">Stopping</a></li>
 <li title="Event Time-Outs"><a href="statem.html#event-time-outs">Event Time-Outs</a></li>
 <li title="Generic Time-Outs"><a href="statem.html#generic-time-outs">Generic Time-Outs</a></li>
@@ -248,7 +249,7 @@
   <p>This section is to be read with the <span class="code">rel(4)</span>, <span class="code">systools(3)</span>,
   and <span class="code">script(4)</span> manual pages in SASL.</p>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-release-concept-idp72320407089296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-release-concept-idp72320407089296').style.visibility = 'hidden';"><span id="ghlink-release-concept-idp72320407089296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/release_structure.xml#L36" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="release-concept" href="#release-concept">10.1 
+  <h3><span onMouseOver="document.getElementById('ghlink-release-concept-idp46311647944736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-release-concept-idp46311647944736').style.visibility = 'hidden';"><span id="ghlink-release-concept-idp46311647944736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/release_structure.xml#L36" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="release-concept" href="#release-concept">10.1 
           Release Concept</a></span></h3>
     
     <p>When you have written one or more applications, you might want
@@ -267,7 +268,7 @@
   
 
   <h3>
-<a name="res_file"></a><span onMouseOver="document.getElementById('ghlink-release-resource-file-idp72320407095344').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-release-resource-file-idp72320407095344').style.visibility = 'hidden';"><span id="ghlink-release-resource-file-idp72320407095344" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/release_structure.xml#L53" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="release-resource-file" href="#release-resource-file">10.2 
+<a name="res_file"></a><span onMouseOver="document.getElementById('ghlink-release-resource-file-idp46311647950784').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-release-resource-file-idp46311647950784').style.visibility = 'hidden';"><span id="ghlink-release-resource-file-idp46311647950784" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/release_structure.xml#L53" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="release-resource-file" href="#release-resource-file">10.2 
           Release Resource File</a></span>
 </h3>
     
@@ -317,7 +318,7 @@
   
 
   <h3>
-<a name="boot"></a><span onMouseOver="document.getElementById('ghlink-generating-boot-scripts-idp72320407112768').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-generating-boot-scripts-idp72320407112768').style.visibility = 'hidden';"><span id="ghlink-generating-boot-scripts-idp72320407112768" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/release_structure.xml#L103" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="generating-boot-scripts" href="#generating-boot-scripts">10.3 
+<a name="boot"></a><span onMouseOver="document.getElementById('ghlink-generating-boot-scripts-idp46311647968208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-generating-boot-scripts-idp46311647968208').style.visibility = 'hidden';"><span id="ghlink-generating-boot-scripts-idp46311647968208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/release_structure.xml#L103" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="generating-boot-scripts" href="#generating-boot-scripts">10.3 
           Generating Boot Scripts</a></span>
 </h3>
     
@@ -374,7 +375,7 @@ Eshell V5.3  (abort with ^G)
   
 
   <h3>
-<a name="pack"></a><span onMouseOver="document.getElementById('ghlink-creating-a-release-package-idp72320407125920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-creating-a-release-package-idp72320407125920').style.visibility = 'hidden';"><span id="ghlink-creating-a-release-package-idp72320407125920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/release_structure.xml#L155" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="creating-a-release-package" href="#creating-a-release-package">10.4 
+<a name="pack"></a><span onMouseOver="document.getElementById('ghlink-creating-a-release-package-idp46311647981360').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-creating-a-release-package-idp46311647981360').style.visibility = 'hidden';"><span id="ghlink-creating-a-release-package-idp46311647981360" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/release_structure.xml#L155" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="creating-a-release-package" href="#creating-a-release-package">10.4 
           Creating a Release Package</a></span>
 </h3>
     
@@ -445,7 +446,7 @@ releases/ch_rel-1.rel</pre></div>
   
 
   <h3>
-<a name="reldir"></a><span onMouseOver="document.getElementById('ghlink-directory-structure-idp72320407146704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-directory-structure-idp72320407146704').style.visibility = 'hidden';"><span id="ghlink-directory-structure-idp72320407146704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/release_structure.xml#L222" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="directory-structure" href="#directory-structure">10.5 
+<a name="reldir"></a><span onMouseOver="document.getElementById('ghlink-directory-structure-idp46311648002144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-directory-structure-idp46311648002144').style.visibility = 'hidden';"><span id="ghlink-directory-structure-idp46311648002144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/release_structure.xml#L222" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="directory-structure" href="#directory-structure">10.5 
           Directory Structure</a></span>
 </h3>
     
@@ -499,7 +500,7 @@ $THIRD_ROOT/TApp1-TAVsn1/ebin
       <span class="code">variables</span> in the call to the <span class="code">systools:make_script/2</span>
       function.</p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-disk-less-and-or-read-only-clients-idp72320407159696').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-disk-less-and-or-read-only-clients-idp72320407159696').style.visibility = 'hidden';"><span id="ghlink-disk-less-and-or-read-only-clients-idp72320407159696" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/release_structure.xml#L270" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="disk-less-and-or-read-only-clients" href="#disk-less-and-or-read-only-clients">Disk-Less and/or Read-Only Clients</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-disk-less-and-or-read-only-clients-idp46311648015136').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-disk-less-and-or-read-only-clients-idp46311648015136').style.visibility = 'hidden';"><span id="ghlink-disk-less-and-or-read-only-clients-idp46311648015136" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/release_structure.xml#L270" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="disk-less-and-or-read-only-clients" href="#disk-less-and-or-read-only-clients">Disk-Less and/or Read-Only Clients</a></span></h4>
       
       <p>If a complete system consists of disk-less and/or
         read-only client nodes, a <span class="code">clients</span> directory is to be

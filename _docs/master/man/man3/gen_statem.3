@@ -108,31 +108,35 @@ Events are of different \fBtypes\fR\&, so the callback functions can know the or
 .LP
 If a callback function fails or returns a bad value, the \fIgen_statem\fR\& terminates, unless otherwise stated\&. However, an exception of class \fB\fIthrow\fR\&\fR\& is not regarded as an error but as a valid return from all callback functions\&.
 .LP
-The "\fIstate callback\fR\&" for a specific \fBstate\fR\& in a \fIgen_statem\fR\& is the callback function that is called for all events in this state\&. It is selected depending on which \fB\fIcallback mode\fR\&\fR\& that the callback module defines with the callback function \fB\fIModule:callback_mode/0\fR\&\fR\&\&.
+The \fIstate callback\fR\& for a specific \fBstate\fR\& in a \fIgen_statem\fR\& is the callback function that is called for all events in this state\&. It is selected depending on which \fB\fIcallback mode\fR\&\fR\& that the callback module defines with the callback function \fB\fIModule:callback_mode/0\fR\&\fR\&\&.
 .LP
-When the \fB\fIcallback mode\fR\&\fR\& is \fIstate_functions\fR\&, the state must be an atom and is used as the state callback name; see \fB\fIModule:StateName/3\fR\&\fR\&\&. This co-locates all code for a specific state in one function as the \fIgen_statem\fR\& engine branches depending on state name\&. Note the fact that the callback function \fB\fIModule:terminate/3\fR\&\fR\& makes the state name \fIterminate\fR\& unusable in this mode\&.
+When the \fB\fIcallback mode\fR\&\fR\& is \fIstate_functions\fR\&, the state must be an atom and is used as the \fIstate callback\fR\& name; see \fB\fIModule:StateName/3\fR\&\fR\&\&. This co-locates all code for a specific state in one function as the \fIgen_statem\fR\& engine branches depending on state name\&. Note the fact that the callback function \fB\fIModule:terminate/3\fR\&\fR\& makes the state name \fIterminate\fR\& unusable in this mode\&.
 .LP
-When the \fB\fIcallback mode\fR\&\fR\& is \fIhandle_event_function\fR\&, the state can be any term and the state callback name is \fB\fIModule:handle_event/4\fR\&\fR\&\&. This makes it easy to branch depending on state or event as you desire\&. Be careful about which events you handle in which states so that you do not accidentally postpone an event forever creating an infinite busy loop\&.
+When the \fB\fIcallback mode\fR\&\fR\& is \fIhandle_event_function\fR\&, the state can be any term and the \fIstate callback\fR\& name is \fB\fIModule:handle_event/4\fR\&\fR\&\&. This makes it easy to branch depending on state or event as you desire\&. Be careful about which events you handle in which states so that you do not accidentally postpone an event forever creating an infinite busy loop\&.
 .LP
-The \fIgen_statem\fR\& enqueues incoming events in order of arrival and presents these to the \fBstate callback\fR\& in that order\&. The state callback can postpone an event so it is not retried in the current state\&. After a state change the queue restarts with the postponed events\&.
+When \fIgen_statem\fR\& receives a process message it is converted into an event and the \fB\fIstate callback\fR\&\fR\& is called with the event as two arguments: type and content\&. When the \fB\fIstate callback\fR\&\fR\& has processed the event it returns to \fIgen_statem\fR\& which does a \fIstate transition\fR\&\&. If this \fIstate transition\fR\& is to a different state, that is: \fINextState =/= State\fR\&, it is a \fIstate change\fR\&\&.
+.LP
+The \fB\fIstate callback\fR\&\fR\& may return \fB\fItransition actions\fR\&\fR\& for \fIgen_statem\fR\& to execute during the \fIstate transition\fR\&, for example to reply to a \fB\fIgen_statem:call/2,3\fR\&\fR\&\&.
+.LP
+One of the possible \fItransition actions\fR\& is to postpone the current event\&. Then it is not retried in the current state\&. The \fIgen_statem\fR\& engine keeps a queue of events divided into the postponed events and the events still to process\&. After a \fIstate change\fR\& the queue restarts with the postponed events\&.
 .LP
 The \fIgen_statem\fR\& event queue model is sufficient to emulate the normal process message queue with selective receive\&. Postponing an event corresponds to not matching it in a receive statement, and changing states corresponds to entering a new receive statement\&.
 .LP
-The \fBstate callback\fR\& can insert events using the \fB\fIaction()\fR\&\fR\& \fInext_event\fR\& and such an event is inserted as the next to present to the state callback\&. That is, as if it is the oldest incoming event\&. A dedicated \fB\fIevent_type()\fR\&\fR\& \fIinternal\fR\& can be used for such events making them impossible to mistake for external events\&.
+The \fB\fIstate callback\fR\&\fR\& can insert events using the \fB\fItransition actions\fR\&\fR\& \fInext_event\fR\& and such an event is inserted in the event queue as the next to call the \fB\fIstate callback\fR\&\fR\& with\&. That is, as if it is the oldest incoming event\&. A dedicated \fB\fIevent_type()\fR\&\fR\& \fIinternal\fR\& can be used for such events making them impossible to mistake for external events\&.
 .LP
 Inserting an event replaces the trick of calling your own state handling functions that you often would have to resort to in, for example, \fB\fIgen_fsm\fR\&\fR\& to force processing an inserted event before others\&.
 .LP
-The \fIgen_statem\fR\& engine can automatically make a specialized call to the \fBstate callback\fR\& whenever a new state is entered; see \fB\fIstate_enter()\fR\&\fR\&\&. This is for writing code common to all state entries\&. Another way to do it is to insert an event at the state transition, and/or to use a dedicated state transition function, but that is something you will have to remember at every state transition to the state(s) that need it\&.
+The \fIgen_statem\fR\& engine can automatically make a specialized call to the \fB\fIstate callback\fR\&\fR\& whenever a new state is entered; see \fB\fIstate_enter()\fR\&\fR\&\&. This is for writing code common to all state entries\&. Another way to do it is to explicitly insert an event at the \fIstate transition\fR\&, and/or to use a dedicated \fIstate transition\fR\& function, but that is something you will have to remember at every \fIstate transition\fR\& to the state(s) that need it\&.
 .LP
 
 .RS -4
 .B
 Note:
 .RE
-If you in \fIgen_statem\fR\&, for example, postpone an event in one state and then call another state callback of yours, you have not changed states and hence the postponed event is not retried, which is logical but can be confusing\&.
+If you in \fIgen_statem\fR\&, for example, postpone an event in one state and then call another \fIstate callback\fR\& of yours, you have not done a \fIstate change\fR\& and hence the postponed event is not retried, which is logical but can be confusing\&.
 
 .LP
-For the details of a state transition, see type \fB\fItransition_option()\fR\&\fR\&\&.
+For the details of a \fIstate transition\fR\&, see type \fB\fItransition_option()\fR\&\fR\&\&.
 .LP
 A \fIgen_statem\fR\& handles system messages as described in \fB\fIsys\fR\&\fR\&\&. The \fIsys\fR\& module can be used for debugging a \fIgen_statem\fR\&\&.
 .LP
@@ -140,7 +144,7 @@ Notice that a \fIgen_statem\fR\& does not trap exit signals automatically, this 
 .LP
 Unless otherwise stated, all functions in this module fail if the specified \fIgen_statem\fR\& does not exist or if bad arguments are specified\&.
 .LP
-The \fIgen_statem\fR\& process can go into hibernation; see \fB\fIproc_lib:hibernate/3\fR\&\fR\&\&. It is done when a \fBstate callback\fR\& or \fB\fIModule:init/1\fR\&\fR\& specifies \fIhibernate\fR\& in the returned \fB\fIActions\fR\&\fR\& list\&. This feature can be useful to reclaim process heap memory while the server is expected to be idle for a long time\&. However, use this feature with care, as hibernation can be too costly to use after every event; see \fB\fIerlang:hibernate/3\fR\&\fR\&\&.
+The \fIgen_statem\fR\& process can go into hibernation; see \fB\fIproc_lib:hibernate/3\fR\&\fR\&\&. It is done when a \fB\fIstate callback\fR\&\fR\& or \fB\fIModule:init/1\fR\&\fR\& specifies \fIhibernate\fR\& in the returned \fB\fIActions\fR\&\fR\& list\&. This feature can be useful to reclaim process heap memory while the server is expected to be idle for a long time\&. However, use this feature with care, as hibernation can be too costly to use after every event; see \fB\fIerlang:hibernate/3\fR\&\fR\&\&.
 .LP
 There is also a server start option \fB\fI{hibernate_after, Timeout}\fR\&\fR\& for \fB\fIstart/3,4\fR\&\fR\& or \fB\fIstart_link/3,4\fR\&\fR\& that may be used to automatically hibernate the server\&.
 .SH "EXAMPLE"
@@ -385,7 +389,7 @@ Destination to use when replying through, for example, the \fB\fIaction()\fR\&\f
 .fi
 .RS
 .LP
-If the \fB\fIcallback mode\fR\&\fR\& is \fIhandle_event_function\fR\&, the state can be any term\&. After a state change (\fINextState =/= State\fR\&), all postponed events are retried\&.
+If the \fB\fIcallback mode\fR\&\fR\& is \fIhandle_event_function\fR\&, the state can be any term\&. After a \fIstate change\fR\& (\fINextState =/= State\fR\&), all postponed events are retried\&.
 .RE
 .nf
 
@@ -394,7 +398,7 @@ If the \fB\fIcallback mode\fR\&\fR\& is \fIhandle_event_function\fR\&, the state
 .fi
 .RS
 .LP
-If the \fB\fIcallback mode\fR\&\fR\& is \fIstate_functions\fR\&, the state must be of this type\&. After a state change (\fINextState =/= State\fR\&), all postponed events are retried\&.
+If the \fB\fIcallback mode\fR\&\fR\& is \fIstate_functions\fR\&, the state must be of this type\&. After a \fIstate change\fR\& (\fINextState =/= State\fR\&), all postponed events are retried\&.
 .RE
 .nf
 
@@ -416,7 +420,7 @@ A term in which the state machine implementation is to store any server data it 
 .LP
 There are 3 categories of events: \fBexternal\fR\&, \fBtimeout\fR\&, and \fIinternal\fR\&\&.
 .LP
-\fIinternal\fR\& events can only be generated by the state machine itself through the state transition action \fB\fInext_event\fR\&\fR\&\&.
+\fIinternal\fR\& events can only be generated by the state machine itself through the \fItransition action\fR\& \fB\fInext_event\fR\&\fR\&\&.
 .RE
 .nf
 
@@ -447,7 +451,7 @@ There are 3 types of timeout events that the state machine can generate for itse
 .fi
 .RS
 .LP
-This is the return type from \fB\fIModule:callback_mode/0\fR\&\fR\& and selects \fBcallback mode\fR\& and whether to do \fBstate enter calls\fR\&, or not\&.
+This is the return type from \fB\fIModule:callback_mode/0\fR\&\fR\& and selects \fB\fIcallback mode\fR\&\fR\& and whether to do \fB\fIstate enter calls\fR\&\fR\&, or not\&.
 .RE
 .nf
 
@@ -477,13 +481,13 @@ The state can be any term and the callback function \fB\fIModule:handle_event/4\
 .LP
 Whether the state machine should use \fIstate enter calls\fR\& or not is selected when starting the \fIgen_statem\fR\& and after code change using the return value from \fB\fIModule:callback_mode/0\fR\&\fR\&\&.
 .LP
-If \fB\fIModule:callback_mode/0\fR\&\fR\& returns a list containing \fIstate_enter\fR\&, the \fIgen_statem\fR\& engine will, at every state change, call the \fBstate callback\fR\& with arguments \fI(enter, OldState, Data)\fR\&\&. This may look like an event but is really a call performed after the previous state callback returned and before any event is delivered to the new state callback\&. See \fB\fIModule:StateName/3\fR\&\fR\& and \fB\fIModule:handle_event/4\fR\&\fR\&\&. Such a call can be repeated by returning a \fB\fIrepeat_state\fR\&\fR\& or \fB\fIrepeat_state_and_data\fR\&\fR\& tuple from the state callback\&.
+If \fB\fIModule:callback_mode/0\fR\&\fR\& returns a list containing \fIstate_enter\fR\&, the \fIgen_statem\fR\& engine will, at every \fIstate change\fR\&, call the \fBstate callback\fR\& with arguments \fI(enter, OldState, Data)\fR\&\&. This may look like an event but is really a call performed after the previous \fB\fIstate callback\fR\&\fR\& returned and before any event is delivered to the new \fB\fIstate callback\fR\&\fR\&\&. See \fB\fIModule:StateName/3\fR\&\fR\& and \fB\fIModule:handle_event/4\fR\&\fR\&\&. Such a call can be repeated by returning a \fB\fIrepeat_state\fR\&\fR\& or \fB\fIrepeat_state_and_data\fR\&\fR\& tuple from the \fIstate callback\fR\&\&.
 .LP
-If \fB\fIModule:callback_mode/0\fR\&\fR\& does not return such a list, no state enter calls are done\&.
+If \fB\fIModule:callback_mode/0\fR\&\fR\& does not return such a list, no \fIstate enter calls\fR\& are done\&.
 .LP
-If \fB\fIModule:code_change/4\fR\&\fR\& should transform the state, it is regarded as a state rename and not a state change, which will not cause a state enter call\&.
+If \fB\fIModule:code_change/4\fR\&\fR\& should transform the state, it is regarded as a state rename and not a \fIstate change\fR\&, which will not cause a \fIstate enter call\fR\&\&.
 .LP
-Note that a state enter call \fIwill\fR\& be done right before entering the initial state even though this formally is not a state change\&. In this case \fIOldState\fR\& will be the same as \fIState\fR\&, which cannot happen for a subsequent state change, but will happen when repeating the state enter call\&.
+Note that a \fIstate enter call\fR\& \fIwill\fR\& be done right before entering the initial state even though this actually is not a \fIstate change\fR\&\&. In this case \fIOldState =:= State\fR\&, which can not happen for a subsequent state change, but will happen when repeating the \fIstate enter call\fR\&\&.
 .RE
 .nf
 
@@ -502,7 +506,7 @@ Note that a state enter call \fIwill\fR\& be done right before entering the init
 .fi
 .RS
 .LP
-Transition options can be set by \fBactions\fR\& and modify the state transition\&. Here are the sequence of steps for a state transition:
+Transition options can be set by \fBactions\fR\& and modify the \fIstate transition\fR\&\&. The \fIstate transition\fR\& takes place when the \fB\fIstate callback\fR\&\fR\& has processed an event and returns\&. Here are the sequence of steps for a \fIstate transition\fR\&:
 .RS 2
 .TP 2
 *
@@ -513,7 +517,7 @@ Any \fBactions\fR\& returned from this call are handled as if they were appended
 .RE
 .RS 2
 .LP
-Should this state enter call return any of the mentioned \fIrepeat_*\fR\& callback results it is repeated again, with the updated \fIData\fR\&\&.
+Should this \fIstate enter call\fR\& return any of the mentioned \fIrepeat_*\fR\& callback results it is repeated again, with the updated \fIData\fR\&\&.
 .RE
 .LP
 .TP 2
@@ -526,7 +530,7 @@ If \fB\fIpostpone()\fR\&\fR\& is \fItrue\fR\&, the current event is postponed\&.
 .LP
 .TP 2
 *
-If the state changes, the queue of incoming events is reset to start with the oldest postponed\&.
+If this is a \fIstate change\fR\&, the queue of incoming events is reset to start with the oldest postponed\&.
 .LP
 .TP 2
 *
@@ -541,16 +545,16 @@ Any event cancels an \fB\fIevent_timeout()\fR\&\fR\& so a zero time event time-o
 .RE
 .RS 2
 .LP
-A state change cancels a \fB\fIstate_timeout()\fR\&\fR\& and any new transition option of this type belongs to the new state\&.
+A \fIstate change\fR\& cancels a \fB\fIstate_timeout()\fR\&\fR\& and any new transition option of this type belongs to the new state\&.
 .RE
 .LP
 .TP 2
 *
-If there are enqueued events the \fBstate callback\fR\& for the possibly new state is called with the oldest enqueued event, and we start again from the top of this list\&.
+If there are enqueued events the \fB\fIstate callback\fR\&\fR\& for the possibly new state is called with the oldest enqueued event, and we start again from the top of this list\&.
 .LP
 .TP 2
 *
-Otherwise the \fIgen_statem\fR\& goes into \fIreceive\fR\& or hibernation (if \fB\fIhibernate()\fR\&\fR\& is \fItrue\fR\&) to wait for the next message\&. In hibernation the next non-system event awakens the \fIgen_statem\fR\&, or rather the next incoming message awakens the \fIgen_statem\fR\&, but if it is a system event it goes right back into hibernation\&. When a new message arrives the \fBstate callback\fR\& is called with the corresponding event, and we start again from the top of this sequence\&.
+Otherwise the \fIgen_statem\fR\& goes into \fIreceive\fR\& or hibernation (if \fB\fIhibernate()\fR\&\fR\& is \fItrue\fR\&) to wait for the next message\&. In hibernation the next non-system event awakens the \fIgen_statem\fR\&, or rather the next incoming message awakens the \fIgen_statem\fR\&, but if it is a system event it goes right back into hibernation\&. When a new message arrives the \fB\fIstate callback\fR\&\fR\& is called with the corresponding event, and we start again from the top of this sequence\&.
 .LP
 .RE
 
@@ -562,7 +566,7 @@ Otherwise the \fIgen_statem\fR\& goes into \fIreceive\fR\& or hibernation (if \f
 .fi
 .RS
 .LP
-If \fItrue\fR\&, postpones the current event and retries it when the state changes (\fINextState =/= State\fR\&)\&.
+If \fItrue\fR\&, postpones the current event and retries it after a \fIstate change\fR\& (\fINextState =/= State\fR\&)\&.
 .RE
 .nf
 
@@ -658,7 +662,7 @@ If \fIAbs\fR\& is \fItrue\fR\& an absolute timer is started, and if it is \fIfal
 .fi
 .RS
 .LP
-These state transition actions can be invoked by returning them from the \fBstate callback\fR\& when it is called with an \fBevent\fR\&, from \fB\fIModule:init/1\fR\&\fR\& or by giving them to \fB\fIenter_loop/5,6\fR\&\fR\&\&.
+These \fItransition actions\fR\& can be invoked by returning them from the \fB\fIstate callback\fR\&\fR\& when it is called with an \fBevent\fR\&, from \fB\fIModule:init/1\fR\&\fR\& or by giving them to \fB\fIenter_loop/5,6\fR\&\fR\&\&.
 .LP
 Actions are executed in the containing list order\&.
 .LP
@@ -667,7 +671,7 @@ Actions that set \fB transition options \fR\& override any previous of the same 
 .TP 2
 .B
 \fIpostpone\fR\&:
-Sets the \fB\fItransition_option()\fR\&\fR\& \fB\fIpostpone()\fR\&\fR\& for this state transition\&. This action is ignored when returned from \fB\fIModule:init/1\fR\&\fR\& or given to \fB\fIenter_loop/5,6\fR\&\fR\&, as there is no event to postpone in those cases\&.
+Sets the \fB\fItransition_option()\fR\&\fR\& \fB\fIpostpone()\fR\&\fR\& for this \fIstate transition\fR\&\&. This action is ignored when returned from \fB\fIModule:init/1\fR\&\fR\& or given to \fB\fIenter_loop/5,6\fR\&\fR\&, as there is no event to postpone in those cases\&.
 .TP 2
 .B
 \fInext_event\fR\&:
@@ -697,7 +701,7 @@ An event of type \fB\fIinternal\fR\&\fR\& is to be used when you want to reliabl
 .fi
 .RS
 .LP
-These state transition actions can be invoked by returning them from the \fBstate callback\fR\&, from \fB\fIModule:init/1\fR\&\fR\& or by giving them to \fB\fIenter_loop/5,6\fR\&\fR\&\&.
+These \fItransition actions\fR\& can be invoked by returning them from the \fB\fIstate callback\fR\&\fR\&, from \fB\fIModule:init/1\fR\&\fR\& or by giving them to \fB\fIenter_loop/5,6\fR\&\fR\&\&.
 .LP
 Actions are executed in the containing list order\&.
 .LP
@@ -706,7 +710,7 @@ Actions that set \fBtransition options\fR\& override any previous of the same ty
 .TP 2
 .B
 \fIhibernate\fR\&:
-Sets the \fB\fItransition_option()\fR\&\fR\& \fB\fIhibernate()\fR\&\fR\& for this state transition\&.
+Sets the \fB\fItransition_option()\fR\&\fR\& \fB\fIhibernate()\fR\&\fR\& for this \fIstate transition\fR\&\&.
 .RE
 .RE
 .nf
@@ -756,14 +760,14 @@ Sets the \fB\fItransition_option()\fR\&\fR\& \fB\fIhibernate()\fR\&\fR\& for thi
 .fi
 .RS
 .LP
-These state transition actions can be invoked by returning them from the \fBstate callback\fR\&, from \fB\fIModule:init/1\fR\&\fR\& or by giving them to \fB\fIenter_loop/5,6\fR\&\fR\&\&.
+These \fItransition actions\fR\& can be invoked by returning them from the \fB\fIstate callback\fR\&\fR\&, from \fB\fIModule:init/1\fR\&\fR\& or by giving them to \fB\fIenter_loop/5,6\fR\&\fR\&\&.
 .LP
 These timeout actions sets timeout \fBtransition options\fR\&\&.
 .RS 2
 .TP 2
 .B
 \fITime\fR\&:
-Short for \fI{timeout,Time,Time}\fR\&, that is, the time-out message is the time-out time\&. This form exists to make the \fBstate callback\fR\& return value \fI{next_state,NextState,NewData,Time}\fR\& allowed like for \fIgen_fsm\fR\&\&.
+Short for \fI{timeout,Time,Time}\fR\&, that is, the time-out message is the time-out time\&. This form exists to make the \fB\fIstate callback\fR\&\fR\& return value \fI{next_state,NextState,NewData,Time}\fR\& allowed like for \fIgen_fsm\fR\&\&.
 .TP 2
 .B
 \fItimeout\fR\&:
@@ -785,11 +789,11 @@ Sets the \fB\fItransition_option()\fR\&\fR\& \fB\fIstate_timeout()\fR\&\fR\& to 
 .fi
 .RS
 .LP
-This state transition action can be invoked by returning it from the \fBstate callback\fR\&, from \fB\fIModule:init/1\fR\&\fR\& or by giving it to \fB\fIenter_loop/5,6\fR\&\fR\&\&.
+This \fItransition action\fR\& can be invoked by returning it from the \fB\fIstate callback\fR\&\fR\&, from \fB\fIModule:init/1\fR\&\fR\& or by giving it to \fB\fIenter_loop/5,6\fR\&\fR\&\&.
 .LP
-It does not set any \fB\fItransition_option()\fR\&\fR\& but instead replies to a caller waiting for a reply in \fB\fIcall/2\fR\&\fR\&\&. \fIFrom\fR\& must be the term from argument \fB\fI{call,From}\fR\&\fR\& in a call to a \fBstate callback\fR\&\&.
+It does not set any \fB\fItransition_option()\fR\&\fR\& but instead replies to a caller waiting for a reply in \fB\fIcall/2\fR\&\fR\&\&. \fIFrom\fR\& must be the term from argument \fB\fI{call,From}\fR\&\fR\& in a call to a \fB\fIstate callback\fR\&\fR\&\&.
 .LP
-Note that using this action from \fB\fIModule:init/1\fR\&\fR\& or \fB\fIenter_loop/5,6\fR\&\fR\& would be weird on the border of witchcraft since there has been no earlier call to a \fBstate callback\fR\& in this server\&.
+Note that using this action from \fB\fIModule:init/1\fR\&\fR\& or \fB\fIenter_loop/5,6\fR\&\fR\& would be weird on the border of witchcraft since there has been no earlier call to a \fB\fIstate callback\fR\&\fR\& in this server\&.
 .RE
 .nf
 
@@ -814,7 +818,7 @@ Note that using this action from \fB\fIModule:init/1\fR\&\fR\& or \fB\fIenter_lo
 .LP
 For a succesful initialization, \fIState\fR\& is the initial \fB\fIstate()\fR\&\fR\& and \fIData\fR\& the initial server \fB\fIdata()\fR\&\fR\& of the \fIgen_statem\fR\&\&.
 .LP
-The \fB\fIActions\fR\&\fR\& are executed when entering the first \fBstate\fR\& just as for a \fBstate callback\fR\&, except that the action \fIpostpone\fR\& is forced to \fIfalse\fR\& since there is no event to postpone\&.
+The \fB\fIActions\fR\&\fR\& are executed when entering the first \fBstate\fR\& just as for a \fB\fIstate callback\fR\&\fR\&, except that the action \fIpostpone\fR\& is forced to \fIfalse\fR\& since there is no event to postpone\&.
 .LP
 For an unsuccesful initialization, \fI{stop,Reason}\fR\& or \fIignore\fR\& should be used; see \fB\fIstart_link/3,4\fR\&\fR\&\&.
 .RE
@@ -869,7 +873,7 @@ The \fIgen_statem\fR\& does a state transition to \fIState\fR\&, which has to be
 .TP 2
 .B
 \fInext_state\fR\&:
-The \fIgen_statem\fR\& does a state transition to \fINextState\fR\& (which can be the same as the current state), sets \fINewData\fR\&, and executes all \fIActions\fR\&\&.
+The \fIgen_statem\fR\& does a \fIstate transition\fR\& to \fINextState\fR\& (which can be the same as the current state), sets \fINewData\fR\&, and executes all \fIActions\fR\&\&. If \fINextState =/= CurrentState\fR\& the \fIstate transition\fR\& is a \fIstate change\fR\&\&.
 .RE
 .RE
 .nf
@@ -928,19 +932,19 @@ The \fIgen_statem\fR\& does a state transition to \fINextState\fR\& (which can b
 .TP 2
 .B
 \fIkeep_state\fR\&:
-The \fIgen_statem\fR\& keeps the current state, or does a state transition to the current state if you like, sets \fINewData\fR\&, and executes all \fIActions\fR\&\&. This is the same as \fI{next_state,CurrentState,NewData,Actions}\fR\&\&.
+The same as \fI{next_state,CurrentState,NewData,Actions}\fR\&\&.
 .TP 2
 .B
 \fIkeep_state_and_data\fR\&:
-The \fIgen_statem\fR\& keeps the current state or does a state transition to the current state if you like, keeps the current server data, and executes all \fIActions\fR\&\&. This is the same as \fI{next_state,CurrentState,CurrentData,Actions}\fR\&\&.
+The same as \fI{keep_state,CurrentData,Actions}\fR\&\&.
 .TP 2
 .B
 \fIrepeat_state\fR\&:
-The \fIgen_statem\fR\& keeps the current state, or does a state transition to the current state if you like, sets \fINewData\fR\&, and executes all \fIActions\fR\&\&. If the \fIgen_statem\fR\& runs with \fB\fIstate enter calls\fR\&\fR\&, the state enter call is repeated, see type \fB\fItransition_option()\fR\&\fR\&, otherwise \fIrepeat_state\fR\& is the same as \fIkeep_state\fR\&\&.
+If the \fIgen_statem\fR\& runs with \fB\fIstate enter calls\fR\&\fR\&, the \fIstate enter call\fR\& is repeated, see type \fB\fItransition_option()\fR\&\fR\&, other than that \fIrepeat_state\fR\& is the same as \fIkeep_state\fR\&\&.
 .TP 2
 .B
 \fIrepeat_state_and_data\fR\&:
-The \fIgen_statem\fR\& keeps the current state and data, or does a state transition to the current state if you like, and executes all \fIActions\fR\&\&. This is the same as \fI{repeat_state,CurrentData,Actions}\fR\&\&. If the \fIgen_statem\fR\& runs with \fB\fIstate enter calls\fR\&\fR\&, the state enter call is repeated, see type \fB\fItransition_option()\fR\&\fR\&, otherwise \fIrepeat_state_and_data\fR\& is the same as \fIkeep_state_and_data\fR\&\&.
+The same as \fI{repeat_state,CurrentData,Actions}\fR\&\&.
 .TP 2
 .B
 \fIstop\fR\&:
@@ -985,9 +989,9 @@ call(ServerRef :: server_ref(),
 .br
 .RS
 .LP
-Makes a synchronous call to the \fIgen_statem\fR\& \fB\fIServerRef\fR\&\fR\& by sending a request and waiting until its reply arrives\&. The \fIgen_statem\fR\& calls the \fBstate callback\fR\& with \fB\fIevent_type()\fR\&\fR\& \fI{call,From}\fR\& and event content \fIRequest\fR\&\&.
+Makes a synchronous call to the \fIgen_statem\fR\& \fB\fIServerRef\fR\&\fR\& by sending a request and waiting until its reply arrives\&. The \fIgen_statem\fR\& calls the \fB\fIstate callback\fR\&\fR\& with \fB\fIevent_type()\fR\&\fR\& \fI{call,From}\fR\& and event content \fIRequest\fR\&\&.
 .LP
-A \fIReply\fR\& is generated when a \fBstate callback\fR\& returns with \fI{reply,From,Reply}\fR\& as one \fB\fIaction()\fR\&\fR\&, and that \fIReply\fR\& becomes the return value of this function\&.
+A \fIReply\fR\& is generated when a \fB\fIstate callback\fR\&\fR\& returns with \fI{reply,From,Reply}\fR\& as one \fB\fIaction()\fR\&\fR\&, and that \fIReply\fR\& becomes the return value of this function\&.
 .LP
 \fITimeout\fR\& is an integer > 0, which specifies how many milliseconds to wait for a reply, or the atom \fIinfinity\fR\& to wait indefinitely, which is the default\&. If no reply is received within the specified time, the function call fails\&.
 .LP
@@ -1021,7 +1025,7 @@ cast(ServerRef :: server_ref(), Msg :: term()) -> ok
 .br
 .RS
 .LP
-Sends an asynchronous event to the \fIgen_statem\fR\& \fB\fIServerRef\fR\&\fR\& and returns \fIok\fR\& immediately, ignoring if the destination node or \fIgen_statem\fR\& does not exist\&. The \fIgen_statem\fR\& calls the \fBstate callback\fR\& with \fB\fIevent_type()\fR\&\fR\& \fIcast\fR\& and event content \fIMsg\fR\&\&.
+Sends an asynchronous event to the \fIgen_statem\fR\& \fB\fIServerRef\fR\&\fR\& and returns \fIok\fR\& immediately, ignoring if the destination node or \fIgen_statem\fR\& does not exist\&. The \fIgen_statem\fR\& calls the \fB\fIstate callback\fR\&\fR\& with \fB\fIevent_type()\fR\&\fR\& \fIcast\fR\& and event content \fIMsg\fR\&\&.
 .RE
 .LP
 .nf
@@ -1118,9 +1122,9 @@ reply(From :: from(), Reply :: term()) -> ok
 .br
 .RS
 .LP
-This function can be used by a \fIgen_statem\fR\& to explicitly send a reply to a process that waits in \fB\fIcall/2\fR\&\fR\& when the reply cannot be defined in the return value of a \fBstate callback\fR\&\&.
+This function can be used by a \fIgen_statem\fR\& to explicitly send a reply to a process that waits in \fB\fIcall/2\fR\&\fR\& when the reply cannot be defined in the return value of a \fB\fIstate callback\fR\&\fR\&\&.
 .LP
-\fIFrom\fR\& must be the term from argument \fB\fI{call,From}\fR\&\fR\& to the \fBstate callback\fR\&\&. A reply or multiple replies canalso be sent using one or several \fB\fIreply_action()\fR\&\fR\&s from a \fBstate callback\fR\&\&.
+\fIFrom\fR\& must be the term from argument \fB\fI{call,From}\fR\&\fR\& to the \fB\fIstate callback\fR\&\fR\&\&. A reply or multiple replies canalso be sent using one or several \fB\fIreply_action()\fR\&\fR\&s from a \fB\fIstate callback\fR\&\fR\&\&.
 .LP
 
 .RS -4
@@ -1289,7 +1293,7 @@ Types:
 .RE
 .RS
 .LP
-This function is called by a \fIgen_statem\fR\& when it needs to find out the \fB\fIcallback mode\fR\&\fR\& of the callback module\&. The value is cached by \fIgen_statem\fR\& for efficiency reasons, so this function is only called once after server start and after code change, but before the first \fBstate callback\fR\& in the current code version is called\&. More occasions may be added in future versions of \fIgen_statem\fR\&\&.
+This function is called by a \fIgen_statem\fR\& when it needs to find out the \fB\fIcallback mode\fR\&\fR\& of the callback module\&. The value is cached by \fIgen_statem\fR\& for efficiency reasons, so this function is only called once after server start and after code change, but before the first \fB\fIstate callback\fR\&\fR\& in the current code version is called\&. More occasions may be added in future versions of \fIgen_statem\fR\&\&.
 .LP
 Server start happens either when \fB\fIModule:init/1\fR\&\fR\& returns or when \fB\fIenter_loop/4-6\fR\&\fR\& is called\&. Code change happens when \fB\fIModule:code_change/4\fR\&\fR\& returns\&.
 .LP
@@ -1337,10 +1341,10 @@ Reason = term()
 .B
 Note:
 .RE
-This callback is optional, so callback modules need not export it\&. If a release upgrade/downgrade with \fIChange={advanced,Extra}\fR\& specified in the \fI\&.appup\fR\& file is made when \fIcode_change/4\fR\& is not implemented the process will crash with exit reason \fIundef\fR\&\&.
+This callback is optional, so callback modules need not export it\&. If a release upgrade/downgrade with \fIChange = {advanced,Extra}\fR\& specified in the \fI\&.appup\fR\& file is made when \fIcode_change/4\fR\& is not implemented the process will crash with exit reason \fIundef\fR\&\&.
 
 .LP
-This function is called by a \fIgen_statem\fR\& when it is to update its internal state during a release upgrade/downgrade, that is, when the instruction \fI{update,Module,Change,\&.\&.\&.}\fR\&, where \fIChange={advanced,Extra}\fR\&, is specified in the \fB\fIappup\fR\&\fR\& file\&. For more information, see \fBOTP Design Principles\fR\&\&.
+This function is called by a \fIgen_statem\fR\& when it is to update its internal state during a release upgrade/downgrade, that is, when the instruction \fI{update,Module,Change,\&.\&.\&.}\fR\&, where \fIChange = {advanced,Extra}\fR\&, is specified in the \fB\fIappup\fR\&\fR\& file\&. For more information, see \fBOTP Design Principles\fR\&\&.
 .LP
 For an upgrade, \fIOldVsn\fR\& is \fIVsn\fR\&, and for a downgrade, \fIOldVsn\fR\& is \fI{down,Vsn}\fR\&\&. \fIVsn\fR\& is defined by the \fIvsn\fR\& attribute(s) of the old version of the callback module \fIModule\fR\&\&. If no such attribute is defined, the version is the checksum of the Beam file\&.
 .LP
@@ -1352,7 +1356,7 @@ If successful, the function must return the updated internal state in an \fI{ok,
 .LP
 If the function returns a failure \fIReason\fR\&, the ongoing upgrade fails and rolls back to the old release\&. Note that \fIReason\fR\& cannot be an \fI{ok,_,_}\fR\& tuple since that will be regarded as a \fI{ok,NewState,NewData}\fR\& tuple, and that a tuple matching \fI{ok,_}\fR\& is an also invalid failure \fIReason\fR\&\&. It is recommended to use an atom as \fIReason\fR\& since it will be wrapped in an \fI{error,Reason}\fR\& tuple\&.
 .LP
-Also note when upgrading a \fIgen_statem\fR\&, this function and hence the \fIChange={advanced,Extra}\fR\& parameter in the \fB\fIappup\fR\&\fR\& file is not only needed to update the internal state or to act on the \fIExtra\fR\& argument\&. It is also needed if an upgrade or downgrade should change \fB\fIcallback mode\fR\&\fR\&, or else the callback mode after the code change will not be honoured, most probably causing a server crash\&.
+Also note when upgrading a \fIgen_statem\fR\&, this function and hence the \fIChange = {advanced,Extra}\fR\& parameter in the \fB\fIappup\fR\&\fR\& file is not only needed to update the internal state or to act on the \fIExtra\fR\& argument\&. It is also needed if an upgrade or downgrade should change \fB\fIcallback mode\fR\&\fR\&, or else the \fIcallback mode\fR\& after the code change will not be honoured, most probably causing a server crash\&.
 .RE
 .LP
 .B
@@ -1490,7 +1494,7 @@ EventContent = term()
 .LP
 Whenever a \fIgen_statem\fR\& receives an event from \fB\fIcall/2\fR\&\fR\&, \fB\fIcast/2\fR\&\fR\&, or as a normal process message, one of these functions is called\&. If \fB\fIcallback mode\fR\&\fR\& is \fIstate_functions\fR\&, \fIModule:StateName/3\fR\& is called, and if it is \fIhandle_event_function\fR\&, \fIModule:handle_event/4\fR\& is called\&.
 .LP
-If \fIEventType\fR\& is \fB\fI{call,From}\fR\&\fR\&, the caller waits for a reply\&. The reply can be sent from this or from any other \fBstate callback\fR\& by returning with \fI{reply,From,Reply}\fR\& in \fB\fIActions\fR\&\fR\&, in \fB\fIReplies\fR\&\fR\&, or by calling \fB\fIreply(From, Reply)\fR\&\fR\&\&.
+If \fIEventType\fR\& is \fB\fI{call,From}\fR\&\fR\&, the caller waits for a reply\&. The reply can be sent from this or from any other \fB\fIstate callback\fR\&\fR\& by returning with \fI{reply,From,Reply}\fR\& in \fB\fIActions\fR\&\fR\&, in \fB\fIReplies\fR\&\fR\&, or by calling \fB\fIreply(From, Reply)\fR\&\fR\&\&.
 .LP
 If this function returns with a next state that does not match equal (\fI=/=\fR\&) to the current state, all postponed events are retried in the next state\&.
 .LP
@@ -1498,7 +1502,7 @@ The only difference between \fIStateFunctionResult\fR\& and \fIHandleEventResult
 .LP
 For options that can be set and actions that can be done by \fIgen_statem\fR\& after returning from this function, see \fB\fIaction()\fR\&\fR\&\&.
 .LP
-When the \fIgen_statem\fR\& runs with \fBstate enter calls\fR\&, these functions are also called with arguments \fI(enter, OldState, \&.\&.\&.)\fR\& whenever the state changes\&. In this case there are some restrictions on the \fBactions\fR\& that may be returned: \fB\fIpostpone()\fR\&\fR\& is not allowed since a \fIstate enter call\fR\& is not an event so there is no event to postpone, and \fB\fI{next_event,_,_}\fR\&\fR\& is not allowed since using \fIstate enter calls\fR\& should not affect how events are consumed and produced\&. You may also not change states from this call\&. Should you return \fI{next_state,NextState, \&.\&.\&.}\fR\& with \fINextState =/= State\fR\& the \fIgen_statem\fR\& crashes\&. Note that it is actually allowed to use \fI{repeat_state, NewData, \&.\&.\&.}\fR\& although it makes little sense since you immediately will be called again with a new \fIstate enter call\fR\& making this just a weird way of looping, and there are better ways to loop in Erlang\&. If you do not update \fINewData\fR\& and have some loop termination condition, or if you use \fI{repeat_state_and_data, _}\fR\& or \fIrepeat_state_and_data\fR\& you have an infinite loop! You are advised to use \fI{keep_state,\&.\&.\&.}\fR\&, \fI{keep_state_and_data,_}\fR\& or \fIkeep_state_and_data\fR\& since changing states from a \fIstate enter call\fR\& is not possible anyway\&.
+When the \fIgen_statem\fR\& runs with \fB\fIstate enter calls\fR\&\fR\&, these functions are also called with arguments \fI(enter, OldState, \&.\&.\&.)\fR\& during every \fIstate change\fR\&\&. In this case there are some restrictions on the \fBactions\fR\& that may be returned: \fB\fIpostpone()\fR\&\fR\& is not allowed since a \fIstate enter call\fR\& is not an event so there is no event to postpone, and \fB\fI{next_event,_,_}\fR\&\fR\& is not allowed since using \fIstate enter calls\fR\& should not affect how events are consumed and produced\&. You may also not change states from this call\&. Should you return \fI{next_state,NextState, \&.\&.\&.}\fR\& with \fINextState =/= State\fR\& the \fIgen_statem\fR\& crashes\&. Note that it is actually allowed to use \fI{repeat_state, NewData, \&.\&.\&.}\fR\& although it makes little sense since you immediately will be called again with a new \fIstate enter call\fR\& making this just a weird way of looping, and there are better ways to loop in Erlang\&. If you do not update \fINewData\fR\& and have some loop termination condition, or if you use \fI{repeat_state_and_data, _}\fR\& or \fIrepeat_state_and_data\fR\& you have an infinite loop! You are advised to use \fI{keep_state,\&.\&.\&.}\fR\&, \fI{keep_state_and_data,_}\fR\& or \fIkeep_state_and_data\fR\& since changing states from a \fIstate enter call\fR\& is not possible anyway\&.
 .LP
 Note the fact that you can use \fB\fIthrow\fR\&\fR\& to return the result, which can be useful\&. For example to bail out with \fIthrow(keep_state_and_data)\fR\& from deep within complex code that cannot return \fI{next_state,State,Data}\fR\& because \fIState\fR\& or \fIData\fR\& is no longer in scope\&.
 .RE

@@ -92,16 +92,17 @@
 <li title="When to use gen_statem"><a href="statem.html#when-to-use-gen_statem">When to use gen_statem</a></li>
 <li title="Callback Module"><a href="statem.html#callback-module">Callback Module</a></li>
 <li title="Callback Modes"><a href="statem.html#callback-modes">Callback Modes</a></li>
-<li title="Event Handler"><a href="statem.html#event-handler">Event Handler</a></li>
-<li title="State Transition Actions"><a href="statem.html#state-transition-actions">State Transition Actions</a></li>
+<li title="State Callback"><a href="statem.html#state-callback">State Callback</a></li>
+<li title="Transition Actions"><a href="statem.html#transition-actions">Transition Actions</a></li>
 <li title="Event Types"><a href="statem.html#event-types">Event Types</a></li>
 <li title="State Enter Calls"><a href="statem.html#state-enter-calls">State Enter Calls</a></li>
+<li title="Time-outs"><a href="statem.html#time-outs">Time-outs</a></li>
 <li title="Example"><a href="statem.html#example">Example</a></li>
 <li title="Starting gen_statem"><a href="statem.html#starting-gen_statem">Starting gen_statem</a></li>
 <li title="Handling Events"><a href="statem.html#handling-events">Handling Events</a></li>
 <li title="State Time-Outs"><a href="statem.html#state-time-outs">State Time-Outs</a></li>
 <li title="All State Events"><a href="statem.html#all-state-events">All State Events</a></li>
-<li title="One Event Handler"><a href="statem.html#one-event-handler">One Event Handler</a></li>
+<li title="One State Callback"><a href="statem.html#one-state-callback">One State Callback</a></li>
 <li title="Stopping"><a href="statem.html#stopping">Stopping</a></li>
 <li title="Event Time-Outs"><a href="statem.html#event-time-outs">Event Time-Outs</a></li>
 <li title="Generic Time-Outs"><a href="statem.html#generic-time-outs">Generic Time-Outs</a></li>
@@ -255,33 +256,45 @@
 
 
   <h3>
-<a name="Event-Driven%20State%20Machines"></a><span onMouseOver="document.getElementById('ghlink-event-driven-state-machines-idp72320406000016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-event-driven-state-machines-idp72320406000016').style.visibility = 'hidden';"><span id="ghlink-event-driven-state-machines-idp72320406000016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L42" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="event-driven-state-machines" href="#event-driven-state-machines">3.1 
+<a name="Event-Driven%20State%20Machines"></a><span onMouseOver="document.getElementById('ghlink-event-driven-state-machines-idp46311646313952').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-event-driven-state-machines-idp46311646313952').style.visibility = 'hidden';"><span id="ghlink-event-driven-state-machines-idp46311646313952" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L42" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="event-driven-state-machines" href="#event-driven-state-machines">3.1 
           Event-Driven State Machines</a></span>
 </h3>
     
     
     <p>
       Established Automata Theory does not deal much with
-      how a state transition is triggered,
+      how a <strong>state transition</strong> is triggered,
       but assumes that the output is a function
       of the input (and the state) and that they are
       some kind of values.
     </p>
     <p>
       For an Event-Driven State Machine, the input is an event
-      that triggers a state transition and the output
-      is actions executed during the state transition.
+      that triggers a <strong>state transition</strong> and the output
+      is actions executed during the <strong>state transition</strong>.
       It can analogously to the mathematical model of a
-      Finite-State Machine be described as
+      Finite State Machine be described as
       a set of relations of the following form:
     </p>
     <div class="example"><pre>
 State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
-    <p>These relations are interpreted as follows:
+    <p>
+      These relations are interpreted as follows:
       if we are in state <span class="code">S</span> and event <span class="code">E</span> occurs, we
       are to perform actions <span class="code">A</span> and make a transition to
       state <span class="code">S'</span>. Notice that <span class="code">S'</span> can be equal to <span class="code">S</span>
       and that <span class="code">A</span> can be empty.
+    </p>
+    <p>
+      In <span class="code">gen_statem</span> we define
+      a <strong>state change</strong> as a <strong>state transition</strong>
+      in which the new state <span class="code">S'</span> is different from
+      the current state <span class="code">S</span>, where "different" means
+      Erlang's strict inequality: <span class="code">=/=</span>
+      also know as "does not match".
+      During a <strong>state changes</strong>,
+      <span class="code">gen_statem</span> does more things
+      than during other <strong>state transitions</strong>.
     </p>
     <p>
       As <span class="code">A</span> and <span class="code">S'</span> depend only on
@@ -304,7 +317,7 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 
 
   <h3>
-<a name="When%20to%20use%20gen_statem"></a><span onMouseOver="document.getElementById('ghlink-when-to-use-gen_statem-idp72320404651008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-when-to-use-gen_statem-idp72320404651008').style.visibility = 'hidden';"><span id="ghlink-when-to-use-gen_statem-idp72320404651008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L88" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="when-to-use-gen_statem" href="#when-to-use-gen_statem">3.2 
+<a name="When%20to%20use%20gen_statem"></a><span onMouseOver="document.getElementById('ghlink-when-to-use-gen_statem-idp46311646140528').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-when-to-use-gen_statem-idp46311646140528').style.visibility = 'hidden';"><span id="ghlink-when-to-use-gen_statem-idp46311646140528" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L100" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="when-to-use-gen_statem" href="#when-to-use-gen_statem">3.2 
           When to use gen_statem</a></span>
 </h3>
     
@@ -316,8 +329,8 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
     <ul>
       <li>
 	Co-located callback code for each state,
-	regardless of
-	<span class="bold_code bc-17"><a href="#Event%20Types">Event Type</a></span>
+	for all
+	<span class="bold_code bc-17"><a href="#Event%20Types"><strong>Event Types</strong></a></span>
 	(such as <strong>call</strong>, <strong>cast</strong> and <strong>info</strong>)
       </li>
       <li>
@@ -330,12 +343,12 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 	(in particular purely internal events)
       </li>
       <li>
-	<span class="bold_code bc-17"><a href="#State%20Enter%20Calls">State Enter Calls</a></span>
+	<span class="bold_code bc-17"><a href="#State%20Enter%20Calls"><strong>State Enter Calls</strong></a></span>
 	(callback on state entry co-located with the rest
 	of each state's callback code)
       </li>
       <li>
-	Easy-to-use timeouts
+	Easy-to-use time-outs
 	(<span class="bold_code bc-17"><a href="#State%20Time-Outs">State Time-Outs</a></span>,
 	<span class="bold_code bc-17"><a href="#Event%20Time-Outs">Event Time-Outs</a></span>
 	and
@@ -364,17 +377,17 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 
 
   <h3>
-<a name="Callback%20Module"></a><span onMouseOver="document.getElementById('ghlink-callback-module-idp72320404005616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-callback-module-idp72320404005616').style.visibility = 'hidden';"><span id="ghlink-callback-module-idp72320404005616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L151" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="callback-module" href="#callback-module">3.3 
+<a name="Callback%20Module"></a><span onMouseOver="document.getElementById('ghlink-callback-module-idp46311644855696').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-callback-module-idp46311644855696').style.visibility = 'hidden';"><span id="ghlink-callback-module-idp46311644855696" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L163" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="callback-module" href="#callback-module">3.3 
           Callback Module</a></span>
 </h3>
     
     
     <p>
-      The callback module contains functions that implement
+      The <strong>callback module</strong> contains functions that implement
       the state machine.
       When an event occurs,
       the <span class="code">gen_statem</span> behaviour engine
-      calls a function in the callback module with the event,
+      calls a function in the <strong>callback module</strong> with the event,
       current state and server data.
       This function performs the actions for this event,
       and returns the new state and server data
@@ -384,7 +397,7 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
       The behaviour engine holds the state machine state,
       server data, timer references, a queue of posponed messages
       and other metadata.  It receives all process messages,
-      handles the system messages, and calls the callback module
+      handles the system messages, and calls the <strong>callback module</strong>
       with machine specific events.
     </p>
   
@@ -392,13 +405,13 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 
 
   <h3>
-<a name="Callback%20Modes"></a><span onMouseOver="document.getElementById('ghlink-callback-modes-idp72320404340736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-callback-modes-idp72320404340736').style.visibility = 'hidden';"><span id="ghlink-callback-modes-idp72320404340736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L176" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="callback-modes" href="#callback-modes">3.4 
+<a name="Callback%20Modes"></a><span onMouseOver="document.getElementById('ghlink-callback-modes-idp46311644370240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-callback-modes-idp46311644370240').style.visibility = 'hidden';"><span id="ghlink-callback-modes-idp46311644370240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L188" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="callback-modes" href="#callback-modes">3.4 
           Callback Modes</a></span>
 </h3>
     
     
     <p>
-      The <span class="code">gen_statem</span> behavior supports two callback modes:
+      The <span class="code">gen_statem</span> behavior supports two <strong>callback modes</strong>:
     </p>
     <dl>
       <dt><strong>
@@ -419,31 +432,31 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
       </dd>
     </dl>
     <p>
-      The callback mode is selected at server start
+      The <strong>callback mode</strong> is selected at server start
       and may be changed with a code upgrade/downgrade.
     </p>
     <p>
       See the section
-      <span class="bold_code bc-17"><a href="#Event%20Handler">Event Handler</a></span>
+      <span class="bold_code bc-17"><a href="#State%20Callback"><strong>State Callback</strong></a></span>
       that describes the event handling callback function(s).
     </p>
     <p>
-      The callback mode is selected by implementing
+      The <strong>callback mode</strong> is selected by implementing
       a mandatory callback function
       <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#Module:callback_mode-0');"><span class="code">Module:callback_mode()</span></a></span>
-      that returns one of the callback modes.
+      that returns one of the <strong>callback modes</strong>.
     </p>
     <p>
       The
       <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#Module:callback_mode-0');"><span class="code">Module:callback_mode()</span></a></span>
-      function may also return a list containing the callback mode
+      function may also return a list containing the <strong>callback mode</strong>
       and the atom <span class="code">state_enter</span> in which case
-      <span class="bold_code bc-17"><a href="#State%20Enter%20Calls">State Enter Calls</a></span>
-      are activated for the callback mode.
+      <span class="bold_code bc-17"><a href="#State%20Enter%20Calls"><strong>state enter calls</strong></a></span>
+      are activated for the <strong>callback mode</strong>.
     </p>
 
     <h4>
-<a name="Choosing%20the%20Callback%20Mode"></a><span onMouseOver="document.getElementById('ghlink-choosing-the-callback-mode-idp72320404197312').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-choosing-the-callback-mode-idp72320404197312').style.visibility = 'hidden';"><span id="ghlink-choosing-the-callback-mode-idp72320404197312" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L232" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="choosing-the-callback-mode" href="#choosing-the-callback-mode">Choosing the Callback Mode</a></span>
+<a name="Choosing%20the%20Callback%20Mode"></a><span onMouseOver="document.getElementById('ghlink-choosing-the-callback-mode-idp46311644975776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-choosing-the-callback-mode-idp46311644975776').style.visibility = 'hidden';"><span id="ghlink-choosing-the-callback-mode-idp46311644975776" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L246" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="choosing-the-callback-mode" href="#choosing-the-callback-mode">Choosing the Callback Mode</a></span>
 </h4>
       
       
@@ -452,11 +465,11 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 	it is the one most like <span class="code">gen_fsm</span>.
 	But if you do not want the restriction that the state
 	must be an atom, or if you do not want to write
-	one event handler function per state; please read on...
+	one <strong>state callback</strong> function per state; please read on...
       </p>
       <p>
 	The two
-	<span class="bold_code bc-17"><a href="#Callback%20Modes">Callback Modes</a></span>
+	<span class="bold_code bc-17"><a href="#Callback%20Modes"><strong>callback modes</strong></a></span>
 	give different possibilities and restrictions,
 	with one common goal:
 	to handle all possible combinations of events and states.
@@ -472,7 +485,7 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 	With <span class="code">state_functions</span>, you are restricted to use
 	atom-only states, and the <span class="code">gen_statem</span> engine
 	branches depending on state name for you.
-	This encourages the callback module to co-locate
+	This encourages the <strong>callback module</strong> to co-locate
 	the implementation of all event actions particular
 	to one state in the same place in the code,
 	hence to focus on one state at the time.
@@ -515,14 +528,15 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 
 
   <h3>
-<a name="Event%20Handler"></a><span onMouseOver="document.getElementById('ghlink-event-handler-idp72320405682688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-event-handler-idp72320405682688').style.visibility = 'hidden';"><span id="ghlink-event-handler-idp72320405682688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L304" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="event-handler" href="#event-handler">3.5 
-          Event Handler</a></span>
+<a name="State%20Callback"></a><span onMouseOver="document.getElementById('ghlink-state-callback-idp46311646445968').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-state-callback-idp46311646445968').style.visibility = 'hidden';"><span id="ghlink-state-callback-idp46311646445968" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L318" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="state-callback" href="#state-callback">3.5 
+          State Callback</a></span>
 </h3>
     
     
     <p>
-      Which callback function that handles an event
-      depends on the callback mode:
+      The <strong>state callback</strong> is the callback function
+      that handles an event in the current state,
+      and which function that is depends on the <strong>callback mode</strong>:
     </p>
     <dl>
       <dt><strong><span class="code">state_functions</span></strong></dt>
@@ -541,7 +555,7 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#Module:handle_event-4');"><span class="code">Module:handle_event(EventType, EventContent, State, Data)</span></a></span>
 	<p>
 	  See section
-	  <span class="bold_code bc-17"><a href="#One%20Event%20Handler">One Event Handler</a></span>
+	  <span class="bold_code bc-17"><a href="#One%20State%20Callback"><strong>One State Callback</strong></a></span>
 	  for an example.
 	</p>
       </dd>
@@ -550,15 +564,17 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
       The state is either the name of the function itself or an argument to it.
       The other arguments are the <span class="code">EventType</span> described in section
       <span class="bold_code bc-17"><a href="#Event%20Types">Event Types</a></span>,
-      the event dependent <span class="code">EventContent</span>, and the current server <span class="code">Data</span>.
+      the event dependent <span class="code">EventContent</span>,
+      and the current server <span class="code">Data</span>.
     </p>
     <p>
-      State enter calls are also handled by the event handler and have
-      slightly different arguments. See the section
+      <strong>State enter calls</strong> are also handled by the event handler
+      and have slightly different arguments. See section
       <span class="bold_code bc-17"><a href="#State%20Enter%20Calls">State Enter Calls</a></span>.
     </p>
     <p>
-      The event handler return values are defined in the description of
+      The <strong>state callback</strong> return values
+      are defined in the description of
       <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#Module:StateName-3');"><span class="code">Module:StateName/3</span></a></span>
       in the <span class="code">gen_statem</span> manual page, but here is
       a more readable list:
@@ -571,22 +587,27 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
       <dd>
 	<p>
 	  Set next state and update the server data.
-	  If the <span class="code">Actions</span> field is used, execute state transition actions.
-	  An empty <span class="code">Actions</span> list is equivalent to not returning the field.
+	  If the <span class="code">Actions</span> field is used,
+	  execute <strong>transition actions</strong>.
+	  An empty <span class="code">Actions</span> list is equivalent to
+	  not returning the field.
 	</p>
 	<p>
 	  See section
-	  <span class="bold_code bc-17"><a href="#State%20Transition%20Actions">State Transition Actions</a></span>
+	  <span class="bold_code bc-17"><a href="#Transition%20Actions"><strong>Transition Actions</strong></a></span>
 	  for a list of possible
-	  state transition actions.
+	  <strong>transition actions</strong>.
 	</p>
 	<p>
-	  If <span class="code">NextState =/= State</span> the state machine changes
-	  to a new state.  A
+	  If <span class="code">NextState =/= State</span> this is a <strong>state change</strong>
+	  so the extra things <span class="code">gen_statem</span> does are: the event queue
+	  is restarted from the oldest
+	  <span class="bold_code bc-17"><a href="#Postponing%20Events">postponed event</a></span>,
+	  any current
+	  <span class="bold_code bc-17"><a href="#State%20Time-Outs">state time-out</a></span>
+	  is cancelled, and a
 	  <span class="bold_code bc-17"><a href="#State%20Enter%20Calls">state enter call</a></span>
-	  is performed if enabled and all
-	  <span class="bold_code bc-17"><a href="#Postponing%20Events">postponed events</a></span>
-	  are retried.
+	  is performed, if enabled.
 	</p>
       </dd>
       <dt><strong>
@@ -596,7 +617,7 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
       <dd>
 	<p>
 	  Same as the <span class="code">next_state</span> values with
-	  <span class="code">NextState =:= State</span>, that is, no state change.
+	  <span class="code">NextState =:= State</span>, that is, no <strong>state change</strong>.
 	</p>
       </dd>
       <dt><strong>
@@ -620,8 +641,15 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 	  Same as the <span class="code">keep_state</span> or <span class="code">keep_state_and_data</span> values,
 	  and if
 	  <span class="bold_code bc-17"><a href="#State%20Enter%20Calls">State Enter Calls</a></span>
-	  are enabled, repeat the state enter call
+	  are enabled, repeat the <strong>state enter call</strong>
 	  as if this state was entered again.
+	</p>
+	<p>
+	  If these return values are used from a
+	  <strong>state enter call</strong> the <span class="code">OldState</span> does not change,
+	  but if used from an event handling <strong>state callback</strong>
+	  the new <strong>state enter call's</strong> <span class="code">OldState</span>
+	  will be the current state.
 	</p>
       </dd>
       <dt><strong>
@@ -641,13 +669,14 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
       <dd>
 	<p>
 	  Same as the <span class="code">stop</span> values, but first execute the given
-	  state transition actions that may only be reply actions.
+	  <span class="bold_code bc-17"><a href="#Transition%20Actions"><strong>transition actions</strong></a></span>
+	  that may only be reply actions.
 	</p>
       </dd>
     </dl>
 
     <h4>
-<a name="The%20First%20State"></a><span onMouseOver="document.getElementById('ghlink-the-first-state-idp72320405988704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-the-first-state-idp72320405988704').style.visibility = 'hidden';"><span id="ghlink-the-first-state-idp72320405988704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L443" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="the-first-state" href="#the-first-state">The First State</a></span>
+<a name="The%20First%20State"></a><span onMouseOver="document.getElementById('ghlink-the-first-state-idp46311646913328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-the-first-state-idp46311646913328').style.visibility = 'hidden';"><span id="ghlink-the-first-state-idp46311646913328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L477" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="the-first-state" href="#the-first-state">The First State</a></span>
 </h4>
       
       
@@ -655,8 +684,8 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 	To decide the first state the
 	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#Module:init-1');"><span class="code">Module:init(Args)</span></a></span>
 	callback function is called before any
-	<span class="bold_code bc-17"><a href="#Event%20Handler">Event Handler</a></span>
-	is called.  This function behaves like an event handler
+	<span class="bold_code bc-17"><a href="#State%20Callback"><strong>state callback</strong></a></span>
+	is called.  This function behaves like an <strong>state callback</strong>
 	function, but gets its only argument <span class="code">Args</span> from 
 	the <span class="code">gen_statem</span>
 	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#start-3');"><span class="code">start/3,4</span></a></span>
@@ -676,8 +705,8 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 
 
   <h3>
-<a name="State%20Transition%20Actions"></a><span onMouseOver="document.getElementById('ghlink-state-transition-actions-idp72320405624272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-state-transition-actions-idp72320405624272').style.visibility = 'hidden';"><span id="ghlink-state-transition-actions-idp72320405624272" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L476" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="state-transition-actions" href="#state-transition-actions">3.6 
-          State Transition Actions</a></span>
+<a name="Transition%20Actions"></a><span onMouseOver="document.getElementById('ghlink-transition-actions-idp46311646921264').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-transition-actions-idp46311646921264').style.visibility = 'hidden';"><span id="ghlink-transition-actions-idp46311646921264" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L510" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="transition-actions" href="#transition-actions">3.6 
+          Transition Actions</a></span>
 </h3>
     
     
@@ -686,13 +715,13 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
       <span class="bold_code bc-17"><a href="#Event-Driven%20State%20Machines">Event-Driven State Machines</a></span>
       actions were mentioned as a part of
       the general state machine model. These general actions
-      are implemented with the code that callback module
+      are implemented with the code that <strong>callback module</strong>
       <span class="code">gen_statem</span> executes in an event-handling
       callback function before returning
       to the <span class="code">gen_statem</span> engine.
     </p>
     <p>
-      There are more specific state-transition actions
+      There are more specific <strong>transition actions</strong>
       that a callback function can command the <span class="code">gen_statem</span>
       engine to do after the callback function return.
       These are commanded by returning a list of
@@ -701,7 +730,7 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
       <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-state_callback_result');">return value</a></span>
       from the
       <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#Module:StateName-3');">callback function</a></span>.
-      These are the possible state transition actions:
+      These are the possible <strong>transition actions</strong>:
     </p>
     <dl>
       <dt><strong>
@@ -711,7 +740,7 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
       </strong></dt>
       <dd>
 	If set postpone the current event, see section
-	<span class="bold_code bc-17"><a href="#Postponing%20Events">Postponing Events</a></span>
+	<span class="bold_code bc-17"><a href="#Postponing%20Events">Postponing Events</a></span>.
       </dd>
       <dt><strong>
 	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-hibernate');"><span class="code">hibernate</span></a></span>
@@ -720,49 +749,52 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
       </strong></dt>
       <dd>
 	If set hibernate the <span class="code">gen_statem</span>, treated in section
-	<span class="bold_code bc-17"><a href="#Hibernation">Hibernation</a></span>
+	<span class="bold_code bc-17"><a href="#Hibernation">Hibernation</a></span>.
       </dd>
       <dt><strong>
-	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-state_timeout');"><span class="code">{state_timeout, Time}</span></a></span>
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-state_timeout');"><span class="code">{state_timeout, EventContent, Time}</span></a></span>
 	<br>
-	<span class="code">{state_timeout, Time, Opts}</span>
+	<span class="code">{state_timeout, EventContent, Time, Opts}</span>
       </strong></dt>
       <dd>
-	Start a state time-out, read more in section
-	<span class="bold_code bc-17"><a href="#State%20Time-Outs">State Time-Outs</a></span>
+	Start a state time-out, read more in sections
+	<span class="bold_code bc-17"><a href="#Time-Outs">Time-Outs</a></span> and
+	<span class="bold_code bc-17"><a href="#State%20Time-Outs">State Time-Outs</a></span>.
       </dd>
       <dt><strong>
-	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-generic_timeout');"><span class="code">{{timeout, Name}, Time}</span></a></span>
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-generic_timeout');"><span class="code">{{timeout, Name}, EventContent, Time}</span></a></span>
 	<br>
-	<span class="code">{{timeout, Name}, Time, Opts}</span>
+	<span class="code">{{timeout, Name}, EventContent, Time, Opts}</span>
       </strong></dt>
       <dd>
-	Start a generic time-out, read more in section
-	<span class="bold_code bc-17"><a href="#Generic%20Time-Outs">Generic Time-Outs</a></span>
+	Start a generic time-out, read more in sections
+	<span class="bold_code bc-17"><a href="#Time-Outs">Time-Outs</a></span> and
+	<span class="bold_code bc-17"><a href="#Generic%20Time-Outs">Generic Time-Outs</a></span>.
       </dd>
       <dt><strong>
-	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-event_timeout');"><span class="code">{timeout, Time}</span></a></span>
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-event_timeout');"><span class="code">{timeout, EventContent, Time}</span></a></span>
 	<br>
-	<span class="code">{timeout, Time, Opts}</span><br>
+	<span class="code">{timeout, EventContent, Time, Opts}</span><br>
 	<span class="code">Time</span>
       </strong></dt>
       <dd>
-	Start an event time-out, see more in section
-	<span class="bold_code bc-17"><a href="#Event%20Time-Outs">Event Time-Outs</a></span>
+	Start an event time-out, see more in sections
+	<span class="bold_code bc-17"><a href="#Time-Outs">Time-Outs</a></span> and
+	<span class="bold_code bc-17"><a href="#Event%20Time-Outs">Event Time-Outs</a></span>.
       </dd>
       <dt><strong>
 	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-reply_action');"><span class="code">{reply, From, Reply}</span></a></span>
       </strong></dt>
       <dd>
 	Reply to a caller, mentioned at the end of section
-	<span class="bold_code bc-17"><a href="#All%20State%20Events">All State Events</a></span>
+	<span class="bold_code bc-17"><a href="#All%20State%20Events">All State Events</a></span>.
       </dd>
       <dt><strong>
 	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-action');"><span class="code">{next_event, EventType, EventContent}</span></a></span>
       </strong></dt>
       <dd>
 	Generate the next event to handle, see section 
-	<span class="bold_code bc-17"><a href="#Inserted%20Events">Inserted Events</a></span>
+	<span class="bold_code bc-17"><a href="#Inserted%20Events">Inserted Events</a></span>.
       </dd>
     </dl>
     <p>
@@ -779,20 +811,20 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 
 
   <h3>
-<a name="Event%20Types"></a><span onMouseOver="document.getElementById('ghlink-event-types-idp72320406155408').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-event-types-idp72320406155408').style.visibility = 'hidden';"><span id="ghlink-event-types-idp72320406155408" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L594" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="event-types" href="#event-types">3.7 
+<a name="Event%20Types"></a><span onMouseOver="document.getElementById('ghlink-event-types-idp46311646955936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-event-types-idp46311646955936').style.visibility = 'hidden';"><span id="ghlink-event-types-idp46311646955936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L631" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="event-types" href="#event-types">3.7 
           Event Types</a></span>
 </h3>
     
     
     <p>
       Events are categorized in different
-      <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-event_type');">event types</a></span>.
+      <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-event_type');"><strong>event types</strong></a></span>.
       Events of all types are for a given state
       handled in the same callback function, and that function gets
       <span class="code">EventType</span> and <span class="code">EventContent</span> as arguments.
     </p>
     <p>
-      The following is a complete list of event types and where
+      The following is a complete list of <strong>event types</strong> and where
       they come from:
     </p>
     <dl>
@@ -810,7 +842,7 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 	Generated by
 	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#call-2');"><span class="code">gen_statem:call</span></a></span>,
 	where <span class="code">From</span> is the reply address to use
-	when replying either through the state transition action
+	when replying either through the <strong>transition action</strong>
 	<span class="code">{reply,From,Msg}</span> or by calling
 	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#reply-1');"><span class="code">gen_statem:reply</span></a></span>.
       </dd>
@@ -825,35 +857,41 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-timeout_event_type');"><span class="code">state_timeout</span></a></span>
       </strong></dt>
       <dd>
-	Generated by state transition action
-	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-state_timeout');"><span class="code">{state_timeout,Time,EventContent}</span></a></span>
-	state timer timing out.
+	Generated by <strong>transition action</strong>
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-timeout_action');"><span class="code">{state_timeout,Time,EventContent}</span></a></span>
+	state timer timing out. Read more in sections
+	<span class="bold_code bc-17"><a href="#Time-Outs">Time-Outs</a></span> and
+	<span class="bold_code bc-17"><a href="#State%20Time-Outs">State Time-Outs</a></span>.
       </dd>
       <dt><strong>
 	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-timeout_event_type');"><span class="code">{timeout,Name}</span></a></span>
       </strong></dt>
       <dd>
-	Generated by state transition action
-	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-generic_timeout');"><span class="code">{{timeout,Name},Time,EventContent}</span></a></span>
-	generic timer timing out.
+	Generated by <strong>transition action</strong>
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-timeout_action');"><span class="code">{{timeout,Name},Time,EventContent}</span></a></span>
+	generic timer timing out.  Read more in sections
+	<span class="bold_code bc-17"><a href="#Time-Outs">Time-Outs</a></span> and
+	<span class="bold_code bc-17"><a href="#Generic%20Time-Outs">Generic Time-Outs</a></span>.
       </dd>
       <dt><strong>
 	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-timeout_event_type');"><span class="code">timeout</span></a></span>
       </strong></dt>
       <dd>
-	Generated by state transition action
-	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-event_timeout');"><span class="code">{timeout,Time,EventContent}</span></a></span>
+	Generated by <strong>transition action</strong>
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-timeout_action');"><span class="code">{timeout,Time,EventContent}</span></a></span>
 	(or its short form <span class="code">Time</span>)
-	event timer timing out.
+	event timer timing out.  Read more in sections
+	<span class="bold_code bc-17"><a href="#Time-Outs">Time-Outs</a></span> and
+	<span class="bold_code bc-17"><a href="#Event%20Time-Outs">Event Time-Outs</a></span>.
       </dd>
       <dt><strong>
 	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-event_type');"><span class="code">internal</span></a></span>
       </strong></dt>
       <dd>
-	Generated by state transition
-	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-action');">action</a></span>
-	<span class="code">{next_event,internal,EventContent}</span>.
-	All event types above can also be generated using
+	Generated by <strong>transition action</strong>
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-enter_action');"><span class="code">{next_event,internal,EventContent}</span></a></span>.
+	All <strong>event types</strong> above can also be generated using
+	the <span class="code">next_event</span> action:
 	<span class="code">{next_event,EventType,EventContent}</span>.
       </dd>
     </dl>
@@ -862,19 +900,19 @@ State(S) x Event(E) -&gt; Actions(A), State(S')</pre></div>
 
 
   <h3>
-<a name="State%20Enter%20Calls"></a><span onMouseOver="document.getElementById('ghlink-state-enter-calls-idp72320406182256').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-state-enter-calls-idp72320406182256').style.visibility = 'hidden';"><span id="ghlink-state-enter-calls-idp72320406182256" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L694" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="state-enter-calls" href="#state-enter-calls">3.8 
+<a name="State%20Enter%20Calls"></a><span onMouseOver="document.getElementById('ghlink-state-enter-calls-idp46311646989824').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-state-enter-calls-idp46311646989824').style.visibility = 'hidden';"><span id="ghlink-state-enter-calls-idp46311646989824" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L737" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="state-enter-calls" href="#state-enter-calls">3.8 
           State Enter Calls</a></span>
 </h3>
     
     
     <p>
       The <span class="code">gen_statem</span> behavior can if this is enabled,
-      regardless of callback mode,
+      regardless of <strong>callback mode</strong>,
       automatically
       <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-state_enter');">call the state callback</a></span>
       with special arguments whenever the state changes
       so you can write state enter actions
-      near the rest of the state transition rules.
+      near the rest of the <strong>state transition</strong> rules.
       It typically looks like this:
     </p>
     <div class="example"><pre>
@@ -885,38 +923,139 @@ StateName(EventType, EventContent, Data) -&gt;
     ... code for actions here ...
     {next_state, NewStateName, NewData}.</pre></div>
     <p>
-      Since the state enter call is not an event there are restrictions
+      Since the <strong>state enter call</strong> is not an event there are restrictions
       on the allowed return value and
       <span class="bold_code bc-17"><a href="#State%20Transition%20Actions">State Transition Actions</a></span>.
       You may not change the state,
       <span class="bold_code bc-17"><a href="#Postponing%20Events">postpone</a></span>
       this non-event, or
-      <span class="bold_code bc-17"><a href="#Inserted%20Events">insert events</a></span>.
+      <span class="bold_code bc-17"><a href="#Inserted%20Events">insert any events</a></span>.
     </p>
     <p>
-      The first state that is entered will get a state enter call
+      The first state that is entered
+      will get a <strong>state enter call</strong>
       with <span class="code">OldState</span> equal to the current state.
     </p>
     <p>
-      You may repeat the state enter call using the <span class="code">{repeat_state,...}</span>
+      You may repeat the <strong>state enter call</strong>
+      using the <span class="code">{repeat_state,...}</span>
       return value from the 
-      <span class="bold_code bc-17"><a href="#Event%20Handler">Event Handler</a></span>.
+      <span class="bold_code bc-17"><a href="#State%20Callback">state callback</a></span>.
       In this case <span class="code">OldState</span> will also be equal to the current state.
     </p>
     <p>
       Depending on how your state machine is specified,
-      this can be a very useful feature,
-      but it forces you to handle the state enter calls in all states.
+      this can be a very useful feature, but it forces you to handle
+      the <strong>state enter calls</strong> in all states.
       See also the
       <span class="bold_code bc-17"><a href="#State%20Enter%20Actions">State Enter Actions</a></span>
-      chapter.
+      section.
     </p>
   
 
 
 
   <h3>
-<a name="Example"></a><span onMouseOver="document.getElementById('ghlink-example-idp72320406192768').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-example-idp72320406192768').style.visibility = 'hidden';"><span id="ghlink-example-idp72320406192768" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L749" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="example" href="#example">3.9 
+<a name="Time-Outs"></a><span onMouseOver="document.getElementById('ghlink-time-outs-idp46311647002784').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-time-outs-idp46311647002784').style.visibility = 'hidden';"><span id="ghlink-time-outs-idp46311647002784" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L794" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="time-outs" href="#time-outs">3.9 
+          Time-outs</a></span>
+</h3>
+    
+    
+    <p>
+      Time-outs in <span class="code">gen_statem</span> are started from a
+      <span class="bold_code bc-17"><a href="#Transition%20Actions"><strong>transition action</strong></a></span>
+      during a state transition that is when exiting from the
+      <span class="bold_code bc-17"><a href="#State%20Callback"><strong>state callback</strong></a></span>.
+    </p>
+    <p>
+      There are 3 types of time-outs in <span class="code">gen_statem</span>:
+    </p>
+    <dl>
+      <dt><strong>
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-state_timeout');"><span class="code">state_timeout</span></a></span>
+      </strong></dt>
+      <dd>
+	There is one
+	<span class="bold_code bc-17"><a href="#State%20Time-Outs">State Time-Out</a></span>
+	that is automatically cancelled by a <strong>state change</strong>.
+      </dd>
+      <dt><strong>
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-generic_timeout');"><span class="code">{timeout, Name}</span></a></span>
+      </strong></dt>
+      <dd>
+	There are any number of
+	<span class="bold_code bc-17"><a href="#Generic%20Time-Outs">Generic Time-Outs</a></span>
+	differing by their <span class="code">Name</span>.
+	They have no automatic cancelling.
+      </dd>
+      <dt><strong>
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-event_timeout');"><span class="code">timeout</span></a></span>
+      </strong></dt>
+      <dd>
+	There is one
+	<span class="bold_code bc-17"><a href="#Event%20Time-Outs">Event Time-Out</a></span>
+	that is automatically cancelled by any event.
+	Note that
+	<span class="bold_code bc-17"><a href="#Postponing%20Events">postponed</a></span>
+	and
+	<span class="bold_code bc-17"><a href="#Inserted%20Events">inserted</a></span>
+	events cancel this timeout just as external events.
+      </dd>
+    </dl>
+    <p>
+      When a time-out is started any running time-out with the same tag,
+      <span class="code">state_timeout</span>, <span class="code">{timeout, Name}</span> or <span class="code">timeout</span>,
+      is cancelled, that is the time-out is restarted with the new time.
+    </p>
+    <p>
+      All time-outs has got an <span class="code">EventContent</span> that is part of the
+      <span class="bold_code bc-17"><a href="#Transition%20Actions"><strong>transition action</strong></a></span>
+      that starts the time-out.
+      Different <span class="code">EventContent</span>s does not create different time-outs.
+      The <span class="code">EventContent</span> is delivered to the
+      <span class="bold_code bc-17"><a href="#State%20Callback"><strong>state callback</strong></a></span>
+      when the time-out expires.
+    </p>
+    <h4>
+<a name="Cancelling%20a%20Time-Out"></a><span onMouseOver="document.getElementById('ghlink-cancelling-a-time-out-idp46311645510832').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-cancelling-a-time-out-idp46311645510832').style.visibility = 'hidden';"><span id="ghlink-cancelling-a-time-out-idp46311645510832" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L862" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="cancelling-a-time-out" href="#cancelling-a-time-out">Cancelling a Time-Out</a></span>
+</h4>
+      
+      
+      <p>
+	If a time-out is started with the time <span class="code">infinity</span> it will
+	never time out, in fact it will not even be started, and any
+	running time-out with the same tag will be cancelled.
+	The <span class="code">EventContent</span> will in this case be ignored,
+	so why not set it to <span class="code">undefined</span>.
+      </p>
+    
+    <h4>
+<a name="Time-Out%20Zero"></a><span onMouseOver="document.getElementById('ghlink-time-out-zero-idp46311644957824').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-time-out-zero-idp46311644957824').style.visibility = 'hidden';"><span id="ghlink-time-out-zero-idp46311644957824" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L873" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="time-out-zero" href="#time-out-zero">Time-Out Zero</a></span>
+</h4>
+      
+      
+      <p>
+	If a time-out is started with the time <span class="code">0</span> it will
+	actually not be started.  Instead the time-out event will
+	immediately be inserted to be processed after any events
+	already enqueued, and before any not yet received external events.
+	Note that some time-outs are automatically cancelled
+	so if you for example combine
+	<span class="bold_code bc-17"><a href="#Postponing%20Events">postponing</a></span>
+	an event in a <strong>state change</strong> with starting an
+	<span class="bold_code bc-17"><a href="#Event%20Time-Outs">event time-out</a></span>
+	with time <span class="code">0</span> there will be no timeout event inserted
+	since the event time-out is cancelled by the postponed
+	event that is delivered due to the state change.
+      </p>
+    
+  
+
+
+
+
+  <h3>
+<a name="Example"></a><span onMouseOver="document.getElementById('ghlink-example-idp46311644875552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-example-idp46311644875552').style.visibility = 'hidden';"><span id="ghlink-example-idp46311644875552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L896" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="example" href="#example">3.10 
           Example</a></span>
 </h3>
     
@@ -940,7 +1079,7 @@ StateName(EventType, EventContent, Data) -&gt;
     </div>
     <p>
       This code lock state machine can be implemented using
-      <span class="code">gen_statem</span> with the following callback module:
+      <span class="code">gen_statem</span> with the following <strong>callback module</strong>:
     </p>
     <div class="example"><pre>-module(code_lock).
 -behaviour(gen_statem).
@@ -1001,7 +1140,7 @@ terminate(_Reason, State, _Data) -&gt;
 
 
   <h3>
-<a name="Starting%20gen_statem"></a><span onMouseOver="document.getElementById('ghlink-starting-gen_statem-idp72320406201872').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-starting-gen_statem-idp72320406201872').style.visibility = 'hidden';"><span id="ghlink-starting-gen_statem-idp72320406201872" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L836" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="starting-gen_statem" href="#starting-gen_statem">3.10 
+<a name="Starting%20gen_statem"></a><span onMouseOver="document.getElementById('ghlink-starting-gen_statem-idp46311647022704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-starting-gen_statem-idp46311647022704').style.visibility = 'hidden';"><span id="ghlink-starting-gen_statem-idp46311647022704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L983" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="starting-gen_statem" href="#starting-gen_statem">3.11 
           Starting gen_statem</a></span>
 </h3>
     
@@ -1036,7 +1175,8 @@ terminate(_Reason, State, _Data) -&gt;
       <li>
         <p>
           The second argument, <span class="code">?MODULE</span>, is the name of
-          the callback module, that is, the module where the callback
+          the <strong>callback module</strong>, that is,
+	  the module where the callback
           functions are located, which is this module.
         </p>
         <p>
@@ -1101,7 +1241,7 @@ terminate(_Reason, State, _Data) -&gt;
       <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#Module:callback_mode-0');"><span class="code">Module:callback_mode/0</span></a></span>
       selects the
       <span class="bold_code bc-17"><a href="#Callback%20Modes"><span class="code">CallbackMode</span></a></span>
-      for the callback module, in this case
+      for the <strong>callback module</strong>, in this case
       <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-callback_mode');"><span class="code">state_functions</span></a></span>.
       That is, each state has got its own handler function:
     </p>
@@ -1113,7 +1253,7 @@ terminate(_Reason, State, _Data) -&gt;
 
 
   <h3>
-<a name="Handling%20Events"></a><span onMouseOver="document.getElementById('ghlink-handling-events-idp72320406236416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handling-events-idp72320406236416').style.visibility = 'hidden';"><span id="ghlink-handling-events-idp72320406236416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L951" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handling-events" href="#handling-events">3.11 
+<a name="Handling%20Events"></a><span onMouseOver="document.getElementById('ghlink-handling-events-idp46311647055392').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-handling-events-idp46311647055392').style.visibility = 'hidden';"><span id="ghlink-handling-events-idp46311647055392" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1099" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="handling-events" href="#handling-events">3.12 
           Handling Events</a></span>
 </h3>
     
@@ -1188,7 +1328,7 @@ terminate(_Reason, State, _Data) -&gt;
   
 
   <h3>
-<a name="State%20Time-Outs"></a><span onMouseOver="document.getElementById('ghlink-state-time-outs-idp72320404198720').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-state-time-outs-idp72320404198720').style.visibility = 'hidden';"><span id="ghlink-state-time-outs-idp72320404198720" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1029" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="state-time-outs" href="#state-time-outs">3.12 
+<a name="State%20Time-Outs"></a><span onMouseOver="document.getElementById('ghlink-state-time-outs-idp46311647073152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-state-time-outs-idp46311647073152').style.visibility = 'hidden';"><span id="ghlink-state-time-outs-idp46311647073152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1177" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="state-time-outs" href="#state-time-outs">3.13 
           State Time-Outs</a></span>
 </h3>
     
@@ -1211,18 +1351,18 @@ terminate(_Reason, State, _Data) -&gt;
     {next_state, locked, Data};</pre></div>
     <p>
       The timer for a state time-out is automatically cancelled
-      when the state machine changes states.  You can restart
-      a state time-out by setting it to a new time, which cancels
-      the running timer and starts a new.  This implies that
-      you can cancel a state time-out by restarting it with
-      time <span class="code">infinity</span>.
+      when the state machine does a <strong>state change</strong>.
+      You can restart a state time-out by setting it to a new time,
+      which cancels the running timer and starts a new.
+      This implies that you can cancel a state time-out
+      by restarting it with time <span class="code">infinity</span>.
     </p>
   
 
 
 
   <h3>
-<a name="All%20State%20Events"></a><span onMouseOver="document.getElementById('ghlink-all-state-events-idp72320406242496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-all-state-events-idp72320406242496').style.visibility = 'hidden';"><span id="ghlink-all-state-events-idp72320406242496" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1064" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="all-state-events" href="#all-state-events">3.13 
+<a name="All%20State%20Events"></a><span onMouseOver="document.getElementById('ghlink-all-state-events-idp46311647081040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-all-state-events-idp46311647081040').style.visibility = 'hidden';"><span id="ghlink-all-state-events-idp46311647081040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1212" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="all-state-events" href="#all-state-events">3.14 
           All State Events</a></span>
 </h3>
     
@@ -1296,7 +1436,7 @@ open(...) -&gt; ... ;
       care about what it is.
     </p>
     <p>
-      If the common event handler needs to know the current state
+      If the common <strong>state callback</strong> needs to know the current state
       a function <span class="code">handle_common/4</span> can be used instead:
     </p>
     <div class="example"><pre>-define(HANDLE_COMMON,
@@ -1306,14 +1446,14 @@ open(...) -&gt; ... ;
 
 
   <h3>
-<a name="One%20Event%20Handler"></a><span onMouseOver="document.getElementById('ghlink-one-event-handler-idp72320406252912').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-one-event-handler-idp72320406252912').style.visibility = 'hidden';"><span id="ghlink-one-event-handler-idp72320406252912" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1151" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="one-event-handler" href="#one-event-handler">3.14 
-          One Event Handler</a></span>
+<a name="One%20State%20Callback"></a><span onMouseOver="document.getElementById('ghlink-one-state-callback-idp46311647093584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-one-state-callback-idp46311647093584').style.visibility = 'hidden';"><span id="ghlink-one-state-callback-idp46311647093584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1299" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="one-state-callback" href="#one-state-callback">3.15 
+          One State Callback</a></span>
 </h3>
     
     
     <p>
       If
-      <span class="bold_code bc-17"><a href="#Callback%20Modes">Callback Mode</a></span>
+      <span class="bold_code bc-17"><a href="#Callback%20Modes"><strong>callback mode</strong></a></span>
       <span class="code">handle_event_function</span> is used,
       all events are handled in
       <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#Module:handle_event-4');"><span class="code">Module:handle_event/4</span></a></span>
@@ -1364,14 +1504,14 @@ handle_event(
 
 
   <h3>
-<a name="Stopping"></a><span onMouseOver="document.getElementById('ghlink-stopping-idp72320406258752').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stopping-idp72320406258752').style.visibility = 'hidden';"><span id="ghlink-stopping-idp72320406258752" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1210" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stopping" href="#stopping">3.15 
+<a name="Stopping"></a><span onMouseOver="document.getElementById('ghlink-stopping-idp46311647100640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stopping-idp46311647100640').style.visibility = 'hidden';"><span id="ghlink-stopping-idp46311647100640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1358" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="stopping" href="#stopping">3.16 
           Stopping</a></span>
 </h3>
     
     
 
     <h4>
-<a name="In%20a%20Supervision%20Tree"></a><span onMouseOver="document.getElementById('ghlink-in-a-supervision-tree-idp72320406260128').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-in-a-supervision-tree-idp72320406260128').style.visibility = 'hidden';"><span id="ghlink-in-a-supervision-tree-idp72320406260128" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1214" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="in-a-supervision-tree" href="#in-a-supervision-tree">In a Supervision Tree</a></span>
+<a name="In%20a%20Supervision%20Tree"></a><span onMouseOver="document.getElementById('ghlink-in-a-supervision-tree-idp46311647102240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-in-a-supervision-tree-idp46311647102240').style.visibility = 'hidden';"><span id="ghlink-in-a-supervision-tree-idp46311647102240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1362" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="in-a-supervision-tree" href="#in-a-supervision-tree">In a Supervision Tree</a></span>
 </h4>
       
       
@@ -1409,7 +1549,7 @@ handle_event(
     
 
     <h4>
-<a name="Standalone%20gen_statem"></a><span onMouseOver="document.getElementById('ghlink-standalone-gen_statem-idp72320406268976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-standalone-gen_statem-idp72320406268976').style.visibility = 'hidden';"><span id="ghlink-standalone-gen_statem-idp72320406268976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1254" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="standalone-gen_statem" href="#standalone-gen_statem">Standalone gen_statem</a></span>
+<a name="Standalone%20gen_statem"></a><span onMouseOver="document.getElementById('ghlink-standalone-gen_statem-idp46311647112560').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-standalone-gen_statem-idp46311647112560').style.visibility = 'hidden';"><span id="ghlink-standalone-gen_statem-idp46311647112560" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1402" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="standalone-gen_statem" href="#standalone-gen_statem">Standalone gen_statem</a></span>
 </h4>
       
       
@@ -1436,7 +1576,7 @@ stop() -&gt;
 
 
   <h3>
-<a name="Event%20Time-Outs"></a><span onMouseOver="document.getElementById('ghlink-event-time-outs-idp72320406274160').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-event-time-outs-idp72320406274160').style.visibility = 'hidden';"><span id="ghlink-event-time-outs-idp72320406274160" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1281" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="event-time-outs" href="#event-time-outs">3.16 
+<a name="Event%20Time-Outs"></a><span onMouseOver="document.getElementById('ghlink-event-time-outs-idp46311647118896').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-event-time-outs-idp46311647118896').style.visibility = 'hidden';"><span id="ghlink-event-time-outs-idp46311647118896" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1429" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="event-time-outs" href="#event-time-outs">3.17 
           Event Time-Outs</a></span>
 </h3>
     
@@ -1449,7 +1589,8 @@ stop() -&gt;
       You get either an event or a time-out, but not both.
     </p>
     <p>
-      It is ordered by the state transition action
+      It is ordered by the
+      <span class="bold_code bc-17"><a href="#Transition%20Actions"><strong>transition action</strong></a></span>
       <span class="code">{timeout,Time,EventContent}</span>, or just an integer <span class="code">Time</span>,
       even without the enclosing actions list
       (the latter is a form inherited from <span class="code">gen_fsm</span>.
@@ -1473,7 +1614,7 @@ locked(
 ...</pre></div>
     <p>
       Whenever we receive a button event we start an event time-out
-      of 30 seconds, and if we get an event type <span class="code">timeout</span>
+      of 30 seconds, and if we get an <strong>event type</strong> of <span class="code">timeout</span>
       we reset the remaining code sequence.
     </p>
     <p>
@@ -1485,7 +1626,7 @@ locked(
     </p>
     <p>
       Note that an event time-out does not work well with
-      when you have for example a status call as in
+      when you have for example a status call as in section
       <span class="bold_code bc-17"><a href="#All%20State%20Events">All State Events</a></span>,
       or handle unknown events, since all kinds of events
       will cancel the event time-out.
@@ -1495,7 +1636,7 @@ locked(
 
 
   <h3>
-<a name="Generic%20Time-Outs"></a><span onMouseOver="document.getElementById('ghlink-generic-time-outs-idp72320406283632').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-generic-time-outs-idp72320406283632').style.visibility = 'hidden';"><span id="ghlink-generic-time-outs-idp72320406283632" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1339" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="generic-time-outs" href="#generic-time-outs">3.17 
+<a name="Generic%20Time-Outs"></a><span onMouseOver="document.getElementById('ghlink-generic-time-outs-idp46311647131200').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-generic-time-outs-idp46311647131200').style.visibility = 'hidden';"><span id="ghlink-generic-time-outs-idp46311647131200" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1490" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="generic-time-outs" href="#generic-time-outs">3.18 
           Generic Time-Outs</a></span>
 </h3>
     
@@ -1542,14 +1683,14 @@ open(cast, {button,_}, Data) -&gt;
 ...</pre></div>
     <p>
       Specific generic time-outs can just as
-      <span class="bold_code bc-17"><a href="#State%20Time-Outs">State Time-Outs</a></span>
+      <span class="bold_code bc-17"><a href="#State%20Time-Outs">state time-outs</a></span>
       be restarted or cancelled
       by setting it to a new time or <span class="code">infinity</span>.
     </p>
     <p>
-      In this particular case we do not need to cancel the timeout
-      since the timeout event is the only possible reason to
-      change the state from <span class="code">open</span> to <span class="code">locked</span>.
+      In this particular case we do not need to cancel the time-out
+      since the time-out event is the only possible reason to
+      do a <strong>state change</strong> from <span class="code">open</span> to <span class="code">locked</span>.
     </p>
     <p>
       Instead of bothering with when to cancel a time-out,
@@ -1561,7 +1702,7 @@ open(cast, {button,_}, Data) -&gt;
 
 
   <h3>
-<a name="Erlang%20Timers"></a><span onMouseOver="document.getElementById('ghlink-erlang-timers-idp72320406293808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-erlang-timers-idp72320406293808').style.visibility = 'hidden';"><span id="ghlink-erlang-timers-idp72320406293808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1404" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="erlang-timers" href="#erlang-timers">3.18 
+<a name="Erlang%20Timers"></a><span onMouseOver="document.getElementById('ghlink-erlang-timers-idp46311647142672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-erlang-timers-idp46311647142672').style.visibility = 'hidden';"><span id="ghlink-erlang-timers-idp46311647142672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1555" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="erlang-timers" href="#erlang-timers">3.19 
           Erlang Timers</a></span>
 </h3>
     
@@ -1602,7 +1743,7 @@ open(cast, {button,_}, Data) -&gt;
 ...</pre></div>
     <p>
       Removing the <span class="code">timer</span> key from the map when we
-      change to state <span class="code">locked</span> is not strictly
+      do a <strong>state change</strong> to <span class="code">locked</span> is not strictly
       necessary since we can only get into state <span class="code">open</span>
       with an updated <span class="code">timer</span> map value.  But it can be nice
       to not have outdated values in the state <span class="code">Data</span>!
@@ -1629,7 +1770,7 @@ open(cast, {button,_}, Data) -&gt;
 
 
   <h3>
-<a name="Postponing%20Events"></a><span onMouseOver="document.getElementById('ghlink-postponing-events-idp72320406306736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-postponing-events-idp72320406306736').style.visibility = 'hidden';"><span id="ghlink-postponing-events-idp72320406306736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1471" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="postponing-events" href="#postponing-events">3.19 
+<a name="Postponing%20Events"></a><span onMouseOver="document.getElementById('ghlink-postponing-events-idp46311647156032').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-postponing-events-idp46311647156032').style.visibility = 'hidden';"><span id="ghlink-postponing-events-idp46311647156032" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1622" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="postponing-events" href="#postponing-events">3.20 
           Postponing Events</a></span>
 </h3>
     
@@ -1637,12 +1778,12 @@ open(cast, {button,_}, Data) -&gt;
     <p>
       If you want to ignore a particular event in the current state
       and handle it in a future state, you can postpone the event.
-      A postponed event is retried after the state has
-      changed, that is, <span class="code">OldState =/= NewState</span>.
+      A postponed event is retried after a <strong>state change</strong>,
+      that is, <span class="code">OldState =/= NewState</span>.
     </p>
     <p>
-      Postponing is ordered by the state transition
-      <span class="bold_code bc-17"><a href="#State%20Transition%20Actions">State Transition Action</a></span>
+      Postponing is ordered by the
+      <span class="bold_code bc-17"><a href="#Transition%20Actions"><strong>transition action</strong></a></span>
       <span class="code">postpone</span>.
     </p>
     <p>
@@ -1655,7 +1796,8 @@ open(cast, {button,_}, Data) -&gt;
     {keep_state,Data,[postpone]};
 ...</pre></div>
     <p>
-      Since a postponed event is only retried after a state change,
+      Since a postponed event is only retried
+      after a <strong>state change</strong>,
       you have to think about where to keep a state data item.
       You can keep it in the server <span class="code">Data</span>
       or in the <span class="code">State</span> itself,
@@ -1664,7 +1806,7 @@ open(cast, {button,_}, Data) -&gt;
       (see section
       <span class="bold_code bc-17"><a href="#Complex%20State">Complex State</a></span>)
       with
-      <span class="bold_code bc-17"><a href="#Callback%20Modes">Callback Mode</a></span>
+      <span class="bold_code bc-17"><a href="#Callback%20Modes"><strong>callback mode</strong></a></span>
       <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-callback_mode');"><span class="code">handle_event_function</span></a></span>.
       If a change in the value changes the set of events that is handled,
       then the value should be kept in the State.
@@ -1679,7 +1821,7 @@ open(cast, {button,_}, Data) -&gt;
     </p>
 
     <h4>
-<a name="Fuzzy%20State%20Diagrams"></a><span onMouseOver="document.getElementById('ghlink-fuzzy-state-diagrams-idp72320406318208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fuzzy-state-diagrams-idp72320406318208').style.visibility = 'hidden';"><span id="ghlink-fuzzy-state-diagrams-idp72320406318208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1522" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fuzzy-state-diagrams" href="#fuzzy-state-diagrams">Fuzzy State Diagrams</a></span>
+<a name="Fuzzy%20State%20Diagrams"></a><span onMouseOver="document.getElementById('ghlink-fuzzy-state-diagrams-idp46311647168864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fuzzy-state-diagrams-idp46311647168864').style.visibility = 'hidden';"><span id="ghlink-fuzzy-state-diagrams-idp46311647168864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1674" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fuzzy-state-diagrams" href="#fuzzy-state-diagrams">Fuzzy State Diagrams</a></span>
 </h4>
       
       
@@ -1698,7 +1840,7 @@ open(cast, {button,_}, Data) -&gt;
     
 
     <h4>
-<a name="Selective%20Receive"></a><span onMouseOver="document.getElementById('ghlink-selective-receive-idp72320406321184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-selective-receive-idp72320406321184').style.visibility = 'hidden';"><span id="ghlink-selective-receive-idp72320406321184" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1539" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="selective-receive" href="#selective-receive">Selective Receive</a></span>
+<a name="Selective%20Receive"></a><span onMouseOver="document.getElementById('ghlink-selective-receive-idp46311647171840').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-selective-receive-idp46311647171840').style.visibility = 'hidden';"><span id="ghlink-selective-receive-idp46311647171840" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1691" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="selective-receive" href="#selective-receive">Selective Receive</a></span>
 </h4>
       
       
@@ -1763,15 +1905,15 @@ do_unlock() -&gt;
       <span class="bold_code bc-18"><a href="javascript:erlhref('../../','stdlib','sys.html');"><span class="code">sys</span></a></span>
       compatible behaviors must respond to system messages and therefore
       do that in their engine receive loop,
-      passing non-system messages to the callback module.
+      passing non-system messages to the <strong>callback module</strong>.
     </p>
     <p>
       The
-      <span class="bold_code bc-17"><a href="#State%20Transition%20Actions">State Transition Action</a></span>
+      <span class="bold_code bc-17"><a href="#Transition%20Actions"><strong>transition action</strong></a></span>
       <span class="code">postpone</span> is designed to model
       selective receives. A selective receive implicitly postpones
       any not received events, but the <span class="code">postpone</span>
-      state transition action explicitly postpones one received event.
+      <strong>transition action</strong> explicitly postpones one received event.
     </p>
     <p>
       Both mechanisms have the same theoretical
@@ -1784,7 +1926,7 @@ do_unlock() -&gt;
 
 
   <h3>
-<a name="State%20Enter%20Actions"></a><span onMouseOver="document.getElementById('ghlink-state-enter-actions-idp72320406334528').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-state-enter-actions-idp72320406334528').style.visibility = 'hidden';"><span id="ghlink-state-enter-actions-idp72320406334528" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1631" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="state-enter-actions" href="#state-enter-actions">3.20 
+<a name="State%20Enter%20Actions"></a><span onMouseOver="document.getElementById('ghlink-state-enter-actions-idp46311647186448').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-state-enter-actions-idp46311647186448').style.visibility = 'hidden';"><span id="ghlink-state-enter-actions-idp46311647186448" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1783" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="state-enter-actions" href="#state-enter-actions">3.21 
           State Enter Actions</a></span>
 </h3>
     
@@ -1796,14 +1938,15 @@ do_unlock() -&gt;
       (described in the next section), especially if just
       one or a few states has got state enter actions,
       this is a perfect use case for the built in
-      <span class="bold_code bc-17"><a href="#State%20Enter%20Calls">State Enter Calls</a></span>.
+      <span class="bold_code bc-17"><a href="#State%20Enter%20Calls"><strong>state enter calls</strong></a></span>.
     </p>
     <p>
       You return a list containing <span class="code">state_enter</span> from your
       <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#Module:callback_mode-0');"><span class="code">callback_mode/0</span></a></span>
       function and the <span class="code">gen_statem</span> engine will call your
-      state callback once with the arguments
-      <span class="code">(enter, OldState, ...)</span> whenever the state changes.
+      <strong>state callback</strong> once with an event
+      <span class="code">(enter, OldState, ...)</span>
+      whenever it does a <strong>state change</strong>.
       Then you just need to handle these event-like calls in all states.
     </p>
     <div class="example"><pre>...
@@ -1848,7 +1991,7 @@ open(state_timeout, lock, Data) -&gt;
 
 
   <h3>
-<a name="Inserted%20Events"></a><span onMouseOver="document.getElementById('ghlink-inserted-events-idp72320406345936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-inserted-events-idp72320406345936').style.visibility = 'hidden';"><span id="ghlink-inserted-events-idp72320406345936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1696" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="inserted-events" href="#inserted-events">3.21 
+<a name="Inserted%20Events"></a><span onMouseOver="document.getElementById('ghlink-inserted-events-idp46311647199152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-inserted-events-idp46311647199152').style.visibility = 'hidden';"><span id="ghlink-inserted-events-idp46311647199152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1851" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="inserted-events" href="#inserted-events">3.22 
           Inserted Events</a></span>
 </h3>
     
@@ -1857,7 +2000,7 @@ open(state_timeout, lock, Data) -&gt;
       It can sometimes be beneficial to be able to generate events
       to your own state machine.
       This can be done with the
-      <span class="bold_code bc-17"><a href="#State%20Transition%20Actions">State Transition Action</a></span>
+      <span class="bold_code bc-17"><a href="#Transition%20Actions"><strong>transition action</strong></a></span>
       <span class="code">{next_event,EventType,EventContent}</span>.
     </p>
     <p>
@@ -1886,9 +2029,9 @@ open(state_timeout, lock, Data) -&gt;
     </p>
     <p>
       A variant of this is to use a
-      <span class="bold_code bc-17"><a href="#Complex%20State">Complex State</a></span>
+      <span class="bold_code bc-17"><a href="#Complex%20State">complex state</a></span>
       with
-      <span class="bold_code bc-17"><a href="#One%20Event%20Handler">One Event Handler</a></span>.
+      <span class="bold_code bc-17"><a href="#One%20State%20Callback"><strong>one state callback</strong></a></span>.
       The state is then modeled with for example a tuple
       <span class="code">{MainFSMState,SubFSMState}</span>.
     </p>
@@ -1940,14 +2083,14 @@ open(internal, {button,_}, Data) -&gt;
 
 
   <h3>
-<a name="Example%20Revisited"></a><span onMouseOver="document.getElementById('ghlink-example-revisited-idp72320406360768').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-example-revisited-idp72320406360768').style.visibility = 'hidden';"><span id="ghlink-example-revisited-idp72320406360768" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1793" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="example-revisited" href="#example-revisited">3.22 
+<a name="Example%20Revisited"></a><span onMouseOver="document.getElementById('ghlink-example-revisited-idp46311647214528').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-example-revisited-idp46311647214528').style.visibility = 'hidden';"><span id="ghlink-example-revisited-idp46311647214528" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1946" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="example-revisited" href="#example-revisited">3.23 
           Example Revisited</a></span>
 </h3>
     
     
     <p>
       This section includes the example after most of the mentioned
-      modifications and some more using state enter calls,
+      modifications and some more using <strong>state enter calls</strong>,
       which deserves a new state diagram:
     </p>
     
@@ -1968,7 +2111,7 @@ open(internal, {button,_}, Data) -&gt;
     </p>
 
     <h4>
-<a name="Callback%20Mode:%20state_functions"></a><span onMouseOver="document.getElementById('ghlink-callback-mode--state_functions-idp72320406366480').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-callback-mode--state_functions-idp72320406366480').style.visibility = 'hidden';"><span id="ghlink-callback-mode--state_functions-idp72320406366480" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1815" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="callback-mode--state_functions" href="#callback-mode--state_functions">Callback Mode: state_functions</a></span>
+<a name="Callback%20Mode:%20state_functions"></a><span onMouseOver="document.getElementById('ghlink-callback-mode--state_functions-idp46311647220656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-callback-mode--state_functions-idp46311647220656').style.visibility = 'hidden';"><span id="ghlink-callback-mode--state_functions-idp46311647220656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1968" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="callback-mode--state_functions" href="#callback-mode--state_functions">Callback Mode: state_functions</a></span>
 </h4>
       
       
@@ -2063,7 +2206,7 @@ terminate(_Reason, State, _Data) -&gt;
     
 
     <h4>
-<a name="Callback%20Mode:%20handle_event_function"></a><span onMouseOver="document.getElementById('ghlink-callback-mode--handle_event_function-idp72320406373984').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-callback-mode--handle_event_function-idp72320406373984').style.visibility = 'hidden';"><span id="ghlink-callback-mode--handle_event_function-idp72320406373984" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1916" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="callback-mode--handle_event_function" href="#callback-mode--handle_event_function">Callback Mode: handle_event_function</a></span>
+<a name="Callback%20Mode:%20handle_event_function"></a><span onMouseOver="document.getElementById('ghlink-callback-mode--handle_event_function-idp46311647228160').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-callback-mode--handle_event_function-idp46311647228160').style.visibility = 'hidden';"><span id="ghlink-callback-mode--handle_event_function-idp46311647228160" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L2069" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="callback-mode--handle_event_function" href="#callback-mode--handle_event_function">Callback Mode: handle_event_function</a></span>
 </h4>
       
       
@@ -2071,7 +2214,8 @@ terminate(_Reason, State, _Data) -&gt;
         This section describes what to change in the example
         to use one <span class="code">handle_event/4</span> function.
         The previously used approach to first branch depending on event
-	does not work that well here because of the state enter calls,
+	does not work that well here
+	because of the <strong>state enter calls</strong>,
         so this example first branches depending on state:
       </p>
       <div class="example"><pre>-export([handle_event/4]).</pre></div>
@@ -2137,7 +2281,7 @@ handle_event({call,From}, code_length, _State, #{length := Length}) -&gt;
 
 
   <h3>
-<a name="Filter%20the%20State"></a><span onMouseOver="document.getElementById('ghlink-filter-the-state-idp72320406384208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-filter-the-state-idp72320406384208').style.visibility = 'hidden';"><span id="ghlink-filter-the-state-idp72320406384208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L1998" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="filter-the-state" href="#filter-the-state">3.23 
+<a name="Filter%20the%20State"></a><span onMouseOver="document.getElementById('ghlink-filter-the-state-idp46311647238800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-filter-the-state-idp46311647238800').style.visibility = 'hidden';"><span id="ghlink-filter-the-state-idp46311647238800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L2152" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="filter-the-state" href="#filter-the-state">3.24 
           Filter the State</a></span>
 </h3>
     
@@ -2198,13 +2342,13 @@ format_status(Opt, [_PDict,State,Data]) -&gt;
 
 
   <h3>
-<a name="Complex%20State"></a><span onMouseOver="document.getElementById('ghlink-complex-state-idp72320406394000').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-complex-state-idp72320406394000').style.visibility = 'hidden';"><span id="ghlink-complex-state-idp72320406394000" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L2058" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="complex-state" href="#complex-state">3.24 
+<a name="Complex%20State"></a><span onMouseOver="document.getElementById('ghlink-complex-state-idp46311647248592').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-complex-state-idp46311647248592').style.visibility = 'hidden';"><span id="ghlink-complex-state-idp46311647248592" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L2212" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="complex-state" href="#complex-state">3.25 
           Complex State</a></span>
 </h3>
     
     
     <p>
-      The callback mode
+      The <strong>callback mode</strong>
       <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-callback_mode');"><span class="code">handle_event_function</span></a></span>
       enables using a non-atom state as described in section
       <span class="bold_code bc-17"><a href="#Callback%20Modes">Callback Modes</a></span>,
@@ -2213,7 +2357,7 @@ format_status(Opt, [_PDict,State,Data]) -&gt;
     <p>
       One reason to use this is when you have a state item
       that when changed should cancel the
-      <span class="bold_code bc-17"><a href="#State%20Time-Outs">State Time-Out</a></span>,
+      <span class="bold_code bc-17"><a href="#State%20Time-Outs">state time-out</a></span>,
       or one that affects the event handling
       in combination with postponing events.
       We will go for the latter and complicate the previous example
@@ -2247,7 +2391,7 @@ x
       so it is not to be recognized as the lock button.
       Or we can make the lock button part of the state so
       when we then change the lock button in the locked state,
-      the change becomes a state change
+      the change becomes a <strong>state change</strong>
       and all postponed events are retried,
       therefore the lock is immediately locked!
     </p>
@@ -2338,7 +2482,7 @@ terminate(_Reason, State, _Data) -&gt;
 
 
   <h3>
-<a name="Hibernation"></a><span onMouseOver="document.getElementById('ghlink-hibernation-idp72320406411296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hibernation-idp72320406411296').style.visibility = 'hidden';"><span id="ghlink-hibernation-idp72320406411296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L2207" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hibernation" href="#hibernation">3.25 
+<a name="Hibernation"></a><span onMouseOver="document.getElementById('ghlink-hibernation-idp46311647266736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-hibernation-idp46311647266736').style.visibility = 'hidden';"><span id="ghlink-hibernation-idp46311647266736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/design_principles/statem.xml#L2361" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="hibernation" href="#hibernation">3.26 
           Hibernation</a></span>
 </h3>
     
@@ -2395,7 +2539,7 @@ handle_event(enter, _OldState, {open,_}, _Data) -&gt;
     </p>
     <p>
       Another not uncommon scenario is to use the
-      <span class="bold_code bc-17"><a href="#Event%20Time-Outs">Event Time-Out</a></span>
+      <span class="bold_code bc-17"><a href="#Event%20Time-Outs">event time-out</a></span>
       to trigger hibernation after a certain time of inactivity.
       There is also a server start option
       <span class="bold_code bc-13"><a href="javascript:erlhref('../../','stdlib','gen_statem.html#type-hibernate_after_opt');"><span class="code">{hibernate_after, Timeout}</span></a></span>
