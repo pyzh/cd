@@ -6,39 +6,128 @@ crypto \- Crypto Functions
 This module provides a set of cryptographic functions\&.
 .RS 2
 .TP 2
-*
-Hash functions -  Secure Hash Standard,  The MD5 Message Digest Algorithm (RFC 1321) and The MD4 Message Digest Algorithm (RFC 1320) 
-.LP
-.TP 2
-*
-Hmac functions -  Keyed-Hashing for Message Authentication (RFC 2104) 
-.LP
-.TP 2
-*
-Cmac functions - The AES-CMAC Algorithm (RFC 4493)
-.LP
-.TP 2
-*
-Block ciphers - DES and AES in Block Cipher Modes -  ECB, CBC, CFB, OFB, CTR and GCM 
-.LP
-.TP 2
-*
-GCM: Dworkin, M\&., "Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) and GMAC", National Institute of Standards and Technology SP 800-38D, November 2007\&.
-.LP
-.TP 2
-*
- RSA encryption RFC 1321  
-.LP
-.TP 2
-*
-Digital signatures Digital Signature Standard (DSS) and Elliptic Curve Digital Signature Algorithm (ECDSA)  
-.LP
-.TP 2
-*
- Secure Remote Password Protocol (SRP - RFC 2945) 
-.LP
-.RE
+.B
+Hash functions:
 
+.RS 2
+.TP 2
+.B
+SHA1, SHA2:
+ Secure Hash Standard [FIPS PUB 180-4] 
+.TP 2
+.B
+SHA3:
+ SHA-3 Standard: Permutation-Based Hash and Extendable-Output Functions [FIPS PUB 202] 
+.TP 2
+.B
+MD5:
+The MD5 Message Digest Algorithm [RFC 1321]
+.TP 2
+.B
+MD4:
+The MD4 Message Digest Algorithm [RFC 1320]
+.RE
+.RS 2
+.LP
+
+.RE
+.TP 2
+.B
+MACs - Message Authentication Codes:
+
+.RS 2
+.TP 2
+.B
+Hmac functions:
+ Keyed-Hashing for Message Authentication [RFC 2104] 
+.TP 2
+.B
+Cmac functions:
+ The AES-CMAC Algorithm [RFC 4493] 
+.TP 2
+.B
+POLY1305:
+ ChaCha20 and Poly1305 for IETF Protocols [RFC 7539] 
+.RE
+.RS 2
+.LP
+
+.RE
+.TP 2
+.B
+Symmetric Ciphers:
+
+.RS 2
+.TP 2
+.B
+DES, 3DES and AES:
+Block Cipher Techniques [NIST]
+.TP 2
+.B
+Blowfish:
+ Fast Software Encryption, Cambridge Security Workshop Proceedings (December 1993), Springer-Verlag, 1994, pp\&. 191-204\&. 
+.TP 2
+.B
+Chacha20:
+ ChaCha20 and Poly1305 for IETF Protocols [RFC 7539] 
+.TP 2
+.B
+Chacha20_poly1305:
+ ChaCha20 and Poly1305 for IETF Protocols [RFC 7539] 
+.RE
+.RS 2
+.LP
+
+.RE
+.TP 2
+.B
+Modes:
+
+.RS 2
+.TP 2
+.B
+ECB, CBC, CFB, OFB and CTR:
+ Recommendation for Block Cipher Modes of Operation: Methods and Techniques [NIST SP 800-38A] 
+.TP 2
+.B
+GCM:
+ Recommendation for Block Cipher Modes of Operation: Galois/Counter Mode (GCM) and GMAC [NIST SP 800-38D] 
+.TP 2
+.B
+CCM:
+ Recommendation for Block Cipher Modes of Operation: The CCM Mode for Authentication and Confidentiality [NIST SP 800-38C] 
+.RE
+.RS 2
+.LP
+
+.RE
+.TP 2
+.B
+Asymetric Ciphers - Public Key Techniques:
+
+.RS 2
+.TP 2
+.B
+RSA:
+ PKCS #1: RSA Cryptography Specifications [RFC 3447] 
+.TP 2
+.B
+DSS:
+ Digital Signature Standard (DSS) [FIPS 186-4] 
+.TP 2
+.B
+ECDSA:
+ Elliptic Curve Digital Signature Algorithm [ECDSA] 
+.TP 2
+.B
+SRP:
+ The SRP Authentication and Key Exchange System [RFC 2945] 
+.RE
+.RS 2
+.LP
+
+.RE
+.RE
 .LP
 
 .RS -4
@@ -630,6 +719,17 @@ Algorithms for public key encrypt/decrypt\&. Only RSA is supported\&.
 .RS
 .LP
 Options for public key encrypt/decrypt\&. Only RSA is supported\&.
+.LP
+
+.RS -4
+.B
+Warning:
+.RE
+.LP
+The RSA options are experimental\&.
+.LP
+The exact set of options and there syntax \fImay\fR\& be changed without prior notice\&.
+
 .RE
 .nf
 
@@ -680,6 +780,17 @@ Algorithms for sign and verify\&.
 .RS
 .LP
 Options for sign and verify\&.
+.LP
+
+.RS -4
+.B
+Warning:
+.RE
+.LP
+The RSA options are experimental\&.
+.LP
+The exact set of options and there syntax \fImay\fR\& be changed without prior notice\&.
+
 .RE
 .SS Diffie-Hellman Keys and parameters
 .nf
