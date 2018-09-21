@@ -1458,8 +1458,18 @@ Notice that this option does not change any guarantees about \fBatomicity and is
 .RE
 .RS 2
 .LP
-Table type \fIordered_set\fR\& is not affected by this option\&. Also, the memory consumption inflicted by both \fIwrite_concurrency\fR\& and \fIread_concurrency\fR\& is a constant overhead per table\&. This overhead can be especially large when both options are combined\&.
+The memory consumption inflicted by both \fIwrite_concurrency\fR\& and \fIread_concurrency\fR\& is a constant overhead per table for \fIset\fR\&, \fIbag\fR\& and \fIduplicate_bag\fR\&\&. For \fIordered_set\fR\& the memory overhead depends on the number of inserted objects and the amount of actual detected concurrency\&. The memory overhead can be especially large when both options are combined\&.
 .RE
+.LP
+
+.RS -4
+.B
+Note:
+.RE
+Prior to stdlib-3\&.7 (OTP-22\&.0) \fIwrite_concurrency\fR\& had no effect on \fIordered_set\fR\&\&.
+.LP
+The current implementation of \fIwrite_concurrency\fR\& for \fIordered_set\fR\& does only improve explicit single key operations\&. Mixing single key operations with operations potentially accessing multiple keys may even yield worse performance with \fIwrite_concurrency\fR\& on \fIordered_set\fR\&\&.
+
 .TP 2
 .B
 \fI{read_concurrency,boolean()}\fR\&:
