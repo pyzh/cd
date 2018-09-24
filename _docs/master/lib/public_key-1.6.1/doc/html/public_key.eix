@@ -1,6 +1,6 @@
 %% 
 %% Search data file for public_key 1.6.1
-%% generated September 21, 2018
+%% generated September 24, 2018
 %% 
 {"public_key_app.html", {app, "public_key"}, ["public_key"]}.
 {"public_key.html", {function, {"public_key", "public_key"}},
