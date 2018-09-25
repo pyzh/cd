@@ -65,6 +65,7 @@
 <li><a href="notes.html">
               Top of chapter
             </a></li>
+<li title="SNMP 5.2.12"><a href="notes.html#snmp-5.2.12">SNMP 5.2.12</a></li>
 <li title="SNMP 5.2.11"><a href="notes.html#snmp-5.2.11">SNMP 5.2.11</a></li>
 <li title="SNMP 5.2.10"><a href="notes.html#snmp-5.2.10">SNMP 5.2.10</a></li>
 <li title="SNMP 5.2.9"><a href="notes.html#snmp-5.2.9">SNMP 5.2.9</a></li>
@@ -110,10 +111,48 @@
   
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.11-idp70900034456416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.11-idp70900034456416').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.11-idp70900034456416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L37" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.11" href="#snmp-5.2.11">1.1 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.12-idp46846762800272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.12-idp46846762800272').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.12-idp46846762800272" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L37" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.12" href="#snmp-5.2.12">1.1 
+          SNMP 5.2.12</a></span></h3>
+
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846762800976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846762800976').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846762800976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L39" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+      <ul>
+        <li>
+	    <p>Conversion of (agent) Audit Trail Log (ATL) failed due
+	    to invalid log entries.</p> <p>The conversion aborted
+	    completely midway because the ATL contained invalid
+	    entries. The conversion has been improved so that it now
+	    firstly handles encountered errors and write an
+	    informative message (into the converted stream) and
+	    secondly keeps count of the number of successful or
+	    failed entry conversions. See <span class="bold_code bc-15"><a href="snmpa.html#log_to_txt">log_to_txt</a></span> for more
+	    info. </p> <p>The reason the ATL contained invalid
+	    entries have also been fixed. The reason was that for
+	    some outgoing messages (not response):</p> <ul> <li> <p>encrypted (v3 messages)</p>
+	    <p>Was logged "as is" (encrypted) without the info to
+	    decrypt, making conversion impossible (which was the
+	    reason the log contained bad entries).</p> </li> <li>
+	    <p>un-encrypted</p> <p>Was not logged at all. </p>
+	    </li> </ul>
+          <p>
+	    Own Id: OTP-15287 Aux Id: ERIERL-206 </p>
+        </li>
+        <li>
+          <p>
+	    [compiler] Spurious version message removed. The snmp mib
+	    compiler printed an spurious version message if the
+	    'version' option was provided.</p>
+          <p>
+	    Own Id: OTP-15290</p>
+        </li>
+      </ul>
+    
+
+
+
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.11-idp46846761458288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.11-idp46846761458288').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.11-idp46846761458288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L76" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.11" href="#snmp-5.2.11">1.2 
           SNMP 5.2.11</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034457120').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034457120').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034457120" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L39" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761459104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761459104').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761459104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L78" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -127,10 +166,10 @@
 
   
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.10-idp70900034460224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.10-idp70900034460224').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.10-idp70900034460224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L53" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.10" href="#snmp-5.2.10">1.2 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.10-idp46846761462368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.10-idp46846761462368').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.10-idp46846761462368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L92" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.10" href="#snmp-5.2.10">1.3 
           SNMP 5.2.10</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034461040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034461040').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034461040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L55" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761463232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761463232').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761463232" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L94" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -144,10 +183,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.9-idp70900034805072').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.9-idp70900034805072').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.9-idp70900034805072" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L69" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.9" href="#snmp-5.2.9">1.3 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.9-idp46846761178880').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.9-idp46846761178880').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.9-idp46846761178880" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L108" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.9" href="#snmp-5.2.9">1.4 
           SNMP 5.2.9</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034805936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034805936').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034805936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L71" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761179744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761179744').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761179744" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L110" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
 	    <p> Removed all old unused files in the documentation.
@@ -160,10 +199,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.8-idp70900034809136').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.8-idp70900034809136').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.8-idp70900034809136" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L84" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.8" href="#snmp-5.2.8">1.4 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.8-idp46846761183008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.8-idp46846761183008').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.8-idp46846761183008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L123" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.8" href="#snmp-5.2.8">1.5 
           SNMP 5.2.8</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034810000').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034810000').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034810000" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L86" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761183872').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761183872').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761183872" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L125" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -177,10 +216,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.7-idp70900036058288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.7-idp70900036058288').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.7-idp70900036058288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L100" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.7" href="#snmp-5.2.7">1.5 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.7-idp46846761187696').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.7-idp46846761187696').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.7-idp46846761187696" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L139" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.7" href="#snmp-5.2.7">1.6 
           SNMP 5.2.7</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900036059152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900036059152').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900036059152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L102" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761188560').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761188560').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761188560" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L141" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -195,10 +234,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.6-idp70900036062496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.6-idp70900036062496').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.6-idp70900036062496" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L117" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.6" href="#snmp-5.2.6">1.6 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.6-idp46846761727872').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.6-idp46846761727872').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.6-idp46846761727872" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L156" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.6" href="#snmp-5.2.6">1.7 
           SNMP 5.2.6</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900036063360').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900036063360').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900036063360" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L119" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761728688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761728688').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761728688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L158" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
 	    <p>Internal code change: Calls to <span class="code">catch</span> followed
@@ -213,10 +252,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.5-idp70900035140000').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.5-idp70900035140000').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.5-idp70900035140000" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L134" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.5" href="#snmp-5.2.5">1.7 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.5-idp46846761733808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.5-idp46846761733808').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.5-idp46846761733808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L173" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.5" href="#snmp-5.2.5">1.8 
           SNMP 5.2.5</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900035140864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900035140864').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900035140864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L136" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761734672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761734672').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761734672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L175" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -234,10 +273,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.4-idp70900035144848').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.4-idp70900035144848').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.4-idp70900035144848" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L154" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.4" href="#snmp-5.2.4">1.8 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.4-idp46846761738656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.4-idp46846761738656').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.4-idp46846761738656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L193" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.4" href="#snmp-5.2.4">1.9 
           SNMP 5.2.4</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034463760').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034463760').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034463760" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L156" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761739520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761739520').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761739520" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L195" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
 	    <p> Correct bugs when path to mib or idl spec files
@@ -249,7 +288,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034466800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034466800').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034466800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L168" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846761761120').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846761761120').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846761761120" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L207" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -263,10 +302,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.3-idp70900034470144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.3-idp70900034470144').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.3-idp70900034470144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L182" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.3" href="#snmp-5.2.3">1.9 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.3-idp46846761764464').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.3-idp46846761764464').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.3-idp46846761764464" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L221" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.3" href="#snmp-5.2.3">1.10 
           SNMP 5.2.3</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034471008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034471008').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034471008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L184" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846761765328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846761765328').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846761765328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L223" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -279,10 +318,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.2-idp70900034474272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.2-idp70900034474272').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.2-idp70900034474272" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L197" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.2" href="#snmp-5.2.2">1.10 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.2-idp46846761768592').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.2-idp46846761768592').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.2-idp46846761768592" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L236" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.2" href="#snmp-5.2.2">1.11 
           SNMP 5.2.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900038984352').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900038984352').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900038984352" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L199" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761769456').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761769456').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761769456" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L238" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -296,10 +335,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.1-idp70900038988080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.1-idp70900038988080').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.1-idp70900038988080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L213" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.1" href="#snmp-5.2.1">1.11 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2.1-idp46846761773184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2.1-idp46846761773184').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2.1-idp46846761773184" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L252" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2.1" href="#snmp-5.2.1">1.12 
           SNMP 5.2.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900038988944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900038988944').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900038988944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L215" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761774048').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761774048').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761774048" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L254" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -311,7 +350,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900038992064').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900038992064').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900038992064" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L227" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846762122064').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846762122064').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846762122064" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L266" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -325,10 +364,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2-idp70900038995408').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2-idp70900038995408').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2-idp70900038995408" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L241" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2" href="#snmp-5.2">1.12 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.2-idp46846762125408').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.2-idp46846762125408').style.visibility = 'hidden';"><span id="ghlink-snmp-5.2-idp46846762125408" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L280" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.2" href="#snmp-5.2">1.13 
           SNMP 5.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034093056').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034093056').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034093056" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L243" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846762126272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846762126272').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846762126272" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L282" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
 	    <p> The runtime dependencies in the application resource
@@ -341,10 +380,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.1.2-idp70900034096288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.1.2-idp70900034096288').style.visibility = 'hidden';"><span id="ghlink-snmp-5.1.2-idp70900034096288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L256" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.1.2" href="#snmp-5.1.2">1.13 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.1.2-idp46846762129504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.1.2-idp46846762129504').style.visibility = 'hidden';"><span id="ghlink-snmp-5.1.2-idp46846762129504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L295" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.1.2" href="#snmp-5.1.2">1.14 
           SNMP 5.1.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034097152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034097152').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034097152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L258" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846762130368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846762130368').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846762130368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L297" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -362,7 +401,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034100960').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034100960').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034100960" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L276" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846762134240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846762134240').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846762134240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L315" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -375,13 +414,13 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-5.1.1-idp70900034104256').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-5.1.1-idp70900034104256').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-5.1.1-idp70900034104256" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L289" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-5.1.1" href="#snmp-development-toolkit-5.1.1">1.14 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-5.1.1-idp46846761669232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-5.1.1-idp46846761669232').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-5.1.1-idp46846761669232" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L328" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-5.1.1" href="#snmp-development-toolkit-5.1.1">1.15 
           SNMP Development Toolkit 5.1.1</a></span></h3>
     
     <p>Version 5.1.1 supports code replacement in runtime from/to
     version 5.1. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034105712').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034105712').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034105712" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L294" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846761670688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846761670688').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846761670688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L333" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
 
 
@@ -399,7 +438,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034411376').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034411376').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034411376" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L314" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761676160').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761676160').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761676160" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L353" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
       <p>-</p>
 
@@ -407,7 +446,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900034413600').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900034413600').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900034413600" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L332" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846761678384').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846761678384').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846761678384" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L371" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
 
@@ -417,10 +456,10 @@
 
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-5.1-idp70900034416288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.1-idp70900034416288').style.visibility = 'hidden';"><span id="ghlink-snmp-5.1-idp70900034416288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L352" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.1" href="#snmp-5.1">1.15 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-5.1-idp46846761681072').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.1-idp46846761681072').style.visibility = 'hidden';"><span id="ghlink-snmp-5.1-idp46846761681072" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L391" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.1" href="#snmp-5.1">1.16 
           SNMP 5.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034417152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034417152').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034417152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L354" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846761681936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846761681936').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846761681936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L393" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -435,10 +474,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.0-idp70900034420608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.0-idp70900034420608').style.visibility = 'hidden';"><span id="ghlink-snmp-5.0-idp70900034420608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L369" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.0" href="#snmp-5.0">1.16 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-5.0-idp46846761427712').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-5.0-idp46846761427712').style.visibility = 'hidden';"><span id="ghlink-snmp-5.0-idp46846761427712" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L408" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-5.0" href="#snmp-5.0">1.17 
           SNMP 5.0</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034421472').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034421472').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034421472" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L371" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846761428576').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846761428576').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846761428576" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L410" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -458,10 +497,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-4.25.1-idp70900034845504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-4.25.1-idp70900034845504').style.visibility = 'hidden';"><span id="ghlink-snmp-4.25.1-idp70900034845504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L391" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-4.25.1" href="#snmp-4.25.1">1.17 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-4.25.1-idp46846761432656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-4.25.1-idp46846761432656').style.visibility = 'hidden';"><span id="ghlink-snmp-4.25.1-idp46846761432656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L430" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-4.25.1" href="#snmp-4.25.1">1.18 
           SNMP 4.25.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034846368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034846368').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034846368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L393" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761433520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761433520').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761433520" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L432" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -488,13 +527,13 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.25.0.1-idp70900034851744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.25.0.1-idp70900034851744').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.25.0.1-idp70900034851744" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L420" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.25.0.1" href="#snmp-development-toolkit-4.25.0.1">1.18 
+<h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.25.0.1-idp46846761438896').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.25.0.1-idp46846761438896').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.25.0.1-idp46846761438896" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L459" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.25.0.1" href="#snmp-development-toolkit-4.25.0.1">1.19 
           SNMP Development Toolkit 4.25.0.1</a></span></h3>
     
     <p>Version 4.25.0.1 supports code replacement in runtime from/to
     version 4.25, 4.24.2, 4.24.1 and 4.24. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034853328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034853328').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034853328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L425" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846761440480').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846761440480').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846761440480" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L464" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
 
 
@@ -513,7 +552,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034858304').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034858304').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034858304" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L446" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761782256').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761782256').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761782256" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L485" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
       <p>-</p>
 
@@ -521,7 +560,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900034860928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900034860928').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900034860928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L474" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846761784880').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846761784880').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846761784880" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L513" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
 
@@ -531,13 +570,13 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.25-idp70900034879104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.25-idp70900034879104').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.25-idp70900034879104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L494" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.25" href="#snmp-development-toolkit-4.25">1.19 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.25-idp46846761787568').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.25-idp46846761787568').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.25-idp46846761787568" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L533" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.25" href="#snmp-development-toolkit-4.25">1.20 
           SNMP Development Toolkit 4.25</a></span></h3>
     
     <p>Version 4.25 supports code replacement in runtime from/to
     version 4.24.2, 4.24.1, 4.24, 4.23.1 and 4.23. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034880640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034880640').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034880640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L499" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846761789152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846761789152').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846761789152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L538" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
 
 
@@ -600,7 +639,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900039229072').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900039229072').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900039229072" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L565" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846766607152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846766607152').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846766607152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L604" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
 
 
@@ -626,7 +665,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900039234864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900039234864').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900039234864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L593" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846766612944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846766612944').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846766612944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L632" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
 
@@ -636,13 +675,13 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.24.2-idp70900039237552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.24.2-idp70900039237552').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.24.2-idp70900039237552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L613" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.24.2" href="#snmp-development-toolkit-4.24.2">1.20 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.24.2-idp46846766057632').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.24.2-idp46846766057632').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.24.2-idp46846766057632" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L652" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.24.2" href="#snmp-development-toolkit-4.24.2">1.21 
           SNMP Development Toolkit 4.24.2</a></span></h3>
     
     <p>Version 4.24.2 supports code replacement in runtime from/to
     version 4.24.1, 4.24, 4.23.1 and 4.23. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034661680').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034661680').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034661680" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L618" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846766059200').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846766059200').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846766059200" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L657" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
 
 
@@ -664,7 +703,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034668640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034668640').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034668640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L642" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846766066160').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846766066160').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846766066160" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L681" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
       <p>-</p>
 
@@ -672,7 +711,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900034670864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900034670864').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900034670864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L660" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846766068384').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846766068384').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846766068384" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L699" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
 
@@ -682,13 +721,13 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.24.1-idp70900034673552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.24.1-idp70900034673552').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.24.1-idp70900034673552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L680" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.24.1" href="#snmp-development-toolkit-4.24.1">1.21 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.24.1-idp46846766071072').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.24.1-idp46846766071072').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.24.1-idp46846766071072" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L719" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.24.1" href="#snmp-development-toolkit-4.24.1">1.22 
           SNMP Development Toolkit 4.24.1</a></span></h3>
     
     <p>Version 4.24.1 supports code replacement in runtime from/to
     version 4.24, 4.23.1 and 4.23. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034675120').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034675120').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034675120" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L685" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846766072640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846766072640').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846766072640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L724" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
       <p>-</p>
 
@@ -696,7 +735,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034677264').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034677264').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034677264" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L701" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846766074784').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846766074784').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846766074784" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L740" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
 
 
@@ -733,7 +772,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900034709728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900034709728').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900034709728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L740" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846761840288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846761840288').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846761840288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L779" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
 
@@ -743,13 +782,13 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.24-idp70900034712416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.24-idp70900034712416').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.24-idp70900034712416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L760" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.24" href="#snmp-development-toolkit-4.24">1.22 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.24-idp46846761842976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.24-idp46846761842976').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.24-idp46846761842976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L799" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.24" href="#snmp-development-toolkit-4.24">1.23 
           SNMP Development Toolkit 4.24</a></span></h3>
     
     <p>Version 4.24 supports code replacement in runtime from/to
     version 4.23.1 and 4.23. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034713872').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034713872').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034713872" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L765" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846761844432').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846761844432').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846761844432" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L804" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
 
 
@@ -788,7 +827,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900039209632').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900039209632').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900039209632" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L806" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761857088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761857088').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761857088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L845" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
       <p>-</p>
 
@@ -796,7 +835,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900039211776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900039211776').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900039211776" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L822" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846761859232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846761859232').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846761859232" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L861" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
 
@@ -806,13 +845,13 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.23.1-idp70900039214464').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.23.1-idp70900039214464').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.23.1-idp70900039214464" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L842" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.23.1" href="#snmp-development-toolkit-4.23.1">1.23 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.23.1-idp46846766329280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.23.1-idp46846766329280').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.23.1-idp46846766329280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L881" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.23.1" href="#snmp-development-toolkit-4.23.1">1.24 
           SNMP Development Toolkit 4.23.1</a></span></h3>
     
     <p>Version 4.23.1 supports code replacement in runtime from/to
     version 4.23. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900039215920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900039215920').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900039215920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L847" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846766330736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846766330736').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846766330736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L886" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
       <p>-</p>
 
@@ -820,7 +859,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900039218624').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900039218624').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900039218624" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L873" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846766333440').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846766333440').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846766333440" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L912" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
 
 
@@ -840,7 +879,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900034247232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900034247232').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900034247232" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L895" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846766338416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846766338416').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846766338416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L934" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
 
@@ -850,12 +889,12 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.23-idp70900034249920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.23-idp70900034249920').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.23-idp70900034249920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L915" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.23" href="#snmp-development-toolkit-4.23">1.24 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.23-idp46846766341104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.23-idp46846766341104').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.23-idp46846766341104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L954" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.23" href="#snmp-development-toolkit-4.23">1.25 
           SNMP Development Toolkit 4.23</a></span></h3>
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034251424').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034251424').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034251424" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L923" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846766342608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846766342608').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846766342608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L962" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
 
 
@@ -883,14 +922,14 @@
       </ul>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034259008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034259008').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034259008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L953" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846766350192').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846766350192').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846766350192" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L992" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
       <p>-</p>
 
       
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900034261376').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900034261376').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900034261376" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L973" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846763262432').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846763262432').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846763262432" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1012" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
 
 
@@ -908,14 +947,14 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.22.1-idp70900038594976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.22.1-idp70900038594976').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.22.1-idp70900038594976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L993" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.22.1" href="#snmp-development-toolkit-4.22.1">1.25 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.22.1-idp46846763266608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.22.1-idp46846763266608').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.22.1-idp46846763266608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1032" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.22.1" href="#snmp-development-toolkit-4.22.1">1.26 
           SNMP Development Toolkit 4.22.1</a></span></h3>
     
     <p>Version 4.22.1 supports code replacement in runtime from/to
     version 4.22, 4.21.7 4.21.6 4.21.5, 4.21.4, 4.21.3, 4.21.2, 4.21.1 and
     4.21. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900038596592').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900038596592').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900038596592" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L999" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846763268224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846763268224').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846763268224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1038" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
 
 
@@ -955,7 +994,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900038606288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900038606288').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900038606288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1041" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846763277984').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846763277984').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846763277984" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1080" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
 
 
@@ -989,7 +1028,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900034483536').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900034483536').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900034483536" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1077" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846761318704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846761318704').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846761318704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1116" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
     
@@ -997,13 +1036,13 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.22-idp70900034485648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.22-idp70900034485648').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.22-idp70900034485648" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1085" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.22" href="#snmp-development-toolkit-4.22">1.26 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.22-idp46846761320704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.22-idp46846761320704').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.22-idp46846761320704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1124" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.22" href="#snmp-development-toolkit-4.22">1.27 
           SNMP Development Toolkit 4.22</a></span></h3>
     
     <p>Version 4.22 supports code replacement in runtime from/to
     version 4.21.7 4.21.6 4.21.5, 4.21.4, 4.21.3, 4.21.2, 4.21.1 and 4.21. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034487248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034487248').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034487248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1090" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846761322304').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846761322304').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846761322304" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1129" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
 
 
@@ -1049,7 +1088,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034133168').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034133168').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034133168" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1138" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761336016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761336016').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761336016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1177" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
       <p>-</p>
 
@@ -1057,7 +1096,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900034135424').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900034135424').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900034135424" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1159" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846761338384').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846761338384').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846761338384" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1198" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
     
@@ -1065,14 +1104,14 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.7-idp70900034137536').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.7-idp70900034137536').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.7-idp70900034137536" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1167" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.7" href="#snmp-development-toolkit-4.21.7">1.27 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.7-idp46846761340496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.7-idp46846761340496').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.7-idp46846761340496" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1206" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.7" href="#snmp-development-toolkit-4.21.7">1.28 
           SNMP Development Toolkit 4.21.7</a></span></h3>
     
     <p>Version 4.21.7 supports code replacement in runtime from/to
     version 4.21.6, 4.21.5, 4.21.4, 4.21.3, 4.21.2, 4.21.1, 4.21, 4.20.1 and
     4.20. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034139152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034139152').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034139152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1173" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846761093552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846761093552').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846761093552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1212" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
       <p>-</p>
 
@@ -1080,7 +1119,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034141616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034141616').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034141616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1196" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761096016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761096016').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761096016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1235" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
       
 
@@ -1099,7 +1138,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900034146528').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900034146528').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900034146528" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1217" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846761100928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846761100928').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846761100928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1256" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
     
@@ -1107,14 +1146,14 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.6-idp70900034148640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.6-idp70900034148640').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.6-idp70900034148640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1225" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.6" href="#snmp-development-toolkit-4.21.6">1.28 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.6-idp46846761103040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.6-idp46846761103040').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.6-idp46846761103040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1264" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.6" href="#snmp-development-toolkit-4.21.6">1.29 
           SNMP Development Toolkit 4.21.6</a></span></h3>
     
     <p>Version 4.21.6 supports code replacement in runtime from/to
     version 4.21.5, 4.21.4, 4.21.3, 4.21.2, 4.21.1, 4.21, 4.20.1 and
     4.20. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034150256').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034150256').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034150256" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1231" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846761104656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846761104656').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846761104656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1270" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
       
 
@@ -1135,7 +1174,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034154864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034154864').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034154864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1254" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761109264').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846761109264').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846761109264" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1293" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
       
 
@@ -1155,7 +1194,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900034615728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900034615728').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900034615728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1276" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846761115392').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846761115392').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846761115392" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1315" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
     
@@ -1163,13 +1202,13 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.5-idp70900034617840').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.5-idp70900034617840').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.5-idp70900034617840" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1284" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.5" href="#snmp-development-toolkit-4.21.5">1.29 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.5-idp46846765851568').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.5-idp46846765851568').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.5-idp46846765851568" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1323" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.5" href="#snmp-development-toolkit-4.21.5">1.30 
           SNMP Development Toolkit 4.21.5</a></span></h3>
     
     <p>Version 4.21.5 supports code replacement in runtime from/to
       version 4.21.4, 4.21.3, 4.21.2, 4.21.1, 4.21, 4.20.1 and 4.20. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034619440').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034619440').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034619440" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1289" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846765853168').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846765853168').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846765853168" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1328" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
 
 
@@ -1183,7 +1222,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034623056').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034623056').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034623056" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1305" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846765856720').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846765856720').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846765856720" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1344" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
 
 
@@ -1204,7 +1243,7 @@
       </ul>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900034627600').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900034627600').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900034627600" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1328" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846765861264').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846765861264').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846765861264" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1367" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
 
@@ -1215,14 +1254,14 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.4-idp70900034630144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.4-idp70900034630144').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.4-idp70900034630144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1347" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.4" href="#snmp-development-toolkit-4.21.4">1.30 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.4-idp46846765863808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.4-idp46846765863808').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.4-idp46846765863808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1386" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.4" href="#snmp-development-toolkit-4.21.4">1.31 
           SNMP Development Toolkit 4.21.4</a></span></h3>
     
     <p>This version has never been released for R14B.</p>
     <p>Version 4.21.4 supports code replacement in runtime from/to
       version 4.21.3, 4.21.2, 4.21.1, 4.21, 4.20.1, 4.20 and 4.19. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034632224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034632224').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034632224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1353" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846765865888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846765865888').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846765865888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1392" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
       <p>-</p>
 
@@ -1230,7 +1269,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900035365888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900035365888').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900035365888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1370" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846765868112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846765868112').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846765868112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1409" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
 
 
@@ -1243,7 +1282,7 @@
       </ul>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900035369504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900035369504').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900035369504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1385" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846765871728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846765871728').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846765871728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1424" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
 
@@ -1254,13 +1293,13 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.3-idp70900035372048').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.3-idp70900035372048').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.3-idp70900035372048" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1404" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.3" href="#snmp-development-toolkit-4.21.3">1.31 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.3-idp46846765874272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.3-idp46846765874272').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.3-idp46846765874272" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1443" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.3" href="#snmp-development-toolkit-4.21.3">1.32 
           SNMP Development Toolkit 4.21.3</a></span></h3>
     
     <p>Version 4.21.3 supports code replacement in runtime from/to
       version 4.21.2, 4.21.1, 4.21, 4.20.1, 4.20 and 4.19. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900035373632').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900035373632').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900035373632" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1409" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846765875856').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846765875856').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846765875856" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1448" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
 
 
@@ -1275,7 +1314,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900035377984').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900035377984').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900035377984" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1426" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846763035232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846763035232').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846763035232" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1465" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
 
 
@@ -1308,7 +1347,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900035387936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900035387936').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900035387936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1461" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846763045184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846763045184').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846763045184" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1500" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
 
 
@@ -1326,13 +1365,13 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.2-idp70900039249088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.2-idp70900039249088').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.2-idp70900039249088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1481" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.2" href="#snmp-development-toolkit-4.21.2">1.32 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.2-idp46846763050640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.2-idp46846763050640').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.2-idp46846763050640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1520" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.2" href="#snmp-development-toolkit-4.21.2">1.33 
           SNMP Development Toolkit 4.21.2</a></span></h3>
     
     <p>Version 4.21.2 supports code replacement in runtime from/to
       version 4.21.1, 4.21, 4.20.1, 4.20 and 4.19. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900039250672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900039250672').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900039250672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1486" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846763052224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846763052224').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846763052224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1525" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
       <p>-</p>
 
@@ -1340,7 +1379,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900039252896').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900039252896').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900039252896" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1504" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846763054448').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846763054448').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846763054448" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1543" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
 
 
@@ -1356,7 +1395,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900039257024').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900039257024').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900039257024" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1522" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846762764944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846762764944').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846762764944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1561" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
     
@@ -1364,13 +1403,13 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.1-idp70900039259136').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.1-idp70900039259136').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.1-idp70900039259136" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1530" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.1" href="#snmp-development-toolkit-4.21.1">1.33 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21.1-idp46846762767056').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21.1-idp46846762767056').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21.1-idp46846762767056" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1569" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21.1" href="#snmp-development-toolkit-4.21.1">1.34 
           SNMP Development Toolkit 4.21.1</a></span></h3>
     
     <p>Version 4.21.1 supports code replacement in runtime from/to
       version 4.20.1, 4.20 and 4.19. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900039260704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900039260704').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900039260704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1535" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846762768624').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846762768624').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846762768624" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1574" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
 
       <ul>
@@ -1394,7 +1433,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900039267744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900039267744').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900039267744" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1561" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846762775728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846762775728').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846762775728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1600" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
       <p>-</p>
 
@@ -1402,7 +1441,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900034817184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900034817184').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900034817184" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1578" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846762777904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846762777904').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846762777904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1617" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
     
@@ -1410,13 +1449,13 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21-idp70900034819248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21-idp70900034819248').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21-idp70900034819248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1586" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21" href="#snmp-development-toolkit-4.21">1.34 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.21-idp46846762780016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.21-idp46846762780016').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.21-idp46846762780016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1625" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.21" href="#snmp-development-toolkit-4.21">1.35 
           SNMP Development Toolkit 4.21</a></span></h3>
     
     <p>Version 4.21 supports code replacement in runtime from/to
       version 4.20.1, 4.20 and 4.19. </p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900034820816').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900034820816').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900034820816" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1591" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846762781584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846762781584').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846762781584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1630" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
 
       <ul>
@@ -1449,7 +1488,7 @@
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034830800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900034830800').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900034830800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1626" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846765270688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846765270688').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846765270688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1665" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
 
 
@@ -1479,7 +1518,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900034838656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900034838656').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900034838656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1658" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846765278544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846765278544').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846765278544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1697" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
     
@@ -1487,19 +1526,19 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.20.1-idp70900035313584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.20.1-idp70900035313584').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.20.1-idp70900035313584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1666" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.20.1" href="#snmp-development-toolkit-4.20.1">1.35 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.20.1-idp46846765280656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.20.1-idp46846765280656').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.20.1-idp46846765280656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1705" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.20.1" href="#snmp-development-toolkit-4.20.1">1.36 
           SNMP Development Toolkit 4.20.1</a></span></h3>
     
     <p>Version 4.20.1 supports code replacement in runtime from/to
       version 4.20, 4.19 and 4.18.</p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900035315104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900035315104').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900035315104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1671" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846765282224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846765282224').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846765282224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1710" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
       <p>-</p>
 
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900035317264').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900035317264').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900035317264" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1685" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846765284384').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846765284384').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846765284384" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1724" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
 
       <ul>
@@ -1520,7 +1559,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900035322800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900035322800').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900035322800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1708" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846765289920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846765289920').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846765289920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1747" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
     
@@ -1528,13 +1567,13 @@
    
 
 
-  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.20-idp70900035324912').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.20-idp70900035324912').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.20-idp70900035324912" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1716" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.20" href="#snmp-development-toolkit-4.20">1.36 
+  <h3><span onMouseOver="document.getElementById('ghlink-snmp-development-toolkit-4.20-idp46846765292032').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-snmp-development-toolkit-4.20-idp46846765292032').style.visibility = 'hidden';"><span id="ghlink-snmp-development-toolkit-4.20-idp46846765292032" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1755" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="snmp-development-toolkit-4.20" href="#snmp-development-toolkit-4.20">1.37 
           SNMP Development Toolkit 4.20</a></span></h3>
     
     <p>Version 4.20 supports code replacement in runtime from/to
       version 4.19 and 4.18.</p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp70900035326368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp70900035326368').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp70900035326368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1721" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp46846763405808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp46846763405808').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp46846763405808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1760" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and new features</a></span></h4>
       
 
       <ul>
@@ -1606,7 +1645,7 @@
       </ul>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900035801088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp70900035801088').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp70900035801088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1798" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846763430864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp46846763430864').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp46846763430864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1837" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       
 
 
@@ -1624,7 +1663,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp70900035806208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp70900035806208').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp70900035806208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1818" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-incompatibilities-idp46846761581200').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-incompatibilities-idp46846761581200').style.visibility = 'hidden';"><span id="ghlink-incompatibilities-idp46846761581200" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/snmp/doc/src/notes.xml#L1857" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="incompatibilities" href="#incompatibilities">Incompatibilities</a></span></h4>
       
       <p>-</p>
     
