@@ -65,6 +65,7 @@
 <li><a href="notes.html">
               Top of chapter
             </a></li>
+<li title="SSL 9.0.2"><a href="notes.html#ssl-9.0.2">SSL 9.0.2</a></li>
 <li title="SSL 9.0.1"><a href="notes.html#ssl-9.0.1">SSL 9.0.1</a></li>
 <li title="SSL 9.0"><a href="notes.html#ssl-9.0">SSL 9.0</a></li>
 <li title="SSL 8.2.6.2"><a href="notes.html#ssl-8.2.6.2">SSL 8.2.6.2</a></li>
@@ -131,10 +132,128 @@
   
   <p>This document describes the changes made to the SSL application.</p>
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-9.0.1-idp71757720665968').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-9.0.1-idp71757720665968').style.visibility = 'hidden';"><span id="ghlink-ssl-9.0.1-idp71757720665968" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L30" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-9.0.1" href="#ssl-9.0.1">1.1 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-9.0.2-idp72110389547984').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-9.0.2-idp72110389547984').style.visibility = 'hidden';"><span id="ghlink-ssl-9.0.2-idp72110389547984" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L30" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-9.0.2" href="#ssl-9.0.2">1.1 
+          SSL 9.0.2</a></span></h3>
+
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110389548688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110389548688').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110389548688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L32" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+      <ul>
+        <li>
+          <p>
+	    Use separate processes for sending and receiving
+	    application data for TLS connections to avoid potential
+	    deadlock that was most likely to occur when using TLS for
+	    Erlang distribution. Note does not change the API.</p>
+          <p>
+	    Own Id: OTP-15122</p>
+        </li>
+        <li>
+          <p>
+	    Correct handling of empty server SNI extension</p>
+          <p>
+	    Own Id: OTP-15168</p>
+        </li>
+        <li>
+          <p>
+	    Correct PSK cipher suite handling and add
+	    selected_cipher_suite to connection information</p>
+          <p>
+	    Own Id: OTP-15172</p>
+        </li>
+        <li>
+          <p>
+	    Adopt to the fact that cipher suite sign restriction are
+	    relaxed in TLS-1.2</p>
+          <p>
+	    Own Id: OTP-15173</p>
+        </li>
+        <li>
+          <p>
+	    Enhance error handling of non existing PEM files</p>
+          <p>
+	    Own Id: OTP-15174</p>
+        </li>
+        <li>
+          <p>
+	    Correct close handling of transport accepted sockets in
+	    the error state</p>
+          <p>
+	    Own Id: OTP-15216</p>
+        </li>
+        <li>
+          <p>
+	    Correct PEM cache to not add references to empty entries
+	    when PEM file does not exist.</p>
+          <p>
+	    Own Id: OTP-15224</p>
+        </li>
+        <li>
+          <p>
+	    Correct handling of all PSK cipher suites</p>
+          <p>
+	    Before only some PSK suites would be correctly negotiated
+	    and most PSK ciphers suites would fail the connection.</p>
+          <p>
+	    Own Id: OTP-15285</p>
+        </li>
+      </ul>
+    
+
+
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110389464944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110389464944').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110389464944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L96" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+      <ul>
+        <li>
+          <p>
+	    TLS will now try to order certificate chains if they
+	    appear to be unordered. That is prior to TLS 1.3,
+	    “certificate_list” ordering was required to be
+	    strict, however some implementations already allowed for
+	    some flexibility. For maximum compatibility, all
+	    implementations SHOULD be prepared to handle potentially
+	    extraneous certificates and arbitrary orderings from any
+	    TLS version.</p>
+          <p>
+	    Own Id: OTP-12983</p>
+        </li>
+        <li>
+          <p>
+	    TLS will now try to reconstructed an incomplete
+	    certificate chains from its local CA-database and use
+	    that data for the certificate path validation. This
+	    especially makes sense for partial chains as then the
+	    peer might not send an intermediate CA as it is
+	    considered the trusted root in that case.</p>
+          <p>
+	    Own Id: OTP-15060</p>
+        </li>
+        <li>
+          <p>
+	    Option keyfile defaults to certfile and should be trumped
+	    with key. This failed for engine keys.</p>
+          <p>
+	    Own Id: OTP-15193</p>
+        </li>
+        <li>
+          <p>
+	    Error message improvement when own certificate has
+	    decoding issues, see also issue ERL-668.</p>
+          <p>
+	    Own Id: OTP-15234</p>
+        </li>
+        <li>
+          <p>
+	    Correct dialyzer spec for key option</p>
+          <p>
+	    Own Id: OTP-15281</p>
+        </li>
+      </ul>
+    
+
+
+
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-9.0.1-idp72110390353504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-9.0.1-idp72110390353504').style.visibility = 'hidden';"><span id="ghlink-ssl-9.0.1-idp72110390353504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L147" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-9.0.1" href="#ssl-9.0.1">1.2 
           SSL 9.0.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757720666672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757720666672').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757720666672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L32" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390354320').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390354320').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110390354320" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L149" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -149,10 +268,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-9.0-idp71757720669872').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-9.0-idp71757720669872').style.visibility = 'hidden';"><span id="ghlink-ssl-9.0-idp71757720669872" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L47" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-9.0" href="#ssl-9.0">1.2 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-9.0-idp72110390357728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-9.0-idp72110390357728').style.visibility = 'hidden';"><span id="ghlink-ssl-9.0-idp72110390357728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L164" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-9.0" href="#ssl-9.0">1.3 
           SSL 9.0</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757720670688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757720670688').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757720670688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L49" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390358592').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390358592').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110390358592" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L166" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -171,7 +290,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757719951504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757719951504').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757719951504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L68" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110390363136').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110390363136').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110390363136" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L185" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -293,10 +412,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.6.2-idp71757719408416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.6.2-idp71757719408416').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.6.2-idp71757719408416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L190" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.6.2" href="#ssl-8.2.6.2">1.3 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.6.2-idp72110390937904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.6.2-idp72110390937904').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.6.2-idp72110390937904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L307" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.6.2" href="#ssl-8.2.6.2">1.4 
           SSL 8.2.6.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757719409280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757719409280').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757719409280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L192" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390938768').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390938768').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110390938768" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L309" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -317,10 +436,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.6.1-idp71757721132288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.6.1-idp71757721132288').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.6.1-idp71757721132288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L213" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.6.1" href="#ssl-8.2.6.1">1.4 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.6.1-idp72110390943552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.6.1-idp72110390943552').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.6.1-idp72110390943552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L330" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.6.1" href="#ssl-8.2.6.1">1.5 
           SSL 8.2.6.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721133152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721133152').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721133152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L215" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390944416').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390944416').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110390944416" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L332" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -333,7 +452,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721136352').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721136352').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721136352" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L228" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110390947616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110390947616').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110390947616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L345" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -347,10 +466,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.6-idp71757721139712').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.6-idp71757721139712').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.6-idp71757721139712" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L242" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.6" href="#ssl-8.2.6">1.5 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.6-idp72110390950976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.6-idp72110390950976').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.6-idp72110390950976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L359" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.6" href="#ssl-8.2.6">1.6 
           SSL 8.2.6</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721140576').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721140576').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721140576" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L244" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390951840').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390951840').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110390951840" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L361" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -364,10 +483,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.5-idp71757721143920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.5-idp71757721143920').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.5-idp71757721143920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L258" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.5" href="#ssl-8.2.5">1.6 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.5-idp72110390955184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.5-idp72110390955184').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.5-idp72110390955184" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L375" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.5" href="#ssl-8.2.5">1.7 
           SSL 8.2.5</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721144784').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721144784').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721144784" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L260" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390956048').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390956048').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110390956048" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L377" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -381,10 +500,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.4-idp71757721148016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.4-idp71757721148016').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.4-idp71757721148016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L274" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.4" href="#ssl-8.2.4">1.7 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.4-idp72110390959280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.4-idp72110390959280').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.4-idp72110390959280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L391" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.4" href="#ssl-8.2.4">1.8 
           SSL 8.2.4</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721148880').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721148880').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721148880" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L276" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390960144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390960144').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110390960144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L393" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -427,7 +546,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721157664').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721157664').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721157664" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L319" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110390968928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110390968928').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110390968928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L436" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -457,10 +576,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.3-idp71757721163968').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.3-idp71757721163968').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.3-idp71757721163968" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L349" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.3" href="#ssl-8.2.3">1.8 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.3-idp72110390975232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.3-idp72110390975232').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.3-idp72110390975232" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L466" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.3" href="#ssl-8.2.3">1.9 
           SSL 8.2.3</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721164832').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721164832').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721164832" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L351" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390976096').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390976096').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110390976096" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L468" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -481,7 +600,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721334704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721334704').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721334704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L372" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110390980752').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110390980752').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110390980752" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L489" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -513,9 +632,9 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.2-idp71757721341280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.2-idp71757721341280').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.2-idp71757721341280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L404" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.2" href="#ssl-8.2.2">1.9 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.2-idp72110390987936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.2-idp72110390987936').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.2-idp72110390987936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L521" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.2" href="#ssl-8.2.2">1.10 
           SSL 8.2.2</a></span></h3>
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721342144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721342144').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721342144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L405" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390988800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110390988800').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110390988800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L522" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -573,7 +692,7 @@
       </ul>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721353584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721353584').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721353584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L464" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391000336').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391000336').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391000336" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L581" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -589,10 +708,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.1-idp71757721357040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.1-idp71757721357040').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.1-idp71757721357040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L480" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.1" href="#ssl-8.2.1">1.10 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2.1-idp72110391003792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2.1-idp72110391003792').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2.1-idp72110391003792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L597" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2.1" href="#ssl-8.2.1">1.11 
           SSL 8.2.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721357904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721357904').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721357904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L482" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391004656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391004656').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391004656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L599" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -604,7 +723,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721361040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721361040').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721361040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L494" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391007792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391007792').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391007792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L611" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -624,10 +743,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2-idp71757721365744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2-idp71757721365744').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2-idp71757721365744" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L514" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2" href="#ssl-8.2">1.11 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.2-idp72110391012496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.2-idp72110391012496').style.visibility = 'hidden';"><span id="ghlink-ssl-8.2-idp72110391012496" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L631" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.2" href="#ssl-8.2">1.12 
           SSL 8.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721366608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721366608').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721366608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L516" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391013360').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391013360').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391013360" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L633" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -648,7 +767,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721371296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721371296').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721371296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L537" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391018048').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391018048').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391018048" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L654" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -740,10 +859,10 @@
     
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.1.3.1.1-idp71757721388112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.1.3.1.1-idp71757721388112').style.visibility = 'hidden';"><span id="ghlink-ssl-8.1.3.1.1-idp71757721388112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L629" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.1.3.1.1" href="#ssl-8.1.3.1.1">1.12 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.1.3.1.1-idp72110391034864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.1.3.1.1-idp72110391034864').style.visibility = 'hidden';"><span id="ghlink-ssl-8.1.3.1.1-idp72110391034864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L746" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.1.3.1.1" href="#ssl-8.1.3.1.1">1.13 
           SSL 8.1.3.1.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721388976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721388976').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721388976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L631" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391035728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391035728').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391035728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L748" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -756,9 +875,9 @@
     
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.1.3.1-idp71757721392320').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.1.3.1-idp71757721392320').style.visibility = 'hidden';"><span id="ghlink-ssl-8.1.3.1-idp71757721392320" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L644" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.1.3.1" href="#ssl-8.1.3.1">1.13 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.1.3.1-idp72110391039072').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.1.3.1-idp72110391039072').style.visibility = 'hidden';"><span id="ghlink-ssl-8.1.3.1-idp72110391039072" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L761" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.1.3.1" href="#ssl-8.1.3.1">1.14 
           SSL 8.1.3.1</a></span></h3>
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721393184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721393184').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721393184" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L645" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391039936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391039936').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391039936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L762" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
 	    <p> An erlang TLS server configured with cipher suites
@@ -807,10 +926,10 @@
       </ul>
     
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.1.3-idp71757721403328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.1.3-idp71757721403328').style.visibility = 'hidden';"><span id="ghlink-ssl-8.1.3-idp71757721403328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L695" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.1.3" href="#ssl-8.1.3">1.14 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.1.3-idp72110391050080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.1.3-idp72110391050080').style.visibility = 'hidden';"><span id="ghlink-ssl-8.1.3-idp72110391050080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L812" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.1.3" href="#ssl-8.1.3">1.15 
           SSL 8.1.3</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721404192').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721404192').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721404192" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L697" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391050944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391050944').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391050944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L814" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -823,10 +942,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.1.2-idp71757721407472').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.1.2-idp71757721407472').style.visibility = 'hidden';"><span id="ghlink-ssl-8.1.2-idp71757721407472" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L710" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.1.2" href="#ssl-8.1.2">1.15 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.1.2-idp72110391054224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.1.2-idp72110391054224').style.visibility = 'hidden';"><span id="ghlink-ssl-8.1.2-idp72110391054224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L827" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.1.2" href="#ssl-8.1.2">1.16 
           SSL 8.1.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721408336').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721408336').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721408336" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L712" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391055088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391055088').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391055088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L829" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -842,10 +961,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.1.1-idp71757721411824').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.1.1-idp71757721411824').style.visibility = 'hidden';"><span id="ghlink-ssl-8.1.1-idp71757721411824" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L728" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.1.1" href="#ssl-8.1.1">1.16 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.1.1-idp72110391058576').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.1.1-idp72110391058576').style.visibility = 'hidden';"><span id="ghlink-ssl-8.1.1-idp72110391058576" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L845" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.1.1" href="#ssl-8.1.1">1.17 
           SSL 8.1.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721412688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721412688').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721412688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L730" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391059440').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391059440').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391059440" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L847" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -892,7 +1011,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721421984').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721421984').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721421984" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L777" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391068736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391068736').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391068736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L894" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -907,10 +1026,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.1-idp71757721425392').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.1-idp71757721425392').style.visibility = 'hidden';"><span id="ghlink-ssl-8.1-idp71757721425392" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L792" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.1" href="#ssl-8.1">1.17 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.1-idp72110391072144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.1-idp72110391072144').style.visibility = 'hidden';"><span id="ghlink-ssl-8.1-idp72110391072144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L909" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.1" href="#ssl-8.1">1.18 
           SSL 8.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721426256').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721426256').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721426256" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L794" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391073008').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391073008').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391073008" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L911" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -923,7 +1042,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721429456').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721429456').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721429456" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L807" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391076208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391076208').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391076208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L924" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -944,10 +1063,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.0.3-idp71757721434208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.0.3-idp71757721434208').style.visibility = 'hidden';"><span id="ghlink-ssl-8.0.3-idp71757721434208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L828" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.0.3" href="#ssl-8.0.3">1.18 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.0.3-idp72110391080960').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.0.3-idp72110391080960').style.visibility = 'hidden';"><span id="ghlink-ssl-8.0.3-idp72110391080960" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L945" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.0.3" href="#ssl-8.0.3">1.19 
           SSL 8.0.3</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721435072').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721435072').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721435072" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L830" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391081824').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391081824').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391081824" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L947" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -970,10 +1089,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.0.2-idp71757721439936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.0.2-idp71757721439936').style.visibility = 'hidden';"><span id="ghlink-ssl-8.0.2-idp71757721439936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L853" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.0.2" href="#ssl-8.0.2">1.19 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.0.2-idp72110391086688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.0.2-idp72110391086688').style.visibility = 'hidden';"><span id="ghlink-ssl-8.0.2-idp72110391086688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L970" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.0.2" href="#ssl-8.0.2">1.20 
           SSL 8.0.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721440800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721440800').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721440800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L855" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391087552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391087552').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391087552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L972" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -994,7 +1113,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721445408').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721445408').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721445408" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L876" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391092160').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391092160').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391092160" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L993" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1017,10 +1136,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.0.1-idp71757721450272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.0.1-idp71757721450272').style.visibility = 'hidden';"><span id="ghlink-ssl-8.0.1-idp71757721450272" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L899" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.0.1" href="#ssl-8.0.1">1.20 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.0.1-idp72110391097024').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.0.1-idp72110391097024').style.visibility = 'hidden';"><span id="ghlink-ssl-8.0.1-idp72110391097024" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1016" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.0.1" href="#ssl-8.0.1">1.21 
           SSL 8.0.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721451136').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721451136').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721451136" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L901" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391097888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391097888').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391097888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1018" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1038,10 +1157,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.0-idp71757721454736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.0-idp71757721454736').style.visibility = 'hidden';"><span id="ghlink-ssl-8.0-idp71757721454736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L919" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.0" href="#ssl-8.0">1.21 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-8.0-idp72110391101488').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-8.0-idp72110391101488').style.visibility = 'hidden';"><span id="ghlink-ssl-8.0-idp72110391101488" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1036" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-8.0" href="#ssl-8.0">1.22 
           SSL 8.0</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721455600').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721455600').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721455600" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L921" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391102352').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391102352').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391102352" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1038" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1054,7 +1173,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721458800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721458800').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721458800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L934" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391105552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391105552').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391105552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1051" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1193,10 +1312,10 @@
 
 
 
- <h3><span onMouseOver="document.getElementById('ghlink-ssl-7.3.3.2-idp71757721487472').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.3.3.2-idp71757721487472').style.visibility = 'hidden';"><span id="ghlink-ssl-7.3.3.2-idp71757721487472" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1073" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.3.3.2" href="#ssl-7.3.3.2">1.22 
+ <h3><span onMouseOver="document.getElementById('ghlink-ssl-7.3.3.2-idp72110391134224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.3.3.2-idp72110391134224').style.visibility = 'hidden';"><span id="ghlink-ssl-7.3.3.2-idp72110391134224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1190" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.3.3.2" href="#ssl-7.3.3.2">1.23 
           SSL 7.3.3.2</a></span></h3>
 
-      <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721488336').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721488336').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721488336" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1075" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+      <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391135088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391135088').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391135088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1192" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
 	<li>
 	  <p> An erlang TLS server configured with cipher suites
@@ -1247,10 +1366,10 @@
       
   
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.3.3-idp71757721498368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.3.3-idp71757721498368').style.visibility = 'hidden';"><span id="ghlink-ssl-7.3.3-idp71757721498368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1127" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.3.3" href="#ssl-7.3.3">1.23 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.3.3-idp72110391145120').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.3.3-idp72110391145120').style.visibility = 'hidden';"><span id="ghlink-ssl-7.3.3-idp72110391145120" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1244" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.3.3" href="#ssl-7.3.3">1.24 
           SSL 7.3.3</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721499232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721499232').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721499232" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1129" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391145984').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391145984').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391145984" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1246" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1277,7 +1396,7 @@
       </ul>
     
 
- <h4><span onMouseOver="document.getElementById('ghlink-ssl-7.3.3.0.1-idp71757721505328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.3.3.0.1-idp71757721505328').style.visibility = 'hidden';"><span id="ghlink-ssl-7.3.3.0.1-idp71757721505328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1156" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.3.3.0.1" href="#ssl-7.3.3.0.1">SSL 7.3.3.0.1</a></span></h4>
+ <h4><span onMouseOver="document.getElementById('ghlink-ssl-7.3.3.0.1-idp72110391152080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.3.3.0.1-idp72110391152080').style.visibility = 'hidden';"><span id="ghlink-ssl-7.3.3.0.1-idp72110391152080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1273" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.3.3.0.1" href="#ssl-7.3.3.0.1">SSL 7.3.3.0.1</a></span></h4>
 
       <h5>Fixed Bugs and Malfunctions</h5>
       <ul>
@@ -1329,7 +1448,7 @@
       
       
   
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721516224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721516224').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721516224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1209" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391162976').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391162976').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391162976" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1326" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1344,10 +1463,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.3.2-idp71757721519616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.3.2-idp71757721519616').style.visibility = 'hidden';"><span id="ghlink-ssl-7.3.2-idp71757721519616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1224" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.3.2" href="#ssl-7.3.2">1.24 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.3.2-idp72110391166368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.3.2-idp72110391166368').style.visibility = 'hidden';"><span id="ghlink-ssl-7.3.2-idp72110391166368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1341" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.3.2" href="#ssl-7.3.2">1.25 
           SSL 7.3.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721520480').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721520480').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721520480" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1226" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391167232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391167232').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391167232" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1343" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1362,10 +1481,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.3.1-idp71757721523904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.3.1-idp71757721523904').style.visibility = 'hidden';"><span id="ghlink-ssl-7.3.1-idp71757721523904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1241" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.3.1" href="#ssl-7.3.1">1.25 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.3.1-idp72110391170656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.3.1-idp72110391170656').style.visibility = 'hidden';"><span id="ghlink-ssl-7.3.1-idp72110391170656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1358" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.3.1" href="#ssl-7.3.1">1.26 
           SSL 7.3.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721524768').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721524768').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721524768" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1243" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391171520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391171520').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391171520" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1360" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1379,7 +1498,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721528000').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721528000').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721528000" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1257" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391174752').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391174752').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391174752" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1374" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1393,10 +1512,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.3-idp71757721531328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.3-idp71757721531328').style.visibility = 'hidden';"><span id="ghlink-ssl-7.3-idp71757721531328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1271" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.3" href="#ssl-7.3">1.26 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.3-idp72110391178080').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.3-idp72110391178080').style.visibility = 'hidden';"><span id="ghlink-ssl-7.3-idp72110391178080" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1388" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.3" href="#ssl-7.3">1.27 
           SSL 7.3</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721532192').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721532192').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721532192" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1273" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391178944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391178944').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391178944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1390" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1460,7 +1579,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721546240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721546240').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721546240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1337" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391192992').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391192992').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391192992" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1454" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1512,10 +1631,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.2-idp71757721557968').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.2-idp71757721557968').style.visibility = 'hidden';"><span id="ghlink-ssl-7.2-idp71757721557968" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1389" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.2" href="#ssl-7.2">1.27 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.2-idp72110391204720').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.2-idp72110391204720').style.visibility = 'hidden';"><span id="ghlink-ssl-7.2-idp72110391204720" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1506" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.2" href="#ssl-7.2">1.28 
           SSL 7.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721558832').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721558832').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721558832" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1391" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391205584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391205584').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391205584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1508" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1560,7 +1679,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721568960').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721568960').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721568960" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1436" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391215712').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391215712').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391215712" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1553" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1601,9 +1720,9 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.1-idp71757721577296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.1-idp71757721577296').style.visibility = 'hidden';"><span id="ghlink-ssl-7.1-idp71757721577296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1477" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.1" href="#ssl-7.1">1.28 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.1-idp72110391224048').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.1-idp72110391224048').style.visibility = 'hidden';"><span id="ghlink-ssl-7.1-idp72110391224048" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1594" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.1" href="#ssl-7.1">1.29 
           SSL 7.1</a></span></h3>
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721578160').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721578160').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721578160" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1478" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391224912').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391224912').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391224912" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1595" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1627,7 +1746,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721583344').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721583344').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721583344" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1502" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391230096').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391230096').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391230096" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1619" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1657,10 +1776,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.0-idp71757721588960').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.0-idp71757721588960').style.visibility = 'hidden';"><span id="ghlink-ssl-7.0-idp71757721588960" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1532" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.0" href="#ssl-7.0">1.29 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-7.0-idp72110391235712').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-7.0-idp72110391235712').style.visibility = 'hidden';"><span id="ghlink-ssl-7.0-idp72110391235712" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1649" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-7.0" href="#ssl-7.0">1.30 
           SSL 7.0</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721589824').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721589824').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721589824" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1534" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391236576').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391236576').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391236576" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1651" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1687,7 +1806,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721595904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721595904').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721595904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1561" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391242656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391242656').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391242656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1678" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1733,9 +1852,9 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-6.0.1.1-idp71757721605168').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-6.0.1.1-idp71757721605168').style.visibility = 'hidden';"><span id="ghlink-ssl-6.0.1.1-idp71757721605168" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1607" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-6.0.1.1" href="#ssl-6.0.1.1">1.30 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-6.0.1.1-idp72110391251920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-6.0.1.1-idp72110391251920').style.visibility = 'hidden';"><span id="ghlink-ssl-6.0.1.1-idp72110391251920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1724" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-6.0.1.1" href="#ssl-6.0.1.1">1.31 
           SSL 6.0.1.1</a></span></h3>
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721606032').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721606032').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721606032" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1608" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391252784').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391252784').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391252784" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1725" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
     <ul>
           <li>
           <p>
@@ -1748,10 +1867,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-6.0.1-idp71757721609344').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-6.0.1-idp71757721609344').style.visibility = 'hidden';"><span id="ghlink-ssl-6.0.1-idp71757721609344" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1621" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-6.0.1" href="#ssl-6.0.1">1.31 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-6.0.1-idp72110391256096').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-6.0.1-idp72110391256096').style.visibility = 'hidden';"><span id="ghlink-ssl-6.0.1-idp72110391256096" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1738" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-6.0.1" href="#ssl-6.0.1">1.32 
           SSL 6.0.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721610208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721610208').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721610208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1623" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391256960').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391256960').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391256960" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1740" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1765,10 +1884,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-6.0-idp71757721613536').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-6.0-idp71757721613536').style.visibility = 'hidden';"><span id="ghlink-ssl-6.0-idp71757721613536" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1637" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-6.0" href="#ssl-6.0">1.32 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-6.0-idp72110391260288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-6.0-idp72110391260288').style.visibility = 'hidden';"><span id="ghlink-ssl-6.0-idp72110391260288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1754" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-6.0" href="#ssl-6.0">1.33 
           SSL 6.0</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721614400').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721614400').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721614400" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1639" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391261152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391261152').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391261152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1756" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1784,7 +1903,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721618112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721618112').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721618112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1655" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391264864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391264864').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391264864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1772" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1839,10 +1958,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.8-idp71757721627888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.8-idp71757721627888').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.8-idp71757721627888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1710" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.8" href="#ssl-5.3.8">1.33 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.8-idp72110391274640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.8-idp72110391274640').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.8-idp72110391274640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1827" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.8" href="#ssl-5.3.8">1.34 
           SSL 5.3.8</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721628752').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721628752').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721628752" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1712" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391275504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391275504').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391275504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1829" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1855,7 +1974,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721631936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721631936').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721631936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1725" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391278688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391278688').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391278688" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1842" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1869,10 +1988,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.7-idp71757721635280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.7-idp71757721635280').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.7-idp71757721635280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1739" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.7" href="#ssl-5.3.7">1.34 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.7-idp72110391282032').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.7-idp72110391282032').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.7-idp72110391282032" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1856" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.7" href="#ssl-5.3.7">1.35 
           SSL 5.3.7</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721636144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721636144').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721636144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1741" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391282896').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391282896').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391282896" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1858" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1886,10 +2005,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.6-idp71757721639472').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.6-idp71757721639472').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.6-idp71757721639472" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1755" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.6" href="#ssl-5.3.6">1.35 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.6-idp72110391286224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.6-idp72110391286224').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.6-idp72110391286224" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1872" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.6" href="#ssl-5.3.6">1.36 
           SSL 5.3.6</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721640336').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721640336').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721640336" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1757" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391287088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391287088').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391287088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1874" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1914,7 +2033,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721645216').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721645216').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721645216" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1782" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391291968').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391291968').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391291968" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1899" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1927,10 +2046,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.5-idp71757721648528').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.5-idp71757721648528').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.5-idp71757721648528" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1795" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.5" href="#ssl-5.3.5">1.36 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.5-idp72110391295280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.5-idp72110391295280').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.5-idp72110391295280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1912" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.5" href="#ssl-5.3.5">1.37 
           SSL 5.3.5</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721649392').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721649392').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721649392" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1797" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391296144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391296144').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391296144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1914" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -1986,7 +2105,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721661248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721661248').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721661248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1853" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391308000').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391308000').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391308000" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1970" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2040,10 +2159,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.4-idp71757721673440').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.4-idp71757721673440').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.4-idp71757721673440" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1907" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.4" href="#ssl-5.3.4">1.37 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.4-idp72110391320192').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.4-idp72110391320192').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.4-idp72110391320192" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2024" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.4" href="#ssl-5.3.4">1.38 
           SSL 5.3.4</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721674304').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721674304').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721674304" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1909" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391321056').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391321056').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391321056" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2026" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2086,7 +2205,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721682880').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721682880').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721682880" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L1952" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391329632').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391329632').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391329632" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2069" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2198,10 +2317,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.3-idp71757721705184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.3-idp71757721705184').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.3-idp71757721705184" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2064" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.3" href="#ssl-5.3.3">1.38 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.3-idp72110391351936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.3-idp72110391351936').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.3-idp72110391351936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2181" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.3" href="#ssl-5.3.3">1.39 
           SSL 5.3.3</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721706048').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721706048').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721706048" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2066" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391352800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391352800').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391352800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2183" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2233,10 +2352,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.2-idp71757721712512').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.2-idp71757721712512').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.2-idp71757721712512" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2098" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.2" href="#ssl-5.3.2">1.39 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.2-idp72110391359264').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.2-idp72110391359264').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.2-idp72110391359264" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2215" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.2" href="#ssl-5.3.2">1.40 
           SSL 5.3.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721713376').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721713376').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721713376" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2100" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391360128').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391360128').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391360128" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2217" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2265,7 +2384,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721719536').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721719536').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721719536" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2129" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391366288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391366288').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391366288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2246" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2296,10 +2415,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.1-idp71757721725904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.1-idp71757721725904').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.1-idp71757721725904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2160" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.1" href="#ssl-5.3.1">1.40 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3.1-idp72110391372656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3.1-idp72110391372656').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3.1-idp72110391372656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2277" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3.1" href="#ssl-5.3.1">1.41 
           SSL 5.3.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721726768').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721726768').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721726768" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2162" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391373520').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391373520').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391373520" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2279" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2336,7 +2455,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721733728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721733728').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721733728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2199" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391380480').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391380480').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391380480" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2316" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2359,10 +2478,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3-idp71757721739024').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3-idp71757721739024').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3-idp71757721739024" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2222" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3" href="#ssl-5.3">1.41 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.3-idp72110391385776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.3-idp72110391385776').style.visibility = 'hidden';"><span id="ghlink-ssl-5.3-idp72110391385776" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2339" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.3" href="#ssl-5.3">1.42 
           SSL 5.3</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721739888').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721739888').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721739888" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2224" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391386640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391386640').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391386640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2341" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2381,7 +2500,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721744448').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721744448').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721744448" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2243" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391391200').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391391200').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391391200" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2360" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2433,9 +2552,9 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.2.1-idp71757721754064').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.2.1-idp71757721754064').style.visibility = 'hidden';"><span id="ghlink-ssl-5.2.1-idp71757721754064" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2295" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.2.1" href="#ssl-5.2.1">1.42 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.2.1-idp72110391400816').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.2.1-idp72110391400816').style.visibility = 'hidden';"><span id="ghlink-ssl-5.2.1-idp72110391400816" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2412" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.2.1" href="#ssl-5.2.1">1.43 
           SSL 5.2.1</a></span></h3>
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721754928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721754928').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721754928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2296" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391401680').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391401680').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391401680" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2413" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2460,9 +2579,9 @@
     
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.1.2.1-idp71757721759984').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.1.2.1-idp71757721759984').style.visibility = 'hidden';"><span id="ghlink-ssl-5.1.2.1-idp71757721759984" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2321" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.1.2.1" href="#ssl-5.1.2.1">1.43 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.1.2.1-idp72110391406736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.1.2.1-idp72110391406736').style.visibility = 'hidden';"><span id="ghlink-ssl-5.1.2.1-idp72110391406736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2438" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.1.2.1" href="#ssl-5.1.2.1">1.44 
           SSL 5.1.2.1</a></span></h3>
-<h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721760848').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721760848').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721760848" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2322" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+<h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391407600').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391407600').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391407600" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2439" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
 <ul>
   <li>
     <p>
@@ -2474,9 +2593,9 @@
 </ul>
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.2-idp71757721764192').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.2-idp71757721764192').style.visibility = 'hidden';"><span id="ghlink-ssl-5.2-idp71757721764192" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2334" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.2" href="#ssl-5.2">1.44 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.2-idp72110391410944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.2-idp72110391410944').style.visibility = 'hidden';"><span id="ghlink-ssl-5.2-idp72110391410944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2451" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.2" href="#ssl-5.2">1.45 
           SSL 5.2</a></span></h3>
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721765056').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721765056').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721765056" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2335" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391411808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391411808').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391411808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2452" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2511,7 +2630,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721771856').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721771856').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721771856" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2370" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391418608').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391418608').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391418608" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2487" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2584,10 +2703,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.1.2-idp71757721786544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.1.2-idp71757721786544').style.visibility = 'hidden';"><span id="ghlink-ssl-5.1.2-idp71757721786544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2443" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.1.2" href="#ssl-5.1.2">1.45 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.1.2-idp72110391433296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.1.2-idp72110391433296').style.visibility = 'hidden';"><span id="ghlink-ssl-5.1.2-idp72110391433296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2560" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.1.2" href="#ssl-5.1.2">1.46 
           SSL 5.1.2</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721787408').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721787408').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721787408" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2445" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391434160').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391434160').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391434160" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2562" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2600,10 +2719,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.1.1-idp71757721790704').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.1.1-idp71757721790704').style.visibility = 'hidden';"><span id="ghlink-ssl-5.1.1-idp71757721790704" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2458" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.1.1" href="#ssl-5.1.1">1.46 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.1.1-idp72110391437456').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.1.1-idp72110391437456').style.visibility = 'hidden';"><span id="ghlink-ssl-5.1.1-idp72110391437456" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2575" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.1.1" href="#ssl-5.1.1">1.47 
           SSL 5.1.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721791568').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721791568').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721791568" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2460" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391438320').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391438320').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391438320" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2577" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2620,7 +2739,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721794992').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721794992').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721794992" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2477" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391441744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391441744').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391441744" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2594" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2633,10 +2752,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.1-idp71757721798288').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.1-idp71757721798288').style.visibility = 'hidden';"><span id="ghlink-ssl-5.1-idp71757721798288" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2490" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.1" href="#ssl-5.1">1.47 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.1-idp72110391445040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.1-idp72110391445040').style.visibility = 'hidden';"><span id="ghlink-ssl-5.1-idp72110391445040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2607" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.1" href="#ssl-5.1">1.48 
           SSL 5.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721799152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721799152').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721799152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2492" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391445904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391445904').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391445904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2609" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2657,7 +2776,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721803792').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721803792').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721803792" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2513" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391450544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391450544').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391450544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2630" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2697,10 +2816,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.0.1-idp71757721811776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.0.1-idp71757721811776').style.visibility = 'hidden';"><span id="ghlink-ssl-5.0.1-idp71757721811776" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2553" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.0.1" href="#ssl-5.0.1">1.48 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.0.1-idp72110391458528').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.0.1-idp72110391458528').style.visibility = 'hidden';"><span id="ghlink-ssl-5.0.1-idp72110391458528" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2670" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.0.1" href="#ssl-5.0.1">1.49 
           SSL 5.0.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721812640').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721812640').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721812640" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2555" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391459392').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391459392').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391459392" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2672" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2744,10 +2863,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.0-idp71757721821456').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.0-idp71757721821456').style.visibility = 'hidden';"><span id="ghlink-ssl-5.0-idp71757721821456" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2599" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.0" href="#ssl-5.0">1.49 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-5.0-idp72110391468208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-5.0-idp72110391468208').style.visibility = 'hidden';"><span id="ghlink-ssl-5.0-idp72110391468208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2716" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-5.0" href="#ssl-5.0">1.50 
           SSL 5.0</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721822320').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721822320').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721822320" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2601" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391469072').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391469072').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391469072" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2718" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2787,7 +2906,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721830176').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721830176').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721830176" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2641" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391476928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391476928').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391476928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2758" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2839,10 +2958,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-4.1.6-idp71757721840864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.1.6-idp71757721840864').style.visibility = 'hidden';"><span id="ghlink-ssl-4.1.6-idp71757721840864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2693" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.1.6" href="#ssl-4.1.6">1.50 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-4.1.6-idp72110391487616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.1.6-idp72110391487616').style.visibility = 'hidden';"><span id="ghlink-ssl-4.1.6-idp72110391487616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2810" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.1.6" href="#ssl-4.1.6">1.51 
           SSL 4.1.6</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721841728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721841728').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721841728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2695" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391488480').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391488480').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391488480" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2812" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2856,7 +2975,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721844960').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721844960').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721844960" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2709" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391491712').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391491712').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391491712" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2826" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2892,11 +3011,11 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-4.1.5-idp71757721852672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.1.5-idp71757721852672').style.visibility = 'hidden';"><span id="ghlink-ssl-4.1.5-idp71757721852672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2745" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.1.5" href="#ssl-4.1.5">1.51 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-4.1.5-idp72110391499424').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.1.5-idp72110391499424').style.visibility = 'hidden';"><span id="ghlink-ssl-4.1.5-idp72110391499424" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2862" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.1.5" href="#ssl-4.1.5">1.52 
           SSL 4.1.5</a></span></h3>
     
     
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721853696').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721853696').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721853696" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2748" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391500448').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391500448').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391500448" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2865" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
     <ul>
       <li>
 	<p>Calling gen_tcp:connect with option {ip, {127,0,0,1}} results in 
@@ -2909,11 +3028,11 @@
     
   
   
-  <h3><span onMouseOver="document.getElementById('ghlink-ssl-4.1.3-idp71757721857152').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.1.3-idp71757721857152').style.visibility = 'hidden';"><span id="ghlink-ssl-4.1.3-idp71757721857152" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2761" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.1.3" href="#ssl-4.1.3">1.52 
+  <h3><span onMouseOver="document.getElementById('ghlink-ssl-4.1.3-idp72110391503904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.1.3-idp72110391503904').style.visibility = 'hidden';"><span id="ghlink-ssl-4.1.3-idp72110391503904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2878" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.1.3" href="#ssl-4.1.3">1.53 
           SSL 4.1.3</a></span></h3>
     
   
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721858176').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721858176').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721858176" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2764" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391504928').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391504928').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391504928" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2881" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
     <ul>
       <li>
 	<p>
@@ -2931,11 +3050,11 @@
 
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-ssl-4.1.2-idp71757721862896').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.1.2-idp71757721862896').style.visibility = 'hidden';"><span id="ghlink-ssl-4.1.2-idp71757721862896" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2782" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.1.2" href="#ssl-4.1.2">1.53 
+  <h3><span onMouseOver="document.getElementById('ghlink-ssl-4.1.2-idp72110391509648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.1.2-idp72110391509648').style.visibility = 'hidden';"><span id="ghlink-ssl-4.1.2-idp72110391509648" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2899" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.1.2" href="#ssl-4.1.2">1.54 
           SSL 4.1.2</a></span></h3>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721863920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721863920').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721863920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2785" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391510672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391510672').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391510672" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2902" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2957,10 +3076,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-4.1.1-idp71757721868832').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.1.1-idp71757721868832').style.visibility = 'hidden';"><span id="ghlink-ssl-4.1.1-idp71757721868832" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2807" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.1.1" href="#ssl-4.1.1">1.54 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-4.1.1-idp72110391515584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.1.1-idp72110391515584').style.visibility = 'hidden';"><span id="ghlink-ssl-4.1.1-idp72110391515584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2924" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.1.1" href="#ssl-4.1.1">1.55 
           SSL 4.1.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721869696').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721869696').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721869696" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2809" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391516448').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391516448').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391516448" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2926" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2978,7 +3097,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721873168').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721873168').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721873168" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2827" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391519920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391519920').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391519920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2944" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -2999,10 +3118,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-4.1-idp71757721878000').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.1-idp71757721878000').style.visibility = 'hidden';"><span id="ghlink-ssl-4.1-idp71757721878000" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2848" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.1" href="#ssl-4.1">1.55 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-4.1-idp72110391524752').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.1-idp72110391524752').style.visibility = 'hidden';"><span id="ghlink-ssl-4.1-idp72110391524752" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2965" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.1" href="#ssl-4.1">1.56 
           SSL 4.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721878864').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721878864').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721878864" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2850" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391525616').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391525616').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391525616" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2967" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -3040,10 +3159,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-4.0.1-idp71757721885984').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.0.1-idp71757721885984').style.visibility = 'hidden';"><span id="ghlink-ssl-4.0.1-idp71757721885984" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2888" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.0.1" href="#ssl-4.0.1">1.56 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-4.0.1-idp72110391532736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.0.1-idp72110391532736').style.visibility = 'hidden';"><span id="ghlink-ssl-4.0.1-idp72110391532736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L3005" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.0.1" href="#ssl-4.0.1">1.57 
           SSL 4.0.1</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721886848').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp71757721886848').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp71757721886848" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2890" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391533600').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fixed-bugs-and-malfunctions-idp72110391533600').style.visibility = 'hidden';"><span id="ghlink-fixed-bugs-and-malfunctions-idp72110391533600" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L3007" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fixed-bugs-and-malfunctions" href="#fixed-bugs-and-malfunctions">Fixed Bugs and Malfunctions</a></span></h4>
       <ul>
         <li>
           <p>
@@ -3098,7 +3217,7 @@
     
 
 
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721898576').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721898576').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721898576" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2942" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391545328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391545328').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391545328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L3059" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
       <ul>
         <li>
           <p>
@@ -3153,10 +3272,10 @@
 
 
 
-<h3><span onMouseOver="document.getElementById('ghlink-ssl-4.0-idp71757721908352').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.0-idp71757721908352').style.visibility = 'hidden';"><span id="ghlink-ssl-4.0-idp71757721908352" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2997" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.0" href="#ssl-4.0">1.57 
+<h3><span onMouseOver="document.getElementById('ghlink-ssl-4.0-idp72110391555104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ssl-4.0-idp72110391555104').style.visibility = 'hidden';"><span id="ghlink-ssl-4.0-idp72110391555104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L3114" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ssl-4.0" href="#ssl-4.0">1.58 
           SSL 4.0</a></span></h3>
     
-    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp71757721909216').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp71757721909216').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp71757721909216" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L2999" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-improvements-and-new-features-idp72110391555968').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-improvements-and-new-features-idp72110391555968').style.visibility = 'hidden';"><span id="ghlink-improvements-and-new-features-idp72110391555968" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssl/doc/src/notes.xml#L3116" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="improvements-and-new-features" href="#improvements-and-new-features">Improvements and New Features</a></span></h4>
     <ul>
       <li>
 	<p>

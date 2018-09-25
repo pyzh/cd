@@ -1,9 +1,0 @@
-%% 
-%% Search data file for jinterface 1.9
-%% generated September 24, 2018
-%% 
-{"jinterface.html", {function, {"jinterface", "jinterface"}},
-[
-]}.
-{"jinterface.html", {module, "jinterface"}, ["jinterface"]}.
-{notused, application, ["jinterface"]}.
