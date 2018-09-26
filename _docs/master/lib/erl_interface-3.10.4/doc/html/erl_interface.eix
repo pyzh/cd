@@ -1,6 +1,6 @@
 %% 
 %% Search data file for erl_interface 3.10.4
-%% generated September 25, 2018
+%% generated September 26, 2018
 %% 
 {"ei.html", {function, {"erl_interface", "ei"}}, [
   {"ei_decode_atom", "ei_decode_atom(const char *buf, int *index, char *p)", "ei_decode_atom"},
