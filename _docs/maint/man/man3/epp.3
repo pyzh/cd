@@ -140,6 +140,8 @@ Options =
 .br
      {includes, IncludePath :: [DirectoryName :: \fBfile:name()\fR\&]} |
 .br
+     {source_name, SourceName :: \fBfile:name()\fR\&} |
+.br
      {macros, PredefMacros :: \fBmacros()\fR\&} |
 .br
      {name, FileName :: \fBfile:name()\fR\&} |
@@ -157,6 +159,8 @@ ErrorDescriptor = term()
 .RS
 .LP
 Opens a file for preprocessing\&.
+.LP
+If you want to change the file name of the implicit -file() attributes inserted during preprocessing, you can do with \fI{source_name, SourceName}\fR\&\&. If unset it will default to the name of the opened file\&.
 .LP
 If \fIextra\fR\& is specified in \fIOptions\fR\&, the return value is \fI{ok, Epp, Extra}\fR\& instead of \fI{ok, Epp}\fR\&\&.
 .RE
@@ -286,6 +290,8 @@ Options =
 .br
     [{includes, IncludePath :: [DirectoryName :: \fBfile:name()\fR\&]} |
 .br
+     {source_name, SourceName :: \fBfile:name()\fR\&} |
+.br
      {macros, PredefMacros :: \fBmacros()\fR\&} |
 .br
      {default_encoding, DefEncoding :: \fBsource_encoding()\fR\&} |
@@ -309,6 +315,8 @@ OpenError = \fBfile:posix()\fR\& | badarg | system_limit
 .RS
 .LP
 Preprocesses and parses an Erlang source file\&. Notice that tuple \fI{eof, Line}\fR\& returned at the end of the file is included as a "form"\&.
+.LP
+If you want to change the file name of the implicit -file() attributes inserted during preprocessing, you can do with \fI{source_name, SourceName}\fR\&\&. If unset it will default to the name of the opened file\&.
 .LP
 If \fIextra\fR\& is specified in \fIOptions\fR\&, the return value is \fI{ok, [Form], Extra}\fR\& instead of \fI{ok, [Form]}\fR\&\&.
 .RE
