@@ -143,7 +143,7 @@ For details, see \fBbeam_lib(3)\fR\&\&.
 .TP 2
 .B
 \fIdeterministic\fR\&:
-Omit the \fIoptions\fR\& and \fIsource\fR\& tuples in the list returned by \fIModule:module_info(compile)\fR\&\&. This option will make it easier to achieve reproducible builds\&.
+Omit the \fIoptions\fR\& and \fIsource\fR\& tuples in the list returned by \fIModule:module_info(compile)\fR\&, and reduce the paths in stack traces to the module name alone\&. This option will make it easier to achieve reproducible builds\&.
 .TP 2
 .B
 \fImakedep\fR\&:
@@ -242,7 +242,7 @@ Causes more verbose information from the compiler, describing what it is doing\&
 .TP 2
 .B
 \fI{source,FileName}\fR\&:
-Sets the value of the source, as returned by \fImodule_info(compile)\fR\&\&.
+Overrides the source file name as presented in \fImodule_info(compile)\fR\& and stack traces\&.
 .TP 2
 .B
 \fI{outdir,Dir}\fR\&:
