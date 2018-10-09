@@ -1,6 +1,6 @@
 %% 
 %% Search data file for ssl 9.1
-%% generated October  8, 2018
+%% generated October  9, 2018
 %% 
 {"ssl_app.html", {app, "ssl"}, ["ssl"]}.
 {"ssl.html", {function, {"ssl", "ssl"}},
