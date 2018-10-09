@@ -1,6 +1,6 @@
 %% 
 %% Search data file for os_mon 2.4.6
-%% generated October  8, 2018
+%% generated October  9, 2018
 %% 
 {"os_mon_app.html", {app, "os_mon"}, ["os_mon"]}.
 {"cpu_sup.html", {function, {"os_mon", "cpu_sup"}},
