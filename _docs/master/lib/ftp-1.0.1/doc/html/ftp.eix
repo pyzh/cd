@@ -1,6 +1,6 @@
 %% 
 %% Search data file for ftp 1.0.1
-%% generated October  9, 2018
+%% generated October 11, 2018
 %% 
 {"ftp.html", {function, {"ftp", "ftp"}},
 [
