@@ -3,12 +3,48 @@
 rand \- Pseudo random number generation.
 .SH DESCRIPTION
 .LP
-This module provides a pseudo random number generator\&. The module contains a number of algorithms\&. The uniform distribution algorithms use the  xoroshiro116+ and xorshift1024* algorithms by Sebastiano Vigna\&.  The normal distribution algorithm uses the  Ziggurat Method by Marsaglia and Tsang  on top of the uniform distribution algorithm\&.
+This module provides a pseudo random number generator\&. The module contains a number of algorithms\&. The uniform distribution algorithms are based on the  Xoroshiro and Xorshift algorithms  by Sebastiano Vigna\&. The normal distribution algorithm uses the  Ziggurat Method by Marsaglia and Tsang  on top of the uniform distribution algorithm\&.
 .LP
-For some algorithms, jump functions are provided for generating non-overlapping sequences for parallel computations\&. The jump functions perform calculations equivalent to perform a large number of repeated calls for calculating new states\&.
+For most algorithms, jump functions are provided for generating non-overlapping sequences for parallel computations\&. The jump functions perform calculations equivalent to perform a large number of repeated calls for calculating new states\&.
 .LP
 The following algorithms are provided:
 .RS 2
+.TP 2
+.B
+\fIexsss\fR\&:
+Xorshift116**, 58 bits precision and period of 2^116-1
+.RS 2
+.LP
+Jump function: equivalent to 2^64 calls
+.RE
+.RS 2
+.LP
+This is the Xorshift116 generator combined with the StarStar scrambler from the 2018 paper by David Blackman and Sebastiano Vigna:  Scrambled Linear Pseudorandom Number Generators  
+.RE
+.RS 2
+.LP
+The generator does not need 58-bit rotates so it is faster than the Xoroshiro116 generator, and when combined with the StarStar scrambler it does not have any weak low bits like \fIexrop\fR\& (Xoroshiro116+)\&.
+.RE
+.RS 2
+.LP
+Alas, this combination is about 10% slower than \fIexrop\fR\&, but is despite that the default algorithm thanks to its statistical qualities\&.
+.RE
+.TP 2
+.B
+\fIexro928ss\fR\&:
+Xoroshiro928**, 58 bits precision and a period of 2^928-1
+.RS 2
+.LP
+Jump function: equivalent to 2^512 calls
+.RE
+.RS 2
+.LP
+This is a 58 bit version of Xoroshiro1024**, from the 2018 paper by David Blackman and Sebastiano Vigna:  Scrambled Linear Pseudorandom Number Generators  that on a 64 bit Erlang system executes only about 40% slower than the default \fIexsss\fR\& algorithm but with much longer period and better statistical properties, and on the flip side a larger state\&.
+.RE
+.RS 2
+.LP
+Many thanks to Sebastiano Vigna for his help with the 58 bit adaption\&.
+.RE
 .TP 2
 .B
 \fIexrop\fR\&:
@@ -27,22 +63,6 @@ Jump function: equivalent to 2^512 calls
 .RE
 .TP 2
 .B
-\fIexro928ss\fR\&:
-Xoroshiro928**, 58 bits precision and a period of 2^928-1
-.RS 2
-.LP
-Jump function: equivalent to 2^512 calls
-.RE
-.RS 2
-.LP
-This is a 58 bit version of Xoroshiro1024**, from the 2018 paper by David Blackman and Sebastiano Vigna:  Scrambled Linear Pseudorandom Number Generators  that on a 64 bit Erlang system executes only about 30% slower than the default \fIexrop\fR\& algorithm but with much longer period and better statistical properties, and on the flip side a larger state\&.
-.RE
-.RS 2
-.LP
-Many thanks to Sebastiano Vigna for his help with the 58 bit adaption\&.
-.RE
-.TP 2
-.B
 \fIexsp\fR\&:
 Xorshift116+, 58 bits precision and period of 2^116-1
 .RS 2
@@ -55,7 +75,7 @@ This is a corrected version of the previous default algorithm, that now has been
 .RE
 .RE
 .LP
-The default algorithm is \fIexrop\fR\& (Xoroshiro116+)\&. If a specific algorithm is required, ensure to always use \fB\fIseed/1\fR\&\fR\& to initialize the state\&.
+The default algorithm is \fIexsss\fR\& (Xorshift116**)\&. If a specific algorithm is required, ensure to always use \fB\fIseed/1\fR\&\fR\& to initialize the state\&.
 .LP
 Undocumented (old) algorithms are deprecated but still implemented so old code relying on them will produce the same pseudo random sequences as before\&.
 .LP
@@ -95,7 +115,7 @@ Use a specified algorithm:
 .LP
 .nf
 
-_ = rand:seed(exs1024s),
+_ = rand:seed(exs928ss),
 R2 = rand:uniform(),
 .fi
 .LP
@@ -103,7 +123,7 @@ Use a specified algorithm with a constant seed:
 .LP
 .nf
 
-_ = rand:seed(exs1024s, {123, 123534, 345345}),
+_ = rand:seed(exs928ss, {123, 123534, 345345}),
 R3 = rand:uniform(),
 .fi
 .LP
@@ -111,7 +131,7 @@ Use the functional API with a non-constant seed:
 .LP
 .nf
 
-S0 = rand:seed_s(exrop),
+S0 = rand:seed_s(exsss),
 {R4, S1} = rand:uniform_s(S0),
 .fi
 .LP
@@ -146,7 +166,7 @@ Note:
 The builtin random number generator algorithms are not cryptographically strong\&. If a cryptographically strong random number generator is needed, use something like \fB\fIcrypto:rand_seed/0\fR\&\fR\&\&.
 
 .LP
-For all these generators except \fIexro928ss\fR\& the lowest bit(s) has got a slightly less random behaviour than all other bits\&. 1 bit for \fIexrop\fR\& (and \fIexsp\fR\&), and 3 bits for \fIexs1024s\fR\&\&. See for example the explanation in the  Xoroshiro128+  generator source code:
+For all these generators except \fIexro928ss\fR\& and \fIexsss\fR\& the lowest bit(s) has got a slightly less random behaviour than all other bits\&. 1 bit for \fIexrop\fR\& (and \fIexsp\fR\&), and 3 bits for \fIexs1024s\fR\&\&. See for example the explanation in the  Xoroshiro128+  generator source code:
 .LP
 .nf
 
@@ -156,7 +176,7 @@ which fail due to the lowest bit being an LFSR; all other bits pass all
 tests. We suggest to use a sign test to extract a random Boolean value.
 .fi
 .LP
-If this is a problem; to generate a boolean use something like this:
+If this is a problem; to generate a boolean with these algorithms use something like this:
 .LP
 .nf
 (rand:uniform(16) > 8)
@@ -174,11 +194,13 @@ The floating point generating functions in this module waste the lowest bits whe
 
 \fBbuiltin_alg()\fR\& = 
 .br
+    exsss |
+.br
+    exro928ss |
+.br
     exrop |
 .br
     exs1024s |
-.br
-    exro928ss |
 .br
     exsp |
 .br
@@ -223,13 +245,13 @@ The floating point generating functions in this module waste the lowest bits whe
 
 \fBalg_state()\fR\& = 
 .br
-    \fBexrop_state()\fR\& |
-.br
-    \fBexs1024_state()\fR\& |
+    \fBexsplus_state()\fR\& |
 .br
     \fBexro928_state()\fR\& |
 .br
-    \fBexsplus_state()\fR\& |
+    \fBexrop_state()\fR\& |
+.br
+    \fBexs1024_state()\fR\& |
 .br
     \fBexs64_state()\fR\& |
 .br
@@ -273,16 +295,7 @@ A traditional 3-tuple of integers seed is passed through algorithm-dependent has
 .RE
 .nf
 
-\fBexrop_state()\fR\&
-.br
-.fi
-.RS
-.LP
-Algorithm specific internal state
-.RE
-.nf
-
-\fBexs1024_state()\fR\&
+\fBexsplus_state()\fR\&
 .br
 .fi
 .RS
@@ -300,7 +313,16 @@ Algorithm specific internal state
 .RE
 .nf
 
-\fBexsplus_state()\fR\&
+\fBexrop_state()\fR\&
+.br
+.fi
+.RS
+.LP
+Algorithm specific internal state
+.RE
+.nf
+
+\fBexs1024_state()\fR\&
 .br
 .fi
 .RS
