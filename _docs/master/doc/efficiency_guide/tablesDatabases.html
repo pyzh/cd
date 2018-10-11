@@ -192,13 +192,13 @@
 <h1>7 Tables and Databases</h1>
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-ets,-dets,-and-mnesia-idp46140207078336').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ets,-dets,-and-mnesia-idp46140207078336').style.visibility = 'hidden';"><span id="ghlink-ets,-dets,-and-mnesia-idp46140207078336" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L32" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ets,-dets,-and-mnesia" href="#ets,-dets,-and-mnesia">7.1 
+  <h3><span onMouseOver="document.getElementById('ghlink-ets,-dets,-and-mnesia-idp47564501206592').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ets,-dets,-and-mnesia-idp47564501206592').style.visibility = 'hidden';"><span id="ghlink-ets,-dets,-and-mnesia-idp47564501206592" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L32" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ets,-dets,-and-mnesia" href="#ets,-dets,-and-mnesia">7.1 
           Ets, Dets, and Mnesia</a></span></h3>
     
     <p>Every example using Ets has a corresponding example in
       Mnesia. In general, all Ets examples also apply to Dets tables.</p>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-select-match-operations-idp46140207079952').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-select-match-operations-idp46140207079952').style.visibility = 'hidden';"><span id="ghlink-select-match-operations-idp46140207079952" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L37" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="select-match-operations" href="#select-match-operations">Select/Match Operations</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-select-match-operations-idp47564501208208').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-select-match-operations-idp47564501208208').style.visibility = 'hidden';"><span id="ghlink-select-match-operations-idp47564501208208" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L37" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="select-match-operations" href="#select-match-operations">Select/Match Operations</a></span></h4>
       
       <p>Select/match operations on Ets and Mnesia tables can become
         very expensive operations. They usually need to scan the complete
@@ -226,7 +226,7 @@
 #person{age = 42, _ = '_'}. </pre></div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-deleting-an-element-idp46140207087120').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-deleting-an-element-idp46140207087120').style.visibility = 'hidden';"><span id="ghlink-deleting-an-element-idp46140207087120" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L65" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="deleting-an-element" href="#deleting-an-element">Deleting an Element</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-deleting-an-element-idp47564501215376').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-deleting-an-element-idp47564501215376').style.visibility = 'hidden';"><span id="ghlink-deleting-an-element-idp47564501215376" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L65" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="deleting-an-element" href="#deleting-an-element">Deleting an Element</a></span></h4>
       
       <p>The <span class="code">delete</span> operation is considered
         successful if the element was not present in the table. Hence
@@ -250,7 +250,7 @@ end,
 ...</pre></div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-fetching-data-idp46140207091648').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fetching-data-idp46140207091648').style.visibility = 'hidden';"><span id="ghlink-fetching-data-idp46140207091648" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L89" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fetching-data" href="#fetching-data">Fetching Data</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-fetching-data-idp47564501219904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-fetching-data-idp47564501219904').style.visibility = 'hidden';"><span id="ghlink-fetching-data-idp47564501219904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L89" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="fetching-data" href="#fetching-data">Fetching Data</a></span></h4>
       
       <p>Do not fetch data that you already have.</p>
       <p>Consider that you have a module that handles the abstract data
@@ -316,7 +316,7 @@ print_occupation(PersonID) -&gt;
     io:format("No person ~p~n", [Person#person.occupation]).</pre></div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-non-persistent-database-storage-idp46140207101664').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-non-persistent-database-storage-idp46140207101664').style.visibility = 'hidden';"><span id="ghlink-non-persistent-database-storage-idp46140207101664" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L154" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="non-persistent-database-storage" href="#non-persistent-database-storage">Non-Persistent Database Storage</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-non-persistent-database-storage-idp47564501229920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-non-persistent-database-storage-idp47564501229920').style.visibility = 'hidden';"><span id="ghlink-non-persistent-database-storage-idp47564501229920" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L154" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="non-persistent-database-storage" href="#non-persistent-database-storage">Non-Persistent Database Storage</a></span></h4>
       
       <p>For non-persistent database storage, prefer Ets tables over
         Mnesia <span class="code">local_content</span> tables. Even the Mnesia <span class="code">dirty_write</span>
@@ -327,7 +327,7 @@ print_occupation(PersonID) -&gt;
         Mnesia writes.</p>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-tab2list-idp46140207104992').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-tab2list-idp46140207104992').style.visibility = 'hidden';"><span id="ghlink-tab2list-idp46140207104992" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L165" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="tab2list" href="#tab2list">tab2list</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-tab2list-idp47564501233248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-tab2list-idp47564501233248').style.visibility = 'hidden';"><span id="ghlink-tab2list-idp47564501233248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L165" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="tab2list" href="#tab2list">tab2list</a></span></h4>
       
       <p>Assuming an Ets table that uses <span class="code">idno</span> as key
         and contains the following:</p>
@@ -408,7 +408,7 @@ lists:filter(fun(X) -&gt; X#person.name == "Bryan" end, TabList),
 ...</pre></div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-ordered_set-tables-idp46140207119280').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ordered_set-tables-idp46140207119280').style.visibility = 'hidden';"><span id="ghlink-ordered_set-tables-idp46140207119280" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L246" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ordered_set-tables" href="#ordered_set-tables">Ordered_set Tables</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-ordered_set-tables-idp47564501247536').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ordered_set-tables-idp47564501247536').style.visibility = 'hidden';"><span id="ghlink-ordered_set-tables-idp47564501247536" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L246" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ordered_set-tables" href="#ordered_set-tables">Ordered_set Tables</a></span></h4>
       
       <p>If the data in the table is to be accessed so that the order
         of the keys in the table is significant, the table type
@@ -432,11 +432,11 @@ lists:filter(fun(X) -&gt; X#person.name == "Bryan" end, TabList),
     
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-ets-specific-idp46140207128272').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ets-specific-idp46140207128272').style.visibility = 'hidden';"><span id="ghlink-ets-specific-idp46140207128272" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L267" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ets-specific" href="#ets-specific">7.2 
+  <h3><span onMouseOver="document.getElementById('ghlink-ets-specific-idp47564501256528').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-ets-specific-idp47564501256528').style.visibility = 'hidden';"><span id="ghlink-ets-specific-idp47564501256528" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L267" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="ets-specific" href="#ets-specific">7.2 
           Ets-Specific</a></span></h3>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-using-keys-of-ets-table-idp46140207129328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-using-keys-of-ets-table-idp46140207129328').style.visibility = 'hidden';"><span id="ghlink-using-keys-of-ets-table-idp46140207129328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L270" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="using-keys-of-ets-table" href="#using-keys-of-ets-table">Using Keys of Ets Table</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-using-keys-of-ets-table-idp47564501257584').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-using-keys-of-ets-table-idp47564501257584').style.visibility = 'hidden';"><span id="ghlink-using-keys-of-ets-table-idp47564501257584" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L270" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="using-keys-of-ets-table" href="#using-keys-of-ets-table">Using Keys of Ets Table</a></span></h4>
       
       <p>An Ets table is a single-key table (either a hash table or a
         tree ordered by the key) and is to be used as one. In other
@@ -489,11 +489,11 @@ lists:map(fun(#index_entry{idno = ID}) -&gt;
     
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-mnesia-specific-idp46140207142128').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-mnesia-specific-idp46140207142128').style.visibility = 'hidden';"><span id="ghlink-mnesia-specific-idp46140207142128" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L323" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="mnesia-specific" href="#mnesia-specific">7.3 
+  <h3><span onMouseOver="document.getElementById('ghlink-mnesia-specific-idp47564501270384').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-mnesia-specific-idp47564501270384').style.visibility = 'hidden';"><span id="ghlink-mnesia-specific-idp47564501270384" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L323" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="mnesia-specific" href="#mnesia-specific">7.3 
           Mnesia-Specific</a></span></h3>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-secondary-index-idp46140207143184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-secondary-index-idp46140207143184').style.visibility = 'hidden';"><span id="ghlink-secondary-index-idp46140207143184" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L326" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="secondary-index" href="#secondary-index">Secondary Index</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-secondary-index-idp47564501271440').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-secondary-index-idp47564501271440').style.visibility = 'hidden';"><span id="ghlink-secondary-index-idp47564501271440" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L326" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="secondary-index" href="#secondary-index">Secondary Index</a></span></h4>
       
       <p>If you frequently do a lookup on a field that is not the
         key of the table, you lose performance using
@@ -517,7 +517,7 @@ PersonsAge42 =
 ...</pre></div>
     
 
-    <h4><span onMouseOver="document.getElementById('ghlink-transactions--idp46140207146544').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-transactions--idp46140207146544').style.visibility = 'hidden';"><span id="ghlink-transactions--idp46140207146544" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L350" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="transactions-" href="#transactions-">Transactions </a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-transactions--idp47564501274800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-transactions--idp47564501274800').style.visibility = 'hidden';"><span id="ghlink-transactions--idp47564501274800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/system/doc/efficiency_guide/tablesDatabases.xml#L350" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="transactions-" href="#transactions-">Transactions </a></span></h4>
       
       <p>Using transactions is a way to guarantee that the distributed
         Mnesia database remains consistent, even when many different
