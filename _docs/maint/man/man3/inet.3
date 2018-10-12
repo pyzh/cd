@@ -206,6 +206,78 @@ The value(s) correspond to the currently active socket \fBoptions\fR\& \fB\fIrec
 .RE
 .nf
 
+\fBgetifaddrs_ifopts()\fR\& = 
+.br
+    [Ifopt ::
+.br
+         {flags,
+.br
+          Flags ::
+.br
+              [up |
+.br
+               broadcast |
+.br
+               loopback |
+.br
+               pointtopoint |
+.br
+               running |
+.br
+               multicast]} |
+.br
+         {addr, Addr :: \fBip_address()\fR\&} |
+.br
+         {netmask, Netmask :: \fBip_address()\fR\&} |
+.br
+         {broadaddr, Broadaddr :: \fBip_address()\fR\&} |
+.br
+         {dstaddr, Dstaddr :: \fBip_address()\fR\&} |
+.br
+         {hwaddr, Hwaddr :: [byte()]}]
+.br
+.fi
+.RS
+.LP
+Interface address description list returned from \fB\fIgetifaddrs/0,1\fR\&\fR\& for a named interface, translated from the returned data of the POSIX API function \fIgetaddrinfo()\fR\&\&.
+.LP
+\fIHwaddr\fR\& is hardware dependent, for example, on Ethernet interfaces it is the 6-byte Ethernet address (MAC address (EUI-48 address))\&.
+.LP
+The tuples \fI{addr,Addr}\fR\&, \fI{netmask,Netmask}\fR\&, and possibly \fI{broadaddr,Broadaddr}\fR\& or \fI{dstaddr,Dstaddr}\fR\& are repeated in the list if the interface has got multiple addresses\&. An interface may have multiple \fI{flag,_}\fR\& tuples for example if it has different flags for different address families\&. Multiple \fI{hwaddr,Hwaddr}\fR\& tuples is hard to say anything definite about, though\&. The tuple \fI{flag,Flags}\fR\& is mandatory, all others are optional\&.
+.LP
+Do not rely too much on the order of \fIFlags\fR\& atoms or the \fIIfopt\fR\& tuples\&. There are however some rules:
+.RS 2
+.TP 2
+*
+A \fI{flag,_}\fR\& tuple applies to all other tuples that follow\&.
+.LP
+.TP 2
+*
+Immediately after \fI{addr,_}\fR\& follows \fI{netmask,_}\fR\&\&.
+.LP
+.TP 2
+*
+Immediately thereafter may \fI{broadaddr,_}\fR\& follow if \fIbroadcast\fR\& is member of \fIFlags\fR\&, or \fI{dstaddr,_}\fR\& if \fIpointtopoint\fR\& is member of \fIFlags\fR\&\&. Both \fI{dstaddr,_}\fR\& and \fI{broadaddr,_}\fR\& does not occur for the same \fI{addr,_}\fR\&\&.
+.LP
+.TP 2
+*
+Any \fI{netmask,_}\fR\&, \fI{broadaddr,_}\fR\&, or \fI{dstaddr,_}\fR\& tuples that follow an \fI{addr,Addr}\fR\& tuple concerns the address \fIAddr\fR\&\&.
+.LP
+.RE
+
+.LP
+The tuple \fI{hwaddr,_}\fR\& is not returned on Solaris, as the hardware address historically belongs to the link layer and it is not returned by the Solaris API function \fIgetaddrinfo()\fR\&\&.
+.LP
+
+.RS -4
+.B
+Warning:
+.RE
+On Windows, the data is fetched from different OS API functions, so the \fINetmask\fR\& and \fIBroadaddr\fR\& values may be calculated, just as some \fIFlags\fR\& values\&.
+
+.RE
+.nf
+
 \fBposix()\fR\& = 
 .br
     eaddrinuse |
@@ -502,75 +574,50 @@ Returns the local hostname\&. Never fails\&.
 .nf
 
 .B
-getifaddrs() -> {ok, Iflist} | {error, posix()}
+getifaddrs() ->
+.B
+              {ok,
+.B
+               [{Ifname :: string(),
+.B
+                 Ifopts :: getifaddrs_ifopts()}]} |
+.B
+              {error, posix()}
 .br
 .fi
+.br
+.RS
+.LP
+Returns a list of 2-tuples containing interface names and the interfaces\&' addresses\&. \fIIfname\fR\& is a Unicode string and \fIIfopts\fR\& is a list of interface address description tuples\&.
+.LP
+The interface address description tuples are documented under the type of the \fB\fIIfopts\fR\&\fR\& value\&.
+.RE
+.LP
+.B
+getifaddrs(Opts) -> {ok, [{Ifname, Ifopts}]} | {error, Posix} 
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Iflist = [{Ifname, [Ifopt]}]
+ Opts = [{netns, Namespace}] 
+.br
+ Namespace = \fB file:filename_all() \fR\&
 .br
 Ifname = string()
 .br
-Ifopt = 
+ Ifopts = \fB getifaddrs_ifopts() \fR\&
 .br
-    {flags, [Flag]} |
-.br
-    {addr, Addr} |
-.br
-    {netmask, Netmask} |
-.br
-    {broadaddr, Broadaddr} |
-.br
-    {dstaddr, Dstaddr} |
-.br
-    {hwaddr, Hwaddr}
-.br
-Flag = 
-.br
-    up | broadcast | loopback | pointtopoint | running | multicast
-.br
-Addr = Netmask = Broadaddr = Dstaddr = \fBip_address()\fR\&
-.br
-Hwaddr = [byte()]
+Posix = \fBposix()\fR\&
 .br
 .RE
 .RE
 .RS
 .LP
-Returns a list of 2-tuples containing interface names and the interface addresses\&. \fIIfname\fR\& is a Unicode string\&. \fIHwaddr\fR\& is hardware dependent, for example, on Ethernet interfaces it is the 6-byte Ethernet address (MAC address (EUI-48 address))\&.
+The same as \fB\fIgetifaddrs/0\fR\&\fR\& but the \fIOption\fR\& \fI{netns, Namespace}\fR\& sets a network namespace for the OS call, on platforms that supports that feature\&.
 .LP
-The tuples \fI{addr,Addr}\fR\&, \fI{netmask,_}\fR\&, and \fI{broadaddr,_}\fR\& are repeated in the result list if the interface has multiple addresses\&. If you come across an interface with multiple \fI{flag,_}\fR\& or \fI{hwaddr,_}\fR\& tuples, you have a strange interface or possibly a bug in this function\&. The tuple \fI{flag,_}\fR\& is mandatory, all others are optional\&.
-.LP
-Do not rely too much on the order of \fIFlag\fR\& atoms or \fIIfopt\fR\& tuples\&. There are however some rules:
-.RS 2
-.TP 2
-*
-Immediately after \fI{addr,_}\fR\& follows \fI{netmask,_}\fR\&\&.
-.LP
-.TP 2
-*
-Immediately thereafter follows \fI{broadaddr,_}\fR\& if flag \fIbroadcast\fR\& is \fInot\fR\& set and flag \fIpointtopoint\fR\& \fIis\fR\& set\&.
-.LP
-.TP 2
-*
-Any \fI{netmask,_}\fR\&, \fI{broadaddr,_}\fR\&, or \fI{dstaddr,_}\fR\& tuples that follow an \fI{addr,_}\fR\& tuple concerns that address\&.
-.LP
-.RE
-
-.LP
-The tuple \fI{hwaddr,_}\fR\& is not returned on Solaris, as the hardware address historically belongs to the link layer and only the superuser can read such addresses\&.
-.LP
-
-.RS -4
-.B
-Warning:
-.RE
-On Windows, the data is fetched from different OS API functions, so the \fINetmask\fR\& and \fIBroadaddr\fR\& values can be calculated, just as some \fIFlag\fR\& values\&. Report flagrant bugs\&.
-
+See the socket option \fB\fI{netns, Namespace}\fR\&\fR\& under \fB\fIsetopts/2\fR\&\fR\&\&.
 .RE
 .LP
 .nf
@@ -1273,7 +1320,7 @@ Received \fIPacket\fR\& is delivered as defined by \fIMode\fR\&\&.
 .TP 2
 .B
 \fI{netns, Namespace :: file:filename_all()}\fR\&:
-Sets a network namespace for the socket\&. Parameter \fINamespace\fR\& is a filename defining the namespace, for example, \fI"/var/run/netns/example"\fR\&, typically created by command \fIip netns add example\fR\&\&. This option must be used in a function call that creates a socket, that is, \fB\fIgen_tcp:connect/3,4\fR\&\fR\&, \fB\fIgen_tcp:listen/2\fR\&\fR\&, \fB\fIgen_udp:open/1,2\fR\&\fR\&, or \fB\fIgen_sctp:open/0,1,2\fR\&\fR\&\&.
+Sets a network namespace for the socket\&. Parameter \fINamespace\fR\& is a filename defining the namespace, for example, \fI"/var/run/netns/example"\fR\&, typically created by command \fIip netns add example\fR\&\&. This option must be used in a function call that creates a socket, that is, \fB\fIgen_tcp:connect/3,4\fR\&\fR\&, \fB\fIgen_tcp:listen/2\fR\&\fR\&, \fB\fIgen_udp:open/1,2\fR\&\fR\& or \fB\fIgen_sctp:open/0,1,2\fR\&\fR\&, and also \fB\fIgetifaddrs/1\fR\&\fR\&\&.
 .RS 2
 .LP
 This option uses the Linux-specific syscall \fIsetns()\fR\&, such as in Linux kernel 3\&.0 or later, and therefore only exists when the runtime system is compiled for such an operating system\&.
