@@ -395,6 +395,7 @@
   {"gethostbyname", "gethostbyname(Hostname, Family)", "gethostbyname-2"},
   {"gethostname", "gethostname()", "gethostname-0"},
   {"getifaddrs", "getifaddrs()", "getifaddrs-0"},
+  {"getifaddrs", "getifaddrs(Opts)", "getifaddrs-1"},
   {"getopts", "getopts(Socket, Options)", "getopts-2"},
   {"getstat", "getstat(Socket)", "getstat-1"},
   {"getstat", "getstat(Socket, Options)", "getstat-2"},
