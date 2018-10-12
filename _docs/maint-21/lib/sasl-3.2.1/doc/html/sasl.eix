@@ -1,6 +1,6 @@
 %% 
 %% Search data file for sasl 3.2.1
-%% generated September 25, 2018
+%% generated October 12, 2018
 %% 
 {"sasl_app.html", {app, "sasl"}, ["sasl"]}.
 {"alarm_handler.html", {function, {"sasl", "alarm_handler"}},
