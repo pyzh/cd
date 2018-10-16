@@ -251,6 +251,62 @@ fun(key_exchange() | cipher() | hash() | aead | default_prf) -> true | false
 .B
 \fIhello_extensions() =\fR\&:
 \fI#{renegotiation_info => binary() | undefined, signature_algs => [{hash(), ecsda| rsa| dsa}] | undefined alpn => binary() | undefined, next_protocol_negotiation => binary() | undefined, srp => string() | undefined, ec_point_formats => list() | undefined, elliptic_curves => [oid] | undefined, sni => string() | undefined} }\fR\&
+.TP 2
+.B
+\fIsignature_scheme() =\fR\&:
+\fIrsa_pkcs1_sha256\fR\&
+.RS 2
+.LP
+\fI| rsa_pkcs1_sha384\fR\&
+.RE
+.RS 2
+.LP
+\fI| rsa_pkcs1_sha512\fR\&
+.RE
+.RS 2
+.LP
+\fI| ecdsa_secp256r1_sha256\fR\&
+.RE
+.RS 2
+.LP
+\fI| ecdsa_secp384r1_sha384\fR\&
+.RE
+.RS 2
+.LP
+\fI| ecdsa_secp521r1_sha512\fR\&
+.RE
+.RS 2
+.LP
+\fI| rsa_pss_rsae_sha256\fR\&
+.RE
+.RS 2
+.LP
+\fI| rsa_pss_rsae_sha384\fR\&
+.RE
+.RS 2
+.LP
+\fI| rsa_pss_rsae_sha512\fR\&
+.RE
+.RS 2
+.LP
+\fI| rsa_pss_pss_sha256\fR\&
+.RE
+.RS 2
+.LP
+\fI| rsa_pss_pss_sha384\fR\&
+.RE
+.RS 2
+.LP
+\fI| rsa_pss_pss_sha512\fR\&
+.RE
+.RS 2
+.LP
+\fI| rsa_pkcs1_sha1\fR\&
+.RE
+.RS 2
+.LP
+\fI| ecdsa_sha1\fR\&
+.RE
 .RE
 .SH "TLS/DTLS OPTION DESCRIPTIONS - COMMON FOR SERVER AND CLIENT"
 
@@ -658,6 +714,18 @@ In addition to the algorithms negotiated by the cipher suite used for key exchan
 .RS 2
 .LP
 The algorithms should be in the preferred order\&. Selected signature algorithm can restrict which hash functions that may be selected\&. Default support for {md5, rsa} removed in ssl-8\&.0
+.RE
+.TP 2
+.B
+\fI{signature_algs_cert, [signature_scheme()]}\fR\&:
+In addition to the signature_algorithms extension from TLS 1\&.2, TLS 1\&.3 (RFC 5246 Section 4\&.2\&.3)adds the signature_algorithms_cert extension which enables having special requirements on the signatures used in the certificates that differs from the requirements on digital signatures as a whole\&. If this is not required this extension is not needed\&.
+.RS 2
+.LP
+The client will send a signature_algorithms_cert extension (ClientHello), if TLS version 1\&.3 or later is used, and the signature_algs_cert option is explicitly specified\&. By default, only the signature_algs extension is sent\&.
+.RE
+.RS 2
+.LP
+The signature schemes shall be ordered according to the client\&'s preference (favorite choice first)\&.
 .RE
 .RE
 .SH "TLS/DTLS OPTION DESCRIPTIONS - SERVER SIDE"
