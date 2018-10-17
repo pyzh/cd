@@ -1395,6 +1395,18 @@ Received \fIPacket\fR\& is delivered as a binary\&.
 If \fIBoolean == true\fR\&, option \fITCP_NODELAY\fR\& is turned on for the socket, which means that also small amounts of data are sent immediately\&.
 .TP 2
 .B
+\fI{nopush, Boolean}\fR\&(TCP/IP sockets):
+This translates to \fITCP_NOPUSH\fR\& on BSD and to \fITCP_CORK\fR\& on Linux\&.
+.RS 2
+.LP
+If \fIBoolean == true\fR\&, the corresponding option is turned on for the socket, which means that small amounts of data are accumulated until a full MSS-worth of data is available or this option is turned off\&.
+.RE
+.RS 2
+.LP
+Note that while \fITCP_NOPUSH\fR\& socket option is available on OSX, its semantics is very different (e\&.g\&., unsetting it does not cause immediate send of accumulated data)\&. Hence, \fInopush\fR\& option is intentionally ignored on OSX\&.
+.RE
+.TP 2
+.B
 \fI{packet, PacketType}\fR\&(TCP/IP sockets):
 Defines the type of packets to use for a socket\&. Possible values:
 .RS 2
