@@ -1,6 +1,6 @@
 %% 
 %% Search data file for stdlib 3.6
-%% generated October 17, 2018
+%% generated October 18, 2018
 %% 
 {"STDLIB_app.html", {app, "stdlib"}, ["STDLIB"]}.
 {"array.html", {function, {"stdlib", "array"}},
