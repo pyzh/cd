@@ -1226,6 +1226,8 @@ Return = ok | {error, term()}
 .LP
 Add or update configuration data for the specified handler\&. If the given \fIKey\fR\& already exists, its associated value will be changed to the given value\&. If it does not exist, it will be added\&.
 .LP
+If the value is incomplete, which for example can be the case for the \fIconfig\fR\& key, it is up to the handler implementation how the unspecified parts are set\&. For all handlers in the Kernel application, unspecified data for the \fIconfig\fR\& key is set to default values\&. To update only specified data, and keep the existing configuration for the rest, use \fB\fIupdate_handler_config/3\fR\&\fR\&\&.
+.LP
 See the definition of the \fB\fIhandler_config()\fR\&\fR\& type for more information about the different parameters\&.
 .RE
 .LP
@@ -1538,6 +1540,81 @@ To overwrite the existing configuration without any merge, use \fB\fIset_handler
 .nf
 
 .B
+update_handler_config(HandlerId, Key :: level, Level) -> Return
+.br
+.fi
+.br
+.nf
+
+.B
+update_handler_config(HandlerId,
+.B
+                      Key :: filter_default,
+.B
+                      FilterDefault) ->
+.B
+                         Return
+.br
+.fi
+.br
+.nf
+
+.B
+update_handler_config(HandlerId, Key :: filters, Filters) ->
+.B
+                         Return
+.br
+.fi
+.br
+.nf
+
+.B
+update_handler_config(HandlerId, Key :: formatter, Formatter) ->
+.B
+                         Return
+.br
+.fi
+.br
+.nf
+
+.B
+update_handler_config(HandlerId, Key :: config, Config) -> Return
+.br
+.fi
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+HandlerId = \fBhandler_id()\fR\&
+.br
+Level = \fBlevel()\fR\& | all | none
+.br
+FilterDefault = log | stop
+.br
+Filters = [{\fBfilter_id()\fR\&, \fBfilter()\fR\&}]
+.br
+Formatter = {module(), \fBformatter_config()\fR\&}
+.br
+Config = term()
+.br
+Return = ok | {error, term()}
+.br
+.RE
+.RE
+.RS
+.LP
+Add or update configuration data for the specified handler\&. If the given \fIKey\fR\& already exists, its associated value will be changed to the given value\&. If it does not exist, it will be added\&.
+.LP
+If the value is incomplete, which for example can be the case for the \fIconfig\fR\& key, it is up to the handler implementation how the unspecified parts are set\&. For all handlers in the Kernel application, unspecified data for the \fIconfig\fR\& key is not changed\&. To reset unspecified data to default values, use \fB\fIset_handler_config/3\fR\&\fR\&\&.
+.LP
+See the definition of the \fB\fIhandler_config()\fR\&\fR\& type for more information about the different parameters\&.
+.RE
+.LP
+.nf
+
+.B
 update_primary_config(Config) -> ok | {error, term()}
 .br
 .fi
@@ -1680,14 +1757,16 @@ If the configuration is faulty, or if the initiation fails, the callback functio
 .RE
 .LP
 .B
-HModule:changing_config(Config1, Config2) -> {ok, Config3} | {error, Reason}
+HModule:changing_config(SetOrUpdate, OldConfig, NewConfig) -> {ok, Config} | {error, Reason}
 .br
 .RS
 .LP
 Types:
 
 .RS 3
-Config1 = Config2 = Config3 = \fBhandler_config()\fR\&
+SetOrUpdate = set | update
+.br
+OldConfig = NewConfig = Config = \fBhandler_config()\fR\&
 .br
 Reason = term()
 .br
@@ -1699,13 +1778,36 @@ This callback function is optional\&.
 .LP
 The function is called on a temporary process when the configuration for a handler is about to change\&. The purpose is to verify and act on the new configuration\&.
 .LP
-\fIConfig1\fR\& is the existing configuration and \fIConfig2\fR\& is the new configuration\&.
+\fIOldConfig\fR\& is the existing configuration and \fINewConfig\fR\& is the new configuration\&.
 .LP
-The handler identity is associated with the \fIid\fR\& key in \fIConfig1\fR\&\&.
+The handler identity is associated with the \fIid\fR\& key in \fIOldConfig\fR\&\&.
 .LP
-If everything succeeds, the callback function must return a possibly adjusted configuration in \fI{ok,Config3}\fR\&\&.
+\fISetOrUpdate\fR\& has the value \fIset\fR\& if the configuration change originates from a call to \fB\fIset_handler_config/2,3\fR\&\fR\&, and \fIupdate\fR\& if it originates from \fB\fIupdate_handler_config/2,3\fR\&\fR\&\&. The handler can use this parameteter to decide how to update the value of the \fIconfig\fR\& field, that is, the handler specific configuration data\&. Typically, if \fISetOrUpdate\fR\& equals \fIset\fR\&, values that are not specified must be given their default values\&. If \fISetOrUpdate\fR\& equals \fIupdate\fR\&, the values found in \fIOldConfig\fR\& must be used instead\&.
+.LP
+If everything succeeds, the callback function must return a possibly adjusted configuration in \fI{ok,Config}\fR\&\&.
 .LP
 If the configuration is faulty, the callback function must return \fI{error,Reason}\fR\&\&.
+.RE
+.LP
+.B
+HModule:filter_config(Config) -> FilteredConfig
+.br
+.RS
+.LP
+Types:
+
+.RS 3
+Config = FilteredConfig = \fBhandler_config()\fR\&
+.br
+.RE
+.RE
+.RS
+.LP
+This callback function is optional\&.
+.LP
+The function is called when one of the Logger API functions for fetching the handler configuration is called, for example \fB\fIlogger:get_handler_config/1\fR\&\fR\&\&.
+.LP
+It allows the handler to remove internal data fields from its configuration data before it is returned to the caller\&.
 .RE
 .LP
 .B
@@ -1795,7 +1897,7 @@ The following Logger API functions can trigger this callback:
 .LP
 .TP 2
 *
-\fB\fIlogger:updata_handler_config/2\fR\&\fR\&
+\fB\fIlogger:updata_handler_config/2,3\fR\&\fR\&
 .LP
 .TP 2
 *
