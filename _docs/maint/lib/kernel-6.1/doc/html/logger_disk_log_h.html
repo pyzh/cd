@@ -588,6 +588,7 @@
     <li title="update_formatter_config-2"><a href="logger.html#update_formatter_config-2">update_formatter_config/2</a></li>
     <li title="update_formatter_config-3"><a href="logger.html#update_formatter_config-3">update_formatter_config/3</a></li>
     <li title="update_handler_config-2"><a href="logger.html#update_handler_config-2">update_handler_config/2</a></li>
+    <li title="update_handler_config-3"><a href="logger.html#update_handler_config-3">update_handler_config/3</a></li>
     <li title="update_primary_config-1"><a href="logger.html#update_primary_config-1">update_primary_config/1</a></li>
     <li title="update_process_metadata-1"><a href="logger.html#update_process_metadata-1">update_process_metadata/1</a></li>
     <li title="warning-1"><a href="logger.html#warning-1">warning/1</a></li>
@@ -596,7 +597,8 @@
     <li title="FModule:check_config-1"><a href="logger.html#FModule:check_config-1">FModule:check_config/1</a></li>
     <li title="FModule:format-2"><a href="logger.html#FModule:format-2">FModule:format/2</a></li>
     <li title="HModule:adding_handler-1"><a href="logger.html#HModule:adding_handler-1">HModule:adding_handler/1</a></li>
-    <li title="HModule:changing_config-2"><a href="logger.html#HModule:changing_config-2">HModule:changing_config/2</a></li>
+    <li title="HModule:changing_config-3"><a href="logger.html#HModule:changing_config-3">HModule:changing_config/3</a></li>
+    <li title="HModule:filter_config-1"><a href="logger.html#HModule:filter_config-1">HModule:filter_config/1</a></li>
     <li title="HModule:log-2"><a href="logger.html#HModule:log-2">HModule:log/2</a></li>
     <li title="HModule:removing_handler-1"><a href="logger.html#HModule:removing_handler-1">HModule:removing_handler/1</a></li>
     </ul>
@@ -773,12 +775,12 @@
 <div class="innertube">
 <!-- refpage --><center><h1>logger_disk_log_h</h1></center>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-module-idp46934133517120').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp46934133517120').style.visibility = 'hidden';"><span id="ghlink-module-idp46934133517120"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-idp46680416265328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp46680416265328').style.visibility = 'hidden';"><span id="ghlink-module-idp46680416265328"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
 <div class="REFBODY module-body">logger_disk_log_h</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp46934133517568').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp46934133517568').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp46934133517568"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp46680416265776').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp46680416265776').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp46680416265776"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
 <div class="REFBODY module-summary-body">A disk_log based handler for Logger</div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-description-idp46934133518032').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp46934133518032').style.visibility = 'hidden';"><span id="ghlink-description-idp46934133518032" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/logger_disk_log_h.xml#L38" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-description-idp46680416266240').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp46680416266240').style.visibility = 'hidden';"><span id="ghlink-description-idp46680416266240" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/logger_disk_log_h.xml#L38" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
 <div class="REFBODY description-body"><p>
     <p>This is a handler for Logger that offers circular
     (wrapped) logs by using <span class="bold_code bc-19"><a href="disk_log.html"><span class="code">disk_log</span></a></span>. 
@@ -807,6 +809,10 @@
 	corresponds to the <span class="code">name</span> property in the
 	<span class="bold_code bc-15"><a href="disk_log.html#open-1"><span class="code">dlog_option()</span></a></span>
 	datatype.</p>
+	<p>The value is set when the handler is added, and it can not
+	  be changed in runtime.</p>
+	<p>Defaults to the same name as the handler identity, in the
+	  current directory.</p>
       </dd>
       <dt><strong><span class="code">type</span></strong></dt>
       <dd>
@@ -814,6 +820,8 @@
 	corresponds to the <span class="code">type</span> property in the
 	<span class="bold_code bc-15"><a href="disk_log.html#open-1"><span class="code">dlog_option()</span></a></span>
 	datatype.</p>
+	<p>The value is set when the handler is added, and it can not
+	  be changed in runtime.</p>
 	<p>Defaults to <span class="code">wrap</span>.</p>
       </dd>
       <dt><strong><span class="code">max_no_files</span></strong></dt>
@@ -823,6 +831,8 @@
 	corresponds to the <span class="code">MaxNoFiles</span> element in the <span class="code">size</span> property in the
 	<span class="bold_code bc-15"><a href="disk_log.html#open-1"><span class="code">dlog_option()</span></a></span>
 	datatype.</p>
+	<p>The value is set when the handler is added, and it can not
+	  be changed in runtime.</p>
 	<p>Defaults to <span class="code">10</span>.</p>
 	<p>The setting has no effect on a halt log.</p>
       </dd>
@@ -834,6 +844,8 @@
 	corresponds to the <span class="code">MaxNoBytes</span> element in the <span class="code">size</span> property in the
 	<span class="bold_code bc-15"><a href="disk_log.html#open-1"><span class="code">dlog_option()</span></a></span>
 	datatype.</p>
+	<p>The value is set when the handler is added, and it can not
+	  be changed in runtime.</p>
 	<p>Defaults to <span class="code">1048576</span> bytes for a wrap log, and
 	<span class="code">infinity</span> for a halt log.</p>
       </dd>
@@ -870,11 +882,11 @@
                       #{config =&gt; #{file =&gt; "./system_disk_log"}}}]'</pre></div>
   </p></div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp46934133555920').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp46934133555920').style.visibility = 'hidden';"><span id="ghlink-exports-idp46934133555920"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-exports-idp46680416306688').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp46680416306688').style.visibility = 'hidden';"><span id="ghlink-exports-idp46680416306688"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
 <div class="exports-body">
 
-    <p><a name="filesync-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-filesync-1-idp46934139943232').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-filesync-1-idp46934139943232').style.visibility = 'hidden';">
-<span id="ghlink-filesync-1-idp46934139943232" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/logger_disk_log_h.xml#L140" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>filesync(Name) -&gt; ok | {error, Reason}</div><div class="REFBODY fun-types">
+    <p><a name="filesync-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-filesync-1-idp46680422312144').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-filesync-1-idp46680422312144').style.visibility = 'hidden';">
+<span id="ghlink-filesync-1-idp46680422312144" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/logger_disk_log_h.xml#L150" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>filesync(Name) -&gt; ok | {error, Reason}</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Name = atom()</span></div>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Reason = handler_busy | {badarg, term()}</span></div>
@@ -885,7 +897,7 @@
 
   </div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-see-also-idp46934133559600').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-see-also-idp46934133559600').style.visibility = 'hidden';"><span id="ghlink-see-also-idp46934133559600" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/logger_disk_log_h.xml#L150" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="see-also" href="#see-also">See Also</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-see-also-idp46680416310368').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-see-also-idp46680416310368').style.visibility = 'hidden';"><span id="ghlink-see-also-idp46680416310368" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/kernel/doc/src/logger_disk_log_h.xml#L160" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="see-also" href="#see-also">See Also</a></span></h3>
 <div class="REFBODY rb-3">
     
     <p><span class="bold_code bc-19"><a href="logger.html"><span class="code">logger(3)</span></a></span>,

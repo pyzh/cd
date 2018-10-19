@@ -15,10 +15,22 @@ To add a new instance of the disk_log handler, use \fB\fIlogger:add_handler/3\fR
 .B
 \fIfile\fR\&:
 This is the full name of the disk log file\&. The option corresponds to the \fIname\fR\& property in the \fB\fIdlog_option()\fR\&\fR\& datatype\&.
+.RS 2
+.LP
+The value is set when the handler is added, and it can not be changed in runtime\&.
+.RE
+.RS 2
+.LP
+Defaults to the same name as the handler identity, in the current directory\&.
+.RE
 .TP 2
 .B
 \fItype\fR\&:
 This is the disk log type, \fIwrap\fR\& or \fIhalt\fR\&\&. The option corresponds to the \fItype\fR\& property in the \fB\fIdlog_option()\fR\&\fR\& datatype\&.
+.RS 2
+.LP
+The value is set when the handler is added, and it can not be changed in runtime\&.
+.RE
 .RS 2
 .LP
 Defaults to \fIwrap\fR\&\&.
@@ -27,6 +39,10 @@ Defaults to \fIwrap\fR\&\&.
 .B
 \fImax_no_files\fR\&:
 This is the maximum number of files that disk_log uses for its circular logging\&. The option corresponds to the \fIMaxNoFiles\fR\& element in the \fIsize\fR\& property in the \fB\fIdlog_option()\fR\&\fR\& datatype\&.
+.RS 2
+.LP
+The value is set when the handler is added, and it can not be changed in runtime\&.
+.RE
 .RS 2
 .LP
 Defaults to \fI10\fR\&\&.
@@ -39,6 +55,10 @@ The setting has no effect on a halt log\&.
 .B
 \fImax_no_bytes\fR\&:
 This is the maximum number of bytes that is written to a log file before disk_log proceeds with the next file in order, or generates an error in case of a full halt log\&. The option corresponds to the \fIMaxNoBytes\fR\& element in the \fIsize\fR\& property in the \fB\fIdlog_option()\fR\&\fR\& datatype\&.
+.RS 2
+.LP
+The value is set when the handler is added, and it can not be changed in runtime\&.
+.RE
 .RS 2
 .LP
 Defaults to \fI1048576\fR\& bytes for a wrap log, and \fIinfinity\fR\& for a halt log\&.
