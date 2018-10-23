@@ -1,6 +1,6 @@
 %% 
 %% Search data file for mnesia 4.15.5
-%% generated October 22, 2018
+%% generated October 23, 2018
 %% 
 {"mnesia.html", {function, {"mnesia", "mnesia"}},
 [
