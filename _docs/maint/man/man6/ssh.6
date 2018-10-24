@@ -53,9 +53,11 @@ The \fIssh\fR\& application does not have an application- specific configuration
 .RE
 
 .LP
-By default, \fIssh\fR\& looks for \fIid_dsa\fR\&, \fIid_rsa\fR\&, \fIid_ecdsa_key\fR\&, \fIknown_hosts\fR\&, and \fIauthorized_keys\fR\& in ~/\&.ssh, and for the host key files in \fI/etc/ssh\fR\&\&. These locations can be changed by the options \fIuser_dir\fR\& and \fIsystem_dir\fR\&\&.
+By default, \fIssh\fR\& looks for \fIid_dsa\fR\&, \fIid_rsa\fR\&, \fIid_ecdsa_key\fR\&, \fIknown_hosts\fR\&, and \fIauthorized_keys\fR\& in ~/\&.ssh, and for the host key files in \fI/etc/ssh\fR\&\&. These locations can be changed by the options \fB\fIuser_dir\fR\&\fR\& and \fB\fIsystem_dir\fR\&\fR\&\&.
 .LP
 Public key handling can also be customized through a callback module that implements the behaviors \fBssh_client_key_api\fR\& and \fBssh_server_key_api\fR\&\&.
+.LP
+See also the default callback module documentation in \fBssh_file\fR\&\&.
 .SH "PUBLIC KEYS"
 
 .LP

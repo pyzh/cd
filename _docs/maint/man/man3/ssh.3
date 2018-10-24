@@ -125,7 +125,7 @@ Optional: one or more \fIUser\&'s private key(s)\fR\&  in case of \fIpublickey\f
 .br
     \fBpref_public_key_algs_client_option()\fR\& |
 .br
-    \fBpubkey_passphrase_client_options()\fR\& |
+    \fBssh_file:pubkey_passphrase_client_options()\fR\& |
 .br
     \fBhost_accepting_client_options()\fR\& |
 .br
@@ -164,21 +164,6 @@ The default value is the \fIpublic_key\fR\& entry in the list returned by \fBssh
 If there is no public key of a specified type available, the corresponding entry is ignored\&. Note that the available set is dependent on the underlying cryptolib and current user\&'s public keys\&.
 .LP
 See also the option \fB\fIuser_dir\fR\&\fR\& for specifying the path to the user\&'s keys\&.
-.RE
-.nf
-
-\fBpubkey_passphrase_client_options()\fR\& = 
-.br
-    {dsa_pass_phrase, string()} |
-.br
-    {rsa_pass_phrase, string()} |
-.br
-    {ecdsa_pass_phrase, string()}
-.br
-.fi
-.RS
-.LP
-If the user\&'s DSA, RSA or ECDSA key is protected by a passphrase, it can be supplied with thoose options\&.
 .RE
 .nf
 
@@ -525,7 +510,7 @@ It is a channel callback module that implements a shell and command execution\&.
 
 \fBauthentication_daemon_options()\fR\& = 
 .br
-    {system_dir, string()} |
+    \fBssh_file:system_dir_daemon_option()\fR\& |
 .br
     {auth_method_kb_interactive_data, \fBprompt_texts()\fR\&} |
 .br
@@ -593,18 +578,6 @@ It is a channel callback module that implements a shell and command execution\&.
 .RS 2
 .TP 2
 .B
-\fIsystem_dir\fR\&:
-Sets the system directory, containing the host key files that identify the host keys for \fIssh\fR\&\&. Defaults to \fI/etc/ssh\fR\&\&.
-.RS 2
-.LP
-For security reasons, this directory is normally accessible only to the root user\&.
-.RE
-.RS 2
-.LP
-See also the option \fBkey_cb\fR\& for the general way to handle keys\&.
-.RE
-.TP 2
-.B
 \fIauth_method_kb_interactive_data\fR\&:
 Sets the text strings that the daemon sends to the client for presentation to the user when using \fIkeyboard-interactive\fR\& authentication\&.
 .RS 2
@@ -639,7 +612,7 @@ From a security perspective this option makes the server very vulnerable\&.
 
 .TP 2
 .B
-\fIpwdfun\fR\& with \fIpwdfun_4()\fR\&:
+\fIpwdfun\fR\& with \fB\fIpwdfun_4()\fR\&\fR\&:
 Provides a function for password validation\&. This could used for calling an external system or handeling passwords stored as hash values\&.
 .RS 2
 .LP
@@ -682,7 +655,7 @@ A third usage is to block login attempts from a missbehaving peer\&. The \fIStat
 .RE
 .TP 2
 .B
-\fIpwdfun\fR\& with \fIpwdfun_2()\fR\&:
+\fIpwdfun\fR\& with \fB\fIpwdfun_2()\fR\&\fR\&:
 Provides a function for password validation\&. This function is called with user and password as strings, and returns:
 .RS 2
 .TP 2
@@ -909,7 +882,7 @@ Default value is \fItrue\fR\& which is compatible with other implementations not
 
 \fBcommon_option()\fR\& = 
 .br
-    \fBuser_dir_common_option()\fR\& |
+    \fBssh_file:user_dir_common_option()\fR\& |
 .br
     \fBprofile_common_option()\fR\& |
 .br
@@ -941,17 +914,6 @@ Default value is \fItrue\fR\& which is compatible with other implementations not
 .RS
 .LP
 The options above can be used both in clients and in daemons (servers)\&. They are further explained below\&.
-.RE
-.nf
-
-\fBuser_dir_common_option()\fR\& = {user_dir, false | string()}
-.br
-.fi
-.RS
-.LP
-Sets the user directory\&. That is, the directory containing \fIssh\fR\& configuration files for the user, such as \fIknown_hosts\fR\&, \fIid_rsa\fR\&, \fIid_dsa\fR\&>, \fIid_ecdsa\fR\& and \fIauthorized_key\fR\&\&. Defaults to the directory normally referred to as \fI~/\&.ssh\fR\&\&.
-.LP
-See also the option \fBkey_cb\fR\& for the general way to handle keys\&.
 .RE
 .nf
 
@@ -1028,7 +990,7 @@ Module implementing the behaviour \fBssh_client_key_api\fR\& and/or \fBssh_serve
 .LP
 The \fIOpts\fR\& defaults to \fI[]\fR\& when only the \fIModule\fR\& is specified\&.
 .LP
-The default value of this option is \fI{ssh_file, []}\fR\&\&.
+The default value of this option is \fI{ssh_file, []}\fR\&\&. See also the manpage of \fBssh_file\fR\&\&.
 .LP
 A call to the call-back function \fIF\fR\& will be
 .LP
@@ -1038,7 +1000,7 @@ A call to the call-back function \fIF\fR\& will be
 	
 .fi
 .LP
-where \fI\&.\&.\&.\fR\& are arguments to \fIF\fR\& as in \fBssh_client_key_api\fR\& and/or \fBssh_server_key_api\fR\&\&. The \fIUserOptions\fR\& are the options given to \fIssh:connect\fR\&, \fIssh:shell\fR\& or \fIssh:daemon\fR\&\&.
+where \fI\&.\&.\&.\fR\& are arguments to \fIF\fR\& as in \fBssh_client_key_api\fR\& and/or \fBssh_server_key_api\fR\&\&. The \fIUserOptions\fR\& are the options given to \fBssh:connect\fR\&, \fBssh:shell\fR\& or \fBssh:daemon\fR\&\&.
 .RE
 .nf
 
