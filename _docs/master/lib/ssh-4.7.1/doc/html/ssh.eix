@@ -1,6 +1,6 @@
 %% 
 %% Search data file for ssh 4.7.1
-%% generated October 23, 2018
+%% generated October 24, 2018
 %% 
 {"SSH_app.html", {app, "ssh"}, ["SSH"]}.
 {"ssh.html", {function, {"ssh", "ssh"}},
@@ -91,6 +91,15 @@
   {"Module:is_auth_key", "Module:is_auth_key(PublicUserKey, User, DaemonOptions)", "Module:is_auth_key-3"}
 ]}.
 {"ssh_server_key_api.html", {module, "ssh"}, ["ssh_server_key_api"]}.
+{"ssh_file.html", {function, {"ssh", "ssh_file"}},
+[
+  {"host_key", "host_key(Algorithm, DaemonOptions)", "host_key-2"},
+  {"is_auth_key", "is_auth_key(PublicUserKey, User, DaemonOptions)", "is_auth_key-3"},
+  {"add_host_key", "add_host_key(HostNames, PublicHostKey, ConnectOptions)", "add_host_key-3"},
+  {"is_host_key", "is_host_key(Key, Host, Algorithm, ConnectOptions)", "is_host_key-4"},
+  {"user_key", "user_key(Algorithm, ConnectOptions)", "user_key-2"}
+]}.
+{"ssh_file.html", {module, "ssh"}, ["ssh_file"]}.
 {"ssh_sftp.html", {function, {"ssh", "ssh_sftp"}},
 [
   {"apread", "apread(ChannelPid, Handle, Position, Len)", "apread-4"},

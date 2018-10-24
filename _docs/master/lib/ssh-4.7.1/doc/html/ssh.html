@@ -164,6 +164,17 @@
     <li title="Module:is_auth_key-3"><a href="ssh_server_key_api.html#Module:is_auth_key-3">Module:is_auth_key/3</a></li>
     </ul>
 </li>
+<li id="no" title="ssh_file " expanded="false">ssh_file<ul>
+<li><a href="ssh_file.html">
+                  Top of manual page
+                </a></li>
+    <li title="add_host_key-3"><a href="ssh_file.html#add_host_key-3">add_host_key/3</a></li>
+    <li title="host_key-2"><a href="ssh_file.html#host_key-2">host_key/2</a></li>
+    <li title="is_auth_key-3"><a href="ssh_file.html#is_auth_key-3">is_auth_key/3</a></li>
+    <li title="is_host_key-4"><a href="ssh_file.html#is_host_key-4">is_host_key/4</a></li>
+    <li title="user_key-2"><a href="ssh_file.html#user_key-2">user_key/2</a></li>
+    </ul>
+</li>
 <li id="no" title="ssh_sftp " expanded="false">ssh_sftp<ul>
 <li><a href="ssh_sftp.html">
                   Top of manual page
@@ -236,11 +247,11 @@
 <div class="innertube">
 <!-- refpage --><center><h1>ssh</h1></center>
   
-  <h3><span onMouseOver="document.getElementById('ghlink-module-idp70540885587744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp70540885587744').style.visibility = 'hidden';"><span id="ghlink-module-idp70540885587744"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-idp47282101538224').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-idp47282101538224').style.visibility = 'hidden';"><span id="ghlink-module-idp47282101538224"></span><a class="title_link" name="module" href="#module">Module</a></span></h3>
 <div class="REFBODY module-body">ssh</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp70540885588192').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp70540885588192').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp70540885588192"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-module-summary-idp47282101538672').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-module-summary-idp47282101538672').style.visibility = 'hidden';"><span id="ghlink-module-summary-idp47282101538672"></span><a class="title_link" name="module-summary" href="#module-summary">Module Summary</a></span></h3>
 <div class="REFBODY module-summary-body">Main API of the ssh application</div>
-  <h3><span onMouseOver="document.getElementById('ghlink-description-idp70540885588656').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp70540885588656').style.visibility = 'hidden';"><span id="ghlink-description-idp70540885588656" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L33" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-description-idp47282101539136').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-description-idp47282101539136').style.visibility = 'hidden';"><span id="ghlink-description-idp47282101539136" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L33" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="description" href="#description">Description</a></span></h3>
 <div class="REFBODY description-body"><p>
     <p>This is the interface module for the <span class="code">SSH</span> application.
     The Secure Shell (SSH) Protocol is a protocol for secure remote login
@@ -302,7 +313,7 @@
 </div>
   </p></div>
 
-  <h3><span onMouseOver="document.getElementById('ghlink-keys-and-files-idp70540886139936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-keys-and-files-idp70540886139936').style.visibility = 'hidden';"><span id="ghlink-keys-and-files-idp70540886139936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L91" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="keys-and-files" href="#keys-and-files">Keys and files</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-keys-and-files-idp47282101312352').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-keys-and-files-idp47282101312352').style.visibility = 'hidden';"><span id="ghlink-keys-and-files-idp47282101312352" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L91" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="keys-and-files" href="#keys-and-files">Keys and files</a></span></h3>
 <div class="REFBODY rb-3">
     
     <p>A number of objects must be present for the SSH application to work. 
@@ -314,8 +325,8 @@
     </p>
 
     <p>The paths could easily be changed by options:
-    <span class="bold_code bc-17"><a href="#type-user_dir_common_option"><span class="code">user_dir</span></a></span> and
-    <span class="bold_code bc-17"><a href="#type-system_dir_daemon_option"><span class="code">system_dir</span></a></span>.
+    <span class="bold_code bc-15"><a href="ssh_file.html#type-user_dir_common_option"><span class="code">user_dir</span></a></span> and
+    <span class="bold_code bc-15"><a href="ssh_file.html#type-system_dir_daemon_option"><span class="code">system_dir</span></a></span>.
     </p>
     <p>A completly different storage could be interfaced by writing call-back modules
     using the behaviours
@@ -345,12 +356,12 @@
 </li>
 	</ul>
 	<p>The host keys directory could be changed with the option 
-	<span class="bold_code bc-17"><a href="#type-system_dir_daemon_option"><span class="code">system_dir</span></a></span>.</p>
+	<span class="bold_code bc-15"><a href="ssh_file.html#type-system_dir_daemon_option"><span class="code">system_dir</span></a></span>.</p>
 	</li>
 	<li>Optional: one or more <i>User's public key</i> in case of <span class="code">publickey</span> authorization.
 	Default is to store them concatenated in the file <span class="code">.ssh/authorized_keys</span> in the user's home directory.
 	<p>The user keys directory could be changed with the option 
-	<span class="bold_code bc-17"><a href="#type-user_dir_common_option"><span class="code">user_dir</span></a></span>.</p>
+	<span class="bold_code bc-15"><a href="ssh_file.html#type-user_dir_common_option"><span class="code">user_dir</span></a></span>.</p>
 	</li>
       </ul>
     </div>
@@ -361,7 +372,7 @@
       <p>The keys and some other data are by default stored in files in the directory <span class="code">.ssh</span>
       in the user's home directory.</p>
       <p>The directory could be changed with the option 
-      <span class="bold_code bc-17"><a href="#type-user_dir_common_option"><span class="code">user_dir</span></a></span>.
+      <span class="bold_code bc-15"><a href="ssh_file.html#type-user_dir_common_option"><span class="code">user_dir</span></a></span>.
       </p>
       <ul>
 	<li>Optional: a list of <i>Host public key(s)</i> for previously connected hosts. This list
@@ -393,15 +404,15 @@
 
   
 
-  <h3><span onMouseOver="document.getElementById('ghlink-data-types-idp70540886173424').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types-idp70540886173424').style.visibility = 'hidden';"><span id="ghlink-data-types-idp70540886173424"></span><a class="title_link" name="data-types" href="#data-types">Data Types</a></span></h3>
+  <h3><span onMouseOver="document.getElementById('ghlink-data-types-idp47282101493024').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-data-types-idp47282101493024').style.visibility = 'hidden';"><span id="ghlink-data-types-idp47282101493024"></span><a class="title_link" name="data-types" href="#data-types">Data Types</a></span></h3>
 
-    <h4><span onMouseOver="document.getElementById('ghlink-Client Options-idp70540886173712').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-Client Options-idp70540886173712').style.visibility = 'hidden';"><span id="ghlink-Client Options-idp70540886173712"></span><a class="title_link" name="Client%20Options" href="#Client%20Options">Client Options</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-Client Options-idp47282101493312').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-Client Options-idp47282101493312').style.visibility = 'hidden';"><span id="ghlink-Client Options-idp47282101493312"></span><a class="title_link" name="Client%20Options" href="#Client%20Options">Client Options</a></span></h4>
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-client_options').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-client_options').style.visibility = 'hidden';">
 <span id="ghlink-type-client_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L175" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-client_options">client_options()</a> = [<span class="bold_code bc-17"><a href="#type-client_option">client_option()</a></span>]</span><br>
-      <span class="bold_code bc-4"><a name="type-client_option">client_option()</a> = <br>    <span class="bold_code bc-17"><a href="#type-pref_public_key_algs_client_option">pref_public_key_algs_client_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-pubkey_passphrase_client_options">pubkey_passphrase_client_options()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-host_accepting_client_options">host_accepting_client_options()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-authentication_client_options">authentication_client_options()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-diffie_hellman_group_exchange_client_option">diffie_hellman_group_exchange_client_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-connect_timeout_client_option">connect_timeout_client_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-recv_ext_info_client_option">recv_ext_info_client_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-opaque_client_options">opaque_client_options()</a></span> |<br>    <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','gen_tcp.html#type-connect_option');">gen_tcp:connect_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-common_option">common_option()</a></span></span><br>
+      <span class="bold_code bc-4"><a name="type-client_option">client_option()</a> = <br>    <span class="bold_code bc-17"><a href="#type-pref_public_key_algs_client_option">pref_public_key_algs_client_option()</a></span> |<br>    <span class="bold_code bc-15"><a href="ssh_file.html#type-pubkey_passphrase_client_options">ssh_file:pubkey_passphrase_client_options()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-host_accepting_client_options">host_accepting_client_options()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-authentication_client_options">authentication_client_options()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-diffie_hellman_group_exchange_client_option">diffie_hellman_group_exchange_client_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-connect_timeout_client_option">connect_timeout_client_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-recv_ext_info_client_option">recv_ext_info_client_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-opaque_client_options">opaque_client_options()</a></span> |<br>    <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','gen_tcp.html#type-connect_option');">gen_tcp:connect_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-common_option">common_option()</a></span></span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
       <p>Options for <span class="bold_code bc-17"><a href="#connect-3">clients</a></span>.
@@ -423,27 +434,15 @@
 	<p>If there is no public key of a specified type available, the corresponding entry is ignored.
 	Note that the available set is dependent on the underlying cryptolib and current user's public keys.
 	</p>
-        <p>See also the option <span class="bold_code bc-17"><a href="#type-user_dir_common_option"><span class="code">user_dir</span></a></span>
+        <p>See also the option <span class="bold_code bc-15"><a href="ssh_file.html#type-user_dir_common_option"><span class="code">user_dir</span></a></span>
         for specifying the path to the user's keys.
 	</p>
       </p></div></div>
 </div>
 
     <div class="data-types-body">
-<div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-pubkey_passphrase_client_options').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-pubkey_passphrase_client_options').style.visibility = 'hidden';">
-<span id="ghlink-type-pubkey_passphrase_client_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L201" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
-      <span class="bold_code bc-4"><a name="type-pubkey_passphrase_client_options">pubkey_passphrase_client_options()</a> = <br>    {dsa_pass_phrase, string()} |<br>    {rsa_pass_phrase, string()} |<br>    {ecdsa_pass_phrase, string()}</span><br>
-</div>
-<div class="data-type-desc"><div class="REFBODY rb-7"><p>
-	<p>If the user's DSA, RSA or ECDSA key is protected by a passphrase, it can be
-	supplied with thoose options.
-	</p>
-      </p></div></div>
-</div>
-
-    <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-host_accepting_client_options').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-host_accepting_client_options').style.visibility = 'hidden';">
-<span id="ghlink-type-host_accepting_client_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L210" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-host_accepting_client_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L201" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-host_accepting_client_options">host_accepting_client_options()</a> = <br>    {silently_accept_hosts, <span class="bold_code bc-17"><a href="#type-accept_hosts">accept_hosts()</a></span>} |<br>    {user_interaction, boolean()} |<br>    {save_accepted_host, boolean()} |<br>    {quiet_mode, boolean()}</span><br>
       <span class="bold_code bc-4"><a name="type-accept_hosts">accept_hosts()</a> = <br>    boolean() |<br>    <span class="bold_code bc-17"><a href="#type-accept_callback">accept_callback()</a></span> |<br>    {HashAlgoSpec :: <span class="bold_code bc-17"><a href="#type-fp_digest_alg">fp_digest_alg()</a></span>, <span class="bold_code bc-17"><a href="#type-accept_callback">accept_callback()</a></span>}</span><br>
       <span class="bold_code bc-4"><a name="type-fp_digest_alg">fp_digest_alg()</a> = md5 | <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','crypto','crypto.html#type-sha1');">crypto:sha1()</a></span> | <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','crypto','crypto.html#type-sha2');">crypto:sha2()</a></span></span><br>
@@ -457,7 +456,7 @@
             <p>This option guides the <span class="code">connect</span> function on how to act when the connected server presents a Host 
             Key that the client has not seen before. The default is to ask the user with a question on stdio of whether to
             accept or reject the new Host Key.
-            See the option <span class="bold_code bc-17"><a href="#type-user_dir_common_option"><span class="code">user_dir</span></a></span>
+            See the option <span class="bold_code bc-15"><a href="ssh_file.html#type-user_dir_common_option"><span class="code">user_dir</span></a></span>
             for specifying the path to the file <span class="code">known_hosts</span> where previously accepted Host Keys are recorded.
 	    See also the option 
 	    <span class="bold_code bc-17"><a href="#type-key_cb_common_option">key_cb</a></span>
@@ -515,7 +514,7 @@
 	    accept question the next time the same host is connected. If the option
 	    <span class="bold_code bc-17"><a href="#type-key_cb_common_option"><span class="code">key_cb</span></a></span>
 	    is not present, the key is saved in the file "known_hosts". See option
-	    <span class="bold_code bc-17"><a href="#type-user_dir_common_option"><span class="code">user_dir</span></a></span> for
+	    <span class="bold_code bc-15"><a href="ssh_file.html#type-user_dir_common_option"><span class="code">user_dir</span></a></span> for
 	    the location of that file.
 	    </p>
 	    <p>If <span class="code">false</span>, the key is not saved and the key will still be unknown
@@ -535,7 +534,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-authentication_client_options').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-authentication_client_options').style.visibility = 'hidden';">
-<span id="ghlink-type-authentication_client_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L297" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-authentication_client_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L288" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-authentication_client_options">authentication_client_options()</a> = <br>    {user, string()} | {password, string()}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -561,7 +560,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-diffie_hellman_group_exchange_client_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-diffie_hellman_group_exchange_client_option').style.visibility = 'hidden';">
-<span id="ghlink-type-diffie_hellman_group_exchange_client_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L320" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-diffie_hellman_group_exchange_client_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L311" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-diffie_hellman_group_exchange_client_option">diffie_hellman_group_exchange_client_option()</a> = <br>    {dh_gex_limits,<br>     {Min :: integer() &gt;= 1,<br>      I :: integer() &gt;= 1,<br>      Max :: integer() &gt;= 1}}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -575,7 +574,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-connect_timeout_client_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-connect_timeout_client_option').style.visibility = 'hidden';">
-<span id="ghlink-type-connect_timeout_client_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L331" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-connect_timeout_client_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L322" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-connect_timeout_client_option">connect_timeout_client_option()</a> = {connect_timeout, timeout()}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -591,7 +590,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-recv_ext_info_client_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-recv_ext_info_client_option').style.visibility = 'hidden';">
-<span id="ghlink-type-recv_ext_info_client_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L344" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-recv_ext_info_client_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L335" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-recv_ext_info_client_option">recv_ext_info_client_option()</a> = {recv_ext_info, boolean()}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -608,11 +607,11 @@
 </div>
 
     
-    <h4><span onMouseOver="document.getElementById('ghlink-Daemon Options (Server Options)-idp70540886242448').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-Daemon Options (Server Options)-idp70540886242448').style.visibility = 'hidden';"><span id="ghlink-Daemon Options (Server Options)-idp70540886242448"></span><a class="title_link" name="Daemon%20Options%20(Server%20Options)" href="#Daemon%20Options%20(Server%20Options)">Daemon Options (Server Options)</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-Daemon Options (Server Options)-idp47282101455184').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-Daemon Options (Server Options)-idp47282101455184').style.visibility = 'hidden';"><span id="ghlink-Daemon Options (Server Options)-idp47282101455184"></span><a class="title_link" name="Daemon%20Options%20(Server%20Options)" href="#Daemon%20Options%20(Server%20Options)">Daemon Options (Server Options)</a></span></h4>
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-daemon_options').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-daemon_options').style.visibility = 'hidden';">
-<span id="ghlink-type-daemon_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L362" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-daemon_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L353" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-daemon_options">daemon_options()</a> = [<span class="bold_code bc-17"><a href="#type-daemon_option">daemon_option()</a></span>]</span><br>
       <span class="bold_code bc-4"><a name="type-daemon_option">daemon_option()</a> = <br>    <span class="bold_code bc-17"><a href="#type-subsystem_daemon_option">subsystem_daemon_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-shell_daemon_option">shell_daemon_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-exec_daemon_option">exec_daemon_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-ssh_cli_daemon_option">ssh_cli_daemon_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-authentication_daemon_options">authentication_daemon_options()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-diffie_hellman_group_exchange_daemon_option">diffie_hellman_group_exchange_daemon_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-negotiation_timeout_daemon_option">negotiation_timeout_daemon_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-hardening_daemon_options">hardening_daemon_options()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-callbacks_daemon_options">callbacks_daemon_options()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-send_ext_info_daemon_option">send_ext_info_daemon_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-opaque_daemon_options">opaque_daemon_options()</a></span> |<br>    <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','gen_tcp.html#type-listen_option');">gen_tcp:listen_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-common_option">common_option()</a></span></span><br>
 </div>
@@ -626,7 +625,7 @@
     
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-subsystem_daemon_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-subsystem_daemon_option').style.visibility = 'hidden';">
-<span id="ghlink-type-subsystem_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L373" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-subsystem_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L364" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-subsystem_daemon_option">subsystem_daemon_option()</a> = {subsystems, <span class="bold_code bc-17"><a href="#type-subsystem_spec">subsystem_spec()</a></span>}</span><br>
       <span class="bold_code bc-4"><a name="type-subsystem_spec">subsystem_spec()</a> = {Name :: string(), <span class="bold_code bc-17"><a href="#type-mod_args">mod_args()</a></span>}</span><br>
 </div>
@@ -649,7 +648,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-shell_daemon_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-shell_daemon_option').style.visibility = 'hidden';">
-<span id="ghlink-type-shell_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L393" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-shell_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L384" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-shell_daemon_option">shell_daemon_option()</a> = <br>    {shell, <span class="bold_code bc-17"><a href="#type-mod_fun_args">mod_fun_args()</a></span> | <span class="bold_code bc-17"><a href="#type-shell_fun%2f1">'shell_fun/1'()</a></span> | <span class="bold_code bc-17"><a href="#type-shell_fun%2f2">'shell_fun/2'()</a></span>}</span><br>
       <span class="bold_code bc-4"><a name="type-shell_fun%2f1">'shell_fun/1'()</a> = fun((User :: string()) -&gt; pid())</span><br>
       <span class="bold_code bc-4"><a name="type-shell_fun%2f2">'shell_fun/2'()</a> = <br>    fun((User :: string(), PeerAddr :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span>) -&gt; pid())</span><br>
@@ -666,7 +665,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-exec_daemon_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-exec_daemon_option').style.visibility = 'hidden';">
-<span id="ghlink-type-exec_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L407" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-exec_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L398" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-exec_daemon_option">exec_daemon_option()</a> = <br>    {exec, <span class="bold_code bc-17"><a href="#type-exec_fun%2f1">'exec_fun/1'()</a></span> | <span class="bold_code bc-17"><a href="#type-exec_fun%2f2">'exec_fun/2'()</a></span> | <span class="bold_code bc-17"><a href="#type-exec_fun%2f3">'exec_fun/3'()</a></span>}</span><br>
       <span class="bold_code bc-4"><a name="type-exec_fun%2f1">'exec_fun/1'()</a> = fun((Cmd :: string()) -&gt; <span class="bold_code bc-17"><a href="#type-exec_result">exec_result()</a></span>)</span><br>
       <span class="bold_code bc-4"><a name="type-exec_fun%2f2">'exec_fun/2'()</a> = <br>    fun((Cmd :: string(), User :: string()) -&gt; <span class="bold_code bc-17"><a href="#type-exec_result">exec_result()</a></span>)</span><br>
@@ -723,7 +722,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-ssh_cli_daemon_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-ssh_cli_daemon_option').style.visibility = 'hidden';">
-<span id="ghlink-type-ssh_cli_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L458" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-ssh_cli_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L449" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-ssh_cli_daemon_option">ssh_cli_daemon_option()</a> = {ssh_cli, <span class="bold_code bc-17"><a href="#type-mod_args">mod_args()</a></span> | no_cli}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -740,8 +739,8 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-authentication_daemon_options').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-authentication_daemon_options').style.visibility = 'hidden';">
-<span id="ghlink-type-authentication_daemon_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L472" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
-      <span class="bold_code bc-4"><a name="type-authentication_daemon_options">authentication_daemon_options()</a> = <br>    {system_dir, string()} |<br>    {auth_method_kb_interactive_data, <span class="bold_code bc-17"><a href="#type-prompt_texts">prompt_texts()</a></span>} |<br>    {user_passwords, [{UserName :: string(), Pwd :: string()}]} |<br>    {password, string()} |<br>    {pwdfun, <span class="bold_code bc-17"><a href="#type-pwdfun_2">pwdfun_2()</a></span> | <span class="bold_code bc-17"><a href="#type-pwdfun_4">pwdfun_4()</a></span>}</span><br>
+<span id="ghlink-type-authentication_daemon_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L463" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+      <span class="bold_code bc-4"><a name="type-authentication_daemon_options">authentication_daemon_options()</a> = <br>    <span class="bold_code bc-15"><a href="ssh_file.html#type-system_dir_daemon_option">ssh_file:system_dir_daemon_option()</a></span> |<br>    {auth_method_kb_interactive_data, <span class="bold_code bc-17"><a href="#type-prompt_texts">prompt_texts()</a></span>} |<br>    {user_passwords, [{UserName :: string(), Pwd :: string()}]} |<br>    {password, string()} |<br>    {pwdfun, <span class="bold_code bc-17"><a href="#type-pwdfun_2">pwdfun_2()</a></span> | <span class="bold_code bc-17"><a href="#type-pwdfun_4">pwdfun_4()</a></span>}</span><br>
       <span class="bold_code bc-4"><a name="type-prompt_texts">prompt_texts()</a> = <span class="bold_code bc-17"><a href="#type-kb_int_tuple">kb_int_tuple()</a></span> | <span class="bold_code bc-17"><a href="#type-kb_int_fun_3">kb_int_fun_3()</a></span></span><br>
       <span class="bold_code bc-4"><a name="type-kb_int_tuple">kb_int_tuple()</a> = <br>    {Name :: string(),<br>     Instruction :: string(),<br>     Prompt :: string(),<br>     Echo :: boolean()}</span><br>
       <span class="bold_code bc-4"><a name="type-kb_int_fun_3">kb_int_fun_3()</a> = <br>    fun((Peer :: <span class="bold_code bc-17"><a href="#type-ip_port">ip_port()</a></span>, User :: string(), Service :: string()) -&gt;<br>            <span class="bold_code bc-17"><a href="#type-kb_int_tuple">kb_int_tuple()</a></span>)</span><br>
@@ -750,18 +749,6 @@
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
 	<dl>
-          <dt><strong><a name="type-system_dir_daemon_option"></a><span class="code">system_dir</span></strong></dt>
-          <dd>
-            <p>Sets the system directory, containing the host key files
-            that identify the host keys for <span class="code">ssh</span>. Defaults to
-            <span class="code">/etc/ssh</span>.</p>
-	    <p>For security reasons, this directory is normally accessible only to the root user.</p>
-	    <p>See also the option 
-	    <span class="bold_code bc-17"><a href="#type-key_cb_common_option">key_cb</a></span>
-	    for the general way to handle keys.
-	    </p>
-	  </dd>
-
 	  <dt><strong><span class="code">auth_method_kb_interactive_data</span></strong></dt>
 	  <dd>
 	    <p>Sets the text strings that the daemon sends to the client for presentation to the user when
@@ -774,7 +761,7 @@
 	    </p>
           </dd>
 
-	  <dt><strong><span class="code">user_passwords</span></strong></dt>
+	  <dt><strong><a name="option-user_passwords"></a><span class="code">user_passwords</span></strong></dt>
 	  <dd>
             <p>Provides passwords for password authentication. The passwords are used when someone tries
 	    to connect to the server and public key user-authentication fails. The option provides
@@ -782,7 +769,7 @@
 	    </p>
           </dd>
 
-          <dt><strong><span class="code">password</span></strong></dt>
+          <dt><strong><a name="option-password"></a><span class="code">password</span></strong></dt>
           <dd>
             <p>Provides a global password that authenticates any user.</p>
 	    <div class="warning">
@@ -794,7 +781,9 @@
 </div>
 	  </dd>
 
-	  <dt><strong><span class="code">pwdfun</span> with <span class="code">pwdfun_4()</span></strong></dt>
+	  <dt><strong><a name="option-pwdfun"></a><span class="code">pwdfun</span> with 
+	  <span class="bold_code bc-17"><a href="#type-pwdfun_4"><span class="code">pwdfun_4()</span></a></span>
+	  </strong></dt>
 	  <dd>
 	    <p>Provides a function for password validation. This could used for calling an external system or handeling
 	    passwords stored as hash values.
@@ -826,7 +815,9 @@
 	    can be used for this. The return value <span class="code">disconnect</span> is useful for this.</p>
 	  </dd>
 
-	  <dt><strong><span class="code">pwdfun</span> with <span class="code">pwdfun_2()</span></strong></dt>
+	  <dt><strong><span class="code">pwdfun</span> with
+	  <span class="bold_code bc-17"><a href="#type-pwdfun_2"><span class="code">pwdfun_2()</span></a></span>
+	  </strong></dt>
 	  <dd>
 	    <p>Provides a function for password validation. This function is called with user and password
 	    as strings, and returns:</p>
@@ -844,7 +835,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-diffie_hellman_group_exchange_daemon_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-diffie_hellman_group_exchange_daemon_option').style.visibility = 'hidden';">
-<span id="ghlink-type-diffie_hellman_group_exchange_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L563" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-diffie_hellman_group_exchange_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L546" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-diffie_hellman_group_exchange_daemon_option">diffie_hellman_group_exchange_daemon_option()</a> = <br>    {dh_gex_groups,<br>     [<span class="bold_code bc-17"><a href="#type-explicit_group">explicit_group()</a></span>] |<br>     <span class="bold_code bc-17"><a href="#type-explicit_group_file">explicit_group_file()</a></span> |<br>     <span class="bold_code bc-17"><a href="#type-ssh_moduli_file">ssh_moduli_file()</a></span>} |<br>    {dh_gex_limits, {Min :: integer() &gt;= 1, Max :: integer() &gt;= 1}}</span><br>
       <span class="bold_code bc-4"><a name="type-explicit_group">explicit_group()</a> = <br>    {Size :: integer() &gt;= 1,<br>     G :: integer() &gt;= 1,<br>     P :: integer() &gt;= 1}</span><br>
       <span class="bold_code bc-4"><a name="type-explicit_group_file">explicit_group_file()</a> = {file, string()}</span><br>
@@ -900,7 +891,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-negotiation_timeout_daemon_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-negotiation_timeout_daemon_option').style.visibility = 'hidden';">
-<span id="ghlink-type-negotiation_timeout_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L616" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-negotiation_timeout_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L599" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-negotiation_timeout_daemon_option">negotiation_timeout_daemon_option()</a> = <br>    {negotiation_timeout, timeout()}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -913,7 +904,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-hardening_daemon_options').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-hardening_daemon_options').style.visibility = 'hidden';">
-<span id="ghlink-type-hardening_daemon_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L626" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-hardening_daemon_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L609" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-hardening_daemon_options">hardening_daemon_options()</a> = <br>    {max_sessions, integer() &gt;= 1} |<br>    {max_channels, integer() &gt;= 1} |<br>    {parallel_login, boolean()} |<br>    {minimal_remote_max_packet_size, integer() &gt;= 1}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -979,7 +970,7 @@
  
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-callbacks_daemon_options').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-callbacks_daemon_options').style.visibility = 'hidden';">
-<span id="ghlink-type-callbacks_daemon_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L686" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-callbacks_daemon_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L669" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-callbacks_daemon_options">callbacks_daemon_options()</a> = <br>    {failfun,<br>     fun((User :: string(),<br>          PeerAddress :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span>,<br>          Reason :: term()) -&gt;<br>             term())} |<br>    {connectfun,<br>     fun((User :: string(),<br>          PeerAddress :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span>,<br>          Method :: string()) -&gt;<br>             term())}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -999,7 +990,7 @@
 
      <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-send_ext_info_daemon_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-send_ext_info_daemon_option').style.visibility = 'hidden';">
-<span id="ghlink-type-send_ext_info_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L703" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-send_ext_info_daemon_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L686" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-send_ext_info_daemon_option">send_ext_info_daemon_option()</a> = {send_ext_info, boolean()}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1016,38 +1007,20 @@
 
 
     
-    <h4><span onMouseOver="document.getElementById('ghlink-Options common to clients and daemons-idp70540886605424').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-Options common to clients and daemons-idp70540886605424').style.visibility = 'hidden';"><span id="ghlink-Options common to clients and daemons-idp70540886605424"></span><a class="title_link" name="Options%20common%20to%20clients%20and%20daemons" href="#Options%20common%20to%20clients%20and%20daemons">Options common to clients and daemons</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-Options common to clients and daemons-idp47282101816960').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-Options common to clients and daemons-idp47282101816960').style.visibility = 'hidden';"><span id="ghlink-Options common to clients and daemons-idp47282101816960"></span><a class="title_link" name="Options%20common%20to%20clients%20and%20daemons" href="#Options%20common%20to%20clients%20and%20daemons">Options common to clients and daemons</a></span></h4>
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-common_options').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-common_options').style.visibility = 'hidden';">
-<span id="ghlink-type-common_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L720" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-common_options" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L703" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-common_options">common_options()</a> = [<span class="bold_code bc-17"><a href="#type-common_option">common_option()</a></span>]</span><br>
-      <span class="bold_code bc-4"><a name="type-common_option">common_option()</a> = <br>    <span class="bold_code bc-17"><a href="#type-user_dir_common_option">user_dir_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-profile_common_option">profile_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-max_idle_time_common_option">max_idle_time_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-key_cb_common_option">key_cb_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-disconnectfun_common_option">disconnectfun_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-unexpectedfun_common_option">unexpectedfun_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-ssh_msg_debug_fun_common_option">ssh_msg_debug_fun_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-rekey_limit_common_option">rekey_limit_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-id_string_common_option">id_string_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-preferred_algorithms_common_option">preferred_algorithms_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-modify_algorithms_common_option">modify_algorithms_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-auth_methods_common_option">auth_methods_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-inet_common_option">inet_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-fd_common_option">fd_common_option()</a></span></span><br>
+      <span class="bold_code bc-4"><a name="type-common_option">common_option()</a> = <br>    <span class="bold_code bc-15"><a href="ssh_file.html#type-user_dir_common_option">ssh_file:user_dir_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-profile_common_option">profile_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-max_idle_time_common_option">max_idle_time_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-key_cb_common_option">key_cb_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-disconnectfun_common_option">disconnectfun_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-unexpectedfun_common_option">unexpectedfun_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-ssh_msg_debug_fun_common_option">ssh_msg_debug_fun_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-rekey_limit_common_option">rekey_limit_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-id_string_common_option">id_string_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-preferred_algorithms_common_option">preferred_algorithms_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-modify_algorithms_common_option">modify_algorithms_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-auth_methods_common_option">auth_methods_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-inet_common_option">inet_common_option()</a></span> |<br>    <span class="bold_code bc-17"><a href="#type-fd_common_option">fd_common_option()</a></span></span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p><p>The options above can be used both in clients and in daemons (servers). They are further explained below.</p>
       </p></div></div>
 </div>
 
     <div class="data-types-body">
-<div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-user_dir_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-user_dir_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-user_dir_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L727" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
-      <span class="bold_code bc-4"><a name="type-user_dir_common_option">user_dir_common_option()</a> = {user_dir, false | string()}</span><br>
-</div>
-<div class="data-type-desc"><div class="REFBODY rb-7"><p>
-	<p>Sets the user directory. That is, the directory containing <span class="code">ssh</span> configuration
-	files for the user, such as 
-	<span class="code">known_hosts</span>, <span class="code">id_rsa</span>, <span class="code">id_dsa</span>&gt;, <span class="code">id_ecdsa</span> and <span class="code">authorized_key</span>.
-	Defaults to the directory normally referred to as <span class="code">~/.ssh</span>.
-	</p>
-	<p>See also the option 
-	<span class="bold_code bc-17"><a href="#type-key_cb_common_option">key_cb</a></span>
-	for the general way to handle keys.
-	</p>
-      </p></div></div>
-</div>
-
-    <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-profile_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-profile_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-profile_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L742" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-profile_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L710" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-profile_common_option">profile_common_option()</a> = {profile, atom()}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1064,7 +1037,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-max_idle_time_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-max_idle_time_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-max_idle_time_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L756" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-max_idle_time_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L724" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-max_idle_time_common_option">max_idle_time_common_option()</a> = {idle_time, timeout()}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1074,7 +1047,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-rekey_limit_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-rekey_limit_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-rekey_limit_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L763" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-rekey_limit_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L731" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-rekey_limit_common_option">rekey_limit_common_option()</a> = <br>    {rekey_limit,<br>     Bytes ::<br>         <span class="bold_code bc-17"><a href="#type-limit_bytes">limit_bytes()</a></span> |<br>         {Minutes :: <span class="bold_code bc-17"><a href="#type-limit_time">limit_time()</a></span>, Bytes :: <span class="bold_code bc-17"><a href="#type-limit_bytes">limit_bytes()</a></span>}}</span><br>
       <span class="bold_code bc-4"><a name="type-limit_bytes">limit_bytes()</a> = integer() &gt;= 0 | infinity</span><br>
       <span class="bold_code bc-4"><a name="type-limit_time">limit_time()</a> = integer() &gt;= 1 | infinity</span><br>
@@ -1101,7 +1074,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-key_cb_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-key_cb_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-key_cb_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L785" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-key_cb_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L753" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-key_cb_common_option">key_cb_common_option()</a> = <br>    {key_cb,<br>     Module :: atom() | {Module :: atom(), Opts :: [term()]}}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1115,14 +1088,18 @@
 	</p>
 	<p>The <span class="code">Opts</span> defaults to <span class="code">[]</span> when only the <span class="code">Module</span> is specified.
 	</p>
-	<p>The default value of this option is <span class="code">{ssh_file, []}</span>.
+	<p>The default value of this option is <span class="code">{ssh_file, []}</span>. See also the manpage of
+	<span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','ssh','ssh_file.html');">ssh_file</a></span>.
 	</p>
 	<p>A call to the call-back function <span class="code">F</span> will be</p>
 	<div class="example"><pre>	  Module:F(..., [{key_cb_private,Opts}|UserOptions])</pre></div>
 	<p>where <span class="code">...</span> are arguments to <span class="code">F</span> as in 
 	<span class="bold_code bc-19"><a href="ssh_client_key_api.html">ssh_client_key_api</a></span> and/or
 	<span class="bold_code bc-19"><a href="ssh_server_key_api.html">ssh_server_key_api</a></span>.
-	The <span class="code">UserOptions</span> are the options given to <span class="code">ssh:connect</span>, <span class="code">ssh:shell</span> or <span class="code">ssh:daemon</span>.
+	The <span class="code">UserOptions</span> are the options given to 
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../../../doc/../','ssh','ssh.html#connect-3');">ssh:connect</a></span>,
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../../../doc/../','ssh','ssh.html#shell-1');">ssh:shell</a></span> or
+	<span class="bold_code bc-13"><a href="javascript:erlhref('../../../../doc/../','ssh','ssh.html#daemon-2');">ssh:daemon</a></span>.
 	</p>
 
       </p></div></div>
@@ -1130,7 +1107,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-disconnectfun_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-disconnectfun_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-disconnectfun_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L813" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-disconnectfun_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L785" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-disconnectfun_common_option">disconnectfun_common_option()</a> = <br>    {disconnectfun, fun((Reason :: term()) -&gt; void | any())}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1140,7 +1117,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-unexpectedfun_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-unexpectedfun_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-unexpectedfun_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L820" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-unexpectedfun_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L792" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-unexpectedfun_common_option">unexpectedfun_common_option()</a> = <br>    {unexpectedfun,<br>     fun((Message :: term(), {Host :: term(), Port :: term()}) -&gt;<br>             report | skip)}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1152,7 +1129,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-ssh_msg_debug_fun_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-ssh_msg_debug_fun_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-ssh_msg_debug_fun_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L829" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-ssh_msg_debug_fun_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L801" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-ssh_msg_debug_fun_common_option">ssh_msg_debug_fun_common_option()</a> = <br>    {ssh_msg_debug_fun,<br>     fun((<span class="bold_code bc-15"><a href="ssh.html#type-connection_ref">ssh:connection_ref()</a></span>,<br>          AlwaysDisplay :: boolean(),<br>          Msg :: binary(),<br>          LanguageTag :: binary()) -&gt;<br>             any())}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1171,7 +1148,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-id_string_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-id_string_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-id_string_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L845" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-id_string_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L817" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-id_string_common_option">id_string_common_option()</a> = <br>    {id_string,<br>     string() |<br>     random |<br>     {random, Nmin :: integer() &gt;= 1, Nmax :: integer() &gt;= 1}}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1189,7 +1166,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-preferred_algorithms_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-preferred_algorithms_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-preferred_algorithms_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L860" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-preferred_algorithms_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L832" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-preferred_algorithms_common_option">preferred_algorithms_common_option()</a> = <br>    {preferred_algorithms, <span class="bold_code bc-17"><a href="#type-algs_list">algs_list()</a></span>}</span><br>
       <span class="bold_code bc-4"><a name="type-algs_list">algs_list()</a> = [<span class="bold_code bc-17"><a href="#type-alg_entry">alg_entry()</a></span>]</span><br>
       <span class="bold_code bc-4"><a name="type-alg_entry">alg_entry()</a> = <br>    {kex, [<span class="bold_code bc-17"><a href="#type-kex_alg">kex_alg()</a></span>]} |<br>    {public_key, [<span class="bold_code bc-17"><a href="#type-pubkey_alg">pubkey_alg()</a></span>]} |<br>    {cipher, <span class="bold_code bc-17"><a href="#type-double_algs">double_algs</a></span>(<span class="bold_code bc-17"><a href="#type-cipher_alg">cipher_alg()</a></span>)} |<br>    {mac, <span class="bold_code bc-17"><a href="#type-double_algs">double_algs</a></span>(<span class="bold_code bc-17"><a href="#type-mac_alg">mac_alg()</a></span>)} |<br>    {compression, <span class="bold_code bc-17"><a href="#type-double_algs">double_algs</a></span>(<span class="bold_code bc-17"><a href="#type-compression_alg">compression_alg()</a></span>)}</span><br>
@@ -1237,7 +1214,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-modify_algorithms_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-modify_algorithms_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-modify_algorithms_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L905" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-modify_algorithms_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L877" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-modify_algorithms_common_option">modify_algorithms_common_option()</a> = <br>    {modify_algorithms, <span class="bold_code bc-17"><a href="#type-modify_algs_list">modify_algs_list()</a></span>}</span><br>
       <span class="bold_code bc-4"><a name="type-modify_algs_list">modify_algs_list()</a> = <br>    [{append, <span class="bold_code bc-17"><a href="#type-algs_list">algs_list()</a></span>} |<br>     {prepend, <span class="bold_code bc-17"><a href="#type-algs_list">algs_list()</a></span>} |<br>     {rm, <span class="bold_code bc-17"><a href="#type-algs_list">algs_list()</a></span>}]</span><br>
 </div>
@@ -1299,7 +1276,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-inet_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-inet_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-inet_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L964" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-inet_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L936" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-inet_common_option">inet_common_option()</a> = {inet, inet | inet6}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1309,7 +1286,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-auth_methods_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-auth_methods_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-auth_methods_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L971" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-auth_methods_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L943" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-auth_methods_common_option">auth_methods_common_option()</a> = {auth_methods, string()}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1323,7 +1300,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-fd_common_option').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-fd_common_option').style.visibility = 'hidden';">
-<span id="ghlink-type-fd_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L982" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-fd_common_option" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L954" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-fd_common_option">fd_common_option()</a> = {fd, <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','gen_tcp.html#type-socket');">gen_tcp:socket()</a></span>}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1332,11 +1309,11 @@
 </div>
 
     
-    <h4><span onMouseOver="document.getElementById('ghlink-Other data types-idp70540886706112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-Other data types-idp70540886706112').style.visibility = 'hidden';"><span id="ghlink-Other data types-idp70540886706112"></span><a class="title_link" name="Other%20data%20types" href="#Other%20data%20types">Other data types</a></span></h4>
+    <h4><span onMouseOver="document.getElementById('ghlink-Other data types-idp47282101912560').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-Other data types-idp47282101912560').style.visibility = 'hidden';"><span id="ghlink-Other data types-idp47282101912560"></span><a class="title_link" name="Other%20data%20types" href="#Other%20data%20types">Other data types</a></span></h4>
     
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-host').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-host').style.visibility = 'hidden';">
-<span id="ghlink-type-host" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L992" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-host" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L964" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-host">host()</a> = string() | <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span> | loopback</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1345,7 +1322,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-ip_port').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-ip_port').style.visibility = 'hidden';">
-<span id="ghlink-type-ip_port" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L998" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-ip_port" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L970" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-ip_port">ip_port()</a> = {<span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span>, <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-port_number');">inet:port_number()</a></span>}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1354,7 +1331,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-mod_args').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-mod_args').style.visibility = 'hidden';">
-<span id="ghlink-type-mod_args" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1004" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-mod_args" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L976" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-mod_args">mod_args()</a> = {Module :: atom(), Args :: list()}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1363,7 +1340,7 @@
       
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-mod_fun_args').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-mod_fun_args').style.visibility = 'hidden';">
-<span id="ghlink-type-mod_fun_args" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1010" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-mod_fun_args" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L982" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-mod_fun_args">mod_fun_args()</a> = <br>    {Module :: atom(), Function :: atom(), Args :: list()}</span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1372,7 +1349,7 @@
       
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-open_socket').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-open_socket').style.visibility = 'hidden';">
-<span id="ghlink-type-open_socket" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1016" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-open_socket" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L988" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-open_socket">open_socket()</a> = <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','gen_tcp.html#type-socket');">gen_tcp:socket()</a></span></span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1385,7 +1362,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-daemon_ref').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-daemon_ref').style.visibility = 'hidden';">
-<span id="ghlink-type-daemon_ref" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1026" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-daemon_ref" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L998" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-daemon_ref">daemon_ref()</a></span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1396,7 +1373,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-').style.visibility = 'hidden';">
-<span id="ghlink-type-" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1034" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><div class="bold_code bc-8"><span onMouseOver="document.getElementById('ghlink-type-connection_ref-idp70540886721808').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-connection_ref-idp70540886721808').style.visibility = 'hidden';"><span id="ghlink-type-connection_ref-idp70540886721808" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1034" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-connection_ref" href="#type-connection_ref">connection_ref()</a></span></div>
+<span id="ghlink-type-" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1006" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><div class="bold_code bc-8"><span onMouseOver="document.getElementById('ghlink-type-connection_ref-idp47282101928256').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-connection_ref-idp47282101928256').style.visibility = 'hidden';"><span id="ghlink-type-connection_ref-idp47282101928256" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1006" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-connection_ref" href="#type-connection_ref">connection_ref()</a></span></div>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
 	<p>Opaque data type representing a connection between a client and a server (daemon).</p>
@@ -1409,7 +1386,7 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-channel_id').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-channel_id').style.visibility = 'hidden';">
-<span id="ghlink-type-channel_id" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1045" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
+<span id="ghlink-type-channel_id" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1017" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>
       <span class="bold_code bc-4"><a name="type-channel_id">channel_id()</a></span><br>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
@@ -1423,9 +1400,9 @@
 
     <div class="data-types-body">
 <div class="data-type-name" onMouseOver="document.getElementById('ghlink-type-').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type-').style.visibility = 'hidden';">
-<span id="ghlink-type-" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1056" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><div class="bold_code bc-8"><span onMouseOver="document.getElementById('ghlink-type--idp70540886729600').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type--idp70540886729600').style.visibility = 'hidden';"><span id="ghlink-type--idp70540886729600" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1056" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-" href="#type-">opaque_client_options</a></span></div>
-<div class="bold_code bc-8"><span onMouseOver="document.getElementById('ghlink-type--idp70540886730048').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type--idp70540886730048').style.visibility = 'hidden';"><span id="ghlink-type--idp70540886730048" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1056" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-" href="#type-">opaque_daemon_options</a></span></div>
-<div class="bold_code bc-8"><span onMouseOver="document.getElementById('ghlink-type--idp70540886730496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type--idp70540886730496').style.visibility = 'hidden';"><span id="ghlink-type--idp70540886730496" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1056" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-" href="#type-">opaque_common_options</a></span></div>
+<span id="ghlink-type-" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1028" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><div class="bold_code bc-8"><span onMouseOver="document.getElementById('ghlink-type--idp47282101936048').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type--idp47282101936048').style.visibility = 'hidden';"><span id="ghlink-type--idp47282101936048" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1028" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-" href="#type-">opaque_client_options</a></span></div>
+<div class="bold_code bc-8"><span onMouseOver="document.getElementById('ghlink-type--idp47282101936496').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type--idp47282101936496').style.visibility = 'hidden';"><span id="ghlink-type--idp47282101936496" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1028" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-" href="#type-">opaque_daemon_options</a></span></div>
+<div class="bold_code bc-8"><span onMouseOver="document.getElementById('ghlink-type--idp47282101936944').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-type--idp47282101936944').style.visibility = 'hidden';"><span id="ghlink-type--idp47282101936944" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1028" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="type-" href="#type-">opaque_common_options</a></span></div>
 </div>
 <div class="data-type-desc"><div class="REFBODY rb-7"><p>
 	<a name="type-opaque_client_options"></a>
@@ -1438,19 +1415,19 @@
 
 
 
- <h3><span onMouseOver="document.getElementById('ghlink-exports-idp70540886734464').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp70540886734464').style.visibility = 'hidden';"><span id="ghlink-exports-idp70540886734464"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
+ <h3><span onMouseOver="document.getElementById('ghlink-exports-idp47282101940912').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-exports-idp47282101940912').style.visibility = 'hidden';"><span id="ghlink-exports-idp47282101940912"></span><a class="title_link" name="exports" href="#exports">Exports</a></span></h3>
 <div class="exports-body">
 
 
-   <p><a name="close-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-close-1-idp70540890619104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-close-1-idp70540890619104').style.visibility = 'hidden';">
-<span id="ghlink-close-1-idp70540890619104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1078" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>close(ConnectionRef) -&gt; ok | {error, term()}</div><div class="REFBODY fun-types">
+   <p><a name="close-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-close-1-idp47282105860512').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-close-1-idp47282105860512').style.visibility = 'hidden';">
+<span id="ghlink-close-1-idp47282105860512" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1050" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>close(ConnectionRef) -&gt; ok | {error, term()}</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">ConnectionRef = <span class="bold_code bc-17"><a href="#type-connection_ref">connection_ref()</a></span></span></div>
 </div></p>
 <div class="REFBODY rb-7"><p><p>Closes an SSH connection.</p></p></div>
     
 
-   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-3-idp70540886738592').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-3-idp70540886738592').style.visibility = 'hidden';"><span id="ghlink-connect-3-idp70540886738592" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1085" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-3" href="#connect-3">connect(Host, Port, Options) -&gt; Result </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-4-idp70540886739056').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-4-idp70540886739056').style.visibility = 'hidden';"><span id="ghlink-connect-4-idp70540886739056" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1085" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-4" href="#connect-4">connect(Host, Port, Options, NegotiationTimeout) -&gt; Result </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-2-idp70540886739552').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-2-idp70540886739552').style.visibility = 'hidden';"><span id="ghlink-connect-2-idp70540886739552" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1085" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-2" href="#connect-2">connect(TcpSocket, Options) -&gt; Result</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-3-idp70540886740016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-3-idp70540886740016').style.visibility = 'hidden';"><span id="ghlink-connect-3-idp70540886740016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1085" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-3" href="#connect-3">connect(TcpSocket, Options, NegotiationTimeout) -&gt; Result</a></span></div></p>
+   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-3-idp47282101945040').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-3-idp47282101945040').style.visibility = 'hidden';"><span id="ghlink-connect-3-idp47282101945040" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1057" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-3" href="#connect-3">connect(Host, Port, Options) -&gt; Result </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-4-idp47282101945504').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-4-idp47282101945504').style.visibility = 'hidden';"><span id="ghlink-connect-4-idp47282101945504" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1057" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-4" href="#connect-4">connect(Host, Port, Options, NegotiationTimeout) -&gt; Result </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-2-idp47282101946000').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-2-idp47282101946000').style.visibility = 'hidden';"><span id="ghlink-connect-2-idp47282101946000" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1057" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-2" href="#connect-2">connect(TcpSocket, Options) -&gt; Result</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-connect-3-idp47282101946464').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connect-3-idp47282101946464').style.visibility = 'hidden';"><span id="ghlink-connect-3-idp47282101946464" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1057" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="connect-3" href="#connect-3">connect(TcpSocket, Options, NegotiationTimeout) -&gt; Result</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
        <div class="REFTYPES rt-4">
@@ -1488,8 +1465,8 @@
      </p></div>
 
 
-   <p><a name="connection_info-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-connection_info-2-idp70540890664880').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connection_info-2-idp70540890664880').style.visibility = 'hidden';">
-<span id="ghlink-connection_info-2-idp70540890664880" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1117" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>connection_info(ConnectionRef, Keys) -&gt; ConnectionInfo</div><div class="REFBODY fun-types">
+   <p><a name="connection_info-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-connection_info-2-idp47282105906448').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-connection_info-2-idp47282105906448').style.visibility = 'hidden';">
+<span id="ghlink-connection_info-2-idp47282105906448" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1089" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>connection_info(ConnectionRef, Keys) -&gt; ConnectionInfo</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">ConnectionRef = <span class="bold_code bc-17"><a href="#type-connection_ref">connection_ref()</a></span></span></div>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Keys = <br>    [client_version | server_version | user | peer | sockname]</span></div>
@@ -1503,7 +1480,7 @@
      </p></div>
 
 
-   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-daemon-1-idp70540886758352').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-daemon-1-idp70540886758352').style.visibility = 'hidden';"><span id="ghlink-daemon-1-idp70540886758352" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1127" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="daemon-1" href="#daemon-1">daemon(Port | TcpSocket) -&gt; Result</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-daemon-2-idp70540886758816').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-daemon-2-idp70540886758816').style.visibility = 'hidden';"><span id="ghlink-daemon-2-idp70540886758816" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1127" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="daemon-2" href="#daemon-2">daemon(Port | TcpSocket, Options) -&gt; Result</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-daemon-3-idp70540886759296').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-daemon-3-idp70540886759296').style.visibility = 'hidden';"><span id="ghlink-daemon-3-idp70540886759296" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1127" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="daemon-3" href="#daemon-3">daemon(HostAddress, Port, Options) -&gt; Result</a></span></div></p>
+   <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-daemon-1-idp47282101964800').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-daemon-1-idp47282101964800').style.visibility = 'hidden';"><span id="ghlink-daemon-1-idp47282101964800" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1099" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="daemon-1" href="#daemon-1">daemon(Port | TcpSocket) -&gt; Result</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-daemon-2-idp47282101965264').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-daemon-2-idp47282101965264').style.visibility = 'hidden';"><span id="ghlink-daemon-2-idp47282101965264" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1099" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="daemon-2" href="#daemon-2">daemon(Port | TcpSocket, Options) -&gt; Result</a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-daemon-3-idp47282101965744').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-daemon-3-idp47282101965744').style.visibility = 'hidden';"><span id="ghlink-daemon-3-idp47282101965744" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1099" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="daemon-3" href="#daemon-3">daemon(HostAddress, Port, Options) -&gt; Result</a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
        <div class="REFTYPES rt-4">
@@ -1555,8 +1532,8 @@
        </p></div>
 
    
-   <p><a name="daemon_info-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-daemon_info-1-idp70540890725088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-daemon_info-1-idp70540890725088').style.visibility = 'hidden';">
-<span id="ghlink-daemon_info-1-idp70540890725088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1173" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>daemon_info(Daemon) -&gt; {ok, DaemonInfo} | {error, term()}</div><div class="REFBODY fun-types">
+   <p><a name="daemon_info-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-daemon_info-1-idp47282105966624').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-daemon_info-1-idp47282105966624').style.visibility = 'hidden';">
+<span id="ghlink-daemon_info-1-idp47282105966624" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1145" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>daemon_info(Daemon) -&gt; {ok, DaemonInfo} | {error, term()}</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Daemon = <span class="bold_code bc-17"><a href="#type-daemon_ref">daemon_ref()</a></span></span></div>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">DaemonInfo = <br>    [{ip, <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span>} |<br>     {port, <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-port_number');">inet:port_number()</a></span>} |<br>     {profile, term()}]</span></div>
@@ -1567,8 +1544,8 @@
 
 
 
-    <p><a name="default_algorithms-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-default_algorithms-0-idp70540890726016').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-default_algorithms-0-idp70540890726016').style.visibility = 'hidden';">
-<span id="ghlink-default_algorithms-0-idp70540890726016" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1183" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>default_algorithms() -&gt; <span class="bold_code bc-17"><a href="#type-algs_list">algs_list()</a></span>
+    <p><a name="default_algorithms-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-default_algorithms-0-idp47282105985904').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-default_algorithms-0-idp47282105985904').style.visibility = 'hidden';">
+<span id="ghlink-default_algorithms-0-idp47282105985904" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1155" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>default_algorithms() -&gt; <span class="bold_code bc-17"><a href="#type-algs_list">algs_list()</a></span>
 </div></p>
 <div class="REFBODY rb-7"><p>
 	<p>Returns a key-value list, where the keys are the different types of algorithms and the values are the
@@ -1578,7 +1555,7 @@
       </p></div>
 
 
-    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-shell-1-idp70540886788304').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-shell-1-idp70540886788304').style.visibility = 'hidden';"><span id="ghlink-shell-1-idp70540886788304" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1195" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="shell-1" href="#shell-1">shell(Host | TcpSocket) -&gt; Result </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-shell-2-idp70540886788768').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-shell-2-idp70540886788768').style.visibility = 'hidden';"><span id="ghlink-shell-2-idp70540886788768" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1195" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="shell-2" href="#shell-2">shell(Host | TcpSocket, Options) -&gt; Result </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-shell-3-idp70540886789248').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-shell-3-idp70540886789248').style.visibility = 'hidden';"><span id="ghlink-shell-3-idp70540886789248" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1195" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="shell-3" href="#shell-3">shell(Host, Port, Options) -&gt; Result </a></span></div></p>
+    <p><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-shell-1-idp47282101994752').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-shell-1-idp47282101994752').style.visibility = 'hidden';"><span id="ghlink-shell-1-idp47282101994752" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1167" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="shell-1" href="#shell-1">shell(Host | TcpSocket) -&gt; Result </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-shell-2-idp47282101995216').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-shell-2-idp47282101995216').style.visibility = 'hidden';"><span id="ghlink-shell-2-idp47282101995216" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1167" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="shell-2" href="#shell-2">shell(Host | TcpSocket, Options) -&gt; Result </a></span></div><div class="bold_code fun-type"><span onMouseOver="document.getElementById('ghlink-shell-3-idp47282101995696').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-shell-3-idp47282101995696').style.visibility = 'hidden';"><span id="ghlink-shell-3-idp47282101995696" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1167" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span><a class="title_link" name="shell-3" href="#shell-3">shell(Host, Port, Options) -&gt; Result </a></span></div></p>
 <div class="REFBODY rb-5">
 <h3 class="func-types-title">Types</h3>
 	<div class="REFTYPES rt-4">
@@ -1611,9 +1588,9 @@
 	</p>
       </p></div>
 
-    <p><a name="start-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-start-0-idp70540890774112').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-0-idp70540890774112').style.visibility = 'hidden';">
-<span id="ghlink-start-0-idp70540890774112" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1222" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>start() -&gt; ok | {error, term()}</div><a name="start-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-start-1-idp70540890773056').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-1-idp70540890773056').style.visibility = 'hidden';">
-<span id="ghlink-start-1-idp70540890773056" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1222" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>start(Type) -&gt; ok | {error, term()}</div><div class="REFBODY fun-types">
+    <p><a name="start-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-start-0-idp47282106016736').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-0-idp47282106016736').style.visibility = 'hidden';">
+<span id="ghlink-start-0-idp47282106016736" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1194" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>start() -&gt; ok | {error, term()}</div><a name="start-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-start-1-idp47282106015680').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-start-1-idp47282106015680').style.visibility = 'hidden';">
+<span id="ghlink-start-1-idp47282106015680" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1194" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>start(Type) -&gt; ok | {error, term()}</div><div class="REFBODY fun-types">
 <h3 class="func-types-title">Types</h3>
 <div class="REFTYPES rt-1"><span class="bold_code bc-2">Type = permanent | transient | temporary</span></div>
 </div></p>
@@ -1624,26 +1601,26 @@
 	manual page in Kernel.</p>
       </p></div>
 
-    <p><a name="stop-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop-0-idp70540890788912').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop-0-idp70540890788912').style.visibility = 'hidden';">
-<span id="ghlink-stop-0-idp70540890788912" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1234" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop() -&gt; ok | {error, term()}</div></p>
+    <p><a name="stop-0"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop-0-idp47282106031728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop-0-idp47282106031728').style.visibility = 'hidden';">
+<span id="ghlink-stop-0-idp47282106031728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1206" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop() -&gt; ok | {error, term()}</div></p>
 <div class="REFBODY rb-7"><p>
         <p>Stops the <span class="code">ssh</span> application.
 	For more information, see the <span class="bold_code bc-18"><a href="javascript:erlhref('../../../../doc/../','kernel','application.html');">application(3)</a></span>
 	manual page in Kernel.</p>
       </p></div>
     
-    <p><a name="stop_daemon-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop_daemon-1-idp70540890795728').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop_daemon-1-idp70540890795728').style.visibility = 'hidden';">
-<span id="ghlink-stop_daemon-1-idp70540890795728" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1244" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop_daemon(DaemonRef :: <span class="bold_code bc-17"><a href="#type-daemon_ref">daemon_ref()</a></span>) -&gt; ok</div><a name="stop_daemon-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop_daemon-2-idp70540890796352').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop_daemon-2-idp70540890796352').style.visibility = 'hidden';">
-<span id="ghlink-stop_daemon-2-idp70540890796352" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1244" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop_daemon(Address :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span>,<br>            Port :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-port_number');">inet:port_number()</a></span>) -&gt;<br>               ok</div><a name="stop_daemon-3"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop_daemon-3-idp70540890807328').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop_daemon-3-idp70540890807328').style.visibility = 'hidden';">
-<span id="ghlink-stop_daemon-3-idp70540890807328" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1244" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop_daemon(Address :: any | <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span>,<br>            Port :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-port_number');">inet:port_number()</a></span>,<br>            Profile :: atom()) -&gt;<br>               ok</div></p>
+    <p><a name="stop_daemon-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop_daemon-1-idp47282106038480').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop_daemon-1-idp47282106038480').style.visibility = 'hidden';">
+<span id="ghlink-stop_daemon-1-idp47282106038480" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1216" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop_daemon(DaemonRef :: <span class="bold_code bc-17"><a href="#type-daemon_ref">daemon_ref()</a></span>) -&gt; ok</div><a name="stop_daemon-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop_daemon-2-idp47282106039104').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop_daemon-2-idp47282106039104').style.visibility = 'hidden';">
+<span id="ghlink-stop_daemon-2-idp47282106039104" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1216" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop_daemon(Address :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span>,<br>            Port :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-port_number');">inet:port_number()</a></span>) -&gt;<br>               ok</div><a name="stop_daemon-3"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop_daemon-3-idp47282106049088').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop_daemon-3-idp47282106049088').style.visibility = 'hidden';">
+<span id="ghlink-stop_daemon-3-idp47282106049088" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1216" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop_daemon(Address :: any | <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span>,<br>            Port :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-port_number');">inet:port_number()</a></span>,<br>            Profile :: atom()) -&gt;<br>               ok</div></p>
 <div class="REFBODY rb-7"><p>
 	<p>Stops the listener and all connections started by the listener.</p>
       </p></div>
 
-    <p><a name="stop_listener-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop_listener-1-idp70540890806176').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop_listener-1-idp70540890806176').style.visibility = 'hidden';">
-<span id="ghlink-stop_listener-1-idp70540890806176" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1254" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop_listener(SysSup :: <span class="bold_code bc-17"><a href="#type-daemon_ref">daemon_ref()</a></span>) -&gt; ok</div><a name="stop_listener-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop_listener-2-idp70540890805664').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop_listener-2-idp70540890805664').style.visibility = 'hidden';">
-<span id="ghlink-stop_listener-2-idp70540890805664" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1254" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop_listener(Address :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span>,<br>              Port :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-port_number');">inet:port_number()</a></span>) -&gt;<br>                 ok</div><a name="stop_listener-3"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop_listener-3-idp70540890829072').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop_listener-3-idp70540890829072').style.visibility = 'hidden';">
-<span id="ghlink-stop_listener-3-idp70540890829072" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1254" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop_listener(Address :: any | <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span>,<br>              Port :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-port_number');">inet:port_number()</a></span>,<br>              Profile :: term()) -&gt;<br>                 ok</div></p>
+    <p><a name="stop_listener-1"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop_listener-1-idp47282106047936').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop_listener-1-idp47282106047936').style.visibility = 'hidden';">
+<span id="ghlink-stop_listener-1-idp47282106047936" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1226" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop_listener(SysSup :: <span class="bold_code bc-17"><a href="#type-daemon_ref">daemon_ref()</a></span>) -&gt; ok</div><a name="stop_listener-2"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop_listener-2-idp47282106047424').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop_listener-2-idp47282106047424').style.visibility = 'hidden';">
+<span id="ghlink-stop_listener-2-idp47282106047424" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1226" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop_listener(Address :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span>,<br>              Port :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-port_number');">inet:port_number()</a></span>) -&gt;<br>                 ok</div><a name="stop_listener-3"></a><div class="bold_code func-head" onMouseOver="document.getElementById('ghlink-stop_listener-3-idp47282106070400').style.visibility = 'visible';" onMouseOut="document.getElementById('ghlink-stop_listener-3-idp47282106070400').style.visibility = 'hidden';">
+<span id="ghlink-stop_listener-3-idp47282106070400" class="ghlink"><a href="https://github.com/erlang/otp/edit/maint/lib/ssh/doc/src/ssh.xml#L1226" title="Found an issue with the documentation? Fix it by clicking here!"><span class="pencil"></span></a></span>stop_listener(Address :: any | <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-ip_address');">inet:ip_address()</a></span>,<br>              Port :: <span class="bold_code bc-14"><a href="javascript:erlhref('../../../../doc/../','kernel','inet.html#type-port_number');">inet:port_number()</a></span>,<br>              Profile :: term()) -&gt;<br>                 ok</div></p>
 <div class="REFBODY rb-7"><p>
 	<p>Stops the listener, but leaves existing connections started by the listener operational.</p>
       </p></div>
